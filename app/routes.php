@@ -11,7 +11,114 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+/*
+|--------------------------------------------------------------------------
+| Tequila filter
+|--------------------------------------------------------------------------
+|
+| Check if the user is connected through Tequila.
+|
+*/
+
+// PATTERNS
+
+	Route::pattern('ad', '[a-z0-9-]');
+	
+	Route::pattern('rss', '[a-zA-Z0-9-]');
+
+// PUBLIC
+
+	Route::get('/', function() {
+
+		// affichage des messages de succès/erreurs
+		// try auto-connect
+	    return 'home';
+	});
+	
+	Route::get('test', array('before' => 'tequila', 'uses' => 'TestController@moica'));
+	
+	Route::resource('ad', 'AdController');
+	
+	Route::get('rss/{rss}', function() {
+	
+		// validation de la key user
+	    return 'rss';
+	});
+
+	Route::get('deconnexion', function() {
+		Auth::logout();
+		Session::forget('tequila');
+		return Redirect::to('/');
+	});
+	
+	Route::get('erreur', function() {
+		return 'erreur';
+	});
+
+// TEQUILA NEEDED
+
+Route::group(array('before' => 'tequila'), function() {
+
+	Route::get('jobs', function() {
+	
+		// affichage des messages de succès/erreurs
+		// affiche de la validation et option si les droits existes
+		// affichage je propose un job
+		return 'listes';
+	});
+	
+	Route::get('job/{ad}', function() {
+		// affichage edition
+		// postulation
+	    return 'job 1';
+	});
+	
+	Route::post('job/{ad}', array('before' => 'csrf', function() {
+	    return 'job@postulation';
+	}));
+	
+	Route::get('alertes', function() {
+	    return 'alertes';
+	});
+	
+	Route::post('alertes', array('before' => 'csrf', function() {
+	    return 'alertes@post';
+	}));
+
 });
+
+// TEQUILA NEEDED + MODERATION RIGHTS
+
+Route::group(array('before' => 'tequila|admin'), function() {
+
+	Route::get('job/edition/{ad}', function() {
+		return 'job edition';
+	});
+	
+	Route::post('job/edition/{ad}', array('before' => 'csrf', function() {
+		return 'job edition@post';
+	}));
+
+	Route::get('validation', function() {
+	    return 'validation';
+	});
+	
+	Route::post('validation', array('before' => 'csrf', function() {
+	    return 'validation@post';
+	}));
+	
+	Route::get('options', function() {
+	    return 'options';
+	});
+	
+	Route::post('options', array('before' => 'csrf', function() {
+	    return 'options@post';
+	}));
+
+});
+
+// PRIVATE CRONS
+
+	Route::get('crons', function() {
+	    return 'crons';
+	});
