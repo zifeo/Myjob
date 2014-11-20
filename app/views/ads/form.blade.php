@@ -5,7 +5,7 @@
 
     <h3>Nouvelle annonce</h3>
 
-    {{ Form::open(array('url' => 'ad', 'class' => 'form-horizontal')) }}
+    {{ Form::model($ad, ['url' => 'ad', 'class' => 'form-horizontal']) }}
         <div class="form-group">
         		{{ Form::label('title', 'Titre de l\'annonce', array('class' => 'col-sm-2 control-label')) }}
         	<div class="col-sm-4">

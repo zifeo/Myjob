@@ -32,7 +32,8 @@
 					</div>
 					<div class="collapse navbar-collapse" id="nav-panel">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="">Tous les jobs</a></li>
+							<li class="active"><a href="{{{ URL::to('ad') }}}">Tous les jobs</a></li>
+							<li><a href="{{{ URL::to('ad', 'create') }}}">Créer</a></li>
 							<li><a href="">Mes alertes</a></li>
 							<li><a href="">Modération</a></li>			
 							<li><a href="">Options</a></li>		

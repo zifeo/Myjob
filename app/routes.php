@@ -22,11 +22,13 @@
 
 // PATTERNS
 
-	Route::pattern('ad', '[a-z0-9-]');
+	Route::pattern('ad', '[a-z0-9_]+');
 	
-	Route::pattern('rss', '[a-zA-Z0-9-]');
+	Route::pattern('rss', '[a-zA-Z0-9-]+');
 
 // PUBLIC
+
+	Route::resource('ad', 'adController');
 
 	Route::get('/', function() {
 
