@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder {
 		$this->call('CategoriesTableSeeder');
 
         $this->command->info('Categories table seeded!');
+
+        $this->call('AdsTableSeeder');
+
+        $this->command->info('Ads table seeded!');
 	}
 
 }
@@ -37,4 +41,18 @@ class CategoriesTableSeeder extends Seeder {
         ]);
     }
 
+}
+
+class AdsTableSeeder extends Seeder  {
+
+    public function run()
+    {
+        DB::table('ads')->delete();
+
+        DB::table('ads')->insert([
+            ['category_id' => 1, 'url' => 'ad1', 'title' => 'ad1', 'description' => 'Lorem ipsum génial'],
+            ['category_id' => 2, 'url' => 'ad2', 'title' => 'ad2', 'description' => 'Lorem ipsum nul'],
+            ['category_id' => 3, 'url' => 'ad3', 'title' => 'ad3', 'description' => 'Lorem ipsum moyen']
+        ]);
+    }
 }
