@@ -9,7 +9,8 @@ class AdController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$ads = Ad::all();
+		return View::make('ads.list')->with('ads', $ads);
 	}
 
 
@@ -21,7 +22,7 @@ class AdController extends \BaseController {
 	public function create()
 	{
 		$categories = Category::lists('name', 'category_id');
-		return View::make('addAd')->with('categories', $categories);
+		return View::make('ads.form')->with('categories', $categories)->with('ad', null);
 	}
 
 
@@ -77,9 +78,10 @@ class AdController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($url)
 	{
-		//
+		$ad = Ad::findorfail($url);
+		return View::make('ads.show')->with('ad', $ad);
 	}
 
 
@@ -89,9 +91,11 @@ class AdController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($url)
 	{
-		//
+		$ad = Ad::findorfail($url);
+		$categories = Category::lists('name', 'category_id');
+		return View::make('ads.form')->with('categories', $categories)->with('ad', $ad);
 	}
 
 

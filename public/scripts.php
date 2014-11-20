@@ -11,4 +11,5 @@ readfile('scripts/jquery.mobile.min.js');
 readfile('scripts/bootstrap.min.js');
 readfile('scripts/bootstrap-datepicker.js');
 readfile('scripts/chosen.jquery.min.js');
+readfile('scripts/momentjs.min.js');
 readfile('scripts/main.js');
