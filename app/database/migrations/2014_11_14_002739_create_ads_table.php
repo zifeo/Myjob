@@ -15,13 +15,13 @@ class CreateAdsTable extends Migration {
 		Schema::create('ads', function(Blueprint $table)
 		{
 			$table->increments('ad_id');
-			$table->integer('category_id')->unique()->unsigned();
+			$table->integer('category_id')->unsigned();
 			$table->foreign('category_id')->references('category_id')->on('categories');
 			$table->string('random_id', 32);
 			$table->string('url', 50)->unique();
 			$table->string('title', 50);
 			$table->string('salary', 100)->nullable();
-			$table->string('place', 100)->nullable();
+			$table->string('place', 15)->nullable();
 			$table->text('description');
 			$table->text('skills')->nullable();
 			$table->string('duration', 100)->nullable();
