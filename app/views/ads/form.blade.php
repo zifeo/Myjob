@@ -21,13 +21,9 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('category', 'Catégorie', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('category_id', 'Catégorie', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4">
-            	<select class="form-control" id="category" name="category">
-                    @foreach($categories as $cat_id => $cat)
-                        <option value="{{$cat_id}}">{{$cat}}</option>
-                    @endforeach
-            	</select>
+                {{ Form::select('category_id', $categories, null, array('class' => 'form-control', 'id' => 'category_id')) }}
             </div>
         </div>
 
@@ -42,13 +38,12 @@
 
 
         <div class="form-group">    
-        	{{ Form::label('start-date', 'Date', array('class' => 'col-sm-2 control-label')) }}
+        	{{ Form::label('starts_at', 'Date', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4" id="hiddable-from-to-date">
         	    <div class="input-daterange input-group datepicker">
-                    <input type="text" class="form-control" name="start-date" id="start-date"/>
+                    {{ Form::text('starts_at', date('m/d/Y'), array('class' => 'form-control', 'id' => 'starts_at')) }}
         	        <span class="input-group-addon">jusqu'au</span>
-        	        <input type="text" class="form-control" name="end-date" id="end-date" />
-                </div>
+        	        {{ Form::text('ends_at', date('m/d/Y', strtotime('now +15days')), array('class' => 'form-control', 'id' => 'ends_at')) }}
             </div>
 
             <div class="col-sm-4 hidden" id="hiddable-punctual-date">
@@ -78,41 +73,41 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('language', 'Langue(s)', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('languages', 'Langue(s)', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4">
-                {{ Form::text('language', null, array('class' => 'form-control', 'placeholder' => 'Langues')) }}
+                {{ Form::text('languages', null, array('class' => 'form-control', 'placeholder' => 'Langues')) }}
             </div>
         </div>
 
         <h3>Contact</h3>
         <div class="form-group">
-            {{ Form::label('contact-first-name', 'Prénom', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('contact_first_name', 'Prénom', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4">
-                {{ Form::text('contact-first-name', null, array('class' => 'form-control', 'placeholder' => 'Votre prénom')) }}
+                {{ Form::text('contact_first_name', null, array('class' => 'form-control', 'placeholder' => 'Votre prénom')) }}
             </div>
         </div>
 
         <div class="form-group">
-            {{ Form::label('contact-last-name', 'Nom', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('contact_last_name', 'Nom', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4">
-                {{ Form::text('contact-last-name', null, array('class' => 'form-control', 'placeholder' => 'Votre nom de famille')) }}
+                {{ Form::text('contact_last_name', null, array('class' => 'form-control', 'placeholder' => 'Votre nom de famille')) }}
             </div>
         </div>
 
         <div class="form-group">
-            {{ Form::label('contact-email', 'Email', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('contact_email', 'Email', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon">@</span>
-                    {{ Form::email('contact-email', null, array('class' => 'form-control', 'placeholder' => 'Votre adresse email')) }}
+                    {{ Form::email('contact_email', null, array('class' => 'form-control', 'placeholder' => 'Votre adresse email')) }}
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            {{ Form::label('contact-phone', 'Téléphone', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('contact_phone', 'Téléphone', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4">
-                {{ Form::text('contact-phone', null, array('class' => 'form-control', 'placeholder' => 'Votre téléphone')) }}
+                {{ Form::text('contact_phone', null, array('class' => 'form-control', 'placeholder' => 'Votre téléphone')) }}
             </div>
         </div>
 
@@ -120,6 +115,7 @@
         <div class="form-group col-sm-4">
         	{{ Form::submit('Enregistrer la nouvelle annonce', array('class' => 'btn btn-default'))}}
     	</div>
+
     {{ Form::close() }}
 </div>
 

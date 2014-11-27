@@ -12,27 +12,29 @@ class Ad extends Eloquent {
 	{
 		$ad = new Ad;
 
-		$ad->category_id = $data['category'];
+		$new_url = self::generate_url($data['title']);
+
+		$ad->category_id = $data['category_id'];
 		$ad->random_id = self::new_random_id();
-		$ad->url = self::generate_url($data['title']);
+		$ad->url = $new_url;
 		$ad->title = $data['title'];
 		$ad->salary = 0;
 		$ad->place = $data['place'];
 		$ad->description = $data['description'];
 		$ad->skills = $data['skills'];
 		$ad->duration = $data['duration'];
-		$ad->languages = $data['language'];
-		$ad->contact_first_name = $data['contact-first-name'];
-		$ad->contact_last_name = $data['contact-last-name'];
-		$ad->contact_email = $data['contact-email'];
-		$ad->contact_phone = $data['contact-phone'];
-		$ad->start_at = strtotime($data['start-date']);
-		$ad->contact_phone = strtotime($data['contact-phone']);
+		$ad->languages = $data['languages'];
+		$ad->contact_first_name = $data['contact_first_name'];
+		$ad->contact_last_name = $data['contact_last_name'];
+		$ad->contact_email = $data['contact_email'];
+		$ad->contact_phone = $data['contact_phone'];
+		$ad->start_at = strtotime($data['starts_at']);
+		$ad->contact_phone = strtotime($data['contact_phone']);
 		$ad->expires_at = strtotime('now +15days');
 		$ad->validated_at = null;
 		$ad->save();
 
-		return $ad;
+		return $new_url;
 	}
 
 	/** Generates a new unique random id **/
