@@ -22,7 +22,7 @@
 
 // PATTERNS
 
-	Route::pattern('ad', '[a-z0-9_]+');
+	Route::pattern('ad', '[a-z0-9-]+');
 	
 	Route::pattern('rss', '[a-zA-Z0-9-]+');
 
