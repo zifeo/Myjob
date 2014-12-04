@@ -50,8 +50,8 @@ class Ad extends Eloquent {
 	/** Generates a new unique and readable url **/
 	private static function generate_url($ad_name)
 	{
-		$new_url = snake_case($ad_name);
-		$new_url = str_replace("_", "-", $new_url);
+		$new_url = str_replace(" ", "-", $ad_name);
+		$new_url = strtolower($new_url);
 
 		if(self::url_is_unique($new_url)) {
 
