@@ -34,10 +34,7 @@
         	</div>
         </div>
 
-
-
-
-        <div class="form-group">    
+        <div class="form-group no-bottom-margin">    
         	{{ Form::label('starts_at', 'Date', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4" id="hiddable-from-to-date">
         	    <div class="input-daterange input-group datepicker">
@@ -47,13 +44,14 @@
                 </div>
             </div>
 
-            
-            <div class="col-sm-4">
+    	</div>
+
+        <div class="form-group right-text-align" style="text-align:right">
+            <div class="col-sm-offset-2 col-sm-4">
                 <input type="checkbox" value="isPunctual" name="isPunctual" id="isPunctual">
                 {{ Form::label('isPunctual', 'Un seul jour ?', array('class' => 'control-label')) }}
             </div>
-
-    	</div>
+        </div>
 
         <div class="form-group">
             {{ Form::label('description', 'Description', array('class' => 'col-sm-2 control-label')) }}
@@ -94,10 +92,7 @@
         <div class="form-group">
             {{ Form::label('contact_email', 'Email', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon">@</span>
                     {{ Form::email('contact_email', null, array('class' => 'form-control', 'placeholder' => 'Votre adresse email')) }}
-                </div>
             </div>
         </div>
 

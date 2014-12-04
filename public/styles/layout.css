@@ -74,7 +74,13 @@ body {
 	height: 100px;
 }
 
+.no-bottom-margin {
+	margin-bottom: 0px;
+}
 
+.right-text-align {
+	text-align: right;
+}
 
 /*
 
