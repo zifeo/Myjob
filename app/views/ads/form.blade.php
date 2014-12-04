@@ -44,16 +44,13 @@
                     {{ Form::text('starts_at', date('m/d/Y'), array('class' => 'form-control', 'id' => 'starts_at')) }}
         	        <span class="input-group-addon">jusqu'au</span>
         	        {{ Form::text('ends_at', date('m/d/Y', strtotime('now +15days')), array('class' => 'form-control', 'id' => 'ends_at')) }}
-            </div>
-
-            <div class="col-sm-4 hidden" id="hiddable-punctual-date">
-                <input type="text" class="form-control datepicker" name="punctual-date" id="punctual-date" />
+                </div>
             </div>
 
             
             <div class="col-sm-4">
                 <input type="checkbox" value="isPunctual" name="isPunctual" id="isPunctual">
-                {{ Form::label('isPunctual', 'Job ponctuel ?', array('class' => 'control-label')) }}
+                {{ Form::label('isPunctual', 'Un seul jour ?', array('class' => 'control-label')) }}
             </div>
 
     	</div>
