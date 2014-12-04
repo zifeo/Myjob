@@ -30,7 +30,7 @@ class CreateAdsTable extends Migration {
 			$table->string('contact_last_name', 50);
 			$table->string('contact_email', 75);
 			$table->string('contact_phone', 20)->nullable();
-			$table->date('start_at');
+			$table->date('starts_at');
 			$table->date('ends_at')->nullable();
 			$table->dateTime('expires_at');
 			$table->dateTime('validated_at')->nullable();	

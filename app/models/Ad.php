@@ -28,9 +28,10 @@ class Ad extends Eloquent {
 		$ad->contact_last_name = $data['contact_last_name'];
 		$ad->contact_email = $data['contact_email'];
 		$ad->contact_phone = $data['contact_phone'];
-		$ad->start_at = strtotime($data['starts_at']);
-		$ad->contact_phone = strtotime($data['contact_phone']);
-		$ad->expires_at = strtotime('now +15days');
+		$ad->starts_at = strtotime($data['starts_at']);
+		$ad->ends_at = strtotime($data['ends_at']);
+		$ad->expires_at = strtotime('+15 days');
+		$ad->contact_phone = $data['contact_phone'];
 		$ad->validated_at = null;
 		$ad->save();
 
