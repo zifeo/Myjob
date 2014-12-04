@@ -3,7 +3,11 @@ $(function(){
 
 
 	// Toggles the datepicker
-	$('.datepicker').datepicker({ format: "dd/mm/yyyy"});
+	$('.datepicker').datepicker({ 
+		format: "dd/mm/yyyy",
+		autoclose: true,
+    	todayHighlight: true
+	});
 
 	// Displays punctual-date datepicker or goes back to from-to-date
 	$('#isPunctual').on("change", function() {
