@@ -8,13 +8,9 @@ $(function(){
 	// Displays punctual-date datepicker or goes back to from-to-date
 	$('#isPunctual').on("change", function() {
 		if($('#isPunctual').is(':checked')) {
-			// display punctual-date
-			$('#hiddable-from-to-date').addClass('hidden');
-			$('#hiddable-punctual-date').removeClass('hidden');
+			$('#ends_at').prop('disabled', true);
 		} else {
-			// display from-to-date
-			$('#hiddable-from-to-date').removeClass('hidden');
-			$('#hiddable-punctual-date').addClass('hidden');
+			$('#ends_at').prop('disabled', false);
 		}
 	});
 	
