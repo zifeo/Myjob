@@ -58,7 +58,7 @@ class AdController extends \BaseController {
 		);
 
 		if($validator->fails()) {
-			return Redirect::to('ad/create')->withErrors($validator)->with('type', 'danger');
+			return Redirect::back()->withErrors($validator)->with('type', 'danger');
 		} else {
 			//Handle category id
 			$url = Ad::create(Input::all());

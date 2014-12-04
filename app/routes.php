@@ -30,12 +30,7 @@
 
 	Route::resource('ad', 'adController');
 
-	Route::get('/', function() {
-
-		// affichage des messages de succès/erreurs
-		// try auto-connect
-	    return 'home';
-	});
+	Route::get('/', 'AdController@index');
 	
 	Route::get('test', array('before' => 'tequila', 'uses' => 'TestController@moica'));
 	
