@@ -41,9 +41,9 @@
         	{{ Form::label('starts_at', 'Date', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-4" id="hiddable-from-to-date">
         	    <div class="input-daterange input-group datepicker">
-                    {{ Form::text('starts_at', date('m/d/Y'), array('class' => 'form-control', 'id' => 'starts_at')) }}
+                    {{ Form::text('starts_at', date('d/m/Y'), array('class' => 'form-control', 'id' => 'starts_at')) }}
         	        <span class="input-group-addon">jusqu'au</span>
-        	        {{ Form::text('ends_at', date('m/d/Y', strtotime('now +15days')), array('class' => 'form-control', 'id' => 'ends_at')) }}
+        	        {{ Form::text('ends_at', date('d/m/Y', strtotime('now +15days')), array('class' => 'form-control', 'id' => 'ends_at')) }}
                 </div>
             </div>
 
