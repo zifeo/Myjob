@@ -29,7 +29,11 @@ class Ad extends Eloquent {
 		$ad->contact_email = $data['contact_email'];
 		$ad->contact_phone = $data['contact_phone'];
 		$ad->starts_at = date('Y-m-d', strtotime($data['starts_at']));
-		$ad->ends_at = date('Y-m-d', strtotime($data['ends_at']));
+
+		if (array_key_exists('ends_at', $data)) {
+			$ad->ends_at = date('Y-m-d', strtotime($data['ends_at']));
+		}
+
 		$ad->expires_at = date('Y-m-d', strtotime('+15 days'));
 		$ad->contact_phone = $data['contact_phone'];
 		$ad->save();
