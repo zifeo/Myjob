@@ -54,8 +54,7 @@ class Ad extends Eloquent {
 	/** Generates a new unique and readable url **/
 	private static function generate_url($ad_name)
 	{
-		$new_url = str_replace(" ", "-", $ad_name);
-		$new_url = strtolower($new_url);
+		$new_url = Str::slug($ad_name, "-");
 
 		if(self::url_is_unique($new_url)) {
 
