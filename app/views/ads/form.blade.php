@@ -18,9 +18,10 @@
                 {{ Form::text('title', null, array(
                     'class' => 'form-control', 
                     'placeholder' => 'Titre', 
-                    'required' => '', 
+                    'required', 
                     'data-minlength' => '5',
-                    'maxlength' => '50')) }}
+                    'maxlength' => '50',
+                    'data-stopshouting')) }}
                 <div class="help-block with-errors"></div>
             </div>
         </div>
@@ -58,7 +59,7 @@
                     {{ Form::text('starts_at', date('d-m-Y'), array(
                         'class' => 'form-control', 
                         'id' => 'starts_at', 
-                        'required' => '')) }}
+                        'required')) }}
                     <span class="input-group-addon">jusqu'au</span>
                     {{ Form::text('ends_at', 
                         date('d-m-Y', strtotime('now +15days')), array(
@@ -124,9 +125,10 @@
                     'class' => 'form-control', 
                     'placeholder' => 'Description de l\'annonce', 
                     'rows' => 4, 
-                    'required' => '',
+                    'required',
                     'data-minlength' => '10',
-                    'maxlength' => '1500')) }}
+                    'maxlength' => '1500',
+                    'data-stopshouting')) }}
                 <div class="help-block with-errors"></div>
             </div>
         </div>
@@ -139,7 +141,7 @@
                 {{ Form::text('contact_first_name', null, array(
                     'class' => 'form-control', 
                     'placeholder' => 'Votre prénom', 
-                    'required' => '',
+                    'required',
                     'data-minlength' => '2',
                     'maxlength' => '50')) }}
                 <div class="help-block with-errors"></div>
@@ -153,7 +155,7 @@
                 {{ Form::text('contact_last_name', null, array(
                     'class' => 'form-control', 
                     'placeholder' => 'Votre nom de famille', 
-                    'required' => '',
+                    'required',
                     'data-minlength' => '2',
                     'maxlength' => '50')) }}
                 <div class="help-block with-errors"></div>
@@ -167,7 +169,7 @@
                 {{ Form::email('contact_email', null, array(
                     'class' => 'form-control', 
                     'placeholder' => 'Votre adresse email', 
-                    'required' => '',
+                    'required',
                     'type' => 'email',
                     'maxlength' => '75')) }}
                 <div class="help-block with-errors"></div>
