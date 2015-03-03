@@ -6,7 +6,8 @@ $(function(){
 	$('.datepicker').datepicker({ 
 		format: "dd-mm-yyyy",
 		autoclose: true,
-    	todayHighlight: true
+    	todayHighlight: true,
+    	startDate: '0'
 	});
 
 	// Displays punctual-date datepicker or goes back to from-to-date
