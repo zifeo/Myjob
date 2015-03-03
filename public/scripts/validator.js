@@ -37,8 +37,9 @@
     html: false,
     disable: true,
     errors: {
-      match: 'Does not match',
-      minlength: 'Not long enough'
+      match: "Ne correspond pas.", 
+      minlength: "Le texte n'est pas assez long.",
+      stopshouting: "Soyez courtois, pas trop de majuscules."
     }
   }
 
@@ -49,11 +50,36 @@
     },
     match: function ($el) {
       var target = $el.data('match')
+      print(target)
       return !$el.val() || $el.val() === $(target).val()
     },
     minlength: function ($el) {
       var minlength = $el.data('minlength')
       return !$el.val() || $el.val().length >= minlength
+    },
+    stopshouting: function ($el) {
+      var text = $el.val()
+
+      // Empty text is ok
+      if (!text) {
+        return true;
+      };
+
+      // Common annoying words
+      if (/URGENT|IMPORTANT|ATTENTION|WARNING|QUICK|NOW|!!/.test(text)) {
+        return false;
+      };
+
+      var nUpper = 0
+      for (var i = 0, len = text.length; i <= len; i++) {
+        // If current letter is a majuscule
+        if (/[A-Z]/.test(text[i])) {
+          nUpper++;
+        };
+      };
+
+      // If number of uppercase letters is more than half the text, reject
+      return nUpper < text.length / 2.0;
     }
   }
 
