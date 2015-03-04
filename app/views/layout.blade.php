@@ -35,7 +35,7 @@
 							<li class="active"><a href="{{{ URL::to('ad') }}}">Tous les jobs</a></li>
 							<li><a href="{{{ URL::to('ad', 'create') }}}">Créer</a></li>
 							<li><a href="">Mes alertes</a></li>
-							<li><a href="">Modération</a></li>			
+							<li><a href="{{{ URL::to('moderation')}}}">Modération</a></li>			
 							<li><a href="">Options</a></li>		
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
