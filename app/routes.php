@@ -96,12 +96,10 @@ Route::group(array('before' => 'tequila|admin'), function() {
 		return 'job edition@post';
 	}));
 
-	Route::get('validation', function() {
-	    return 'validation';
-	});
+	Route::get('moderation', 'ModerationController@adsToModerate');
 	
-	Route::post('validation', array('before' => 'csrf', function() {
-	    return 'validation@post';
+	Route::post('moderation', array('before' => 'csrf', function() {
+	    return 'moderation@post';
 	}));
 	
 	Route::get('options', function() {
