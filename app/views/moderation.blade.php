@@ -7,6 +7,7 @@
         @forelse ($ads_to_moderate as $ad)
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <a href="#" class="pull-right">Edit</a>
                     <h3 class="panel-title">{{{$ad->title}}}</h3>
                 </div>
                 <div class="panel-body">
@@ -19,10 +20,16 @@
                         <span><em>{{{ $ad->starts_at }}} : {{{ $ad->ends_at or $ad->starts_at }}}</em></span><br>
                     </div>
                     {{{ $ad->description }}}
-                    <div class="clearfix"></div>
                 </div>
                 <div class="panel-footer">
-                    <a href="#" class="success">Accepter</a> - <a href="#" class="danger">Refuser</a>
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-success">Accepter</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-danger">Refuser</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         @empty
