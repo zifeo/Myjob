@@ -11,15 +11,18 @@
                     <h3 class="panel-title">{{{$ad->title}}}</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="pull-right small text-right montserra">
-                        <span class="badge">{{{ Category::find($ad->category_id)->name }}}</span><br>
+                    <div class="col-md-3 col-xs-12 side-infos">
+                        <span class="badge pull-right">{{{ Category::find($ad->category_id)->name }}}</span>
                         <span>{{{ $ad->place or 'Non spécifié' }}}</span><br>
                         <span>{{{ $ad->contact_first_name }}} {{{ $ad->contact_last_name }}}</span><br>
                         <span>{{{ $ad->contact_phone }}}</span><br>
-                        <span>{{{ $ad->contact_email }}}</span><br><br>
-                        <span><em>{{{ $ad->starts_at }}} : {{{ $ad->ends_at or $ad->starts_at }}}</em></span><br>
+                        <span>{{{ $ad->contact_email }}}</span><br>
+                        <span><em>{{{ $ad->starts_at }}} : {{{ $ad->ends_at or $ad->starts_at }}} 
+                            ({{{ floor((strtotime($ad->ends_at) - strtotime($ad->starts_at))/(60*60*24)) }}} j)</em></span><br>
                     </div>
-                    {{{ $ad->description }}}
+                    <div class ="col-md-9 col-xs-12">
+                        {{{ $ad->description }}}
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="btn-group btn-group-justified" role="group">

@@ -9,3 +9,4 @@ readfile('styles/chosen.min.css');
 readfile('styles/datepicker3.css');
 readfile('styles/layout.css');
 readfile('styles/form.css');
+readfile('styles/moderation.css');
