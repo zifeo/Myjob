@@ -13,3 +13,6 @@ readfile('scripts/bootstrap-datepicker.js');
 readfile('scripts/chosen.jquery.min.js');
 readfile('scripts/momentjs.min.js');
 readfile('scripts/main.js');
+
+// TODO change to validator.min.js when site is public
+readfile('scripts/validator.js');
