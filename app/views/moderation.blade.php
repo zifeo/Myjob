@@ -12,7 +12,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-md-3 col-xs-12 side-infos">
-                        <span class="badge pull-right">{{{ Category::find($ad->category_id)->name }}}</span>
+                        <span class="badge pull-right">{{{ $category_names[$ad->category_id] }}}</span>
                         <span>{{{ $ad->place or 'Non spécifié' }}}</span><br>
                         <span>{{{ $ad->contact_first_name }}} {{{ $ad->contact_last_name }}}</span><br>
                         <span>{{{ $ad->contact_phone }}}</span><br>
@@ -24,6 +24,7 @@
                         {{{ $ad->description }}}
                     </div>
                 </div>
+
                 <div class="panel-footer">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
