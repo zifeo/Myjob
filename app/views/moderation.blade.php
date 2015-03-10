@@ -28,10 +28,10 @@
                 <div class="panel-footer">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-success">Accepter</button>
+                            <button rel="{{ $ad->url }}" type="button" class="btn btn-success validation-accept-button">Accepter</button>
                         </div>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-danger">Refuser</button>
+                            <button rel="{{ $ad->url }}" type="button" class="btn btn-danger validation-refuse-button">Refuser</button>
                         </div>
                     </div>
                 </div>
