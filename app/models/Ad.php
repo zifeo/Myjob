@@ -35,7 +35,6 @@ class Ad extends Eloquent {
 		}
 
 		$ad->expires_at = date('Y-m-d', strtotime('+15 days'));
-		$ad->contact_phone = $data['contact_phone'];
 		$ad->save();
 		
 		return $new_url;
