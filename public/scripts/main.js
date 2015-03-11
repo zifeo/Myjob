@@ -28,4 +28,24 @@ $(function(){
 	$(window).on('scrollstart', function(){
 		$('.swipe a').css({marginRight: '0'});
 	});
+
+	$('.validation-accept-button').on('click', function(){
+		var self = this;
+		var id = $(this).attr("rel");
+		$.post("/moderation", {id: id, accepted: 1}, function( data ) {
+  			if (data == "ok") {
+  				$(self).parents('.panel').hide(500);
+  			};
+		});
+	});
+
+	$('.validation-refuse-button').on('click', function(){
+		var self = this;
+		var id = $(this).attr("rel");
+		$.post("/moderation", {id: id, accepted: 0}, function( data ) {
+  			if (data == "ok") {
+  				$(self).parents('.panel').hide(500);
+  			};
+		});
+	})
 });

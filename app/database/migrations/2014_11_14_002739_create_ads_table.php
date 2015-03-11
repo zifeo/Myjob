@@ -33,8 +33,8 @@ class CreateAdsTable extends Migration {
 			$table->date('starts_at');
 			$table->date('ends_at')->nullable();
 			$table->dateTime('expires_at');
-			$table->dateTime('validated_at')->nullable();	
-
+			$table->boolean('is_validated')->default(false);
+			$table->dateTime('validated_at')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

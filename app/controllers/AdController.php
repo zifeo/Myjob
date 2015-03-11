@@ -9,7 +9,7 @@ class AdController extends \BaseController {
 	 */
 	public function index()
 	{
-		$ads = Ad::all();
+		$ads = Ad::where('is_validated', '=', 1)->get();
 		return View::make('ads.list')->with('ads', $ads);
 	}
 

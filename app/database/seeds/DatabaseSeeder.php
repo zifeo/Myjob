@@ -40,7 +40,6 @@ class CategoriesTableSeeder extends Seeder {
         	['name' => 'Autre']
         ]);
     }
-
 }
 
 class AdsTableSeeder extends Seeder  {
@@ -49,10 +48,55 @@ class AdsTableSeeder extends Seeder  {
     {
         DB::table('ads')->delete();
 
-        DB::table('ads')->insert([
-            ['category_id' => 1, 'url' => 'ad1', 'title' => 'ad1', 'description' => 'Lorem ipsum génial'],
-            ['category_id' => 2, 'url' => 'ad2', 'title' => 'ad2', 'description' => 'Lorem ipsum nul'],
-            ['category_id' => 3, 'url' => 'ad3', 'title' => 'ad3', 'description' => 'Lorem ipsum moyen']
-        ]);
+        $ads = [
+            [
+                'title' => 'Recherche Jardinier',
+                'category_id' => 1,
+                'place' => 'Renens',
+                'description' => 'Je recherche une personne musclée pour des travaux d\'entretien',
+                'skills' => 'Musclé, beau, intense.',
+                'duration' => '2h par jour',
+                'languages' => 'Français et espagnol',
+                'contact_first_name' => 'Juan',
+                'contact_last_name' => 'Paolo',
+                'contact_email' => 'j.p@gmail.com',
+                'contact_phone' => '0212221122',
+                'starts_at' => '2015-06-02',
+                'ends_at' => '2015-08-29'
+            ],
+            [
+                'title' => 'Experience',
+                'category_id' => 3,
+                'place' => 'EPFL',
+                'description' => 'Je recherche une personne forte pour expérience sociologique.',
+                'skills' => 'Intelligent',
+                'duration' => '1h',
+                'languages' => '',
+                'contact_first_name' => 'Cédric',
+                'contact_last_name' => 'Cook',
+                'contact_email' => 'c.c@pollypocket.com',
+                'contact_phone' => '0215955555',
+                'starts_at' => '2015-03-02',
+            ],
+            [
+                'title' => 'Recherche étudiant en informatique ',
+                'category_id' => 8,
+                'place' => 'EPFL',
+                'description' => 'Je cherche un étudiant en info pour m\'aider avec Computer Graphics',
+                'skills' => 'Bon en informatique',
+                'duration' => '1h par semaine',
+                'languages' => 'Français',
+                'contact_first_name' => 'Johnny',
+                'contact_last_name' => 'Bobby',
+                'contact_email' => 'j.ahahhsh@epfl.ch',
+                'contact_phone' => '832749853',
+                'starts_at' => '2015-04-12',
+                'ends_at' => '2015-05-12',
+            ]
+        ];
+
+        foreach ($ads as $ad) {
+            Ad::create($ad);   
+        }
     }
 }
