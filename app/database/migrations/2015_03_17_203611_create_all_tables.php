@@ -56,7 +56,7 @@ class CreateAllTables extends Migration {
 			$table->increments('ad_id');
 			$table->integer('category_id')->unsigned();
 			$table->foreign('category_id')->references('category_id')->on('categories');
-			$table->string('random_id', 32);
+			$table->string('random_secret', 32);
 			$table->string('url', 50)->unique();
 			$table->string('title', 50);
 			$table->string('salary', 100)->nullable();
