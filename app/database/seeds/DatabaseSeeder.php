@@ -13,11 +13,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('CategoriesTableSeeder');
 
-        $this->command->info('Categories table seeded!');
+        $this->call('ContactEmailsTableSeeder');
 
         $this->call('AdsTableSeeder');
-
-        $this->command->info('Ads table seeded!');
 	}
 
 }
@@ -42,7 +40,29 @@ class CategoriesTableSeeder extends Seeder {
     }
 }
 
-class AdsTableSeeder extends Seeder  {
+class ContactEmailsTableSeeder extends Seeder {
+    public function run()
+    {
+        DB::table('contact_emails')->delete();
+
+        /* Every seeded Ad should have corresponding email here. */
+        $emails = [
+            'j.p@gmail.com',
+            'c.c@pollypocket.com',
+            'j.ahahhsh@epfl.ch',
+            'j.p@epfl.ch',
+        ];
+
+        foreach ($emails as $email) {
+            DB::table('contact_emails')->insert([
+                'contact_email' => $email,
+                'random_secret' => str_random(32),
+            ]);
+        }
+    }
+}
+
+class AdsTableSeeder extends Seeder {
 
     public function run()
     {
