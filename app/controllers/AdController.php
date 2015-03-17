@@ -22,7 +22,7 @@ class AdController extends \BaseController {
 	public function create()
 	{
 		$categories = Category::lists('name', 'category_id');
-		return View::make('ads.form')->with('categories', $categories)->with('ad', null);
+		return View::make('ads.new')->with('categories', $categories)->with('ad', null);
 	}
 
 
@@ -34,34 +34,17 @@ class AdController extends \BaseController {
 	public function store()
 	{
 		$this->beforeFilter('csrf');
-
 		$categories = Category::lists('name', 'category_id');
 
-		$validator = Validator::make(
-			Input::all(),
-			[
-				'title' => 				['required', 'min:5', 'max:50'],
-				'place' => 				['required', 'min:5', 'max:15'],
-				'category_id' =>		['required', 'in:'.implode(',', array_keys($categories))],
-				'duration' => 			['required', 'min:5', 'max:100'],
-				'starts_at' => 			['after:-1 day'],
-				'ends_at' => 			['after:' . Input::get('starts_at')],
-				'punctual_date' => 		['after:-1 day'],
-				'description' => 		['required', 'min:10', 'max:1500'],
-				'skills' => 			['min:5', 'max:100'],
-				'languages' => 			['min:3', 'max:50'],
-				'contact_first_name' => ['required', 'min:2', 'max:50'],
-				'contact_last_name' => 	['required', 'min:2', 'max:50'],
-				'contact_email' => 		['required', 'email', 'max:75'],
-				'contact_phone' => 		['min:4', 'max:20'],
-			]
-		);
-
+		$fields = $this->validation();
+		$validator = Validator::make(Input::all(), $fields);
+		$data = array_only(Input::all(), array_keys($fields));
+		
 		if($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->with('type', 'danger');
 		} else {
 			//Handle category id
-			$url = Ad::create(Input::all());
+			$url = Ad::create($data);
 			return Redirect::to('ad/' . $url);
 		}
 	}
@@ -90,7 +73,7 @@ class AdController extends \BaseController {
 	{
 		$ad = Ad::findorfail($url);
 		$categories = Category::lists('name', 'category_id');
-		return View::make('ads.form')->with('categories', $categories)->with('ad', $ad);
+		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
 	}
 
 
@@ -100,9 +83,24 @@ class AdController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($url)
 	{
-		//
+		$this->beforeFilter('csrf');
+		$categories = Category::lists('name', 'category_id');
+
+		$fields = $this->validation();
+		$validator = Validator::make(Input::all(), $fields);
+		$data = array_only(Input::all(), array_keys($fields));
+
+		if($validator->fails()) {
+			return Redirect::back()->withErrors($validator)->with('type', 'danger');
+		} else {
+			//Handle category id
+			$ad = Ad::findorfail($url);
+			$ad->fill($data);
+			$ad->save();
+			return Redirect::to('ad/' . $url);
+		}
 	}
 
 
@@ -117,5 +115,26 @@ class AdController extends \BaseController {
 		//
 	}
 
+	private function validation() {
+		
+		$categories = Category::lists('name', 'category_id');
+		return [
+			'title' => 				['required', 'min:5', 'max:50'],
+			'place' => 				['required', 'min:5', 'max:15'],
+			'category_id' =>		['required', 'in:'.implode(',', array_keys($categories))],
+			'duration' => 			['required', 'min:5', 'max:100'],
+			'starts_at' => 			['after:-1 day'],
+			'ends_at' => 			['after:' . Input::get('starts_at')],
+			'punctual_date' => 		['after:-1 day'],
+			'description' => 		['required', 'min:10', 'max:1500'],
+			'skills' => 			['min:5', 'max:100'],
+			'languages' => 			['min:3', 'max:50'],
+			'contact_first_name' => ['required', 'min:2', 'max:50'],
+			'contact_last_name' => 	['required', 'min:2', 'max:50'],
+			'contact_email' => 		['required', 'email', 'max:75'],
+			'contact_phone' => 		['min:4', 'max:20'],
+		];
+		
+	}
 
 }
