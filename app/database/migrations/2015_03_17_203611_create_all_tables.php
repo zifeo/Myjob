@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdsTable extends Migration {
+class CreateAllTables extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,6 +12,45 @@ class CreateAdsTable extends Migration {
 	 */
 	public function up()
 	{
+		/* contact_emails */
+		Schema::create('contact_emails', function(Blueprint $table)
+		{
+			$table->string('contact_email', 75);
+			$table->primary('contact_email');
+			$table->string('random_secret', 32);
+			$table->timestamps();
+			$table->softDeletes();
+		});
+
+		/* categories */
+		Schema::create('categories', function(Blueprint $table)
+		{
+			$table->increments('category_id');
+			$table->string('name', 30);
+			$table->integer('color');
+
+			$table->timestamps();
+			$table->softDeletes();
+		});
+
+		/* users */
+		Schema::create('users', function(Blueprint $table)
+		{
+			$table->increments('user_id');
+			$table->integer('sciper')->unsigned()->unique();
+			$table->string('first_name', 50);
+			$table->string('last_name', 50);
+			$table->string('email', 75)->unique();
+			$table->boolean('daily_notice_activated')->default(false);
+			$table->boolean('weekly_notice_activated')->default(true);
+			$table->smallInteger('application_count')->default(0)->unsigned();
+			$table->boolean('is_admin')->default(false);
+			
+			$table->timestamps();
+			$table->softDeletes();
+		});
+
+		/* ads */
 		Schema::create('ads', function(Blueprint $table)
 		{
 			$table->increments('ad_id');
@@ -29,6 +68,7 @@ class CreateAdsTable extends Migration {
 			$table->string('contact_first_name', 50);
 			$table->string('contact_last_name', 50);
 			$table->string('contact_email', 75);
+			$table->foreign('contact_email')->references('contact_email')->on('contact_emails');
 			$table->string('contact_phone', 20)->nullable();
 			$table->date('starts_at');
 			$table->date('ends_at')->nullable();
@@ -48,6 +88,9 @@ class CreateAdsTable extends Migration {
 	public function down()
 	{
 		Schema::drop('ads');
+		Schema::drop('users');
+		Schema::drop('categories');
+		Schema::drop('contact_emails');
 	}
 
 }
