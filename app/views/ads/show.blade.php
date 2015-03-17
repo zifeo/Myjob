@@ -8,6 +8,6 @@ Myjob
 <div class="col-sm-12">
 	{{{ $ad->title }}}<br>
 	{{{ $ad->description }}}<br>
-	<a href="{{{ URL::to('ad', [$ad->url, 'edit']) }}}">edit</a>
+	<a href="{{{ route('ad.edit', $ad->url) }}}">edit</a>
 </div>
 @stop

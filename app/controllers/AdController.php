@@ -45,7 +45,7 @@ class AdController extends \BaseController {
 		} else {
 			//Handle category id
 			$url = Ad::create($data);
-			return Redirect::to('ad/' . $url);
+			return Redirect::route('ad', $url);
 		}
 	}
 
@@ -99,7 +99,7 @@ class AdController extends \BaseController {
 			$ad = Ad::findorfail($url);
 			$ad->fill($data);
 			$ad->save();
-			return Redirect::to('ad/' . $url);
+			return Redirect::route('ad', $url);
 		}
 	}
 
