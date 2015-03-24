@@ -60,8 +60,24 @@ class AdController extends \BaseController {
 		if($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->with('type', 'danger');
 		} else {
-			//Handle category id
+
+			/* If this is the first ad with that email, 
+			create new entry in contact_emails */
+
+			$email = Input::get('contact_email');
+
+			if (! ContactEmail::find($email)) {
+				$contact_email = new ContactEmail;
+
+				$contact_email->contact_email = $email;
+				$contact_email->random_secret = str_random(32);
+
+				$contact_email->save();
+			}
+
+			/* Create the ad in the DB */
 			$url = Ad::create(Input::all());
+
 			return Redirect::to('ad/' . $url);
 		}
 	}
