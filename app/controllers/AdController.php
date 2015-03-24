@@ -121,10 +121,10 @@ class AdController extends \BaseController {
 	* Displays the ads created by the person with 
 	* the @param $email email
 	*/
-	public function ads_with_email($email, $secret)
+	public function manage_ads_with_email($email, $secret)
 	{
 		// TODO restrict to secret owner
-		
+
 		$ads = Ad::where('contact_email', '=', $email)->get();
 		return View::make('ads.list')->with('ads', $ads);
 	}
