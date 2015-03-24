@@ -66,7 +66,7 @@
       };
 
       // Common annoying words
-      if (/URGENT|IMPORTANT|ATTENTION|WARNING|QUICK|NOW|!!/.test(text)) {
+      if (/CHERCHE|URGENT|IMPORTANT|ATTENTION|WARNING|QUICK|NOW|!!/.test(text)) {
         return false;
       };
 
