@@ -54,10 +54,12 @@ class ContactEmailsTableSeeder extends Seeder {
         ];
 
         foreach ($emails as $email) {
-            DB::table('contact_emails')->insert([
-                'contact_email' => $email,
-                'random_secret' => str_random(32),
-            ]);
+            $contact_email = new ContactEmail;
+
+            $contact_email->contact_email = $email;
+            $contact_email->random_secret = str_random(32);
+
+            $contact_email->save();
         }
     }
 }
