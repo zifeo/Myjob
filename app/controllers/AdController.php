@@ -41,9 +41,9 @@ class AdController extends \BaseController {
 			Input::all(),
 			[
 				'title' => 				['required', 'min:5', 'max:50'],
-				'place' => 				['required', 'min:5', 'max:15'],
+				'place' => 				['min:5', 'max:15'],
 				'category_id' =>		['required', 'in:'.implode(',', array_keys($categories))],
-				'duration' => 			['required', 'min:5', 'max:100'],
+				'duration' => 			['min:5', 'max:100'],
 				'starts_at' => 			['after:-1 day'],
 				'ends_at' => 			['after:' . Input::get('starts_at')],
 				'punctual_date' => 		['after:-1 day'],
