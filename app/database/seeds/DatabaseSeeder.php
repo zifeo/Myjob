@@ -26,17 +26,25 @@ class CategoriesTableSeeder extends Seeder {
     {
         DB::table('categories')->delete();
 
-        DB::table('categories')->insert([
-        	['name' => 'Aide à domicile'],
-        	['name' => 'Babysitting'],
-        	['name' => 'Cobaye pour expériences'],
-        	['name' => 'Informatique'],
-        	['name' => 'Job de bureau'],
-        	['name' => 'Promotion'],
-        	['name' => 'Restauration - Hôtellerie'],
-        	['name' => 'Soutien scolaire'],
-        	['name' => 'Autre']
-        ]);
+        $categories = [
+            'Aide à domicile',
+            'Babysitting',
+            'Cobaye pour expériences',
+            'Informatique',
+            'Job de bureau',
+            'Promotion',
+            'Restauration - Hôtellerie',
+            'Soutien scolaire',
+            'Autre'
+        ];
+
+        foreach ($categories as $category_name) {
+            $category = new Category;
+
+            $category->name = $category_name;
+
+            $category->save();
+        }
     }
 }
 
