@@ -16,8 +16,8 @@ class CreateAllTables extends Migration {
 		Schema::create('contact_emails', function(Blueprint $table)
 		{
 			$table->string('contact_email', 75);
-			$table->primary('contact_email');
 			$table->string('random_secret', 32);
+			$table->primary(['contact_email', 'random_secret']);
 			$table->timestamps();
 			$table->softDeletes();
 		});

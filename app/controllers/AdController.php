@@ -62,17 +62,20 @@ class AdController extends \BaseController {
 		} else {
 
 			/* If this is the first ad with that email, 
-			create new entry in contact_emails */
+			or last secret is outdated, create new entry 
+			in contact_emails */
 
 			$email = Input::get('contact_email');
 
-			if (! ContactEmail::find($email)) {
+			if (empty(ContactEmail::get_valid_secrets($email))) {
 				$contact_email = new ContactEmail;
 
 				$contact_email->contact_email = $email;
 				$contact_email->random_secret = str_random(32);
 
 				$contact_email->save();
+
+				// TODO send email with code
 			}
 
 			/* Create the ad in the DB */
@@ -139,10 +142,24 @@ class AdController extends \BaseController {
 	*/
 	public function manage_ads_with_email($email, $secret)
 	{
-		// TODO restrict to secret owner
+		if (ContactEmail::is_outdated($secret, $email))
+		{
+			// TODO Lien dans le message
+			$message = 'Ce lien a plus de ' . ContactEmail::n_weeks_valid_secret .
+			' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
+			return Redirect::to('/')->withErrors(array('message' => $message))->with('type', 'warning');
+		} 
+		elseif (! ContactEmail::is_valid($secret, $email))
+		{
+			App::abort(404);
+		}
+		else
+		{
+			// TODO Durable connection
 
-		$ads = Ad::where('contact_email', '=', $email)->get();
-		return View::make('ads.list')->with('ads', $ads);
+			$ads = Ad::where('contact_email', '=', $email)->get();
+			return View::make('ads.list')->with('ads', $ads);
+		}
 	}
 
 }
