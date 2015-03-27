@@ -42,10 +42,30 @@ class AdController extends \BaseController {
 		
 		if($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->with('type', 'danger');
-		} else {
-			//Handle category id
-			$url = Ad::create($data);
-			return Redirect::route('ad', $url);
+		} 
+		else 
+		{
+			/* If this is the first ad with that email, 
+			or last secret is outdated, create new entry 
+			in contact_emails */
+
+			$email = Input::get('contact_email');
+
+			if (empty(ContactEmail::get_valid_secrets($email))) {
+				$contact_email = new ContactEmail;
+
+				$contact_email->contact_email = $email;
+				$contact_email->random_secret = str_random(32);
+
+				$contact_email->save();
+
+				// TODO send email with code
+			}
+
+			/* Create the ad in the DB */
+			$url = Ad::create(Input::all());
+
+			return Redirect::route('ad.show', $url);
 		}
 	}
 
@@ -72,6 +92,9 @@ class AdController extends \BaseController {
 	public function edit($url)
 	{
 		$ad = Ad::findorfail($url);
+
+		$this->check_visitor_connected($ad->contact_email);
+
 		$categories = Category::lists('name', 'category_id');
 		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
 	}
@@ -85,6 +108,10 @@ class AdController extends \BaseController {
 	 */
 	public function update($url)
 	{
+		$ad = Ad::findorfail($url);
+
+		$this->check_visitor_connected($ad->contact_email);
+
 		$this->beforeFilter('csrf');
 		$categories = Category::lists('name', 'category_id');
 
@@ -94,12 +121,12 @@ class AdController extends \BaseController {
 
 		if($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->with('type', 'danger');
-		} else {
-			//Handle category id
-			$ad = Ad::findorfail($url);
+		} 
+		else
+		{
 			$ad->fill($data);
 			$ad->save();
-			return Redirect::route('ad', $url);
+			return Redirect::route('ad.show', $url);
 		}
 	}
 
@@ -115,14 +142,41 @@ class AdController extends \BaseController {
 		//
 	}
 
+	/**
+	* Displays the ads created by the person with 
+	* the @param $email email
+	*/
+	public function manage_ads_with_email($email, $secret)
+	{
+		if (ContactEmail::is_outdated($secret, $email))
+		{
+			// TODO Lien dans le message
+			$message = 'Ce lien a plus de ' . ContactEmail::n_weeks_valid_secret .
+			' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
+			return Redirect::to('/')->withErrors(array('message' => $message))->with('type', 'warning');
+		} 
+		elseif (! ContactEmail::is_valid($secret, $email))
+		{
+			App::abort(404);
+		}
+		else
+		{
+			/* Temporarily allow current visitor to edit all ads with email $email. */
+			Session::put('connected_visitor', $email);
+
+			$ads = Ad::where('contact_email', '=', $email)->get();
+			return View::make('ads.list')->with('ads', $ads);
+		}
+	}
+
 	private function validation() {
 		
 		$categories = Category::lists('name', 'category_id');
 		return [
 			'title' => 				['required', 'min:5', 'max:50'],
-			'place' => 				['required', 'min:5', 'max:15'],
+			'place' => 				['min:5', 'max:15'],
 			'category_id' =>		['required', 'in:'.implode(',', array_keys($categories))],
-			'duration' => 			['required', 'min:5', 'max:100'],
+			'duration' => 			['min:5', 'max:100'],
 			'starts_at' => 			['after:-1 day'],
 			'ends_at' => 			['after:' . Input::get('starts_at')],
 			'punctual_date' => 		['after:-1 day'],
@@ -134,7 +188,13 @@ class AdController extends \BaseController {
 			'contact_email' => 		['required', 'email', 'max:75'],
 			'contact_phone' => 		['min:4', 'max:20'],
 		];
-		
+	}
+
+	private function check_visitor_connected($email)
+	{
+		if (! Session::has('connected_visitor') || Session::get('connected_visitor') != $email) {
+			App::abort(404);
+		}
 	}
 
 }
