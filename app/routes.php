@@ -62,7 +62,9 @@ $secret_regexp = "[a-zA-Z0-9]{32}";
 
 // RANDOM_SECRET NEEDED
 
-	Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email')->where('email', $email_regexp)->where('secret', $secret_regexp);
+	Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email')
+		->where('email', $email_regexp)
+		->where('secret', $secret_regexp);
 
 // TEQUILA NEEDED
 
