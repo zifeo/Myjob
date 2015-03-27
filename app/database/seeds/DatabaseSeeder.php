@@ -13,11 +13,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('CategoriesTableSeeder');
 
-        $this->command->info('Categories table seeded!');
+        $this->call('ContactEmailsTableSeeder');
 
         $this->call('AdsTableSeeder');
-
-        $this->command->info('Ads table seeded!');
 	}
 
 }
@@ -28,21 +26,53 @@ class CategoriesTableSeeder extends Seeder {
     {
         DB::table('categories')->delete();
 
-        DB::table('categories')->insert([
-        	['name' => 'Aide à domicile'],
-        	['name' => 'Babysitting'],
-        	['name' => 'Cobaye pour expériences'],
-        	['name' => 'Informatique'],
-        	['name' => 'Job de bureau'],
-        	['name' => 'Promotion'],
-        	['name' => 'Restauration - Hôtellerie'],
-        	['name' => 'Soutien scolaire'],
-        	['name' => 'Autre']
-        ]);
+        $categories = [
+            'Aide à domicile',
+            'Babysitting',
+            'Cobaye pour expériences',
+            'Informatique',
+            'Job de bureau',
+            'Promotion',
+            'Restauration - Hôtellerie',
+            'Soutien scolaire',
+            'Autre'
+        ];
+
+        foreach ($categories as $category_name) {
+            $category = new Category;
+
+            $category->name = $category_name;
+
+            $category->save();
+        }
     }
 }
 
-class AdsTableSeeder extends Seeder  {
+class ContactEmailsTableSeeder extends Seeder {
+    public function run()
+    {
+        DB::table('contact_emails')->delete();
+
+        /* Every seeded Ad should have corresponding email here. */
+        $emails = [
+            'j.p@gmail.com',
+            'c.c@pollypocket.com',
+            'j.ahahhsh@epfl.ch',
+            'j.p@epfl.ch',
+        ];
+
+        foreach ($emails as $email) {
+            $contact_email = new ContactEmail;
+
+            $contact_email->contact_email = $email;
+            $contact_email->random_secret = str_random(32);
+
+            $contact_email->save();
+        }
+    }
+}
+
+class AdsTableSeeder extends Seeder {
 
     public function run()
     {
@@ -79,7 +109,7 @@ class AdsTableSeeder extends Seeder  {
                 'starts_at' => '2015-03-02',
             ],
             [
-                'title' => 'Recherche étudiant en informatique ',
+                'title' => 'Recherche étudiant en informatique',
                 'category_id' => 8,
                 'place' => 'EPFL',
                 'description' => 'Je cherche un étudiant en info pour m\'aider avec Computer Graphics',
@@ -92,6 +122,21 @@ class AdsTableSeeder extends Seeder  {
                 'contact_phone' => '832749853',
                 'starts_at' => '2015-04-12',
                 'ends_at' => '2015-05-12',
+            ],
+            [
+                'title' => 'Programmeur C pour machine à café',
+                'category_id' => 4,
+                'place' => 'EPFL - LSRO',
+                'description' => 'Cela fait 5 ans que je cherche une personne pour recoder le kernel de la machine à café. S\'il vous plait, Linux programmeurs acharnés, aidez le LSRO.',
+                'skills' => 'Gros foufou en C',
+                'duration' => '8h par jour',
+                'languages' => 'Français, Anglais, Russe',
+                'contact_first_name' => 'Jean',
+                'contact_last_name' => 'Pierre',
+                'contact_email' => 'j.p@epfl.ch',
+                'contact_phone' => '0216931120',
+                'starts_at' => '2015-04-01',
+                'ends_at' => '2015-04-15',
             ]
         ];
 

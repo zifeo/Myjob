@@ -15,7 +15,7 @@ class Ad extends Eloquent {
 		$new_url = self::generate_url($data['title']);
 
 		$ad->category_id = $data['category_id'];
-		$ad->random_id = self::new_random_id();
+		$ad->random_secret = str_random(32);
 		$ad->url = $new_url;
 		$ad->title = $data['title'];
 		$ad->salary = 0;
@@ -40,16 +40,6 @@ class Ad extends Eloquent {
 		return $new_url;
 	}
 
-	/** Generates a new unique random id **/
-	private static function new_random_id()
-	{
-		do{
-			$new_random_id = str_random(32);
-		} while(! self::random_id_is_unique($new_random_id));
-
-		return $new_random_id;
-	}
-
 	/** Generates a new unique and readable url **/
 	private static function generate_url($ad_name)
 	{
@@ -70,13 +60,6 @@ class Ad extends Eloquent {
 
 			return $new_url_num;
 		}
-	}
-
-	private static function random_id_is_unique($id)
-	{
-		return DB::table('ads')
-			->where('random_id', '=', $id)
-			->count() == 0;
 	}
 
 	private static function url_is_unique($url)

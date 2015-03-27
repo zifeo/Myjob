@@ -20,6 +20,14 @@
 |
 */
 
+
+/* Very simple email regexp, might catch too much things but it's not
+a problem, since it's only used to route to the right controller. The 
+controller can do further checks if needed. */
+$email_regexp = ".+@.+\..+";
+
+$secret_regexp = "[a-zA-Z0-9]{32}";
+
 // PATTERNS
 
 	Route::pattern('ad', '[a-z0-9-]+');
@@ -51,6 +59,12 @@
 	Route::get('erreur', function() {
 		return 'erreur';
 	});
+
+// RANDOM_SECRET NEEDED
+
+	Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email')
+		->where('email', $email_regexp)
+		->where('secret', $secret_regexp);
 
 // TEQUILA NEEDED
 
