@@ -97,10 +97,6 @@ class AdController extends \BaseController {
 
 		return View::make('ads.show')->with('ad', $ad);
 	}
-	
-	private function parseDate($ad, $field) {
-		$ad->{$field} = new DateTime($ad->{$field});
-	}
 
 	/**
 	 * Show the form for editing the specified resource.
