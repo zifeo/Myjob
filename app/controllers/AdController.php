@@ -92,6 +92,9 @@ class AdController extends \BaseController {
 	public function edit($url)
 	{
 		$ad = Ad::findorfail($url);
+
+		$this->check_visitor_connected($ad->contact_email);
+
 		$categories = Category::lists('name', 'category_id');
 		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
 	}
@@ -105,6 +108,10 @@ class AdController extends \BaseController {
 	 */
 	public function update($url)
 	{
+		$ad = Ad::findorfail($url);
+
+		$this->check_visitor_connected($ad->contact_email);
+
 		$this->beforeFilter('csrf');
 		$categories = Category::lists('name', 'category_id');
 
@@ -114,12 +121,12 @@ class AdController extends \BaseController {
 
 		if($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->with('type', 'danger');
-		} else {
-			//Handle category id
-			$ad = Ad::findorfail($url);
+		} 
+		else
+		{
 			$ad->fill($data);
 			$ad->save();
-			return Redirect::route('ad', $url);
+			return Redirect::route('ad.show', $url);
 		}
 	}
 
@@ -181,6 +188,13 @@ class AdController extends \BaseController {
 			'contact_email' => 		['required', 'email', 'max:75'],
 			'contact_phone' => 		['min:4', 'max:20'],
 		];
+	}
+
+	private function check_visitor_connected($email)
+	{
+		if (! Session::has('connected_visitor') || Session::get('connected_visitor') != $email) {
+			App::abort(404);
+		}
 	}
 
 }
