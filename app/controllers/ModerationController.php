@@ -25,7 +25,7 @@ class ModerationController extends BaseController {
         $ad = Ad::find($id);
 
         $ad->is_validated = $accepted;
-        $ad->validated_at = date('Y-m-d H-i-s', strtotime('now'));
+        $ad->validated_at = Carbon::now()->toDateTimeString();
 
         if ($ad->save()) {
             echo "ok";
