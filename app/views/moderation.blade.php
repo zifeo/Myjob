@@ -18,7 +18,7 @@
                         <span>{{{ $ad->contact_phone }}}</span><br>
                         <span>{{{ $ad->contact_email }}}</span><br>
                         <span><em>{{{ $ad->starts_at }}} : {{{ $ad->ends_at or $ad->starts_at }}} 
-                            ({{{ floor((strtotime($ad->ends_at) - strtotime($ad->starts_at))/(60*60*24)) }}} j)</em></span><br>
+                            ({{{ isset($ad->ends_at) ? floor((strtotime($ad->ends_at) - strtotime($ad->starts_at))/(60*60*24)) : 0 }}} j)</em></span><br>
                     </div>
                     <div class ="col-md-9 col-xs-12">
                         {{{ $ad->description }}}
