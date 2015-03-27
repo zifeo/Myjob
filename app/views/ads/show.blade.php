@@ -24,7 +24,9 @@ Myjob
 			<li class="list-group-item">Salaire<span class="pull-right">{{{ $ad->salary }}}</span></li>
 			<li class="list-group-item">Lieu<span class="pull-right">{{{ $ad->place }}}</span></li>
 			<li class="list-group-item">Langue<span class="pull-right">{{{ $ad->languages }}}</span></li>
+			@if(isset($ad->starts_at, $ad->ends_at))
 			<li class="list-group-item">Période<span class="pull-right">{{{ $ad->starts_at->format('D. j F') }}} - {{{ $ad->ends_at->format('D. j F y') }}}</span></li>
+			@endif
 			<li class="list-group-item">Fréquence/durée<span class="pull-right">{{{ $ad->duration }}}</span></li>
 		</ul>
 	</div>	
