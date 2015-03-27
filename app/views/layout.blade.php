@@ -75,7 +75,7 @@
 			<footer class="row">
 				<div id="commons" class="">
 	  				<div id="commons">
-		  				<p>(c) {{ date('Y') }} · <a href="http://github.com/timozattol">Timothée Lottaz</a>/<a href="http://github.com/zifeo">Teo Stocco</a>.<br><a href="http://agepinfo.ch">AGEPINFO</a>/<a href="http://agepoly.ch">AGEPOLY</a>. Tous droits réservés.<br>MyJob est un service soutenu par l'<a href="http://epfl.ch">EPFL</a>.</p>
+		  				<p>(c) {{ date('Y') }} · <a href="http://github.com/timozattol">Timothée Lottaz</a>/<a href="http://github.com/zifeo">Teo Stocco</a>.<br><a href="http://agepinfo.ch">AGEPINFO</a>/<a href="http://agepoly.ch">AGEPOLY</a>. Tous droits réservés.<br>Service soutenu officiellement par l'<a href="http://epfl.ch">EPFL</a>.</p>
 		  				<div class="pull-left hidden-xs" id="agepinfo">
 			  				<a href="http://agepoly.epfl.ch/">
 				  				<img src="{{asset('contents/images/agepinfo.svg')}}" height="120" alt="">
