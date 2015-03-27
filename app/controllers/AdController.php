@@ -155,7 +155,8 @@ class AdController extends \BaseController {
 		}
 		else
 		{
-			// TODO Durable connection
+			/* Temporarily allow current visitor to edit all ads with email $email. */
+			Session::put('connected_visitor', $email);
 
 			$ads = Ad::where('contact_email', '=', $email)->get();
 			return View::make('ads.list')->with('ads', $ads);
