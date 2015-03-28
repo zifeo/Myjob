@@ -7,6 +7,8 @@ class Ad extends Eloquent {
     protected $guarded = array('ad_id');
 	protected $softDelete = true;
 
+	const n_weeks_ad_valid = 2;
+
 	/** Overrides create function **/
 	public static function create(array $data)
 	{
@@ -34,7 +36,7 @@ class Ad extends Eloquent {
 			$ad->ends_at = date('Y-m-d', strtotime($data['ends_at']));
 		}
 
-		$ad->expires_at = date('Y-m-d', strtotime('+15 days'));
+		$ad->expires_at = Carbon::now()->addWeeks(self::n_weeks_ad_valid)->toDateTimeString();
 		$ad->save();
 		
 		return $new_url;
