@@ -22,7 +22,7 @@
         {{ Form::text('place', null, array(
             'class' => 'form-control', 
             'placeholder' => 'Lieu',
-            'data-minlength' => '5',
+            'data-minlength' => '3',
             'maxlength' => '15')) }}
         <div class="help-block with-errors"></div>
     </div>
@@ -73,7 +73,7 @@
         {{ Form::text('duration', null, array(
             'class' => 'form-control', 
             'placeholder' => 'Ex: 8h par jour, 5x par semaine',
-            'data-minlength' => '5',
+            'data-minlength' => '2',
             'maxlength' => '100'))}}
         <div class="help-block with-errors"></div>
     </div>

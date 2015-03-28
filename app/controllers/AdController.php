@@ -189,9 +189,9 @@ class AdController extends \BaseController {
 		$categories = Category::lists('name', 'category_id');
 		return [
 			'title' => 				['required', 'min:5', 'max:50'],
-			'place' => 				['min:5', 'max:15'],
+			'place' => 				['min:3', 'max:15'],
 			'category_id' =>		['required', 'in:'.implode(',', array_keys($categories))],
-			'duration' => 			['min:5', 'max:100'],
+			'duration' => 			['min:2', 'max:100'],
 			'starts_at' => 			['after:-1 day'],
 			'ends_at' => 			['after:' . Input::get('starts_at')],
 			'punctual_date' => 		['after:-1 day'],
