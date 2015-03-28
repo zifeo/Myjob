@@ -69,7 +69,7 @@ class AdController extends \BaseController {
 			}
 
 			/* Create the ad in the DB */
-			$url = Ad::create(Input::all());
+			$url = Ad::create($data);
 
 			return Redirect::route('ad.show', $url);
 		}

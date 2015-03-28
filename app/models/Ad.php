@@ -19,15 +19,15 @@ class Ad extends Eloquent {
 		$ad->url = $new_url;
 		$ad->title = $data['title'];
 		$ad->salary = 0;
-		$ad->place = $data['place'];
+		$ad->place = self::nullable($data['place']);
 		$ad->description = $data['description'];
-		$ad->skills = $data['skills'];
-		$ad->duration = $data['duration'];
-		$ad->languages = $data['languages'];
+		$ad->skills = self::nullable($data['skills']);
+		$ad->duration = self::nullable($data['duration']);
+		$ad->languages = self::nullable($data['languages']);
 		$ad->contact_first_name = $data['contact_first_name'];
 		$ad->contact_last_name = $data['contact_last_name'];
 		$ad->contact_email = $data['contact_email'];
-		$ad->contact_phone = $data['contact_phone'];
+		$ad->contact_phone = self::nullable($data['contact_phone']);
 		$ad->starts_at = date('Y-m-d', strtotime($data['starts_at']));
 
 		if (array_key_exists('ends_at', $data)) {
@@ -66,7 +66,18 @@ class Ad extends Eloquent {
 	{
 		return DB::table('ads')->where('url', '=', $url)->count() == 0;
 	}
-	
+
+	private static function nullable($field)
+	{
+		if ($field == '') {
+			return NULL;
+		}
+		else
+		{
+			return $field;
+		}
+	}
+
 	public static function withCategories() {
 		return Ad::join('categories', 'ads.category_id', '=', 'categories.category_id');
 	}
