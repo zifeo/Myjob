@@ -183,6 +183,35 @@ class AdController extends \BaseController {
 			return View::make('ads.list')->with('ads', $ads);
 		}
 	}
+	
+	public function search() {
+		
+		$raw = trim(Input::get('q'));
+		if (empty($raw)) {
+			return Redirect::route('ad.index');
+		}
+		$terms = explode(' ', $raw);
+		
+		$fields = ['url', 
+				   'title', 'name AS category', 
+				   'description',
+				   'place',
+				   'starts_at'];	
+		
+		$query = Ad::withCategories()->select($fields)->where('is_validated', '=', 1);
+		$searchFields = ['title', 'description', 'place', 'skills', 'languages', 'name'];
+
+	    foreach ($terms as $t) {
+	        $query->where(function($query) use (&$t, &$searchFields) {
+		        foreach ($searchFields as $f) {
+			        $query->Orwhere($f, 'LIKE', '%'.$t.'%');
+	        	}
+	        });
+	    }
+		$ads = $query->get();
+		
+		return View::make('ads.list')->with('ads', $ads)->with('searchTerms', $raw);
+	}
 
 	private function validation() {
 		

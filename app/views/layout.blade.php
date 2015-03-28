@@ -24,16 +24,17 @@
 		  					<li><a href="#">English</a></li>
 						</ul>
 	  				</div>
-					<form id="search-form" class="form form-inline" action="//search.epfl.ch/web.action">
+	  				{{ Form::open(['route' => 'ad.search', 'class' => 'form form-inline', 'id' => 'search-form']) }}
 						<div class="input-group">
-							<input id="search-query" class="form-control" type="text" placeholder="Recherche" name="q" />
+							<input id="search-query" class="form-control" type="text" placeholder="Recherche" name="q" value="{{{ $searchTerms or '' }}}" />
 	  						<label class="hidden" for="search-query">Recherche</label>
 							<div class="input-group-btn">
-								<button class="btn btn-default" type="button">
-								<span class="glyphicon glyphicon-search"></span></button>
+								<button class="btn btn-default" type="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
 	  						</div>
 						</div>
-	  				</form>
+					{{ Form::close() }}
 			</header>
 		</div>
 		<div class="nav-wrapper container-fluid">

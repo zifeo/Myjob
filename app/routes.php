@@ -114,6 +114,8 @@ Route::group(array('before' => 'tequila|admin'), function() {
 	
 	Route::post('moderation', 'ModerationController@validate');
 	
+	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
+	
 	Route::get('options', function() {
 	    return 'options';
 	});
