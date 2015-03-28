@@ -16,4 +16,5 @@ class Category extends Eloquent {
 
         return $category_name_map;
     }
+    
 }

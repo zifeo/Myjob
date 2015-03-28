@@ -10,7 +10,7 @@ Myjob
 		@foreach ($ads as $ad)
 		<a href="{{{ URL::to('ad', $ad->url) }}}" class="list-group-item">
 			<div class="pull-right small text-right montserra">
-				<span><strong>{{{ $ad->title }}}</strong></span><br>
+				<span><strong>{{{ $ad->category }}}</strong></span><br>
 				<span>{{{ $ad->place or 'Non spécifié' }}}</span><br>
 				<span>{{{ $ad->start_at }}}</span>
 			</div>

@@ -77,4 +77,13 @@ class Ad extends Eloquent {
 			return $field;
 		}
 	}
+
+	public static function withCategories() {
+		return Ad::join('categories', 'ads.category_id', '=', 'categories.category_id');
+	}
+	
+	public function getDates()
+	{
+    	return array_merge(parent::getDates(), ['starts_at', 'ends_at', 'validated_at']);
+	}
 }

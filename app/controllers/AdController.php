@@ -9,10 +9,16 @@ class AdController extends \BaseController {
 	 */
 	public function index()
 	{
-		$ads = Ad::where('is_validated', '=', 1)->get();
+		
+		$fields = ['url', 
+				   'title', 'name AS category', 
+				   'description',
+				   'place',
+				   'starts_at'];
+		
+		$ads = Ad::withCategories()->select($fields)->where('is_validated', '=', 1)->get();
 		return View::make('ads.list')->with('ads', $ads);
 	}
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -78,10 +84,19 @@ class AdController extends \BaseController {
 	 */
 	public function show($url)
 	{
-		$ad = Ad::findorfail($url);
+		
+		$fields = ['url', 
+				   'title', 'name AS category', 
+				   'description',
+				   'salary', 'place', 'skills', 'languages',
+				   'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone',
+				   'starts_at', 'ends_at', 'duration',
+				   'ads.updated_at'];
+		
+		$ad = Ad::withCategories()->select($fields)->findOrFail($url);
+
 		return View::make('ads.show')->with('ad', $ad);
 	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -196,5 +211,5 @@ class AdController extends \BaseController {
 			App::abort(404);
 		}
 	}
-
+	
 }
