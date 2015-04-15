@@ -40,6 +40,24 @@ class Ad extends Eloquent {
 		return $new_url;
 	}
 
+	public static function get_valid_ads($fields)
+	{
+		return Ad::withCategories()->select($fields)
+			->where('is_validated', '=', 1)
+			->where('expires_at', '>', Carbon::now()->toDateTimeString());
+	}
+
+
+	public static function withCategories()
+	{
+		return Ad::join('categories', 'ads.category_id', '=', 'categories.category_id');
+	}
+
+	public function getDates()
+	{
+		return array_merge(parent::getDates(), ['starts_at', 'ends_at', 'validated_at']);
+	}
+
 	/** Generates a new unique and readable url **/
 	private static function generate_url($ad_name)
 	{
@@ -76,14 +94,5 @@ class Ad extends Eloquent {
 		{
 			return $field;
 		}
-	}
-
-	public static function withCategories() {
-		return Ad::join('categories', 'ads.category_id', '=', 'categories.category_id');
-	}
-	
-	public function getDates()
-	{
-    	return array_merge(parent::getDates(), ['starts_at', 'ends_at', 'validated_at']);
 	}
 }
