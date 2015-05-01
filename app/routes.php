@@ -36,7 +36,12 @@ Route::pattern('secret', '[a-zA-Z0-9]{32}');
 Route::get('/', 'AdController@index');
 Route::resource('ad', 'AdController');
 
-Route::get('test', ['before' => 'tequila', 'uses' => 'AdController@index']);
+Route::get('burp', ['before' => 'tequila', 'uses' => 'AdController@index']);
+Route::get('signout', function() {
+	Auth::logout();
+	Session::flush();	    
+	return Redirect::action('AdController@index');
+});
 
 /* TODO	
 Route::get('rss/{rss}', function() {

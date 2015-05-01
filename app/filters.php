@@ -19,7 +19,7 @@ App::before(function($request)
 
 App::after(function($request, $response)
 {
-	//
+	
 });
 
 /*
@@ -89,9 +89,10 @@ Route::filter('csrf', function()
 
 Route::filter('tequila', function() {
     
-    if (Agepinfo\Tequila::guest())
-	    //return Redirect::to(Agepinfo\Tequila::url());
-		null;
+    if (Auth::guest()) {
+	    return Agepinfo\Tequila::auth();
+	}
+
 });
 
 /*

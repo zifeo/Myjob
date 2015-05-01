@@ -54,11 +54,15 @@
 							<li class="active"><a href="{{{ URL::to('ad') }}}">Tous les jobs</a></li>
 							<li><a href="{{{ URL::to('ad', 'create') }}}">Créer</a></li>
 							<li><a href="">Mes alertes</a></li>
-							<li><a href="{{{ URL::to('moderation')}}}">Modération</a></li>			
+							<li><a href="{{{ URL::to('moderation') }}}">Modération</a></li>			
 							<li><a href="">Options</a></li>		
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="">Déconnexion</a></li>
+							@if (Auth::check())
+								<li><a href="{{{ URL::to('signout') }}}">Déconnexion ({{{ Auth::user()->casualName() }}})</a></li>
+							@else
+								<li><a href="{{{ URL::to('burp') }}}">Connexion</a></li>
+							@endif
 						</ul>
 					</div>
 				</nav>
