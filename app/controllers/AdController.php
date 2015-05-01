@@ -1,6 +1,6 @@
 <?php
 
-class AdController extends \BaseController {
+class AdController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
