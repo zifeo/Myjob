@@ -20,51 +20,45 @@
 |
 */
 
+// PATTERNS
 
 /* Very simple email regexp, might catch too much things but it's not
 a problem, since it's only used to route to the right controller. The 
 controller can do further checks if needed. */
-$email_regexp = ".+@.+\..+";
 
-$secret_regexp = "[a-zA-Z0-9]{32}";
-
-// PATTERNS
-
-	Route::pattern('ad', '[a-z0-9-]+');
-	
-	Route::pattern('rss', '[a-zA-Z0-9-]+');
+Route::pattern('ad', '[a-z0-9-]+');
+Route::pattern('rss', '[a-zA-Z0-9-]+');
+Route::pattern('email', '.+@.+\..+');
+Route::pattern('secret', '[a-zA-Z0-9]{32}');
 
 // PUBLIC
 
-	Route::resource('ad', 'adController');
+Route::get('/', 'AdController@index');
+Route::resource('ad', 'AdController');
 
-	Route::get('/', 'AdController@index');
-	
-	Route::get('test', array('before' => 'tequila', 'uses' => 'TestController@moica'));
-	
-	Route::resource('ad', 'AdController');
-	
-	Route::get('rss/{rss}', function() {
-	
-		// validation de la key user
-	    return 'rss';
-	});
+Route::get('test', ['before' => 'tequila', 'uses' => 'AdController@index']);
 
-	Route::get('deconnexion', function() {
-		Auth::logout();
-		Session::forget('tequila');
-		return Redirect::to('/');
-	});
-	
-	Route::get('erreur', function() {
-		return 'erreur';
-	});
+/* TODO	
+Route::get('rss/{rss}', function() {
+
+	// validation de la key user
+    return 'rss';
+});
+
+Route::get('deconnexion', function() {
+	Auth::logout();
+	Session::forget('tequila');
+	return Redirect::to('/');
+});
+
+Route::get('erreur', function() {
+	return 'erreur';
+});
+*/
 
 // RANDOM_SECRET NEEDED
 
-	Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email')
-		->where('email', $email_regexp)
-		->where('secret', $secret_regexp);
+Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email');
 
 // TEQUILA NEEDED
 
@@ -128,6 +122,6 @@ Route::group(array('before' => 'tequila|admin'), function() {
 
 // PRIVATE CRONS
 
-	Route::get('crons', function() {
-	    return 'crons';
-	});
+Route::get('crons', function() {
+	return 'crons';
+});
