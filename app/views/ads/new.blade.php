@@ -7,7 +7,7 @@
     <h3>Nouvelle annonce</h3>
 
     {{ Form::open([
-        'route' => 'ad.store', 
+        'action' => 'AdController@store', 
         'class' => 'form-horizontal', 
         'data-toggle' => 'validator']) }}
         

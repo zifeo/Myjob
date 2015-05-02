@@ -31,102 +31,64 @@ Route::pattern('rss', '[a-zA-Z0-9-]+');
 Route::pattern('email', '.+@.+\..+');
 Route::pattern('secret', '[a-zA-Z0-9]{32}');
 
+// CSRF
+
+Route::when('*', 'csrf', ['post', 'put', 'patch', 'delete']);
+
 // PUBLIC
 
-Route::get('/', 'AdController@index');
-Route::resource('ad', 'AdController');
+Route::get('/', 'PublicController@index');
+Route::get('help', 'PublicController@help');
 
-Route::get('burp', ['before' => 'tequila', 'uses' => 'AdController@index']);
-Route::get('signout', function() {
-	Auth::logout();
-	Session::flush();	    
-	return Redirect::action('AdController@index');
-});
-
-/* TODO	
-Route::get('rss/{rss}', function() {
-
-	// validation de la key user
-    return 'rss';
-});
-
-Route::get('deconnexion', function() {
-	Auth::logout();
-	Session::forget('tequila');
-	return Redirect::to('/');
-});
-
-Route::get('erreur', function() {
+/*Route::get('erreur', function() {
 	return 'erreur';
 });
-*/
+Route::get('rss/{rss}', function() {
+    return 'rss';
+});*/
 
 // RANDOM_SECRET NEEDED
 
-Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email');
+Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
 
-// TEQUILA NEEDED
+Route::get('ad/create', 	'AdController@create');
+Route::post('ad/store', 	'AdController@store');
 
-Route::group(array('before' => 'tequila'), function() {
-
-	Route::get('jobs', function() {
-	
-		// affichage des messages de succès/erreurs
-		// affiche de la validation et option si les droits existes
-		// affichage je propose un job
-		return 'listes';
-	});
-	
-	Route::get('job/{ad}', function() {
-		// affichage edition
-		// postulation
-	    return 'job 1';
-	});
-	
-	Route::post('job/{ad}', array('before' => 'csrf', function() {
-	    return 'job@postulation';
-	}));
-	
-	Route::get('alertes', function() {
-	    return 'alertes';
-	});
-	
-	Route::post('alertes', array('before' => 'csrf', function() {
-	    return 'alertes@post';
-	}));
-
+Route::get('debug', function() {
+		//Auth::logout();
+		Session::flush();
+		return Redirect::to('/');
 });
 
-// TEQUILA NEEDED + MODERATION RIGHTS
+Route::group(['before' => 'publisher'], function() {
+	
+	Route::resource('ad', 'AdController', ['except' => ['create', 'store']]);
+	
+	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
+	
+});
 
-Route::group(array('before' => 'tequila|admin'), function() {
-
-	Route::get('job/edition/{ad}', function() {
-		return 'job edition';
+Route::group(['before' => 'tequila'], function() {
+	
+	Route::get('signin', function() {
+		return Redirect::route('AdController@index');
 	});
 	
-	Route::post('job/edition/{ad}', array('before' => 'csrf', function() {
-		return 'job edition@post';
-	}));
+	Route::get('signout', function() {
+		Auth::logout();
+		return Redirect::to('/');
+	});
+	
+});
+
+Route::group(['before' => 'tequila|admin'], function() {
 
 	Route::get('moderation', 'ModerationController@adsToModerate');
 	
 	Route::post('moderation', 'ModerationController@validate');
 	
-	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
-	
-	Route::get('options', function() {
-	    return 'options';
-	});
-	
-	Route::post('options', array('before' => 'csrf', function() {
-	    return 'options@post';
-	}));
+	/*Route::get('crons', function() {
+		return 'crons';
+	});*/
 
-});
-
-// PRIVATE CRONS
-
-Route::get('crons', function() {
-	return 'crons';
 });

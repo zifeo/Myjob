@@ -1,7 +1,7 @@
 <?php
 
 class AdController extends Controller {
-
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -16,7 +16,7 @@ class AdController extends Controller {
 				   'place',
 				   'starts_at'];
 		
-		$ads = Ad::withCategories()->select($fields)->where('is_validated', '=', 1)->get();
+		$ads = Ad::withCategoriesVisitors()->select($fields)->where('is_validated', '=', 1)->get();
 		return View::make('ads.list')->with('ads', $ads);
 	}
 
@@ -39,7 +39,6 @@ class AdController extends Controller {
 	 */
 	public function store()
 	{
-		$this->beforeFilter('csrf');
 		$categories = Category::lists('name', 'category_id');
 
 		$fields = $this->validation();
@@ -71,7 +70,7 @@ class AdController extends Controller {
 			/* Create the ad in the DB */
 			$url = Ad::create(Input::all());
 
-			return Redirect::route('ad.show', $url);
+			return Redirect::route('AdController@show', $url);
 		}
 	}
 
@@ -93,7 +92,7 @@ class AdController extends Controller {
 				   'starts_at', 'ends_at', 'duration',
 				   'ads.updated_at'];
 		
-		$ad = Ad::withCategories()->select($fields)->findOrFail($url);
+		$ad = Ad::withCategoriesVisitors()->select($fields)->findOrFail($url);
 
 		return View::make('ads.show')->with('ad', $ad);
 	}
@@ -106,9 +105,7 @@ class AdController extends Controller {
 	 */
 	public function edit($url)
 	{
-		$ad = Ad::findorfail($url);
-
-		$this->check_visitor_connected($ad->contact_email);
+		$ad = Ad::withVisitors()->findorfail($url);
 
 		$categories = Category::lists('name', 'category_id');
 		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
@@ -123,9 +120,7 @@ class AdController extends Controller {
 	 */
 	public function update($url)
 	{
-		$ad = Ad::findorfail($url);
-
-		$this->check_visitor_connected($ad->contact_email);
+		$ad = Ad::withVisitors()->findorfail($url);
 
 		$this->beforeFilter('csrf');
 		$categories = Category::lists('name', 'category_id');
@@ -141,7 +136,7 @@ class AdController extends Controller {
 		{
 			$ad->fill($data);
 			$ad->save();
-			return Redirect::route('ad.show', $url);
+			return Redirect::route('AdController@show', $url);
 		}
 	}
 
@@ -178,9 +173,7 @@ class AdController extends Controller {
 		{
 			/* Temporarily allow current visitor to edit all ads with email $email. */
 			Session::put('connected_visitor', $email);
-
-			$ads = Ad::where('contact_email', '=', $email)->get();
-			return View::make('ads.list')->with('ads', $ads);
+			return Redirection::action('ads.list');
 		}
 	}
 	
@@ -188,7 +181,7 @@ class AdController extends Controller {
 		
 		$raw = trim(Input::get('q'));
 		if (empty($raw)) {
-			return Redirect::route('ad.index');
+			return Redirect::route('AdController@index');
 		}
 		$terms = explode(' ', $raw);
 		
@@ -232,13 +225,6 @@ class AdController extends Controller {
 			'contact_email' => 		['required', 'email', 'max:75'],
 			'contact_phone' => 		['min:4', 'max:20'],
 		];
-	}
-
-	private function check_visitor_connected($email)
-	{
-		if (! Session::has('connected_visitor') || Session::get('connected_visitor') != $email) {
-			App::abort(404);
-		}
 	}
 	
 }

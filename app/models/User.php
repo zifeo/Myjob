@@ -11,7 +11,6 @@ class User extends Eloquent implements UserInterface {
 	protected $softDelete = true;
 	protected $primaryKey = 'user_id';
 
-
 	public static function sciperOrCreate($sciper) {
 		
 		$u = self::where("sciper", "=", $sciper)->get();
@@ -22,7 +21,6 @@ class User extends Eloquent implements UserInterface {
 			
 			$u->save();
 			$u->is_admin = $u->user_id == 1;
-			$u->save();
 			
 			return $u;
 		} else {

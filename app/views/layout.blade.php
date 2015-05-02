@@ -51,17 +51,20 @@
 					</div>
 					<div class="collapse navbar-collapse" id="nav-panel">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="{{{ URL::to('ad') }}}">Tous les jobs</a></li>
-							<li><a href="{{{ URL::to('ad', 'create') }}}">Créer</a></li>
-							<li><a href="">Mes alertes</a></li>
-							<li><a href="{{{ URL::to('moderation') }}}">Modération</a></li>			
-							<li><a href="">Options</a></li>		
+							<li class="active"><a href="{{{ URL::action('PublicController@index') }}}">Accueil</a></li>
+							<li class="active"><a href="{{{ URL::action('AdController@index') }}}">Tous les jobs</a></li>
+							<li><a href="{{{ URL::action('AdController@create') }}}">Créer</a></li>
+							<li class="active"><a href="">Toutes mes annonces</a></li>
+							<li><a href="">Options</a></li>
+							<li><a href="{{{ URL::action('PublicController@help') }}}">Aide</a></li>				
+							<li><a href="{{{ URL::action('ModerationController@adsToModerate') }}}">Modération</a></li>			
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
+							{{{ var_dump(Auth::check(), Auth::user(), Session::all()) }}}
 							@if (Auth::check())
 								<li><a href="{{{ URL::to('signout') }}}">Déconnexion ({{{ Auth::user()->casualName() }}})</a></li>
 							@else
-								<li><a href="{{{ URL::to('burp') }}}">Connexion</a></li>
+								<li><a href="{{{ URL::to('signin') }}}">Connexion</a></li>
 							@endif
 						</ul>
 					</div>

@@ -36,7 +36,7 @@ class CreateAllTables extends Migration {
 		/* users */
 		Schema::create('users', function(Blueprint $table)
 		{
-			$table->increments('user_id');
+			$table->increments('id');
 			$table->integer('sciper')->unsigned()->unique();
 			$table->string('first_name', 50);
 			$table->string('last_name', 50);
@@ -78,6 +78,15 @@ class CreateAllTables extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 		});
+
+		/* session */		
+		Schema::create('sessions', function(Blueprint $table) {
+            $table->increments('id');
+            $table->text('payload');
+            $table->integer('last_activity');
+            $table->timestamps();
+        });
+
 	}
 
 	/**
@@ -91,6 +100,7 @@ class CreateAllTables extends Migration {
 		Schema::drop('users');
 		Schema::drop('categories');
 		Schema::drop('contact_emails');
+		Schema::drop('sessions');
 	}
 
 }

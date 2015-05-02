@@ -1,7 +1,7 @@
 <?php 
 	
 namespace Agepinfo;
-use Session, Config, Log, Input, Auth, URL, User, Redirect;
+use Session, Config, Log, Input, Auth, URL, User, Redirect, App;
 
 //==========================================================================
 //! Tequila authentification server class file for laravel
@@ -17,8 +17,8 @@ final class Tequila {
 
 	// check if the user is authentificated through tequila
 	public static function auth() {
-		
-		if (Input::has('key') && Session::get('tequila') == Input::get('key')) {
+				
+		if (Input::has('key') && Session::has('tequila') && Session::get('tequila') == Input::get('key')) {
 
 			$host = Config::get('tequila.host') . self::FETCH_PATCH;			
 
@@ -33,7 +33,13 @@ final class Tequila {
 	       	$u->save();
 
 			Auth::login($u);
-			return Redirect::to(URL::current());
+			
+			var_dump($u->casualName());
+			var_dump(Auth::user()->casualName());
+			var_dump(Auth::check());
+			var_dump(Session::all());
+			exit(1);
+			return Redirect::to(URL::route('ad.index'));
 		}
 
 		return Redirect::to(self::requestUrl());
@@ -41,10 +47,12 @@ final class Tequila {
     
     // return the tequila authentication url after creating a request
     private static function requestUrl() {
-	    	   
-	    if (Session::has('tequila'))
-	    	return Config::get('tequila.host') . self::AUTH_PATH . '?requestkey=' . Session::get('tequila');
-	    	
+	    
+	    if (Session::has('tequila')) {
+		    Log::error("invalid tequila token");
+		    App::abort(500);
+	    }
+	   
 	    $response = self::createRequest();
 	    Session::put('tequila', $response['key']);
 	    
@@ -55,6 +63,7 @@ final class Tequila {
     private static function createRequest() {
 
     	$host = Config::get('tequila.host') . self::CREATE_PATH;
+
         $data = [
         	'urlaccess'		=> URL::current(),
             'service'   	=> Config::get('tequila.service'),
