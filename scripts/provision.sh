@@ -32,6 +32,8 @@ sudo echo "<VirtualHost *:80>
 	</Directory>
 </VirtualHost>" > /etc/apache2/sites-available/myjob.conf
 
+sudo ln -s /etc/apache2/sites-available/myjob.conf /etc/apache2/sites-enabled/myjob.conf
+
 sudo service apache2 restart
 fi
 
@@ -63,9 +65,11 @@ php composer.phar install
 
 # Create user & database "forge"
 
-echo "CREATE USER 'forge'@'localhost'; CREATE DATABASE forge; GRANT ALL PRIVILEGES ON forge.* To 'forge'@'localhost'" | mysql -u root
+echo "CREATE USER 'forge'@'localhost';" | mysql -u root
+echo "CREATE DATABASE forge; GRANT ALL PRIVILEGES ON forge.* To 'forge'@'localhost'" | mysql -u root
 
-php artisan --migrate
+php artisan migrate --force
+php artisan migrate --seed --force
 
 cd "$olddir"
 fi
