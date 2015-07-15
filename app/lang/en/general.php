@@ -12,7 +12,7 @@ return array(
 	'edit' => 'Edit',
 	'delete' => 'Delete',
 	'refuse' => 'Refuse',
-	'postulate' => 'Apply',
+	'apply_job' => 'Apply',
 	'search' => 'Search',
 	'toggle_navigation' => 'Toggle navigation',
 	'nav_all_jobs' => 'All jobs',

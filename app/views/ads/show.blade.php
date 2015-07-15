@@ -46,6 +46,6 @@ Myjob
 	<a href="{{ route('ad.edit', $ad->url) }}" class="btn btn-warning">{{ trans('general.edit') }}</a>
 	<a href="" class="btn btn-danger">{{ trans('general.delete') }}</a>
 	<a href="" class="btn btn-default">{{ trans('general.refuse') }}</a>
-	<a href="" class="btn btn-primary">{{ trans('general.postulate') }}</a>
+	<a href="" class="btn btn-primary">{{ trans('general.apply_job') }}</a>
 </div>
 @stop

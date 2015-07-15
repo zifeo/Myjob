@@ -12,7 +12,7 @@ return array(
 	'edit' => 'Editer',
 	'delete' => 'Supprimer',
 	'refuse' => 'Refuser',
-	'postulate' => 'Postuler',
+	'apply_job' => 'Postuler',
 	'search' => 'Recherche',
 	'toggle_navigation' => 'Activer la navigation', // Activer-désactiver, how to translate?
 	'nav_all_jobs' => 'Tous les jobs',
