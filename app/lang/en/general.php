@@ -24,7 +24,6 @@ return array(
 	'nav_options' => 'Options',
 	'disconnect' => 'Logout',
 	'accept' => 'Accept',
-	'refuse' => 'Refuser',
 	'close' => 'Close',
 
 

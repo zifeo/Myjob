@@ -23,7 +23,6 @@ return array(
 	'nav_help' => 'Aide',
 	'disconnect' => 'Déconnexion',
 	'accept' => 'Accepter',
-	'refuse' => 'Refuser',
 	'close' => 'Fermer',
 
 
