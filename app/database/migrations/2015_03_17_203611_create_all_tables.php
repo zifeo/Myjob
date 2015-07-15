@@ -18,6 +18,7 @@ class CreateAllTables extends Migration {
 			$table->string('contact_email', 75);
 			$table->string('random_secret', 32);
 			$table->primary(['contact_email', 'random_secret']);
+
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -75,8 +76,19 @@ class CreateAllTables extends Migration {
 			$table->dateTime('expires_at');
 			$table->boolean('is_validated')->default(false);
 			$table->dateTime('validated_at')->nullable();
+
 			$table->timestamps();
 			$table->softDeletes();
+		});
+
+		/* FAQ */
+		Schema::create('faq', function(Blueprint $table) {
+			$table->integer('position');
+			$table->primary('position');
+			$table->string('question', 100);
+			$table->text('answer');
+
+			$table->timestamps();
 		});
 	}
 
@@ -91,6 +103,7 @@ class CreateAllTables extends Migration {
 		Schema::drop('users');
 		Schema::drop('categories');
 		Schema::drop('contact_emails');
+		Schema::drop('faq');
 	}
 
 }

@@ -54,7 +54,8 @@
 							<li><a href="{{{ URL::to('ad', 'create') }}}">Créer</a></li>
 							<li><a href="">Mes alertes</a></li>
 							<li><a href="{{{ URL::to('moderation')}}}">Modération</a></li>			
-							<li><a href="">Options</a></li>		
+							<li><a href="">Options</a></li>
+							<li><a href="{{{ URL::to('help') }}}">Aide</a></li>	
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="">Déconnexion</a></li>
