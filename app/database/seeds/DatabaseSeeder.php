@@ -156,7 +156,10 @@ class FAQSeeder extends Seeder {
         /* Every seeded Ad should have corresponding email here. */
         $questionAnswers = [
             'What is the meaning of life?' => 'God.',
-            'What if I accidently eat a banana?' => 'Send an email to banana@myjob.ch and we\'ll see what we can do.'
+            'What if I accidently eat a banana?' => 'Send an email to banana@myjob.ch and we\'ll see what we can do.',
+            'How to make MyJob work, it\'s all laggy!' => 'Did you try to reboot your computer?',
+            'Knock knock' => 'Who\'s there?',
+            'How can I post an ad on MyJob?' => 'Please use the <a href="ad/create">corresponding form</a>'
         ];
 
         $position = 0;
