@@ -11,7 +11,7 @@ Myjob
 		<a href="{{{ URL::to('ad', $ad->url) }}}" class="list-group-item">
 			<div class="pull-right small text-right montserra">
 				<span><strong>{{{ $ad->category }}}</strong></span><br>
-				<span>{{{ $ad->place or 'Non spécifié' }}}</span><br>
+				<span>{{{ $ad->place or trans('general.unspecified') }}}</span><br>
 				<span>{{{ $ad->start_at }}}</span>
 			</div>
 			<h4 class="list-group-item-heading">{{{ $ad->title }}}</h4>
