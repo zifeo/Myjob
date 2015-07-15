@@ -18,22 +18,36 @@
 						<h1><img width="360" height="60" src="{{ asset('contents/images/myagep.svg') }}" alt="Myjob"></h1>
 					</a>
 				</div>
-					<div id="lang-selector">
-		  				<ul class="">
-		  					<li><a href="#">Français</a></li>
-		  					<li><a href="#">English</a></li>
-						</ul>
-	  				</div>
-					<form id="search-form" class="form form-inline" action="//search.epfl.ch/web.action">
-						<div class="input-group">
-							<input id="search-query" class="form-control" type="text" placeholder="{{ trans('general.search') }}" name="q" />
-	  						<label class="hidden" for="search-query">{{ trans('general.search') }}</label>
-							<div class="input-group-btn">
-								<button class="btn btn-default" type="button">
-								<span class="glyphicon glyphicon-search"></span></button>
-	  						</div>
+
+				<div id="lang-selector">
+					<form class="hidden" name="set_language" action="/language/set" method="POST">
+						<input id="language" name="language"></input>
+					</form>
+
+					<ul>
+						<li>
+							<a href="#" onclick="document.getElementById('language').value='fr'; document.set_language.submit()">
+								Français
+							</a>
+						</li>
+						<li>
+							<a href="#" onclick="document.getElementById('language').value='en'; document.set_language.submit()">
+								English
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<form id="search-form" class="form form-inline" action="//search.epfl.ch/web.action">
+					<div class="input-group">
+						<input id="search-query" class="form-control" type="text" placeholder="{{ trans('general.search') }}" name="q" />
+							<label class="hidden" for="search-query">{{ trans('general.search') }}</label>
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">
+							<span class="glyphicon glyphicon-search"></span></button>
 						</div>
-	  				</form>
+					</div>
+				</form>
 			</header>
 		</div>
 		<div class="nav-wrapper container-fluid">

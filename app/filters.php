@@ -13,7 +13,9 @@
 
 App::before(function($request)
 {
-
+	/* Get language from Session and apply to locale at every request */
+	$language = Session::get('language', Config::get('app.locale'));
+	App::setLocale($language);
 });
 
 
