@@ -26,8 +26,8 @@
 	  				</div>
 					<form id="search-form" class="form form-inline" action="//search.epfl.ch/web.action">
 						<div class="input-group">
-							<input id="search-query" class="form-control" type="text" placeholder="Recherche" name="q" />
-	  						<label class="hidden" for="search-query">Recherche</label>
+							<input id="search-query" class="form-control" type="text" placeholder="{{ trans('general.search') }}" name="q" />
+	  						<label class="hidden" for="search-query">{{ trans('general.search') }}</label>
 							<div class="input-group-btn">
 								<button class="btn btn-default" type="button">
 								<span class="glyphicon glyphicon-search"></span></button>
@@ -41,23 +41,23 @@
 				<nav class="navbar" role="navigation">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-panel">
-							<span class="sr-only">Toggle navigation</span>
+							<span class="sr-only">{{ trans('general.toggle_navigation') }}</span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand visible-xs" href="">Current page</a>
+						<a class="navbar-brand visible-xs" href="">Current page<!-- TODO current page name --></a>
 					</div>
 					<div class="collapse navbar-collapse" id="nav-panel">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="{{{ URL::to('ad') }}}">Tous les jobs</a></li>
-							<li><a href="{{{ URL::to('ad', 'create') }}}">Créer</a></li>
-							<li><a href="">Mes alertes</a></li>
-							<li><a href="{{{ URL::to('moderation')}}}">Modération</a></li>			
-							<li><a href="">Options</a></li>		
+							<li class="active"><a href="{{{ URL::to('ad') }}}">{{ trans('general.nav_all_jobs') }}</a></li>
+							<li><a href="{{{ URL::to('ad', 'create') }}}">{{ trans('general.nav_new_job') }}</a></li>
+							<li><a href="">{{ trans('general.nav_notifications') }}</a></li>
+							<li><a href="{{{ URL::to('moderation')}}}">{{ trans('general.nav_moderation') }}</a></li>			
+							<li><a href="">{{ trans('general.nav_options') }}</a></li>		
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="">Déconnexion</a></li>
+							<li><a href="">{{ trans('general.disconnect') }}</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -75,7 +75,11 @@
 			<footer class="row">
 				<div id="commons" class="">
 	  				<div id="commons">
-		  				<p>(c) {{ date('Y') }} · <a href="http://github.com/timozattol">Timothée Lottaz</a>/<a href="http://github.com/zifeo">Teo Stocco</a>.<br><a href="http://agepinfo.ch">AGEPINFO</a>/<a href="http://agepoly.ch">AGEPOLY</a>. Tous droits réservés.<br>Service soutenu officiellement par l'<a href="http://epfl.ch">EPFL</a>.</p>
+		  				<p>
+		  					<a href="http://agepinfo.ch">AGEPINFO</a> · &#169; {{ date('Y') }}<br/> 
+		  					<a href="http://github.com/timozattol">Timothée Lottaz</a> / 
+		  					<a href="http://github.com/zifeo">Teo Stocco</a>
+		  				</p>
 		  				<div class="pull-left hidden-xs" id="agepinfo">
 			  				<a href="http://agepoly.epfl.ch/">
 				  				<img src="{{asset('contents/images/agepinfo.svg')}}" height="120" alt="">

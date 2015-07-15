@@ -37,6 +37,7 @@ return array(
 	'modify_submit' => 'Modifier l\'annonce',
 	'details_title' => 'Détails',
 	'salary' => 'Salaire',
-	'contact_person' => 'Personne de contact'
+	'contact_person' => 'Personne de contact',
+	
 
 );
