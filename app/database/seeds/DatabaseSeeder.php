@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('ContactEmailsTableSeeder');
 
         $this->call('AdsTableSeeder');
+
+        $this->call('FAQSeeder');
 	}
 
 }
@@ -142,6 +144,33 @@ class AdsTableSeeder extends Seeder {
 
         foreach ($ads as $ad) {
             Ad::create($ad);   
+        }
+    }
+}
+
+class FAQSeeder extends Seeder {
+    public function run()
+    {
+        DB::table('faq')->delete();
+
+        /* Every seeded Ad should have corresponding email here. */
+        $questionAnswers = [
+            'What is the meaning of life?' => 'God.',
+            'What if I accidently eat a banana?' => 'Send an email to banana@myjob.ch and we\'ll see what we can do.'
+        ];
+
+        $position = 0;
+
+        foreach ($questionAnswers as $question => $answer) {
+            $faq_entry = new FAQ;
+
+            $faq_entry->position = $position;
+            $faq_entry->question = $question;
+            $faq_entry->answer = $answer;
+
+            $faq_entry->save();
+
+            ++$position;
         }
     }
 }
