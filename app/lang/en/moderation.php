@@ -8,7 +8,7 @@ return array(
 
 	// TODO translation
 
-	'nothing_left' => 'Il n\'y a plus rien à modérer !',
+	'nothing_left' => 'Nothing left to moderate!',
 	
 
 );
