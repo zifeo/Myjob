@@ -6,8 +6,6 @@ return array(
 		Ad-related strings
 	*/
 
-	// TODO translation
-
 	'ad_title' => 'Ad title',
 	'title' => 'Title',
 	'workplace' => 'Job location',
@@ -40,6 +38,5 @@ return array(
 	'details_title' => 'Details',
 	'salary' => 'Salary',
 	'contact_person' => 'Contact person',
-	
 
 );

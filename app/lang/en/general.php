@@ -6,8 +6,6 @@ return array(
 		General strings
 	*/
 
-	// TODO translation
-
 	'unspecified' => 'unspecified',
 	'updated' => 'updated',
 	'put_offline' => 'Put Offline',
@@ -25,8 +23,5 @@ return array(
 	'disconnect' => 'Logout',
 	'accept' => 'Accept',
 	'close' => 'Close',
-
-
-
 
 );
