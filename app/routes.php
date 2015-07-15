@@ -60,6 +60,8 @@ $secret_regexp = "[a-zA-Z0-9]{32}";
 		return 'erreur';
 	});
 
+	Route::get('contact', 'ContactController@showContactUs');
+
 // RANDOM_SECRET NEEDED
 
 	Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email')
