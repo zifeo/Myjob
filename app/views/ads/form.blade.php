@@ -5,7 +5,7 @@
     <div class="col-sm-4">
         {{ Form::text('title', null, array(
             'class' => 'form-control', 
-            'placeholder' => trans('ads.title'), 
+            'placeholder' => trans('ads.ad_title_placeholder'), 
             'required', 
             'data-minlength' => '5',
             'maxlength' => '50',
@@ -21,7 +21,7 @@
     <div class="col-sm-4">
         {{ Form::text('place', null, array(
             'class' => 'form-control', 
-            'placeholder' => trans('ads.place'),
+            'placeholder' => trans('ads.workplace_placeholder'),
             'data-minlength' => '3',
             'maxlength' => '15')) }}
         <div class="help-block with-errors"></div>
@@ -72,7 +72,7 @@
     <div class="col-sm-4">
         {{ Form::text('duration', null, array(
             'class' => 'form-control', 
-            'placeholder' => trans('ads.indicative_duration_example'),
+            'placeholder' => trans('ads.indicative_duration_placeholder'),
             'data-minlength' => '2',
             'maxlength' => '100'))}}
         <div class="help-block with-errors"></div>
@@ -80,12 +80,12 @@
 </div>
 
 <div class="form-group">
-    {{ Form::label('skills', trans('ads.skill(s)'), array(
+    {{ Form::label('skills', trans('ads.skills'), array(
         'class' => 'col-sm-2 control-label')) }}
     <div class="col-sm-4">
         {{ Form::text('skills', null, array(
             'class' => 'form-control', 
-            'placeholder' => trans('ads.skills'),
+            'placeholder' => trans('ads.skills_placeholder'),
             'data-minlength' => '5',
             'maxlength' => '100')) }}
         <div class="help-block with-errors"></div>
@@ -93,12 +93,12 @@
 </div>
 
 <div class="form-group">
-    {{ Form::label('languages', trans('ads.language(s)'), array(
+    {{ Form::label('languages', trans('ads.languages'), array(
     'class' => 'col-sm-2 control-label')) }}
     <div class="col-sm-4">
         {{ Form::text('languages', null, array(
             'class' => 'form-control', 
-            'placeholder' => trans('ads.languages'),
+            'placeholder' => trans('ads.languages_placeholder'),
             'data-minlength' => '3',
             'maxlength' => '50')) }}
         <div class="help-block with-errors"></div>
@@ -111,7 +111,7 @@
     <div class="col-sm-4">
         {{ Form::textarea('description', null, array(
             'class' => 'form-control', 
-            'placeholder' => trans('ads.ad_description'), 
+            'placeholder' => trans('ads.description_placeholder'), 
             'rows' => 4, 
             'required',
             'data-minlength' => '10',
