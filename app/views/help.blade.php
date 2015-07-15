@@ -34,9 +34,9 @@
 @endif
 
 
+<h3>Nous contacter</h3>
 
 <div class="panel panel-default">
-	<div class="panel-heading"><h3 class="panel-title">Nous contacter</h3></div>
 	<div class="panel-body">
 		@if (! empty($faq_items))
 			<p>
