@@ -54,7 +54,8 @@
 							<li><a href="{{{ URL::to('ad', 'create') }}}">{{ trans('general.nav_new_job') }}</a></li>
 							<li><a href="">{{ trans('general.nav_notifications') }}</a></li>
 							<li><a href="{{{ URL::to('moderation')}}}">{{ trans('general.nav_moderation') }}</a></li>			
-							<li><a href="">{{ trans('general.nav_options') }}</a></li>		
+							<li><a href="">{{ trans('general.nav_options') }}</a></li>
+							<li><a href="{{{ URL::to('help') }}}">{{ trans('general.nav_help') }}</a></li>		
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="">{{ trans('general.disconnect') }}</a></li>

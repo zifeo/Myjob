@@ -20,6 +20,7 @@ return array(
 	'nav_notifications' => 'Mes alertes',
 	'nav_moderation' => 'Modération',
 	'nav_options' => 'Options',
+	'nav_help' => 'Aide',
 	'disconnect' => 'Déconnexion',
 	'accept' => 'Accepter',
 	'refuse' => 'Refuser',
