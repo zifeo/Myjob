@@ -25,7 +25,4 @@ return array(
 	'accept' => 'Accepter',
 	'close' => 'Fermer',
 
-
-
-
 );

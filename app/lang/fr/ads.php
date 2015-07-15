@@ -39,5 +39,4 @@ return array(
 	'salary' => 'Salaire',
 	'contact_person' => 'Personne de contact',
 	
-
 );

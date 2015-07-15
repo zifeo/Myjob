@@ -8,5 +8,4 @@ return array(
 
 	'nothing_left' => 'Il n\'y a plus rien à modérer !',
 	
-
 );

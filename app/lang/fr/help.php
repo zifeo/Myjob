@@ -13,6 +13,4 @@ return array(
 		'ou si vous voulez simplement prendre contact avec l\'équipe de '. 
 		'MyJob, envoyez un mail à:',
 
-
-
 );
