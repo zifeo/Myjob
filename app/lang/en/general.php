@@ -8,24 +8,24 @@ return array(
 
 	// TODO translation
 
-	'unspecified' => 'non spécifié',
-	'updated' => 'mis à jour',
-	'put_offline' => 'Mettre hors-ligne',
-	'edit' => 'Editer',
-	'delete' => 'Supprimer',
-	'refuse' => 'Refuser',
-	'postulate' => 'Postuler',
-	'search' => 'Recherche',
-	'toggle_navigation' => 'Activer la navigation', // Activer-désactiver, how to translate?
-	'nav_all_jobs' => 'Tous les jobs',
-	'nav_new_job' => 'Créer',
-	'nav_notifications' => 'Mes alertes',
-	'nav_moderation' => 'Modération',
+	'unspecified' => 'unspecified',
+	'updated' => 'updated',
+	'put_offline' => 'Put Offline',
+	'edit' => 'Edit',
+	'delete' => 'Delete',
+	'refuse' => 'Refuse',
+	'postulate' => 'Apply',
+	'search' => 'Search',
+	'toggle_navigation' => 'Toggle navigation',
+	'nav_all_jobs' => 'All jobs',
+	'nav_new_job' => 'Create',
+	'nav_notifications' => 'My notifications',
+	'nav_moderation' => 'Moderation',
 	'nav_options' => 'Options',
-	'disconnect' => 'Déconnexion',
-	'accept' => 'Accepter',
+	'disconnect' => 'Logout',
+	'accept' => 'Accept',
 	'refuse' => 'Refuser',
-	'close' => 'Fermer',
+	'close' => 'Close',
 
 
 
