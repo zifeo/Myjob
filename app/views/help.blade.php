@@ -3,9 +3,9 @@
 @section('content')
 
 
-@if (! empty($faq_items))
+@if (count($faq_items))
 
-	<h3>FAQ</h3>
+	<h3>Foire aux Questions</h3>
 
 	<div class="panel-group" id="faq" role="tablist" aria-multiselectable="true">
 
@@ -35,11 +35,22 @@
 
 
 
+<div class="panel panel-default">
+	<div class="panel-heading"><h3 class="panel-title">Nous contacter</h3></div>
+	<div class="panel-body">
+		@if (! empty($faq_items))
+			<p>
+				Si une question subsiste après avoir lu la FAQ, ou si vous voulez simplement 
+				prendre contact avec l'équipe de MyJob, envoyez un mail à:
+			</p>
+		@endif
 
-<h3>Contact us</h3>
-
-Hello, please contact us!
-
-
+		<a href="mailto:myjob@epfl.ch">
+			<button type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> myjob@epfl.ch
+			</button>
+		</a>
+	</div>
+</div>
 
 @stop
