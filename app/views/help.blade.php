@@ -2,10 +2,9 @@
 
 @section('content')
 
-
 @if (count($faq_items))
 
-	<h3>Foire aux Questions</h3>
+	<h3>{{ trans('help.faq_title') }}</h3>
 
 	<div class="panel-group" id="faq" role="tablist" aria-multiselectable="true">
 
@@ -34,14 +33,13 @@
 @endif
 
 
-<h3>Nous contacter</h3>
+<h3>{{ trans('help.contact_us') }}</h3>
 
 <div class="panel panel-default">
 	<div class="panel-body">
 		@if (! empty($faq_items))
 			<p>
-				Si une question subsiste après avoir lu la FAQ, ou si vous voulez simplement 
-				prendre contact avec l'équipe de MyJob, envoyez un mail à:
+				{{ trans('help.contact_us_text') }}
 			</p>
 		@endif
 
