@@ -60,7 +60,7 @@ $secret_regexp = "[a-zA-Z0-9]{32}";
 		return 'erreur';
 	});
 
-	Route::get('contact', 'ContactController@showContactUs');
+	Route::get('help', 'HelpController@showHelp');
 
 // RANDOM_SECRET NEEDED
 
