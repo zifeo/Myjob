@@ -20,6 +20,7 @@ class HomeController extends BaseController {
 			App::setLocale($language);
 			return Redirect::back();
 		} else {
+			/* Unsupported locale */
 			App::abort(403);
 		}
 	}
