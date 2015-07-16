@@ -14,14 +14,14 @@
 			<div class="panel-heading" role="tab" id="heading{{ $faq_item->position }}">
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#faq" href="#collapse{{ $faq_item->position }}" aria-expanded="false" aria-controls="collapse{{ $faq_item->position }}">
-						{{ $faq_item->question }}
+						{{ App::getLocale() == 'en' ? $faq_item->question_en : $faq_item->question_fr }}
 					</a>
 				</h4>
 			</div>
 
 			<div id="collapse{{ $faq_item->position }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $faq_item->position }}">
 				<div class="panel-body">
-					{{ $faq_item->answer }}
+					{{ App::getLocale() == 'en' ? $faq_item->answer_en : $faq_item->answer_fr }}
 				</div>
 			</div>
 		</div>
