@@ -22,7 +22,7 @@ Myjob
 		<ul class="list-group">
 			<li class="list-group-item">{{ trans('ads.skills') }}<span class="pull-right">{{{ $ad->skills }}}</span></li>
 			<li class="list-group-item">{{ trans('ads.salary') }}<span class="pull-right">{{{ $ad->salary }}}</span></li>
-			<li class="list-group-item">{{ trans('ads.place') }}<span class="pull-right">{{{ $ad->place }}}</span></li>
+			<li class="list-group-item">{{ trans('ads.workplace') }}<span class="pull-right">{{{ $ad->place }}}</span></li>
 			<li class="list-group-item">{{ trans('ads.languages') }}<span class="pull-right">{{{ $ad->languages }}}</span></li>
 			@if(isset($ad->starts_at, $ad->ends_at))
 			<li class="list-group-item">{{ trans('ads.date') }}<span class="pull-right">{{{ $ad->starts_at->format('D. j F') }}} - {{{ $ad->ends_at->format('D. j F y') }}}</span></li>

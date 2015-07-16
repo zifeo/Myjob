@@ -7,7 +7,7 @@
         @forelse ($ads_to_moderate as $ad)
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="#" class="pull-right">Edit</a>
+                    <a href="#" class="pull-right">{{ trans('general.edit') }}</a>
                     <h3 class="panel-title">{{{$ad->title}}}</h3>
                 </div>
                 <div class="panel-body">
