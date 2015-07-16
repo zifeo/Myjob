@@ -48,7 +48,7 @@
                 'class' => 'form-control', 
                 'id' => 'starts_at', 
                 'required')) }}
-            <span class="input-group-addon">jusqu'au</span>
+            <span class="input-group-addon">{{ trans('ads.until') }}</span>
             {{ Form::text('ends_at', 
                 date('d-m-Y', strtotime('now +15days')), array(
                 'class' => 'form-control', 
