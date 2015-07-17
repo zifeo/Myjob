@@ -5,9 +5,9 @@ use Illuminate\Auth\UserInterface;
 class User extends Eloquent implements UserInterface {
 
 	protected $table = 'users';
-    protected $fillable = array('first_name', 'last_name', 'email');
-    protected $guarded = array('id', 'password');
-	protected $hidden = array('password');
+    protected $fillable = ['first_name', 'last_name', 'email'];
+    protected $guarded = ['user_id', 'password'];
+	protected $hidden = ['password'];
 	protected $softDelete = true;
 	protected $primaryKey = 'user_id';
 

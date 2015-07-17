@@ -55,7 +55,7 @@ Route::get('ad/create', 	'AdController@create');
 Route::post('ad/store', 	'AdController@store');
 
 Route::get('debug', function() {
-		//Auth::logout();
+		Auth::logout();
 		Session::flush();
 		return Redirect::to('/');
 });

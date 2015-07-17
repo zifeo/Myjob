@@ -60,7 +60,6 @@
 							<li><a href="{{{ URL::action('ModerationController@adsToModerate') }}}">Modération</a></li>			
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							{{{ var_dump(Auth::check(), Auth::user(), Session::all()) }}}
 							@if (Auth::check())
 								<li><a href="{{{ URL::to('signout') }}}">Déconnexion ({{{ Auth::user()->casualName() }}})</a></li>
 							@else

@@ -22,7 +22,7 @@ final class Tequila {
 
 			$host = Config::get('tequila.host') . self::FETCH_PATCH;			
 
-			$data = array('key' => Session::get('tequila'));
+			$data = ['key' => Session::get('tequila')];
 			$reponse = self::post($host, $data);
 
 	       	$u = User::sciperOrCreate($reponse["uniqueid"]);
@@ -33,12 +33,6 @@ final class Tequila {
 	       	$u->save();
 
 			Auth::login($u);
-			
-			var_dump($u->casualName());
-			var_dump(Auth::user()->casualName());
-			var_dump(Auth::check());
-			var_dump(Session::all());
-			exit(1);
 			return Redirect::to(URL::route('ad.index'));
 		}
 

@@ -36,7 +36,7 @@ class CreateAllTables extends Migration {
 		/* users */
 		Schema::create('users', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->increments('user_id');
 			$table->integer('sciper')->unsigned()->unique();
 			$table->string('first_name', 50);
 			$table->string('last_name', 50);
