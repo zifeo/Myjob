@@ -3,6 +3,7 @@
 header('Content-type: text/css'); 
 
 readfile('styles/fonts.css');
+readfile('styles/semantic.min.css');
 readfile('styles/bootstrap.min.css');
 readfile('styles/glyphicons.css');
 readfile('styles/chosen.min.css');
