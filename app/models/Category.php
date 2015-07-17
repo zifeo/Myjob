@@ -5,16 +5,17 @@ class Category extends Eloquent {
     protected $primaryKey = 'category_id';
     protected $hidden = ['created_at'];
 
-    public static function get_category_names() {
-        $categories = Category::all();
+    public static function get_id_name_mapping() {
+        $locale = App::getLocale();
 
-        $category_name_map = [];
-
-        foreach ($categories as $category) {
-            $category_name_map[$category->category_id] = $category->name; 
+        if ($locale == 'en') {
+            return Category::lists('name_en', 'category_id');
+        } elseif ($locale == 'fr') {
+            return Category::lists('name_fr', 'category_id');
+        } else {
+            /* Unsupported locale */
+            App::abort(403);
         }
-
-        return $category_name_map;
     }
     
 }

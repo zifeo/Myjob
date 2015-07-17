@@ -10,7 +10,7 @@ class ModerationController extends BaseController {
 
         return View::make('moderation')
             ->with('ads_to_moderate', $ads_to_moderate)
-            ->with('category_names', Category::get_category_names());
+            ->with('category_names', Category::get_id_name_mapping());
     }
 
     public function validate() {

@@ -4,19 +4,19 @@
 
 <div class="col-sm-12">
 
-    <h3>Nouvelle annonce</h3>
+    <h3>{{ trans('ads.new_ad_title') }}</h3>
 
     {{ Form::open([
         'route' => 'ad.store', 
         'class' => 'form-horizontal', 
         'data-toggle' => 'validator']) }}
         
-		@include('ads.form') 
+		@include('ads.form')
 		
 		<div class="form-group col-sm-4">
-			{{ Form::submit('Enregistrer la nouvelle annonce', array('class' => 'btn btn-default'))}}
+			{{ Form::submit(trans('ads.new_ad_submit'), array('class' => 'btn btn-default')) }}
 		</div>
-        
+
     {{ Form::close() }}
 </div>
 
