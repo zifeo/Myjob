@@ -1,6 +1,6 @@
 <?php
 
-class ModerationController extends BaseController {
+class ModerationController extends Controller {
 
     /**
     * Display the moderation panel, with the Ads to be moderated

@@ -21,7 +21,7 @@ App::before(function($request)
 
 App::after(function($request, $response)
 {
-	//
+	
 });
 
 /*
@@ -40,11 +40,6 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::guest('login');
 });
 
-
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -73,10 +68,26 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
+Route::filter('csrf', function() {
+	
 	if (Session::token() != Input::get('_token')) {
 		throw new Illuminate\Session\TokenMismatchException;
+	}
+});
+
+/*
+|--------------------------------------------------------------------------
+| Publisher filter
+|--------------------------------------------------------------------------
+|
+| Check if the visitor has an edit access by email.
+|
+*/
+
+Route::filter('publisher', function() {
+		
+	if (Auth::guest() && (!Session::has('connected_visitor') || Session::get('connected_visitor') != Input::get('email'))) {
+		App::abort(404);
 	}
 });
 
@@ -90,10 +101,10 @@ Route::filter('csrf', function()
 */
 
 Route::filter('tequila', function() {
-    
-    if (Agepinfo\Tequila::guest())
-	    //return Redirect::to(Agepinfo\Tequila::url());
-		null;
+     
+    if (Auth::guest()) {
+	    return Agepinfo\Tequila::auth();
+	}
 });
 
 /*
@@ -107,7 +118,7 @@ Route::filter('tequila', function() {
 
 Route::filter('admin', function() {
     
-    if (false)
-	    return 'admin required';
- 
+    if (Auth::guest() || Auth::user()->is_admin != 1) {
+		App::abort(404);
+	}
 });

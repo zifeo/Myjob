@@ -9,6 +9,20 @@ class Ad extends Eloquent {
 
 	const N_WEEKS_AD_VALID = 2;
 
+	public static function withCategories() {
+		return self::join('categories', 'ads.category_id', '=', 'categories.category_id');
+	}
+
+	public static function withVisitors() {			
+
+		return Auth::guest() ? self::where('contact_email', '=', Session::get('connected_visitor')): self;
+	}
+	
+	public static function withCategoriesVisitors() {			
+
+		return Auth::guest() ? self::withCategories()->where('contact_email', '=', Session::get('connected_visitor')): self::withCategories();
+	}
+
 	/** Overrides create function **/
 	public static function create(array $data)
 	{
@@ -44,7 +58,7 @@ class Ad extends Eloquent {
 
 	public static function get_valid_ads($fields)
 	{
-		return Ad::withCategories()->select($fields)
+		return Ad::withCategoriesVisitors()->select($fields)
 			->where('is_validated', '=', 1)
 			->where('expires_at', '>', Carbon::now()->toDateTimeString());
 	}

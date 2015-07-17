@@ -1,7 +1,7 @@
 <?php
 
-class AdController extends \BaseController {
-
+class AdController extends Controller {
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,9 +14,8 @@ class AdController extends \BaseController {
 				   'description',
 				   'place',
 				   'starts_at'];
-		
-		$ads = Ad::get_valid_ads($fields)->get();
 
+		$ads = Ad::get_valid_ads($fields)->get();
 		return View::make('ads.list')->with('ads', $ads);
 	}
 
@@ -71,7 +70,7 @@ class AdController extends \BaseController {
 			/* Create the ad in the DB */
 			$url = Ad::create($data);
 
-			return Redirect::route('ad.show', $url);
+			return Redirect::route('AdController@show', $url);
 		}
 	}
 
@@ -93,7 +92,7 @@ class AdController extends \BaseController {
 				   'starts_at', 'ends_at', 'duration',
 				   'ads.updated_at'];
 		
-		$ad = Ad::withCategories()->select($fields)->findOrFail($url);
+		$ad = Ad::withCategoriesVisitors()->select($fields)->findOrFail($url);
 
 		return View::make('ads.show')->with('ad', $ad);
 	}
@@ -106,9 +105,7 @@ class AdController extends \BaseController {
 	 */
 	public function edit($url)
 	{
-		$ad = Ad::findorfail($url);
-
-		$this->check_visitor_connected($ad->contact_email);
+		$ad = Ad::withVisitors()->findorfail($url);
 
 		$categories = Category::get_id_name_mapping();
 		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
@@ -123,9 +120,7 @@ class AdController extends \BaseController {
 	 */
 	public function update($url)
 	{
-		$ad = Ad::findorfail($url);
-
-		$this->check_visitor_connected($ad->contact_email);
+		$ad = Ad::withVisitors()->findorfail($url);
 
 		$this->beforeFilter('csrf');
 		$categories = Category::get_id_name_mapping();
@@ -141,7 +136,7 @@ class AdController extends \BaseController {
 		{
 			$ad->fill($data);
 			$ad->save();
-			return Redirect::route('ad.show', $url);
+			return Redirect::route('AdController@show', $url);
 		}
 	}
 
@@ -178,10 +173,37 @@ class AdController extends \BaseController {
 		{
 			/* Temporarily allow current visitor to edit all ads with email $email. */
 			Session::put('connected_visitor', $email);
-
-			$ads = Ad::where('contact_email', '=', $email)->get();
-			return View::make('ads.list')->with('ads', $ads);
+			return Redirection::action('ads.list');
 		}
+	}
+	
+	public function search() {
+		
+		$raw = trim(Input::get('q'));
+		if (empty($raw)) {
+			return Redirect::route('AdController@index');
+		}
+		$terms = explode(' ', $raw);
+		
+		$fields = ['url', 
+				   'title', 'name AS category', 
+				   'description',
+				   'place',
+				   'starts_at'];	
+		
+		$query = Ad::withCategories()->select($fields)->where('is_validated', '=', 1);
+		$searchFields = ['title', 'description', 'place', 'skills', 'languages', 'name'];
+
+	    foreach ($terms as $t) {
+	        $query->where(function($query) use (&$t, &$searchFields) {
+		        foreach ($searchFields as $f) {
+			        $query->Orwhere($f, 'LIKE', '%'.$t.'%');
+	        	}
+	        });
+	    }
+		$ads = $query->get();
+		
+		return View::make('ads.list')->with('ads', $ads)->with('searchTerms', $raw);
 	}
 
 	private function validation() {

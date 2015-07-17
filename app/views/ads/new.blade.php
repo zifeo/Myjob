@@ -7,7 +7,7 @@
     <h3>{{ trans('ads.new_ad_title') }}</h3>
 
     {{ Form::open([
-        'route' => 'ad.store', 
+        'action' => 'AdController@store', 
         'class' => 'form-horizontal', 
         'data-toggle' => 'validator']) }}
         

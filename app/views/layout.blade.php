@@ -18,6 +18,7 @@
 						<h1><img width="360" height="60" src="{{ asset('contents/images/myagep.svg') }}" alt="Myjob"></h1>
 					</a>
 				</div>
+<<<<<<< HEAD
 
 				<div id="lang-selector">
 					<form class="hidden" name="set_language" action="/language/set" method="POST">
@@ -38,16 +39,18 @@
 					</ul>
 				</div>
 
-				<form id="search-form" class="form form-inline" action="//search.epfl.ch/web.action">
-					<div class="input-group">
-						<input id="search-query" class="form-control" type="text" placeholder="{{ trans('general.search') }}" name="q" />
-							<label class="hidden" for="search-query">{{ trans('general.search') }}</label>
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="button">
-							<span class="glyphicon glyphicon-search"></span></button>
+
+	  				{{ Form::open(['route' => 'ad.search', 'class' => 'form form-inline', 'id' => 'search-form']) }}
+						<div class="input-group">
+							<input id="search-query" class="form-control" type="text" placeholder="Recherche" name="q" value="{{{ $searchTerms or '' }}}" />
+	  						<label class="hidden" for="search-query">{{ trans('general.search') }}</label>
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+	  						</div>
 						</div>
-					</div>
-				</form>
+					{{ Form::close() }}
 			</header>
 		</div>
 		<div class="nav-wrapper container-fluid">
@@ -72,7 +75,11 @@
 							<li><a href="{{{ URL::to('help') }}}">{{ trans('general.nav_help') }}</a></li>		
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="">{{ trans('general.disconnect') }}</a></li>
+							@if (Auth::check())
+								<li><a href="{{{ URL::to('signout') }}}">{{ trans('general.disconnect') }} ({{{ Auth::user()->casualName() }}})</a></li>
+							@else
+								<li><a href="{{{ URL::to('signin') }}}">{{ trans('general.connect') }}</a></li>
+							@endif
 						</ul>
 					</div>
 				</nav>

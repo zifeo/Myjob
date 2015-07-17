@@ -21,6 +21,7 @@ return array(
 	'nav_moderation' => 'Moderation',
 	'nav_options' => 'Options',
 	'nav_help' => 'Help',
+	'connect' => 'Login',
 	'disconnect' => 'Logout',
 	'accept' => 'Accept',
 	'close' => 'Close',

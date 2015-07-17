@@ -20,45 +20,32 @@
 |
 */
 
+// PATTERNS
 
 /* Very simple email regexp, might catch too much things but it's not
 a problem, since it's only used to route to the right controller. The 
 controller can do further checks if needed. */
-$email_regexp = ".+@.+\..+";
 
-$secret_regexp = "[a-zA-Z0-9]{32}";
+Route::pattern('ad', '[a-z0-9-]+');
+Route::pattern('rss', '[a-zA-Z0-9-]+');
+Route::pattern('email', '.+@.+\..+');
+Route::pattern('secret', '[a-zA-Z0-9]{32}');
 
-// PATTERNS
+// CSRF
 
-	Route::pattern('ad', '[a-z0-9-]+');
-	
-	Route::pattern('rss', '[a-zA-Z0-9-]+');
+Route::when('*', 'csrf', ['post', 'put', 'patch', 'delete']);
 
 // PUBLIC
 
-	Route::resource('ad', 'adController');
+Route::get('/', 'PublicController@index');
+Route::get('help', 'PublicController@help');
 
-	Route::get('/', 'AdController@index');
-	
-	Route::get('test', array('before' => 'tequila', 'uses' => 'TestController@moica'));
-	
-	Route::resource('ad', 'AdController');
-	
-	Route::get('rss/{rss}', function() {
-	
-		// validation de la key user
-	    return 'rss';
-	});
-
-	Route::get('deconnexion', function() {
-		Auth::logout();
-		Session::forget('tequila');
-		return Redirect::to('/');
-	});
-	
-	Route::get('erreur', function() {
-		return 'erreur';
-	});
+/*Route::get('erreur', function() {
+	return 'erreur';
+});
+Route::get('rss/{rss}', function() {
+    return 'rss';
+});*/
 
 	Route::get('help', 'HelpController@showHelp');
 
@@ -66,70 +53,46 @@ $secret_regexp = "[a-zA-Z0-9]{32}";
 
 // RANDOM_SECRET NEEDED
 
-	Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email')
-		->where('email', $email_regexp)
-		->where('secret', $secret_regexp);
+Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
 
-// TEQUILA NEEDED
+Route::get('ad/create', 	'AdController@create');
+Route::post('ad/store', 	'AdController@store');
 
-Route::group(array('before' => 'tequila'), function() {
-
-	Route::get('jobs', function() {
-	
-		// affichage des messages de succès/erreurs
-		// affiche de la validation et option si les droits existes
-		// affichage je propose un job
-		return 'listes';
-	});
-	
-	Route::get('job/{ad}', function() {
-		// affichage edition
-		// postulation
-	    return 'job 1';
-	});
-	
-	Route::post('job/{ad}', array('before' => 'csrf', function() {
-	    return 'job@postulation';
-	}));
-	
-	Route::get('alertes', function() {
-	    return 'alertes';
-	});
-	
-	Route::post('alertes', array('before' => 'csrf', function() {
-	    return 'alertes@post';
-	}));
-
+Route::get('debug', function() {
+		Auth::logout();
+		Session::flush();
+		return Redirect::to('/');
 });
 
-// TEQUILA NEEDED + MODERATION RIGHTS
+Route::group(['before' => 'publisher'], function() {
+	
+	Route::resource('ad', 'AdController', ['except' => ['create', 'store']]);
+	
+	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
+	
+});
 
-Route::group(array('before' => 'tequila|admin'), function() {
-
-	Route::get('job/edition/{ad}', function() {
-		return 'job edition';
+Route::group(['before' => 'tequila'], function() {
+	
+	Route::get('signin', function() {
+		return Redirect::route('AdController@index');
 	});
 	
-	Route::post('job/edition/{ad}', array('before' => 'csrf', function() {
-		return 'job edition@post';
-	}));
+	Route::get('signout', function() {
+		Auth::logout();
+		return Redirect::to('/');
+	});
+	
+});
+
+Route::group(['before' => 'tequila|admin'], function() {
 
 	Route::get('moderation', 'ModerationController@adsToModerate');
 	
 	Route::post('moderation', 'ModerationController@validate');
 	
-	Route::get('options', function() {
-	    return 'options';
-	});
-	
-	Route::post('options', array('before' => 'csrf', function() {
-	    return 'options@post';
-	}));
+	/*Route::get('crons', function() {
+		return 'crons';
+	});*/
 
 });
-
-// PRIVATE CRONS
-
-	Route::get('crons', function() {
-	    return 'crons';
-	});

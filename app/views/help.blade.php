@@ -2,6 +2,7 @@
 
 @section('content')
 
+<<<<<<< HEAD
 @if (count($faq_items))
 
 	<h3>{{ trans('help.faq_title') }}</h3>

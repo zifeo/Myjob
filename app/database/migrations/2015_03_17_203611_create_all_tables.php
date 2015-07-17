@@ -93,6 +93,14 @@ class CreateAllTables extends Migration {
 
 			$table->timestamps();
 		});
+
+		/* session */		
+		Schema::create('sessions', function(Blueprint $table) {
+            $table->increments('id');
+            $table->text('payload');
+            $table->integer('last_activity');
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -107,6 +115,7 @@ class CreateAllTables extends Migration {
 		Schema::drop('categories');
 		Schema::drop('contact_emails');
 		Schema::drop('faq');
+		Schema::drop('sessions');
 	}
 
 }
