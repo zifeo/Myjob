@@ -33,7 +33,7 @@
 		<div class="menu-wrapper sticky">
 			<div class="ui container grid">
 				<div class="ui computer tablet only row text inverted menu">
-					<a class="item active" href="{{{ URL::to('ad') }}}">{{ trans('general.nav_all_jobs') }}</a>
+					<a class="item active" href="{{{ URL::to('/') }}}">{{ trans('general.nav_all_jobs') }}</a>
 					<a class="item" href="{{{ URL::to('ad', 'create') }}}">{{ trans('general.nav_new_job') }}</a>
 					<a class="item" href="{{{ URL::to('moderation')}}}">{{ trans('general.nav_moderation') }}</a>
 					<a class="item" href="">{{ trans('general.nav_options') }}</a>

@@ -38,9 +38,7 @@ class AdController extends Controller {
 	 */
 	public function store()
 	{
-		$this->beforeFilter('csrf');
 		$categories = Category::get_id_name_mapping();
-
 		$fields = $this->validation();
 		$validator = Validator::make(Input::all(), $fields);
 		$data = array_only(Input::all(), array_keys($fields));

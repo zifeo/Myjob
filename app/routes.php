@@ -47,9 +47,9 @@ Route::get('rss/{rss}', function() {
     return 'rss';
 });*/
 
-	Route::get('help', 'HelpController@showHelp');
+Route::get('help', 'HelpController@showHelp');
 
-	Route::post('language/set', 'HomeController@changeLanguage');
+Route::post('language/set', 'HomeController@changeLanguage');
 
 // RANDOM_SECRET NEEDED
 
