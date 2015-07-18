@@ -17,7 +17,6 @@ return array(
 	'toggle_navigation' => 'Toggle navigation',
 	'nav_all_jobs' => 'All jobs',
 	'nav_new_job' => 'Create',
-	'nav_notifications' => 'My notifications',
 	'nav_moderation' => 'Moderation',
 	'nav_options' => 'Options',
 	'nav_help' => 'Help',
@@ -25,5 +24,6 @@ return array(
 	'disconnect' => 'Logout',
 	'accept' => 'Accept',
 	'close' => 'Close',
+	'back' => 'Back',
 
 );

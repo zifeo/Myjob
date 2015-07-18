@@ -17,7 +17,6 @@ return array(
 	'toggle_navigation' => 'Activer la navigation', // Activer-désactiver, how to translate?
 	'nav_all_jobs' => 'Tous les jobs',
 	'nav_new_job' => 'Créer',
-	'nav_notifications' => 'Mes alertes',
 	'nav_moderation' => 'Modération',
 	'nav_options' => 'Options',
 	'nav_help' => 'Aide',
@@ -25,5 +24,6 @@ return array(
 	'disconnect' => 'Déconnexion',
 	'accept' => 'Accepter',
 	'close' => 'Fermer',
+	'back' => 'Retour',
 
 );

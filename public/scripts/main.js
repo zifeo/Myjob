@@ -1,14 +1,24 @@
 $(function(){
 	//$('#category').chosen();
 
+	$('.mobile-menu-toggle').on('click', function(){
+		$('.ui.labeled.icon.sidebar')
+			.sidebar('toggle');		
+	});
+	
+	$('.message .close').on('click', function() {
+    	$(this)
+			.closest('.message')
+			.transition('fade');
+  	});
 
 	// Toggles the datepicker
-	$('.datepicker').datepicker({ 
+	/*$('.datepicker').datepicker({ 
 		format: "dd-mm-yyyy",
 		autoclose: true,
     	todayHighlight: true,
     	startDate: '0'
-	});
+	});*/
 
 	// Displays punctual-date datepicker or goes back to from-to-date
 	$('#isPunctual').on("change", function() {
