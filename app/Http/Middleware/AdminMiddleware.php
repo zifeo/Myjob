@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-	    var_dump(Auth::user()->is_admin);
+
 	    if (Auth::guest() || Auth::user()->is_admin != 1) {
 			App::abort(404);
 		}

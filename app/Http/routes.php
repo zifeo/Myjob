@@ -11,16 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-// PUBLIC
-
-Route::get('/', 'PublicController@index');
-Route::get('help', 'PublicController@help');
-
 /* TODO
 Route::get('erreur', function() {
 	return 'erreur';
@@ -30,18 +20,20 @@ Route::get('rss/{rss}', function() {
 });
 */
 
-Route::get('help', 'HelpController@showHelp');
-
-Route::post('language/set', 'HomeController@changeLanguage');
-
-// RANDOM_SECRET NEEDED
-
-Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
+Route::get('/', 'PublicController@index');
 
 Route::get('ad/create', 	'AdController@create');
 Route::post('ad/store', 	'AdController@store');
 
-Route::get('debug', function() {
+Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
+
+Route::get('help', 'HelpController@showHelp');
+
+Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
+
+Route::post('language/set', 'HomeController@changeLanguage');
+
+Route::get('reset', function() {
 	Auth::logout();
 	Session::flush();
 	return Redirect::to('/');
@@ -50,21 +42,13 @@ Route::get('debug', function() {
 Route::group(['middleware' => 'publisher'], function() {
 	
 	Route::resource('ad', 'AdController', ['except' => ['create', 'store']]);
-	
-	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
-	
+		
 });
 
 Route::group(['middleware' => 'tequila'], function() {
 	
-	Route::get('signin', function() {
+	Route::get('connect', function() {
 		return Redirect::route('AdController@index');
-	});
-	
-	Route::get('signout', function() {
-		Auth::logout();
-		Session::flush();
-		return Redirect::to('/');
 	});
 	
 });
@@ -72,7 +56,6 @@ Route::group(['middleware' => 'tequila'], function() {
 Route::group(['middleware' => ['tequila', 'admin']], function() {
 
 	Route::get('moderation', 'ModerationController@adsToModerate');
-	
 	Route::post('moderation', 'ModerationController@validateAd');
 	
 	/*

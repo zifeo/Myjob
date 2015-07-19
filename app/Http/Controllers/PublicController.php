@@ -11,7 +11,7 @@ class PublicController extends Controller {
 		return View::make('home');
 	}
 	
-	public function help() {
+	public function Oldhelp() {
 				
 		return View::make('help');
 	}

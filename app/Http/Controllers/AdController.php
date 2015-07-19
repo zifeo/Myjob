@@ -49,11 +49,9 @@ class AdController extends Controller {
 		$validator = Validator::make(Input::all(), $fields);
 		$data = array_only(Input::all(), array_keys($fields));
 		
-		if($validator->fails()) {
+		if ($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->with('type', 'danger');
-		} 
-		else 
-		{
+		} else {
 			/* If this is the first ad with that email, 
 			or last secret is outdated, create new entry 
 			in contact_emails */
@@ -133,11 +131,9 @@ class AdController extends Controller {
 		$validator = Validator::make(Input::all(), $fields);
 		$data = array_only(Input::all(), array_keys($fields));
 
-		if($validator->fails()) {
+		if ($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->with('type', 'danger');
-		} 
-		else
-		{
+		} else {
 			$ad->fill($data);
 			$ad->save();
 			return Redirect::route('AdController@show', $url);
@@ -168,13 +164,12 @@ class AdController extends Controller {
 			$message = 'Ce lien a plus de ' . ContactEmail::n_weeks_valid_secret .
 			' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
 			return Redirect::to('/')->withErrors(array('message' => $message))->with('type', 'warning');
-		} 
-		elseif (! ContactEmail::is_valid($secret, $email))
-		{
+			
+		} elseif (! ContactEmail::is_valid($secret, $email)) {
+			
 			App::abort(404);
-		}
-		else
-		{
+			
+		} else {
 			/* Temporarily allow current visitor to edit all ads with email $email. */
 			Session::put('connected_visitor', $email);
 			return Redirection::action('ads.list');

@@ -15,9 +15,7 @@ class PublisherMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-	    var_dump(Auth::guest());
-	    
+    {	    
         if (Auth::guest() && 
         	(!Session::has('connected_visitor') || Session::get('connected_visitor') != Input::get('email'))) {
 	        	

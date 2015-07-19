@@ -35,4 +35,5 @@ class User extends Model implements AuthenticatableContract {
 			return $u->first();
 		}
 	}
+	
 }

@@ -52,7 +52,7 @@
 							{{ trans('general.nav_help') }}
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('signout') }}">
+							<a class="item" href="{{ URL::to('reset') }}">
 								{{ trans('general.disconnect') }} · {{ $user }}
 							</a>
 						</div>
@@ -63,7 +63,7 @@
 							<span id="current-nav-state">{{ trans('general.nav_all_jobs') }}</span>
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('signout') }}">
+							<a class="item" href="{{ URL::to('reset') }}">
 								{{ trans('general.disconnect') }}
 							</a>
 						</div>
@@ -91,7 +91,7 @@
 							<i class="comments icon"></i>
 							{{ trans('general.nav_help') }}
 						</a>
-						<a class="item" href="{{ URL::to('signout') }}">
+						<a class="item" href="{{ URL::to('reset') }}">
 							<i class="sign out icon"></i>
 							{{ trans('general.disconnect') }}
 						</a>
@@ -112,7 +112,7 @@
 							{{ trans('general.nav_help') }}
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('signin') }}">
+							<a class="item" href="{{ URL::to('connect') }}">
 								{{ trans('general.connect') }}
 							</a>
 						</div>
@@ -128,7 +128,7 @@
 							{{ trans('general.nav_help') }}
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('signin') }}">
+							<a class="item" href="{{ URL::to('connect') }}">
 								{{ trans('general.connect') }}
 							</a>
 						</div>
