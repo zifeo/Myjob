@@ -13,7 +13,7 @@
 	<body>
 		<header class="header-wrapper ui container two column stackable grid">
 			<div class="middle aligned column">
-				<a href="{{ url('/') }}">
+				<a href="@if ($auth) {{  url('ad') }} @else {{ url('/') }} @endif">
 					<h1><img width="360" height="60" src="{{ asset('contents/images/myagep.svg') }}" alt="Myjob"></h1>
 				</a>
 			</div>
@@ -34,25 +34,25 @@
 			<div class="ui container grid">
 				@if ($auth)
 					<div class="ui computer tablet only row text inverted menu">
-						<a class="item active" href="{{ URL::to('/') }}">
+						<a class="item active" href="{{ url('ad') }}">
 							{{ trans('general.nav_all_jobs') }}
 						</a>
-						<a class="item" href="{{ URL::to('ad', 'create') }}">
+						<a class="item" href="{{ url('ad', 'create') }}">
 							{{ trans('general.nav_new_job') }}
 						</a>
 						@if ($admin)
-							<a class="item" href="{{ URL::to('moderation')}}">
+							<a class="item" href="{{ url('moderation')}}">
 								{{ trans('general.nav_moderation') }}
 							</a>
 						@endif
 						<a class="item" href="">
 							{{ trans('general.nav_options') }}
 						</a>
-						<a class="item" href="{{ URL::to('help') }}">
+						<a class="item" href="{{ url('help') }}">
 							{{ trans('general.nav_help') }}
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('reset') }}">
+							<a class="item" href="{{ url('reset') }}">
 								{{ trans('general.disconnect') }} · {{ $user }}
 							</a>
 						</div>
@@ -63,22 +63,22 @@
 							<span id="current-nav-state">{{ trans('general.nav_all_jobs') }}</span>
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('reset') }}">
+							<a class="item" href="{{ url('reset') }}">
 								{{ trans('general.disconnect') }}
 							</a>
 						</div>
 					</div>
 					<div class="ui left vertical inverted sidebar labeled icon menu">
-						<a class="item" href="{{ URL::to('ad') }}">
+						<a class="item" href="{{ url('ad') }}">
 							<i class="home icon"></i>
 							{{ trans('general.nav_all_jobs') }}
 						</a>
-						<a class="item" href="{{ URL::to('ad', 'create') }}">
+						<a class="item" href="{{ url('ad', 'create') }}">
 							<i class="add circle icon"></i>
 							{{ trans('general.nav_new_job') }}
 						</a>
 						@if ($admin)
-							<a class="item" href="{{ URL::to('moderation')}}">
+							<a class="item" href="{{ url('moderation')}}">
 								<i class="unhide icon"></i>
 								{{ trans('general.nav_moderation') }}
 							</a>
@@ -87,11 +87,11 @@
 							<i class="options icon"></i>
 							{{ trans('general.nav_options') }}
 						</a>
-						<a class="item" href="{{ URL::to('help') }}">
+						<a class="item" href="{{ url('help') }}">
 							<i class="comments icon"></i>
 							{{ trans('general.nav_help') }}
 						</a>
-						<a class="item" href="{{ URL::to('reset') }}">
+						<a class="item" href="{{ url('reset') }}">
 							<i class="sign out icon"></i>
 							{{ trans('general.disconnect') }}
 						</a>
@@ -102,33 +102,33 @@
 					</div>
 				@else
 					<div class="ui computer tablet only row text inverted menu">
-						<a class="item" href="{{ URL::to('ad', 'create') }}">
+						<a class="item" href="{{ url('ad', 'create') }}">
 							{{ trans('general.nav_home') }}
 						</a>
-						<a class="item" href="{{ URL::to('ad', 'create') }}">
+						<a class="item" href="{{ url('ad', 'create') }}">
 							{{ trans('general.nav_new_job') }}
 						</a>
-						<a class="item" href="{{ URL::to('help') }}">
+						<a class="item" href="{{ url('help') }}">
 							{{ trans('general.nav_help') }}
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('connect') }}">
+							<a class="item" href="{{ url('connect') }}">
 								{{ trans('general.connect') }}
 							</a>
 						</div>
 					</div>
 					<div class="ui mobile only row text inverted icon menu">
-						<a class="item" href="{{ URL::to('ad', 'create') }}">
+						<a class="item" href="{{ url('ad', 'create') }}">
 							<i class="home large icon"></i>
 						</a>
-						<a class="item" href="{{ URL::to('ad', 'create') }}">
+						<a class="item" href="{{ url('ad', 'create') }}">
 							{{ trans('general.nav_new_job') }}
 						</a>
-						<a class="item" href="{{ URL::to('help') }}">
+						<a class="item" href="{{ url('help') }}">
 							{{ trans('general.nav_help') }}
 						</a>
 						<div class="right menu">
-							<a class="item" href="{{ URL::to('connect') }}">
+							<a class="item" href="{{ url('connect') }}">
 								{{ trans('general.connect') }}
 							</a>
 						</div>
