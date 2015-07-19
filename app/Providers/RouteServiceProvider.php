@@ -4,6 +4,7 @@ namespace Myjob\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Session, Config, App, Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,14 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         //
+        		
+		Route::pattern('ad', '[a-z0-9-]+');
+		Route::pattern('email', '.+@.+\..+');
+		Route::pattern('rss', '[a-zA-Z0-9-]+');
+		Route::pattern('secret', '[a-zA-Z0-9]{32}');
+        
+        $language = Session::get('language', Config::get('app.locale'));
+		App::setLocale($language);
 
         parent::boot($router);
     }
