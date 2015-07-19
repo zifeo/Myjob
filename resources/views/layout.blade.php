@@ -19,8 +19,8 @@
 			</div>
 			<div class="right aligned column">
 				<div class="lang-selector-wrapper">
-					<a class="active item" href="language/set/fr">Français</a>
-					<a class="item" href="language/set/en">English</a>
+					<a class="active item" href="language/set/fr">Fr<span>ançais</span></a>
+					<a class="item" href="language/set/en">En<span>glish</span></a>
 				</div>
 				{!! Form::open(['route' => 'ad.search', 'class' => 'search-form-wrapper']) !!}
 					<div class="ui action input">
@@ -32,68 +32,110 @@
 		</header>
 		<div class="menu-wrapper sticky">
 			<div class="ui container grid">
-				<div class="ui computer tablet only row text inverted menu">
-					<a class="item active" href="{{{ URL::to('/') }}}">{{ trans('general.nav_all_jobs') }}</a>
-					<a class="item" href="{{{ URL::to('ad', 'create') }}}">{{ trans('general.nav_new_job') }}</a>
-					<a class="item" href="{{{ URL::to('moderation')}}}">{{ trans('general.nav_moderation') }}</a>
-					<a class="item" href="">{{ trans('general.nav_options') }}</a>
-					<a class="item" href="{{{ URL::to('help') }}}">{{ trans('general.nav_help') }}</a>
-					<div class="right menu">
-						@if (Auth::check())
-						<a class="item" href="{{{ URL::to('signout') }}}">{{ trans('general.disconnect') }} ({{{ Auth::user()->first_name }}})</a>
-						@else
-						<a class="item" href="{{{ URL::to('signin') }}}">{{ trans('general.connect') }}</a>
+				@if ($auth)
+					<div class="ui computer tablet only row text inverted menu">
+						<a class="item active" href="{{ URL::to('/') }}">
+							{{ trans('general.nav_all_jobs') }}
+						</a>
+						<a class="item" href="{{ URL::to('ad', 'create') }}">
+							{{ trans('general.nav_new_job') }}
+						</a>
+						@if ($admin)
+							<a class="item" href="{{ URL::to('moderation')}}">
+								{{ trans('general.nav_moderation') }}
+							</a>
 						@endif
+						<a class="item" href="">
+							{{ trans('general.nav_options') }}
+						</a>
+						<a class="item" href="{{ URL::to('help') }}">
+							{{ trans('general.nav_help') }}
+						</a>
+						<div class="right menu">
+							<a class="item" href="{{ URL::to('signout') }}">
+								{{ trans('general.disconnect') }} · {{ $user }}
+							</a>
+						</div>
 					</div>
-				</div>
-				<div class="ui mobile only row text inverted menu">
-					<a class="item mobile-menu-toggle">
-						<i class="sidebar icon"></i>
-						{{ trans('general.nav_all_jobs') }}
-					</a>
-					<div class="right menu">
-						<a class="item">
-							{{ trans('general.connect') }}
+					<div class="ui mobile only row text inverted icon menu">
+						<a class="item mobile-menu-toggle">
+							<i class="sidebar large icon"></i>
+							<span id="current-nav-state">{{ trans('general.nav_all_jobs') }}</span>
+						</a>
+						<div class="right menu">
+							<a class="item" href="{{ URL::to('signout') }}">
+								{{ trans('general.disconnect') }}
+							</a>
+						</div>
+					</div>
+					<div class="ui left vertical inverted sidebar labeled icon menu">
+						<a class="item" href="{{ URL::to('ad') }}">
+							<i class="home icon"></i>
+							{{ trans('general.nav_all_jobs') }}
+						</a>
+						<a class="item" href="{{ URL::to('ad', 'create') }}">
+							<i class="add circle icon"></i>
+							{{ trans('general.nav_new_job') }}
+						</a>
+						@if ($admin)
+							<a class="item" href="{{ URL::to('moderation')}}">
+								<i class="unhide icon"></i>
+								{{ trans('general.nav_moderation') }}
+							</a>
+						@endif
+						<a class="item" href="">
+							<i class="options icon"></i>
+							{{ trans('general.nav_options') }}
+						</a>
+						<a class="item" href="{{ URL::to('help') }}">
+							<i class="comments icon"></i>
+							{{ trans('general.nav_help') }}
+						</a>
+						<a class="item" href="{{ URL::to('signout') }}">
+							<i class="sign out icon"></i>
+							{{ trans('general.disconnect') }}
+						</a>
+						<a class="item" href="">
+							<i class="chevron circle right icon"></i>
+							{{ trans('general.back') }}
 						</a>
 					</div>
+				@else
+					<div class="ui computer tablet only row text inverted menu">
+						<a class="item" href="{{ URL::to('ad', 'create') }}">
+							{{ trans('general.nav_home') }}
+						</a>
+						<a class="item" href="{{ URL::to('ad', 'create') }}">
+							{{ trans('general.nav_new_job') }}
+						</a>
+						<a class="item" href="{{ URL::to('help') }}">
+							{{ trans('general.nav_help') }}
+						</a>
+						<div class="right menu">
+							<a class="item" href="{{ URL::to('signin') }}">
+								{{ trans('general.connect') }}
+							</a>
+						</div>
+					</div>
+					<div class="ui mobile only row text inverted icon menu">
+						<a class="item" href="{{ URL::to('ad', 'create') }}">
+							<i class="home large icon"></i>
+						</a>
+						<a class="item" href="{{ URL::to('ad', 'create') }}">
+							{{ trans('general.nav_new_job') }}
+						</a>
+						<a class="item" href="{{ URL::to('help') }}">
+							{{ trans('general.nav_help') }}
+						</a>
+						<div class="right menu">
+							<a class="item" href="{{ URL::to('signin') }}">
+								{{ trans('general.connect') }}
+							</a>
+						</div>
+					</div>
+					@endif
 				</div>
 			</div>
-		</div>
-		<div class="ui left vertical inverted sidebar labeled icon menu">
-			<a class="item" href="{{{ URL::to('ad') }}}">
-				<i class="home icon"></i>
-				{{ trans('general.nav_all_jobs') }}
-			</a>
-			<a class="item" href="{{{ URL::to('ad', 'create') }}}">
-				<i class="add circle icon"></i>
-				{{ trans('general.nav_new_job') }}</a>
-			<a class="item" href="{{{ URL::to('moderation')}}}">
-				<i class="unhide icon"></i>
-				{{ trans('general.nav_moderation') }}
-			</a>
-			<a class="item" href="">
-				<i class="options icon"></i>
-				{{ trans('general.nav_options') }}
-			</a>
-			<a class="item" href="{{{ URL::to('help') }}}">
-				<i class="comments icon"></i>
-				{{ trans('general.nav_help') }}
-			</a>
-			@if (Auth::check())
-			<a class="item" href="{{{ URL::to('signout') }}}">
-				<i class="sign out icon"></i>
-				{{ trans('general.disconnect') }} ({{{ Auth::user()->first_name }}})
-			</a>
-			@else
-			<a class="item" href="{{{ URL::to('signin') }}}">
-				<i class="sign in icon"></i>
-				{{ trans('general.connect') }}
-			</a>
-			@endif
-			<a class="item" href="">
-				<i class="chevron circle right icon"></i>
-				{{ trans('general.back') }}
-			</a>
 		</div>
 		<div class="ui container message notifications-wrapper">
 			<i class="close icon"></i>
@@ -105,9 +147,7 @@
 				@include('notifications')
 			@endif
 		</div>
-		<div class="ui container content-wrapper">
-			@yield('content')
-		</div>
+		@yield('content')
 		<footer class="ui container three column stackable grid footer-wrapper">
 			<div class="right aligned computer tablet only column">
 				<a href="http://agepoly.epfl.ch"><img src="{{ asset('contents/images/agepinfo.svg' )}}" height="120" alt=""></a>

@@ -35,9 +35,4 @@ class User extends Model implements AuthenticatableContract {
 			return $u->first();
 		}
 	}
-	
-	public function casualName() {
-		return strtok($this->first_name, ' ');
-	}
-
 }

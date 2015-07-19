@@ -25,7 +25,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
         		
 		Route::pattern('ad', '[a-z0-9-]+');
 		Route::pattern('email', '.+@.+\..+');

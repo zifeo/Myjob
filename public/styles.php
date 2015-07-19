@@ -2,9 +2,9 @@
 
 header('Content-type: text/css'); 
 
-readfile('styles/fonts.css');
-readfile('styles/semantic.min.css');
-readfile('styles/chosen.min.css');
-readfile('styles/layout.css');
-readfile('styles/form.css');
-readfile('styles/moderation.css');
+readfile('../resources/assets/stylesheets/fonts.css');
+readfile('../resources/assets/stylesheets/semantic.min.css');
+readfile('../resources/assets/stylesheets/chosen.min.css');
+readfile('../resources/assets/stylesheets/layout.css');
+readfile('../resources/assets/stylesheets/form.css');
+readfile('../resources/assets/stylesheets/moderation.css');

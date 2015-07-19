@@ -16,7 +16,8 @@ return array(
 	'search' => 'Recherche',
 	'toggle_navigation' => 'Activer la navigation', // Activer-désactiver, how to translate?
 	'nav_all_jobs' => 'Tous les jobs',
-	'nav_new_job' => 'Créer',
+	'nav_home' => 'Accueil',
+	'nav_new_job' => 'Créer une annonce',
 	'nav_moderation' => 'Modération',
 	'nav_options' => 'Options',
 	'nav_help' => 'Aide',
