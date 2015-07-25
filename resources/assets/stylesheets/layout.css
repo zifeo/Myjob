@@ -2,6 +2,14 @@ body {
 	background-color: #f0f0f0;
 }
 
+.button {
+	font-family: 'montserrat' !important;
+}
+
+.padded {
+	padding: 2rem !important;
+}
+
 .header-wrapper {
 	padding: 1rem 0 !important;
 }
@@ -62,7 +70,7 @@ body {
 
 .menu-wrapper {
 	background: #c61618;
-	margin: 0 0 1rem 0;
+	margin: 0 0 1rem 0;	
 }
 
 	.menu-wrapper .menu {
@@ -76,13 +84,33 @@ body {
 	}
 
 .notifications-wrapper {
-	margin-top: 1rem !important;
+	margin-top: 2rem !important;
 }
 
-.content-wrapper {}
+	.ui.notifications-wrapper {
+		max-width: 800px !important;
+	}
+	
+	.notifications-wrapper > .column:first-child {
+		text-align: center;
+	}
+	
+	.notifications-wrapper .column {
+		padding-top: 0.6rem !important;
+		padding-bottom: 0.6rem !important;
+	}
+
+	.notifications-wrapper .header {
+		margin-bottom: 0.5rem;
+	}
+
+.content-wrapper {
+	padding: 1rem 0 !important;
+}
 
 .footer-wrapper {
-	margin-top: 1rem !important;
+	margin-top: 2rem !important;
+	border-top: 1px solid #ddd;
 }
 
 	.footer-wrapper p {
