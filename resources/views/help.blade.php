@@ -18,7 +18,7 @@
 				</p>
 			</div>
 			@empty
-			<p>Pas de question-réponse pour le moment.</p>
+			<p class="mt">Pas de question-réponse pour le moment.</p>
 			@endforelse
 		</div>
 	</div>

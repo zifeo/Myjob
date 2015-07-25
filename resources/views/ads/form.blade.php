@@ -1,5 +1,5 @@
 <div class="ui segment">
-	<div class="ui top attached label caps">Information de l'annonce </div>
+	<div class="ui top attached label caps">Information de l'annonce</div>
 	<div class="field">
 		<label>{{ trans('ads.ad_title') }}</label>
 		{!! Form::text('title', null, [

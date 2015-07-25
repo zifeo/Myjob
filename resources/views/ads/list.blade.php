@@ -7,22 +7,32 @@ Myjob
 @section('content')
 
 <div class="row">
-	<div class="ten wide column">
+	<div class="eleven wide column ads-list-wrapper">
 		<h2 class="ui header">Derniers jobs</h2>
 
-		<a href="" title="" class="ui top attached segment">
-			<h3 class="">Test</h3>
-			<p>This segment is on top</p>
-		</a>
-		<a href="" title="" class="ui attached segment">
-			<p>This segment is attached on both sides</p>
-		</a>
-		<a href="" title="" class="ui attached segment">
-			<p>This segment is attached on both sides</p>
-		</a>
-		<a href="" title="" class="ui bottom attached segment">
-			<p>This segment is on bottom</p>
-		</a>	
+		<div class="ui two column stackable grid">
+			
+			@forelse ($ads as $ad)
+			<div class="column">
+				<a class="ui card" href="{{ URL::to('ad', $ad->url) }}">
+					<div class="content">
+						<div class="right floated">{{ $ad->place or trans('general.unspecified') }}</div>
+						<div class="header">{{ $ad->title }}</div>
+						<div class="meta">
+							<span class="right floated time">{{ $ad->start_at }}</span>
+							<span class="category">{{ $ad->category }}</span>
+						</div>
+						<div class="description">
+							<p>{{ $ad->description }}</p>
+						</div>
+					</div>
+				</a>
+			</div>
+			@empty
+			<p class="mt">Pas d'annonce pour le moment.</p>
+			@endforelse
+		</div>
+	
 	</div>
 	<div class="five wide column">
 		<h3 class="ui header">MyJob nouvelles</h3>
@@ -60,23 +70,6 @@ Myjob
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-
-<div class="col-sm-12">
-	<div class="list-group swipe">
-		@foreach ($ads as $ad)
-		<a href="{{{ URL::to('ad', $ad->url) }}}" class="list-group-item">
-			<div class="pull-right small text-right montserra">
-				<span><strong>{{{ $ad->category }}}</strong></span><br>
-				<span>{{{ $ad->place or trans('general.unspecified') }}}</span><br>
-				<span>{{{ $ad->start_at }}}</span>
-			</div>
-			<h4 class="list-group-item-heading">{{{ $ad->title }}}</h4>
-			<p class="list-group-item-text">{{{ $ad->description }}}</p>
-			<div class="clearfix"></div>
-		</a>
-		@endforeach
 	</div>
 </div>
 @stop

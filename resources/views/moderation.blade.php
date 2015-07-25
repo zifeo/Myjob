@@ -41,7 +41,7 @@
 				</div>
 			</div>
 			@empty
-			<p>Pas d'annonce à modérer pour le moment.</p>
+			<p class="mt">Pas d'annonce à modérer pour le moment.</p>
            @endforelse
 		</div>   
 	</div>
@@ -78,7 +78,7 @@
 					</div>
 				</div>
 			</div>
-			<h3 class="ui header">Log</h4>
+			<h3 class="ui header">Logs</h4>
 			<div class="event">
 				<div class="content">
 					<div class="summary">
