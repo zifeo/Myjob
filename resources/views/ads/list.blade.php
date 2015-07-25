@@ -5,10 +5,13 @@ Myjob
 @stop
 
 @section('content')
-<div class="ui container stackable grid">
-	<div class="ten wide column ads-list-wrapper">
+
+<div class="row">
+	<div class="ten wide column">
+		<h2 class="ui header">Derniers jobs</h2>
+
 		<a href="" title="" class="ui top attached segment">
-			<h3>Test</h3>
+			<h3 class="">Test</h3>
 			<p>This segment is on top</p>
 		</a>
 		<a href="" title="" class="ui attached segment">
@@ -21,27 +24,11 @@ Myjob
 			<p>This segment is on bottom</p>
 		</a>	
 	</div>
-	<div class="six wide column">
-		<div class="ui fluid card">
-			<div class="content">
-				<div class="header">
-					Abbreviated Header
-				</div>
-				<div class="description">
-					<p>Blabla<p>
-				</div>
-			</div>
-			<div class="ui two bottom attached buttons">
-				<div class="ui button">
-						Action 1
-				</div>
-				<div class="ui button">
-					Action 2
-				</div>
-			</div>
-		</div>
-		<div class="ui small feed segment">
-			<h4 class="ui header">Lastest activity</h4>
+	<div class="five wide column">
+		<h3 class="ui header">MyJob nouvelles</h3>
+		<p>Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en <a href="{{ url('help') }}">signalant</a> tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et commentaires.<br>Tim & Teo</p>
+		<div class="ui small feed">
+			<h3 class="ui header">Lastest activity</h3>
 			<div class="event">
 				<div class="content">
 					<div class="summary">
@@ -76,7 +63,6 @@ Myjob
 	</div>
 </div>
 
-</div>
 <div class="col-sm-12">
 	<div class="list-group swipe">
 		@foreach ($ads as $ad)

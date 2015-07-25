@@ -8,6 +8,8 @@ $(function(){
 	
 	$('.selection').dropdown();
 	
+	$('.ui.accordion').accordion();
+	
 	$('.message .close').on('click', function() {
     	$(this)
 			.closest('.message')

@@ -18,6 +18,15 @@
 				'id' => 'category_id'
 			]) !!}
 		</div>
+		<div class="field">
+			<label>{{ trans('ads.salary') }}</label>
+ 			{!! Form::text('salary', null, [
+	 			'placeholder' => trans('ads.salary'),
+ 				'id' => 'salary',
+				'data-minlength' => '3',
+	            'maxlength' => '15'
+			]) !!}
+		</div>
 	</div>
 	<div class="field">
 		<label>{{ trans('ads.description') }} <small>(supporte le balisage Markdown)</small></label>
