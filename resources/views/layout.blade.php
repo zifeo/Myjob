@@ -102,7 +102,7 @@
 				</div>
 				@else
 				<div class="ui computer tablet only row text inverted menu">
-					<a class="item" href="{{ url('ad', 'create') }}">
+					<a class="item" href="{{ url('') }}">
 						{{ trans('general.nav_home') }}
 					</a>
 					<a class="item" href="{{ url('ad', 'create') }}">
@@ -118,7 +118,7 @@
 					</div>
 				</div>
 				<div class="ui mobile only row text inverted icon menu">
-					<a class="item" href="{{ url('ad', 'create') }}">
+					<a class="item" href="{{ url('') }}">
 						<i class="home large icon"></i>
 					</a>
 					<a class="item" href="{{ url('ad', 'create') }}">
@@ -156,7 +156,7 @@
 			</div>
 			<div class="middle aligned column">
 				<p>
-					<a href="http://agepinfo.ch">AGEPINFO</a> {{ date('Y') }}<br> 
+					<a href="https://agepoly.ch">AGEPINFO</a> {{ date('Y') }}<br> 
 					<a href="http://github.com/timozattol">Timothée Lottaz</a> · 
 					<a href="http://github.com/zifeo">Teo Stocco</a><br>
 					<a href="http://petitesannonces.epfl.ch">Petites annonces</a> · 

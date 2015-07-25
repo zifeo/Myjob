@@ -2,12 +2,20 @@ body {
 	background-color: #f0f0f0;
 }
 
-.button {
+.header, .button {
 	font-family: 'montserrat' !important;
 }
 
 .padded {
 	padding: 2rem !important;
+}
+
+.mt {
+	margin-top: 1rem !important;
+}
+
+.caps {
+	text-transform: uppercase !important;
 }
 
 .header-wrapper {

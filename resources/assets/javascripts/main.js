@@ -6,6 +6,8 @@ $(function(){
 			.sidebar('toggle');		
 	});
 	
+	$('.selection').dropdown();
+	
 	$('.message .close').on('click', function() {
     	$(this)
 			.closest('.message')
