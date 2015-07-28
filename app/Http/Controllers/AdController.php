@@ -16,7 +16,7 @@ class AdController extends Controller {
 	public function index()
 	{
 		$fields = ['url',
-				   'title', 'name_'. $this->get_safe_locale() . ' AS category', 
+				   'title', 'name_'. App::getLocale() . ' AS category', 
 				   'description',
 				   'place',
 				   'starts_at'];
@@ -87,7 +87,7 @@ class AdController extends Controller {
 	{
 		
 		$fields = ['url', 
-				   'title', 'name_' . $this->get_safe_locale() . ' AS category', 
+				   'title', 'name_' . App::getLocale() . ' AS category', 
 				   'description',
 				   'salary', 'place', 'skills', 'languages',
 				   'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone',
@@ -232,14 +232,4 @@ class AdController extends Controller {
 		}
 	}
 	
-	private function get_safe_locale() {
-		$locale = App::getLocale();
-
-		if (! in_array($locale, ['en', 'fr'])) {
-			// Unsupported locale
-			App::abort(403);
-		}
-
-		return $locale;
-	}
 }

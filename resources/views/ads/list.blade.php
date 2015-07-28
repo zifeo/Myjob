@@ -36,9 +36,10 @@ Myjob
 	</div>
 	<div class="five wide column">
 		<h3 class="ui header">MyJob nouvelles</h3>
-		<p>Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en <a href="{{ url('help') }}">signalant</a> tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et commentaires.<br>Tim & Teo</p>
+		<p>Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en signalant tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et suggestions !</p>
+		<a class="ui small red button mt" href="{{ url('help') }}">Feedback</a>
+		<h3 class="ui header">Lastest activity</h3>
 		<div class="ui small feed">
-			<h3 class="ui header">Lastest activity</h3>
 			<div class="event">
 				<div class="content">
 					<div class="summary">

@@ -4,10 +4,11 @@ namespace Myjob\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Session, Config, App, Route;
+use Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+		
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -30,9 +31,6 @@ class RouteServiceProvider extends ServiceProvider
 		Route::pattern('email', '.+@.+\..+');
 		Route::pattern('rss', '[a-zA-Z0-9-]+');
 		Route::pattern('secret', '[a-zA-Z0-9]{32}');
-        
-        $language = Session::get('language', Config::get('app.locale'));
-		App::setLocale($language);
 
         parent::boot($router);
     }
@@ -49,4 +47,5 @@ class RouteServiceProvider extends ServiceProvider
             require app_path('Http/routes.php');
         });
     }
+
 }

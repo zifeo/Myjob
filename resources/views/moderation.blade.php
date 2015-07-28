@@ -46,8 +46,8 @@
 		</div>   
 	</div>
 	<div class="five wide column">		
+		<h3 class="ui header">Activités</h4>
 		<div class="ui small feed">
-			<h3 class="ui header">Activités</h4>
 			<div class="event">
 				<div class="content">
 					<div class="summary">
@@ -78,6 +78,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="ui small feed">
 			<h3 class="ui header">Logs</h4>
 			<div class="event">
 				<div class="content">

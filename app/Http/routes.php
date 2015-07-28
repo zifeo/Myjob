@@ -20,48 +20,52 @@ Route::get('rss/{rss}', function() {
 });
 */
 
-Route::get('/', 'PublicController@index');
+Route::group(['middleware' => 'locales'], function() {
 
-Route::get('ad/create', 	'AdController@create');
-Route::post('ad/store', 	'AdController@store');
-
-Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
-
-Route::get('help', 'HelpController@showHelp');
-
-Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
-
-Route::post('language/set', 'HomeController@changeLanguage');
-
-Route::get('reset', function() {
-	Auth::logout();
-	Session::flush();
-	return Redirect::to('/');
-});
-
-Route::group(['middleware' => 'publisher'], function() {
+	Route::get('/', 'PublicController@index');
 	
-	Route::resource('ad', 'AdController', ['except' => ['create', 'store']]);
+	Route::get('ad/create', 	'AdController@create');
+	Route::post('ad/store', 	'AdController@store');
+	
+	Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
+	
+	Route::get('help', 'HelpController@showHelp');
+	
+	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
+	
+	Route::post('language/set', 'HomeController@changeLanguage');
+	
+	Route::get('reset', function() {
+		Auth::logout();
+		Session::flush();
+		return Redirect::to('/');
+	});
+	
+	Route::group(['middleware' => 'publisher'], function() {
 		
-});
-
-Route::group(['middleware' => 'tequila'], function() {
-	
-	Route::get('connect', function() {
-		return Redirect::route('AdController@index');
+		Route::resource('ad', 'AdController', ['except' => ['create', 'store']]);
+			
 	});
 	
-});
-
-Route::group(['middleware' => ['tequila', 'admin']], function() {
-
-	Route::get('moderation', 'ModerationController@adsToModerate');
-	Route::post('moderation', 'ModerationController@validateAd');
-	
-	/*
-	Route::get('crons', function() {
-		return 'crons';
+	Route::group(['middleware' => 'tequila'], function() {
+		
+		Route::get('connect', function() {
+			return Redirect::route('AdController@index');
+		});
+		
 	});
-	*/
-
+	
+	Route::group(['middleware' => ['tequila', 'admin']], function() {
+	
+		Route::get('moderation', 'ModerationController@adsToModerate');
+		Route::post('moderation', 'ModerationController@validateAd');
+		
+		/*
+		Route::get('crons', function() {
+			return 'crons';
+		});
+		*/
+	
+	});
+	
 });

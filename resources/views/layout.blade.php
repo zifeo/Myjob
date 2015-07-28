@@ -19,8 +19,8 @@
 			</div>
 			<div class="right aligned column">
 				<div class="lang-selector-wrapper">
-					<a class="active item" href="language/set/fr">Fr<span>ançais</span></a>
-					<a class="item" href="language/set/en">En<span>glish</span></a>
+					<a class="active item" href="?lang=fr">Fr<span>ançais</span></a>
+					<a class="item" href="?lang=en">En<span>glish</span></a>
 				</div>
 				{!! Form::open(['route' => 'ad.search', 'class' => 'search-form-wrapper']) !!}
 					<div class="ui action input">

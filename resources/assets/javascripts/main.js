@@ -1,5 +1,9 @@
-$(function(){
-	//$('#category').chosen();
+$(function() {
+	
+	var locale = window.navigator.userLanguage || window.navigator.language;
+	moment.locale(locale);
+
+
 
 	$('.mobile-menu-toggle').on('click', function(){
 		$('.ui.labeled.icon.sidebar')
@@ -14,6 +18,23 @@ $(function(){
     	$(this)
 			.closest('.message')
 			.transition('fade');
+  	});
+  	
+  	$('.datepicker').pickadate({
+	  	 formatSubmit: 'dd-mm-yyyy',
+	  	 hiddenName: true
+  	});
+  	
+  	$('input.moment').each(function(i) {
+	  	var date = $.trim($(this).val());
+	  	if (date.length > 0)
+	  		$(this).val(moment(date).format('LL'));	
+	  	else
+	  		$(this).attr('placeholder', moment($(this).attr('placeholder')).format('LL'));	
+  	});
+  	
+  	$('.placeholder-moment').each(function(i) {
+	  	console.log('test');
   	});
 
 	// Toggles the datepicker

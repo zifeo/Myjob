@@ -2,7 +2,7 @@ body {
 	background-color: #f0f0f0;
 }
 
-.header, .button {
+.header, .button, .statistic .value, .statistic .label {
 	font-family: 'montserrat' !important;
 }
 
@@ -11,7 +11,7 @@ body {
 }
 
 .mt {
-	margin-top: 1rem !important;
+	margin-top: 0.8rem !important;
 }
 
 .caps {

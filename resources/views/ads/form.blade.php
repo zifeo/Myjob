@@ -19,13 +19,12 @@
 			]) !!}
 		</div>
 		<div class="field">
-			<label>{{ trans('ads.salary') }}</label>
- 			{!! Form::text('salary', null, [
-	 			'placeholder' => trans('ads.salary'),
- 				'id' => 'salary',
-				'data-minlength' => '3',
+			<label>{{ trans('ads.workplace') }}</label>
+			{!! Form::text('place', null, [
+	            'placeholder' => trans('ads.workplace_placeholder'),
+	            'data-minlength' => '3',
 	            'maxlength' => '15'
-			]) !!}
+	        ]) !!}
 		</div>
 	</div>
 	<div class="field">
@@ -46,28 +45,22 @@
 	<div class="two fields">
 		<div class="field">
 			<label>Date de début <small>(par défaut, dès aujourd'hui)</small></label>
-			{!! Form::text('starts_at', date('d-m-Y'), [
-                'id' => 'starts_at', 
+			{!! Form::text('starts_at', date('Y/m/d'), [
+                'id' => 'starts_at',
+                'class' => 'datepicker moment',
                 'required'
             ]) !!}
 		</div>
 		<div class="field">
 			<label>Date de fin <small>(si applicable)</small></label>
-			{!! Form::text('ends_at', 
-                date('d-m-Y', strtotime('now +15days')), [
-                'id' => 'ends_at'
+			{!! Form::text('ends_at', null, [
+                'id' => 'ends_at',
+                'class' => 'datepicker moment',
+                'placeholder' => date('c', strtotime('now +15days'))
             ]) !!}
 		</div>
 	</div>
 	<div class="two fields">
-		<div class="field">
-			<label>{{ trans('ads.workplace') }}</label>
-			{!! Form::text('place', null, [
-	            'placeholder' => trans('ads.workplace_placeholder'),
-	            'data-minlength' => '3',
-	            'maxlength' => '15'
-	        ]) !!}
-		</div>
 		<div class="field">
 			<label>{{ trans('ads.indicative_duration') }}</label>
 			{!! Form::text('duration', null, [
@@ -75,6 +68,15 @@
 	            'data-minlength' => '2',
 	            'maxlength' => '100'
 	        ]) !!}
+		</div>
+		<div class="field">
+	        <label>{{ trans('ads.salary') }}</label>
+ 			{!! Form::text('salary', null, [
+	 			'placeholder' => trans('ads.salary'),
+ 				'id' => 'salary',
+				'data-minlength' => '3',
+	            'maxlength' => '15'
+			]) !!}
 		</div>
 	</div>
 	<div class="two fields">
@@ -99,25 +101,24 @@
 
 <div class="ui segment">
 	<div class="ui top attached label caps">Information de contact</div>
-	<div class="field">
-		<label>{{ trans('ads.contact_person') }}</label>
-		<div class="two fields">
-			<div class="field">
-				{!! Form::text('contact_first_name', null, [
-		            'placeholder' => trans('ads.first_name_placeholder'), 
-		            'required',
-		            'data-minlength' => '2',
-		            'maxlength' => '50'
-		        ]) !!}
-			</div>
-			<div class="field">
-				{!! Form::text('contact_last_name', null, [
-		            'placeholder' => trans('ads.last_name_placeholder'), 
-		            'required',
-		            'data-minlength' => '2',
-		            'maxlength' => '50'
-		        ]) !!}
-			</div>
+	<div class="two fields">
+		<div class="field">
+			<label>{{ trans('ads.first_name') }}</label>
+			{!! Form::text('contact_first_name', null, [
+	            'placeholder' => trans('ads.first_name_placeholder'), 
+	            'required',
+	            'data-minlength' => '2',
+	            'maxlength' => '50'
+	        ]) !!}
+		</div>
+		<div class="field">
+			<label>{{ trans('ads.last_name') }}</label>
+			{!! Form::text('contact_last_name', null, [
+	            'placeholder' => trans('ads.last_name_placeholder'), 
+	            'required',
+	            'data-minlength' => '2',
+	            'maxlength' => '50'
+	        ]) !!}
 		</div>
 	</div>
 	<div class="two fields">

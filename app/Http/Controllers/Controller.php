@@ -10,7 +10,7 @@ use Auth, View;
 abstract class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
-    
+        
     public function __construct() {
 	    
 	    $auth = Auth::check();
