@@ -26,11 +26,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Myjob\Http\Middleware\Authenticate::class,
-        'guest' => \Myjob\Http\Middleware\RedirectIfAuthenticated::class,
-        'publisher' => \Myjob\Http\Middleware\Publisher::class,
-        'tequila' => \Myjob\Http\Middleware\Tequila::class,
-        'admin' => \Myjob\Http\Middleware\Admin::class,
+        'publisher' => \Myjob\Http\Middleware\PublisherAuth::class,
+        'tequila' => \Myjob\Http\Middleware\TequilaAuth::class,
+        'admin' => \Myjob\Http\Middleware\AdminAuth::class,
         'locales' => \Myjob\Http\Middleware\Locales::class,
     ];
 }
