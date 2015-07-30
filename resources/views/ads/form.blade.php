@@ -45,9 +45,10 @@
 	<div class="two fields">
 		<div class="field">
 			<label>Date de début <small>(par défaut, dès aujourd'hui)</small></label>
-			{!! Form::text('starts_at', date('Y/m/d'), [
+			{!! Form::text('starts_at', date('c', strtotime('now'), [
                 'id' => 'starts_at',
                 'class' => 'datepicker moment',
+                'placeholder' => date('c', strtotime('now'))
                 'required'
             ]) !!}
 		</div>
