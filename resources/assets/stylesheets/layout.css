@@ -1,3 +1,5 @@
+/* GENERIC */
+
 body {
 	background-color: #f0f0f0;
 }
@@ -31,13 +33,23 @@ body {
 		padding: 0 0.8rem 0.8rem 0 !important;
 	}
 
-	@media (max-width: 767px) { 
+@media (max-width: 767px) { 
 
-		.stackable.grid > .row.compact > .column {
-			padding: 0 0.8rem 0.8rem 0 !important;
-		}
-
+	.stackable.grid > .row.compact > .column {
+		padding: 0 0.8rem 0.8rem 0 !important;
 	}
+	
+	.ui.stackable.celled.grid > .row > .column {
+		padding: 1rem !important;
+	}
+	
+	.ui.stackable.celled.grid > .row + .row {
+		border: 0 !important;
+	}
+
+}
+
+/* SITE-SPECIFIC */
 
 .header-wrapper {
 	padding: 1rem 0 !important;
@@ -69,9 +81,6 @@ body {
 		font-weight: bold;
 	}
 
-	.header-wrapper .search-form-wrapper {
-	}
-	
 	@media (max-width: 767px) { 
 		
 		.header-wrapper h1 {

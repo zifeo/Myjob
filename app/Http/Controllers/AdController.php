@@ -91,7 +91,7 @@ class AdController extends Controller {
 				   'description',
 				   'salary', 'place', 'skills', 'languages',
 				   'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone',
-				   'starts_at', 'ends_at', 'duration',
+				   'starts_at', 'ends_at', 'validated_at', 'duration',
 				   'ads.updated_at'];
 		
 		$ad = Ad::withCategoriesVisitors()->select($fields)->findOrFail($url);

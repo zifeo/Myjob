@@ -23,10 +23,10 @@
 					<a class="active item" href="?lang=fr">Fr<span>ançais</span></a>
 					<a class="item" href="?lang=en">En<span>glish</span></a>
 				</div>
-				{!! Form::open(['route' => 'ad.search', 'class' => 'search-form-wrapper']) !!}
+				{!! Form::open(['route' => 'ad.search']) !!}
 					<div class="ui action input">
 						<input type="text" name="q" id="search-query" placeholder="{{ trans('general.search') }}">
-						<button class="ui icon button"><i class="search icon"></i></button>
+						<button class="ui icon basic button"><i class="search icon"></i></button>
 					</div>
 				{!! Form::close() !!}
 			</div>

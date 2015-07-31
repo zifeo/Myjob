@@ -8,7 +8,7 @@ $(function() {
 
 	// format date on inputs	
 	moment.locale(locale);
-	$('input.moment').each(function(i) {
+	$('input.date').each(function(i) {
 	  	var date = $.trim($(this).val());
 	  	if (date.length > 0)
 	  		$(this).val(moment(date).format('LL'));	
@@ -18,6 +18,14 @@ $(function() {
 	$('span.moment').each(function(i) {
 	  	var date = $.trim($(this).html());
 	  	$(this).html(moment(date).fromNow());	
+	});
+	$('span.calendar').each(function(i) {
+	  	var date = $.trim($(this).html());
+	  	$(this).html(moment(date).calendar());	
+	});
+	$('span.date').each(function(i) {
+	  	var date = $.trim($(this).html());
+	  	$(this).html(moment(date).format('dddd Do MMMM YY'));	
 	});
 	
 	// format date on pickers

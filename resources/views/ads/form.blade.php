@@ -47,7 +47,7 @@
 			<label>Date de début <small>(par défaut, dès aujourd'hui)</small></label>
 			{!! Form::text('starts_at', date('c'), [
                 'id' => 'starts_at',
-                'class' => 'datepicker moment',
+                'class' => 'datepicker date',
                 'placeholder' => date('c'),
                 'required'
             ]) !!}
@@ -56,7 +56,7 @@
 			<label>Date de fin <small>(si applicable)</small></label>
 			{!! Form::text('ends_at', null, [
                 'id' => 'ends_at',
-                'class' => 'datepicker moment',
+                'class' => 'datepicker date',
                 'placeholder' => date('c', strtotime('now +15days'))
             ]) !!}
 		</div>
