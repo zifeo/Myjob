@@ -19,7 +19,7 @@ class AdController extends Controller {
 				   'title', 'name_'. App::getLocale() . ' AS category', 
 				   'description',
 				   'place',
-				   'starts_at'];
+				   'ads.updated_at'];
 
 		$ads = Ad::get_valid_ads($fields)->get();
 		return View::make('ads.list')->with('ads', $ads);

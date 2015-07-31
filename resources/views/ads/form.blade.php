@@ -45,10 +45,10 @@
 	<div class="two fields">
 		<div class="field">
 			<label>Date de début <small>(par défaut, dès aujourd'hui)</small></label>
-			{!! Form::text('starts_at', date('c', strtotime('now'), [
+			{!! Form::text('starts_at', date('c'), [
                 'id' => 'starts_at',
                 'class' => 'datepicker moment',
-                'placeholder' => date('c', strtotime('now'))
+                'placeholder' => date('c'),
                 'required'
             ]) !!}
 		</div>
@@ -142,7 +142,3 @@
 		</div>
 	</div>
 </div>
-
-{!! Form::submit(trans('ads.new_ad_submit'), [
-	'class' => 'ui red button mt'
-]) !!}

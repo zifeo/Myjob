@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="format-detection" content="telephone=no">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="shortcut icon" href="{{ asset('contents/images/favicon.png') }}">
 		{!! HTML::style('styles.php') !!}
 		{!! HTML::script('scripts.php') !!}
@@ -150,24 +151,26 @@
 		<div class="ui container centered stackable grid content-wrapper">
 			@yield('content')
 		</div>
-		<footer class="ui container three column stackable grid footer-wrapper">
-			<div class="right aligned computer tablet only column">
-				<a href="http://agepoly.epfl.ch"><img src="{{ asset('contents/images/agepinfo.svg' )}}" height="120" alt=""></a>
-			</div>
-			<div class="middle aligned column">
-				<p>
-					<a href="https://agepoly.ch">AGEPINFO</a> {{ date('Y') }}<br> 
-					<a href="http://github.com/timozattol">Timothée Lottaz</a> · 
-					<a href="http://github.com/zifeo">Teo Stocco</a><br>
-					<a href="http://petitesannonces.epfl.ch">Petites annonces</a> · 
-					<a href="http://polyhelp.epfl.ch">PolyHelp</a>
-				</p>
-			</div>
-			<div class="middle aligned computer tablet only column">
-				<a href="http://epfl.ch">
-			  		<img src="{{ asset('contents/images/epfl.svg') }}" width="120" alt="">
-			  	</a>
-			</div>
-		</footer>
+		<div class="footer-wrapper">
+			<footer class="ui container three column stackable grid">
+				<div class="right aligned computer tablet only column">
+					<a href="http://agepoly.epfl.ch"><img src="{{ asset('contents/images/agepinfo.svg' )}}" height="120" alt=""></a>
+				</div>
+				<div class="middle aligned column">
+					<p>
+						<a href="https://agepoly.ch">AGEPINFO</a> {{ date('Y') }}<br> 
+						<a href="http://github.com/timozattol">Timothée Lottaz</a> · 
+						<a href="http://github.com/zifeo">Teo Stocco</a><br>
+						<a href="http://petitesannonces.epfl.ch">Petites annonces</a> · 
+						<a href="http://polyhelp.epfl.ch">PolyHelp</a>
+					</p>
+				</div>
+				<div class="middle aligned computer tablet only column">
+					<a href="http://epfl.ch">
+				  		<img src="{{ asset('contents/images/epfl.svg') }}" width="120" alt="">
+				  	</a>
+				</div>
+			</footer>
+		</div>
 	</body>
 </html>

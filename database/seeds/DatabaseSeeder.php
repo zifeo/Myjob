@@ -164,9 +164,11 @@ class AdsTableSeeder extends Seeder {
             ]
         ];
 
-        foreach ($ads as $ad) {
-            Ad::create($ad);   
-        }
+        for ($i = 0; $i < 3; ++$i) {
+	        foreach ($ads as $ad) {
+	            Ad::create($ad);   
+	        }
+		}
     }
 }
 

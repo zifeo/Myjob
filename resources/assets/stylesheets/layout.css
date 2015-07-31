@@ -18,6 +18,27 @@ body {
 	text-transform: uppercase !important;
 }
 
+.align-center {
+	padding: 1rem 0 0 0;
+	text-align: center;
+}
+
+.row.compact {
+	padding: 1rem 0.2rem 0.2rem 1rem !important; 
+}
+
+	.row.compact > .column {
+		padding: 0 0.8rem 0.8rem 0 !important;
+	}
+
+	@media (max-width: 767px) { 
+
+		.stackable.grid > .row.compact > .column {
+			padding: 0 0.8rem 0.8rem 0 !important;
+		}
+
+	}
+
 .header-wrapper {
 	padding: 1rem 0 !important;
 }
@@ -83,14 +104,23 @@ body {
 
 	.menu-wrapper .menu {
 		font-family: 'montserrat' !important;
-		margin: 0 !important;
+		margin: 0 1rem !important;
 		padding: 5px;
+	}
+	
+	.menu-wrapper .menu.right {
+		margin: 0 !important;
+		padding: 5px 0;
+	}
+	
+	.menu-wrapper .mobile-menu-toggle {
+		margin: 0 !important;
 	}
 	
 	.menu-wrapper #current-nav-state {
 		margin: 0 0 0 0.65rem;
 	}
-
+	
 .notifications-wrapper {
 	margin-top: 2rem !important;
 }
@@ -117,7 +147,8 @@ body {
 }
 
 .footer-wrapper {
-	margin-top: 2rem !important;
+	margin: 2rem 0 0 0;
+	padding: 1rem 0;
 	border-top: 1px solid #ddd;
 }
 

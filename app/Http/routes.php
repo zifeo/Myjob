@@ -58,7 +58,7 @@ Route::group(['middleware' => 'locales'], function() {
 	Route::group(['middleware' => ['tequila', 'admin']], function() {
 	
 		Route::get('moderation', 'ModerationController@adsToModerate');
-		Route::post('moderation', 'ModerationController@validateAd');
+		Route::post('moderation', 'ModerationController@validation');
 		
 		/*
 		Route::get('crons', function() {

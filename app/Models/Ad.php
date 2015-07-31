@@ -13,7 +13,7 @@ class Ad extends Model {
 
 	protected $table = 'ads';
     protected $primaryKey = 'url'; // only on Laravel not in the DB
-    protected $guarded = array('ad_id');
+    protected $guarded = ['ad_id'];
 	protected $softDelete = true;
 
 	const N_WEEKS_AD_VALID = 2;

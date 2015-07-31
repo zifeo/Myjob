@@ -2,7 +2,7 @@
 	
 namespace Myjob\Http\Controllers;
 
-use Request, View;
+use View, Log, Input;
 use Myjob\Models\Ad;
 use Myjob\Models\Category;
 
@@ -19,24 +19,21 @@ class ModerationController extends Controller {
             ->with('category_names', Category::get_id_name_mapping());
     }
 
-    public function validateAd() {
+    public function validation() {
+	    
         $id = Input::get('id');
         $accepted = Input::get('accepted');
-
-        if ($accepted != 0 && $accepted != 1) {
-            echo "failure";
-            return;
-        }
-
         $ad = Ad::find($id);
 
-        $ad->is_validated = $accepted;
-        $ad->validated_at = Carbon::now()->toDateTimeString();
-
-        if ($ad->save()) {
-            echo "ok";
-        } else {
-            echo "failure";
+        if ($ad == null || ($accepted != 0 && $accepted != 1)) {
+            Log::critical("Invalid arguments posted to moderation.");
+            abort(400);
         }
+
+        $ad->is_validated = $accepted;
+        $ad->validated_at = date('Y-m-d H:i:s');
+		$ad->save();
+        echo "ok";
+        
     }
 }

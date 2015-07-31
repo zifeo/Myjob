@@ -1,17 +1,24 @@
 $(function() {
 	
+	// token for ajax
+	$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+	
 	// locale should be like 'fr' or 'en'
 	var locale = window.navigator.userLanguage || window.navigator.language;
 
 	// format date on inputs	
 	moment.locale(locale);
-  	$('input.moment').each(function(i) {
+	$('input.moment').each(function(i) {
 	  	var date = $.trim($(this).val());
 	  	if (date.length > 0)
 	  		$(this).val(moment(date).format('LL'));	
 	  	else
 	  		$(this).attr('placeholder', moment($(this).attr('placeholder')).format('LL'));	
-  	});
+	});
+	$('span.moment').each(function(i) {
+	  	var date = $.trim($(this).html());
+	  	$(this).html(moment(date).fromNow());	
+	});
 	
 	// format date on pickers
 	switch (locale) {
@@ -52,7 +59,7 @@ $(function() {
 			  	 labelMonthPrev:"Previous month",
 			  	 labelMonthSelect:"Select a month",
 			  	 labelYearSelect:"Select a year"
-		  	});
+			});
 	}
 	
 	// close mobile menu
@@ -72,31 +79,33 @@ $(function() {
     	$(this)
 			.closest('.message')
 			.transition('fade');
-  	});
+	});
   	
-
-  	
-
-
-
-
-	$('.validation-accept-button').on('click', function(){
+	// ad moderation
+	$('.validation-accept-button').on('click', function() {
 		var self = this;
 		var id = $(this).attr("rel");
-		$.post("/moderation", {id: id, accepted: 1}, function( data ) {
-  			if (data == "ok") {
-  				$(self).parents('.panel').hide(500);
-  			};
+		$.post("moderation/", {id: id, accepted: 1}, function(data) {
+			if (data == "ok") {
+				var that = $(self).parents('.card');
+				that.transition({
+						animation: 'horizontal flip',
+						onComplete: function() {
+							console.log("+"+$(this).html())
+							that.parent()
+								.remove();
+						}
+					});
+			}
 		});
 	});
-
-	$('.validation-refuse-button').on('click', function(){
+	$('.validation-refuse-button').on('click', function() {
 		var self = this;
 		var id = $(this).attr("rel");
-		$.post("/moderation", {id: id, accepted: 0}, function( data ) {
-  			if (data == "ok") {
-  				$(self).parents('.panel').hide(500);
-  			};
+		$.post("moderation/", {id: id, accepted: 0}, function(data) {
+			if (data == "ok")
+				$(self).parents('.card').transition('horizontal flip').parent().remove();
 		});
-	})
+	});
+	
 });
