@@ -2,10 +2,7 @@ $(function() {
 	
 	// token for ajax
 	$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-	
-	// locale should be like 'fr' or 'en'
-	var locale = window.navigator.userLanguage || window.navigator.language;
-
+		
 	// format date on inputs	
 	moment.locale(locale);
 	$('input.date').each(function(i) {
@@ -30,10 +27,8 @@ $(function() {
 	
 	// format date on pickers
 	switch (locale.toLowerCase()) {
-		case 'fr-fr':
-			$('input.datepicker').pickadate({
-			  	 formatSubmit: 'yyyy-mm-dd',
-			  	 hiddenName: true,
+		case 'fr':
+			$.extend($.fn.pickadate.defaults, {
 			  	 monthsFull:["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],
 			  	 monthsShort:["Jan","Fev","Mar","Avr","Mai","Juin","Juil","Aou","Sep","Oct","Nov","Dec"],
 			  	 weekdaysFull:["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],
@@ -51,9 +46,7 @@ $(function() {
 			break;
 			
 		default:
-			$('input.datepicker').pickadate({
-			  	 formatSubmit: 'yyyy-mm-dd',
-			  	 hiddenName: true,
+			$.extend($.fn.pickadate.defaults, {
 			  	 monthsFull:["January","February","March","April","May","June","July","August","September","October","November","December"],
 			  	 monthsShort:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
 			  	 weekdaysFull:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -69,6 +62,12 @@ $(function() {
 			  	 labelYearSelect:"Select a year"
 			});
 	}
+	// need to be after locale set up
+	$('input.datepicker').pickadate({
+		formatSubmit: 'yyyy-mm-dd',
+		hiddenName: true,
+		min: new Date()
+	});
 	
 	// close mobile menu
 	$('.mobile-menu-toggle').on('click', function() {

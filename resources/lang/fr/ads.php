@@ -1,10 +1,48 @@
 <?php
 
-return array(
+return [
 
 	/*
 		Ad-related strings
 	*/
+
+	'labels' => [
+		'title'					=> 'Titre',
+		'category_id'			=> 'Catégorie',
+		'place'					=> 'Lieu de travail',
+		'description'			=> 'Description',
+		
+		'starts_at'				=> 'Date de début',
+		'ends_at'				=> 'Date de fin',
+		'duration'				=> 'Durée indicative',
+		'salary'				=> 'Rémunération',
+		'skills'				=> 'Compétence·s',
+		'languages'				=> 'Langue·s',
+		
+		'contact_first_name' 	=> 'Prénom',
+		'contact_last_name'		=> 'Nom',
+		'contact_email'			=> 'Email',
+		'contact_phone'			=> 'Téléphone',
+	],
+	
+	'placeholders' => [
+		'title'					=> 'Livreur de pizza, Expérience neurologique',
+		'category_id'			=> '',
+		'place'					=> 'St-Sulpice, à distance',
+		'description'			=> "Recherche un·e étudiant·e pour donner des cours d'appui à un·e élève de 17 ans en filière bio-chimie. Les matières à revoir sont mathématiques, physiques et anglais. Les disponibilités suivantes sont recherchées : lundi soir dès 18h et mercredi après-midi entre 13h et 18h.",
+		
+		'starts_at'				=> '',
+		'ends_at'				=> '',
+		'duration'				=> '',
+		'salary'				=> '',
+		'skills'				=> '',
+		'languages'				=> '',
+		
+		'contact_first_name' 	=> '',
+		'contact_last_name'		=> '',
+		'contact_email'			=> '',
+		'contact_phone'			=> '',
+	],
 
 	'ad_title' => 'Titre de l\'annonce',
 	'ad_title_placeholder' => 'Titre',
@@ -39,4 +77,4 @@ return array(
 	'salary' => 'Salaire',
 	'contact_person' => 'Personne de contact',
 	
-);
+];

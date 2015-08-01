@@ -9,7 +9,7 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="shortcut icon" href="{{ asset('contents/images/favicon.png') }}">
 		{!! HTML::style('styles.php') !!}
-		{!! HTML::script('scripts.php') !!}
+		{!! HTML::script('scripts.php?lang=' . App::getLocale()) !!}
 	</head>
 	<body>
 		<header class="header-wrapper ui container two column stackable grid">

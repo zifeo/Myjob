@@ -21,7 +21,10 @@
         ],
         "psr-4": {
             "Myjob\\": "app/"
-        }
+        },
+        "files": [
+			"app/Agepinfo/helpers.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [
