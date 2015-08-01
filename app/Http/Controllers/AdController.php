@@ -4,7 +4,8 @@ namespace Myjob\Http\Controllers;
 
 use Myjob\Models\Category;
 use Myjob\Models\Ad;
-use View, App;
+use Myjob\Models\Provider;
+use View, App, Input, Validator;
 
 class AdController extends Controller {
 	
@@ -58,8 +59,8 @@ class AdController extends Controller {
 
 			$email = Input::get('contact_email');
 
-			if (empty(ContactEmail::get_valid_secrets($email))) {
-				$contact_email = new ContactEmail;
+			if (empty(Provider::get_valid_secrets($email))) {
+				$contact_email = new Provider;
 
 				$contact_email->contact_email = $email;
 				$contact_email->random_secret = str_random(32);
@@ -158,14 +159,14 @@ class AdController extends Controller {
 	*/
 	public function manage_ads_with_email($email, $secret)
 	{
-		if (ContactEmail::is_outdated($secret, $email))
+		if (Provider::is_outdated($secret, $email))
 		{
 			// TODO Lien dans le message
-			$message = 'Ce lien a plus de ' . ContactEmail::n_weeks_valid_secret .
+			$message = 'Ce lien a plus de ' . config('myjob.providers.secretValidityWeeks') .
 			' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
 			return Redirect::to('/')->withErrors(array('message' => $message))->with('type', 'warning');
 			
-		} elseif (! ContactEmail::is_valid($secret, $email)) {
+		} elseif (! Provider::is_valid($secret, $email)) {
 			
 			App::abort(404);
 			
@@ -206,30 +207,31 @@ class AdController extends Controller {
 	}
 
 	private function validation() {
-		
-		$categories = Category::get_id_name_mapping();
-		return [
-			'title' => 				['required', 'min:5', 'max:50'],
-			'place' => 				['min:3', 'max:15'],
-			'category_id' =>		['required', 'in:'.implode(',', array_keys($categories))],
-			'duration' => 			['min:2', 'max:100'],
-			'starts_at' => 			['after:-1 day'],
-			'ends_at' => 			['after:' . Input::get('starts_at')],
-			'punctual_date' => 		['after:-1 day'],
-			'description' => 		['required', 'min:10', 'max:1500'],
-			'skills' => 			['min:5', 'max:100'],
-			'languages' => 			['min:3', 'max:50'],
-			'contact_first_name' => ['required', 'min:2', 'max:50'],
-			'contact_last_name' => 	['required', 'min:2', 'max:50'],
-			'contact_email' => 		['required', 'email', 'max:75'],
-			'contact_phone' => 		['min:4', 'max:20'],
-		];
-	}
 
-	private function check_visitor_connected($email) {
-		if (! Session::has('connected_visitor') || Session::get('connected_visitor') != $email) {
-			App::abort(404);
-		}
+		$config = config('data.ad');
+		$fields = array_keys($config);
+		
+		$filters = array_combine($fields, array_map(function($field) use ($config) {
+			$f = [];
+			
+			if (isset($config[$field]['required']))
+				$f[] = 'required';
+			if (isset($config[$field]['email']))
+				$filters[] = 'email';
+				
+			if (isset($config[$field]['min']))
+				$f[] = 'min:' . $config[$field]['min'];
+			if (isset($config[$field]['max']))
+				$f[] = 'max:' . $config[$field]['max'];
+				
+			return $f;
+		}, $fields));
+		
+		$filters['category_id'][] 	= 'in:' . implode(',', Category::get_id_name_mapping()->keys()->all());
+		$filters['starts_at'][] 	= 'after:-1 day';
+		$filters['ends_at'][] 		= 'after:' . Input::get('starts_at');
+					
+		return $fields;
 	}
 	
 }

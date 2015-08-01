@@ -23,7 +23,7 @@
 			{!! Form::text('place', null, [
 	            'placeholder' => trans('ads.workplace_placeholder'),
 	            'data-minlength' => '3',
-	            'maxlength' => '15'
+	            'maxlength' => '30'
 	        ]) !!}
 		</div>
 	</div>
@@ -31,7 +31,6 @@
 		<label>{{ trans('ads.description') }} <small>(supporte le balisage Markdown)</small></label>
 		{!! Form::textarea('description', null, [
             'placeholder' => trans('ads.description_placeholder'), 
-            'rows' => 7, 
             'required',
             'data-minlength' => '10',
             'maxlength' => '1500',
@@ -56,6 +55,7 @@
 			<label>Date de fin <small>(si applicable)</small></label>
 			{!! Form::text('ends_at', null, [
                 'id' => 'ends_at',
+                'readOnly',
                 'class' => 'datepicker date',
                 'placeholder' => date('c', strtotime('now +15days'))
             ]) !!}

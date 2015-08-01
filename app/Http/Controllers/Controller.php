@@ -18,7 +18,7 @@ abstract class Controller extends BaseController
 	    
 	    if ($auth) {
 		    $user = Auth::user();
-		    View::share('admin', $user->is_admin == 1);
+		    View::share('admin', $user->admin == 1);
 		    View::share('user', strtok($user->first_name, ' '));
 	    }
 	    	    

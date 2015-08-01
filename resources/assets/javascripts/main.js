@@ -29,8 +29,8 @@ $(function() {
 	});
 	
 	// format date on pickers
-	switch (locale) {
-		case 'fr':
+	switch (locale.toLowerCase()) {
+		case 'fr-fr':
 			$('input.datepicker').pickadate({
 			  	 formatSubmit: 'yyyy-mm-dd',
 			  	 hiddenName: true,
@@ -90,30 +90,27 @@ $(function() {
 	});
   	
 	// ad moderation
+	function termination(data) {
+		if (data == "ok") {
+			var that = $(self).parents('.card');
+			that.transition({
+					animation: 'horizontal flip',
+					onComplete: function() {
+						that.parent()
+							.remove();
+					}
+				});
+		}
+	}
 	$('.validation-accept-button').on('click', function() {
 		var self = this;
 		var id = $(this).attr("rel");
-		$.post("moderation/", {id: id, accepted: 1}, function(data) {
-			if (data == "ok") {
-				var that = $(self).parents('.card');
-				that.transition({
-						animation: 'horizontal flip',
-						onComplete: function() {
-							console.log("+"+$(this).html())
-							that.parent()
-								.remove();
-						}
-					});
-			}
-		});
+		$.post("moderation/", {id: id, accepted: 1}, termination);
 	});
 	$('.validation-refuse-button').on('click', function() {
 		var self = this;
 		var id = $(this).attr("rel");
-		$.post("moderation/", {id: id, accepted: 0}, function(data) {
-			if (data == "ok")
-				$(self).parents('.card').transition('horizontal flip').parent().remove();
-		});
+		$.post("moderation/", {id: id, accepted: 0}, termination);
 	});
 	
 });

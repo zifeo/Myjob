@@ -5,71 +5,60 @@ namespace Myjob\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use DB, Auth;
+use Log, Auth;
 
 class Ad extends Model {
 
 	use SoftDeletes;
 
-	protected $table = 'ads';
-    protected $primaryKey = 'url'; // only on Laravel not in the DB
-    protected $guarded = ['ad_id'];
-	protected $softDelete = true;
+    protected $primaryKey = 'url';
+	protected $fillable = [
+		'title', 'category_id', 'place', 'description',
+		'starts_at' ,'ends_at','duration', 'salary', 'skills', 'languages',
+		'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone'
+	];
 
-	const N_WEEKS_AD_VALID = 2;
+	const WEEK = 7 * 24 * 3600;
+
 
 	public static function withCategories() {
 		return self::join('categories', 'ads.category_id', '=', 'categories.category_id');
 	}
 
 	public static function withVisitors() {			
-
 		return Auth::guest() ? self::where('contact_email', '=', Session::get('connected_visitor')): self;
 	}
 	
 	public static function withCategoriesVisitors() {			
-
 		return Auth::guest() ? self::withCategories()->where('contact_email', '=', Session::get('connected_visitor')): self::withCategories();
 	}
 
-	/** Overrides create function **/
+	// Overrides create function
 	public static function create(array $data = [])
 	{
-		$ad = new Ad;
 
-		$new_url = self::generate_url($data['title']);
-
-		$ad->category_id = $data['category_id'];
-		$ad->random_secret = str_random(32);
-		$ad->url = $new_url;
-		$ad->title = $data['title'];
-		$ad->salary = 0;
-		$ad->place = self::nullable($data['place']);
-		$ad->description = $data['description'];
-		$ad->skills = self::nullable($data['skills']);
-		$ad->duration = self::nullable($data['duration']);
-		$ad->languages = self::nullable($data['languages']);
-		$ad->contact_first_name = $data['contact_first_name'];
-		$ad->contact_last_name = $data['contact_last_name'];
-		$ad->contact_email = $data['contact_email'];
-		$ad->contact_phone = self::nullable($data['contact_phone']);
-		$ad->starts_at = date('Y-m-d', strtotime($data['starts_at']));
-
-		if (array_key_exists('ends_at', $data)) {
-			$ad->ends_at = date('Y-m-d', strtotime($data['ends_at']));
-		}
-
-		$ad->expires_at = date('Y-m-d', time() + self::N_WEEKS_AD_VALID * 7 * 24 * 3600);
-		$ad->save();
+		$ad = new Ad($data); // mass-alignement allowed on fillable 
+		assert(isset($ad->title), "Create without all datas.");
 		
-		return $new_url;
+		$ad->url = self::generate_url($ad->title);
+		$ad->random_secret = str_random(32);
+		$ad->expires_at = date('Y-m-d', time() + config('myjob.ads.validityWeeks') * self::WEEK);
+
+		foreach (config('data.ad') as $field => $filters) {
+			if (! isset($filters['required']))
+				$ad->{$field} = self::nullable($ad->{$field});
+		}
+				
+		$ad->save();
+		Log::info('Ad ' . e($ad->title) . ' created.');		
+		return $ad->url;
 	}
 
 	public static function get_valid_ads($fields)
 	{
 		return Ad::withCategoriesVisitors()->select($fields)
-			->where('is_validated', '=', 1)
-			->where('expires_at', '>', date('Y-m-d', time()));
+			->where('validated_at', '<=', date('Y-m-d'))
+			->where('expires_at', '>', date('Y-m-d'));
 	}
 
 	public function getDates()
@@ -99,19 +88,11 @@ class Ad extends Model {
 		}
 	}
 
-	private static function url_is_unique($url)
-	{
-		return DB::table('ads')->where('url', '=', $url)->count() == 0;
+	private static function url_is_unique($url) {
+		return self::where('url', '=', $url)->count() == 0;
 	}
 
-	private static function nullable($field)
-	{
-		if ($field == '') {
-			return NULL;
-		}
-		else
-		{
-			return $field;
-		}
+	private static function nullable($field) {
+		return isset($field) && !empty($field) ? $field: null;
 	}
 }

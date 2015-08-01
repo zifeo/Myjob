@@ -10,6 +10,5 @@ class FAQ extends Model {
 	use SoftDeletes;
 	
     protected $table = 'faq';
-    protected $softDelete = true;
 
 }

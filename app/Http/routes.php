@@ -20,6 +20,12 @@ Route::get('rss/{rss}', function() {
 });
 */
 
+Route::get('reset', function() {
+	Auth::logout();
+	Session::flush();
+	return Redirect::to('/');
+});
+
 Route::group(['middleware' => 'locales'], function() {
 
 	Route::get('/', 'PublicController@index');
@@ -34,12 +40,6 @@ Route::group(['middleware' => 'locales'], function() {
 	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
 	
 	Route::post('language/set', 'HomeController@changeLanguage');
-	
-	Route::get('reset', function() {
-		Auth::logout();
-		Session::flush();
-		return Redirect::to('/');
-	});
 	
 	Route::group(['middleware' => 'publisher'], function() {
 		

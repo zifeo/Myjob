@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Myjob\Models\Category;
-use Myjob\Models\ContactEmail;
+use Myjob\Models\Provider;
 use Myjob\Models\Ad;
 use Myjob\Models\FAQ;
 
@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(CategoriesTableSeeder::class);
-        $this->call(ContactEmailsTableSeeder::class);
+        $this->call(ProvidersTableSeeder::class);
         $this->call(AdsTableSeeder::class);
         $this->call(FAQSeeder::class);
 
@@ -65,17 +65,17 @@ class CategoriesTableSeeder extends Seeder {
 
             next($categories_en);
             next($categories_fr);
-
+            
             $category->save();
         }
     }
 }
 
-class ContactEmailsTableSeeder extends Seeder {
+class ProvidersTableSeeder extends Seeder {
 	
     public function run()
     {
-        DB::table('contact_emails')->delete();
+        DB::table('providers')->delete();
 
         /* Every seeded Ad should have corresponding email here. */
         $emails = [
@@ -86,7 +86,7 @@ class ContactEmailsTableSeeder extends Seeder {
         ];
 
         foreach ($emails as $email) {
-            $contact_email = new ContactEmail;
+            $contact_email = new Provider;
 
             $contact_email->contact_email = $email;
             $contact_email->random_secret = str_random(32);
@@ -107,6 +107,7 @@ class AdsTableSeeder extends Seeder {
                 'title' => 'Recherche Jardinier',
                 'category_id' => 1,
                 'place' => 'Renens',
+                'salary' => '$$',
                 'description' => 'Je recherche une personne musclée pour des travaux d\'entretien',
                 'skills' => 'Musclé, beau, intense.',
                 'duration' => '2h par jour',
@@ -122,6 +123,7 @@ class AdsTableSeeder extends Seeder {
                 'title' => 'Experience',
                 'category_id' => 3,
                 'place' => 'EPFL',
+                'salary' => 'bénévole',
                 'description' => 'Je recherche une personne forte pour expérience sociologique.',
                 'skills' => 'Intelligent',
                 'duration' => '1h',
@@ -134,8 +136,9 @@ class AdsTableSeeder extends Seeder {
             ],
             [
                 'title' => 'Recherche étudiant en informatique',
-                'category_id' => 8,
+                'category_id' => 7,
                 'place' => 'EPFL',
+                'salary' => '53.—',
                 'description' => 'Je cherche un étudiant en info pour m\'aider avec Computer Graphics',
                 'skills' => 'Bon en informatique',
                 'duration' => '1h par semaine',
@@ -151,6 +154,7 @@ class AdsTableSeeder extends Seeder {
                 'title' => 'Programmeur C pour machine à café',
                 'category_id' => 4,
                 'place' => 'EPFL - LSRO',
+                'salary' => '24.—/h',
                 'description' => 'Cela fait 5 ans que je cherche une personne pour recoder le kernel de la machine à café. S\'il vous plait, Linux programmeurs acharnés, aidez le LSRO.',
                 'skills' => 'Gros foufou en C',
                 'duration' => '8h par jour',

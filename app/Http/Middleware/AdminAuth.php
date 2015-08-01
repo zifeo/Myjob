@@ -17,7 +17,7 @@ class AdminAuth
     public function handle($request, Closure $next)
     {
 
-	    if (Auth::guest() || Auth::user()->is_admin != 1) {
+	    if (Auth::guest() || Auth::user()->admin != 1) {
 			App::abort(404);
 		}
 	    
