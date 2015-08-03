@@ -26,7 +26,7 @@ class Ad extends Model {
 	}
 
 	public static function withVisitors() {			
-		return Auth::guest() ? self::where('contact_email', '=', Session::get('connected_visitor')): self;
+		return Auth::guest() ? self::where('contact_email', '=', Session::get('connected_visitor')): new static;
 	}
 	
 	public static function withCategoriesVisitors() {			
@@ -54,11 +54,12 @@ class Ad extends Model {
 		return $ad->url;
 	}
 
-	public static function get_valid_ads($fields)
+	public static function acceptedAd($fields)
 	{
 		return Ad::withCategoriesVisitors()->select($fields)
-			->where('validated_at', '<=', date('Y-m-d'))
-			->where('expires_at', '>', date('Y-m-d'));
+			->whereNotNull('validated_at')
+			->where('expires_at', '>', date('Y-m-d'))
+			->where('validated', '=', true);
 	}
 
 	public function getDates()
@@ -71,7 +72,7 @@ class Ad extends Model {
 	{
 		$new_url = Str::slug($ad_name, "-");
 
-		if(self::url_is_unique($new_url)) {
+		if (self::url_is_unique($new_url)) {
 
 			return $new_url;
 

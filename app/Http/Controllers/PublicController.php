@@ -11,9 +11,10 @@ class PublicController extends Controller {
 		return View::make('home');
 	}
 	
-	public function Oldhelp() {
-				
-		return View::make('help');
-	}
+	public function help() {
+        $faq_items = FAQ::all();
+
+        return View::make('help')->with('faq_items', $faq_items);
+    }
 
 }

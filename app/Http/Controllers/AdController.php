@@ -5,7 +5,7 @@ namespace Myjob\Http\Controllers;
 use Myjob\Models\Category;
 use Myjob\Models\Ad;
 use Myjob\Models\Provider;
-use View, App, Input, Validator;
+use View, App, Input, Validator, Redirect;
 
 class AdController extends Controller {
 	
@@ -22,7 +22,7 @@ class AdController extends Controller {
 				   'place',
 				   'ads.updated_at'];
 
-		$ads = Ad::get_valid_ads($fields)->get();
+		$ads = Ad::acceptedAd($fields)->get();
 		return View::make('ads.list')->with('ads', $ads);
 	}
 
@@ -88,12 +88,10 @@ class AdController extends Controller {
 	{
 		
 		$fields = ['url', 
-				   'title', 'name_' . App::getLocale() . ' AS category', 
-				   'description',
-				   'salary', 'place', 'skills', 'languages',
+				   'title', 'name_' . App::getLocale() . ' AS category', 'place', 'description',
+				   'starts_at', 'ends_at', 'duration', 'salary', 'skills', 'languages',
 				   'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone',
-				   'starts_at', 'ends_at', 'validated_at', 'duration',
-				   'ads.updated_at'];
+				   'validated', 'expires_at', 'ads.updated_at'];
 		
 		$ad = Ad::withCategoriesVisitors()->select($fields)->findOrFail($url);
 
@@ -124,20 +122,15 @@ class AdController extends Controller {
 	public function update($url)
 	{
 		$ad = Ad::withVisitors()->findorfail($url);
-
-		$this->beforeFilter('csrf');
 		$categories = Category::get_id_name_mapping();
+		$validator = Validator::make(Input::all(), $this->validation());
 
-		$fields = $this->validation();
-		$validator = Validator::make(Input::all(), $fields);
-		$data = array_only(Input::all(), array_keys($fields));
-
-		if ($validator->fails()) {
-			return Redirect::back()->withErrors($validator)->with('type', 'danger');
-		} else {
-			$ad->fill($data);
+		if ($validator->fails())
+			return back()->withErrors($validator)->with('type', 'danger');
+		else {
+			$ad->fill(Input::all());
 			$ad->save();
-			return Redirect::route('AdController@show', $url);
+			return redirect()->action('AdController@show', $url);
 		}
 	}
 
@@ -148,9 +141,11 @@ class AdController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($url)
 	{
-		//
+		$ad = Ad::withVisitors()->findorfail($url);
+		$ad->delete();
+		return redirect()->action('AdController@index');
 	}
 
 	/**

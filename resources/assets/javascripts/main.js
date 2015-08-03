@@ -25,43 +25,6 @@ $(function() {
 	  	$(this).html(moment(date).format('dddd Do MMMM YY'));	
 	});
 	
-	// format date on pickers
-	switch (locale.toLowerCase()) {
-		case 'fr':
-			$.extend($.fn.pickadate.defaults, {
-			  	 monthsFull:["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],
-			  	 monthsShort:["Jan","Fev","Mar","Avr","Mai","Juin","Juil","Aou","Sep","Oct","Nov","Dec"],
-			  	 weekdaysFull:["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],
-			  	 weekdaysShort:["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"],
-			  	 today:"Aujourd'hui",
-			  	 clear:"Effacer",
-			  	 close:"Fermer",
-			  	 firstDay:1,
-			  	 format:"dd mmmm yyyy",
-			  	 labelMonthNext:"Mois suivant",
-			  	 labelMonthPrev:"Mois précédent",
-			  	 labelMonthSelect:"Sélectionner un mois",
-			  	 labelYearSelect:"Sélectionner une année"
-		  	});
-			break;
-			
-		default:
-			$.extend($.fn.pickadate.defaults, {
-			  	 monthsFull:["January","February","March","April","May","June","July","August","September","October","November","December"],
-			  	 monthsShort:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-			  	 weekdaysFull:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-			  	 weekdaysShort:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
-			  	 today:"Today",
-			  	 clear:"Clear",
-			  	 close:"Close",
-			  	 firstDay:0,
-			  	 format:"mmmm dd, yyyy",
-			  	 labelMonthNext:"Next month",
-			  	 labelMonthPrev:"Previous month",
-			  	 labelMonthSelect:"Select a month",
-			  	 labelYearSelect:"Select a year"
-			});
-	}
 	// need to be after locale set up
 	$('input.datepicker').pickadate({
 		formatSubmit: 'yyyy-mm-dd',
@@ -79,7 +42,7 @@ $(function() {
 	$('select.selection').dropdown();
 	
 	// faq accordion
-	$('.ui.accordion').accordion();
+	$('div.accordion').accordion();
 	
 	// close message banner
 	$('.message .close').on('click', function() {
@@ -88,28 +51,92 @@ $(function() {
 			.transition('fade');
 	});
   	
-	// ad moderation
-	function termination(data) {
-		if (data == "ok") {
+	// ad moderation	
+	$('.validation-accept').on('click', function() {
+		var self = this;
+		var ad = $(this).attr("rel");
+		$.get('accept/' + ad).done(function(data) {
 			var that = $(self).parents('.card');
 			that.transition({
-					animation: 'horizontal flip',
-					onComplete: function() {
-						that.parent()
-							.remove();
-					}
+				animation: 'horizontal flip',
+				onComplete: function() {
+					that.parent()
+						.remove();
+				}
+			});
+		});
+	});
+	$('.validation-refuse').on('click', function() {
+		var self = this;
+		var ad = $(this).attr("rel");
+		$.get('refuse/' + ad).done(function(data) {
+			var that = $(self).parents('.card');
+			that.transition({
+				animation: 'horizontal flip',
+				onComplete: function() {
+					that.parent()
+						.remove();
+				}
+			});
+		});
+	});
+
+	// form validation
+	$('form.validation').each(function() {
+		var attrs = {};
+		
+		$(this).find('input[name!="_token"][name!=""], textarea, select').each(function() {
+			var name = $(this).attr('name');
+			var field = {
+				identifier: name,
+				rules: []
+			};
+			
+			if ($(this).attr('type') == 'email')
+				field.rules.push({
+					prompt: trans.validation.email,
+					type: 'email',
 				});
-		}
-	}
-	$('.validation-accept-button').on('click', function() {
-		var self = this;
-		var id = $(this).attr("rel");
-		$.post("moderation/", {id: id, accepted: 1}, termination);
+	
+			if ($(this).attr('required'))
+				field.rules.push({
+					prompt: trans.validation.required,
+					type: 'empty',
+				});
+			else
+				field.optional = true;
+				
+			if (min = $(this).attr('minlength'))
+				field.rules.push({
+					prompt: trans.validation.minlenght(min),
+					type: 'length[' + min + ']',
+				});
+				
+			if (max = $(this).attr('maxlength'))
+				field.rules.push({
+					prompt: trans.validation.maxlenght(max),
+					type: 'maxLength[' + max + ']',
+				});				
+			
+			attrs[name] = field;
+		});
+		
+		$(this).form({
+			on: 'blur',
+			inline : true,
+			fields: attrs,
+			templates: {
+		       prompt: function(error) {
+		          return $('<div class="ui red pointing prompt label transition">'+error+'</div>');
+		       }
+		    }
+		});
 	});
-	$('.validation-refuse-button').on('click', function() {
-		var self = this;
-		var id = $(this).attr("rel");
-		$.post("moderation/", {id: id, accepted: 0}, termination);
+
+	// ad deletion
+	$('.ad-delete').on('click', function() {
+		$('#confirm-delete').modal('show');
 	});
+
 	
 });

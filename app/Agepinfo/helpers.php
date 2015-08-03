@@ -8,8 +8,7 @@ function form($field) {
 	
 	$config = config('data.ad')[$field];
 	$attrs = [
-		'id' => $field,
-		
+		'id' => $field,	
 	];
 	
 	if (existTrans('ads.placeholders', $field))
@@ -22,9 +21,6 @@ function form($field) {
 	if (isset($config['readOnly']))
 		$attrs[] = 'readOnly';
 		
-	if (isset($config['email']))
-		$attrs['datatype'] = 'email';
-	
 	if (isset($config['min']))
 		$attrs['minlength'] = $config['min'];
 	if (isset($config['max']))
@@ -36,4 +32,12 @@ function form($field) {
 function existTrans($subname, $name) {
 	$trans = trans($subname . '.' . $name);
 	return $trans != $subname . '.' . $name && ! empty($trans);
+}
+
+function formatDate($time = null) {
+	return date('Y-m-d H:i:s', $time == null ? time(): $time);
+}
+
+function expired($ad) {
+	return $ad->expires_at <= formatDate();
 }

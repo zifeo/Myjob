@@ -3,7 +3,7 @@
 namespace Myjob\Agepinfo;
 
 use Myjob\Models\User;
-use Session, Config, Log, Input, Auth, URL, Redirect, App;
+use Session, Log, Input, Auth, URL, App;
 
 //==========================================================================
 //! Tequila authentification server class file for laravel
@@ -22,7 +22,7 @@ final class Tequila {
 				
 		if (Input::has('key') && Session::has('tequila') && Session::get('tequila') == Input::get('key')) {
 
-			$host = Config::get('tequila.host') . self::FETCH_PATCH;			
+			$host = config('tequila.host') . self::FETCH_PATCH;			
 
 			$data = ['key' => Session::get('tequila')];
 			$reponse = self::post($host, $data);
@@ -36,10 +36,10 @@ final class Tequila {
 
 			Auth::login($u);
 			
-			return Redirect::to(URL::route('ad.index'));
+			return redirect()->action('AdController@index');
 		}
 
-		return Redirect::to(self::requestUrl());
+		return redirect(self::requestUrl());
 	}
     
     // return the tequila authentication url after creating a request
@@ -53,20 +53,20 @@ final class Tequila {
 	    $response = self::createRequest();
 	    Session::put('tequila', $response['key']);
 	    
-	    return Config::get('tequila.host') . self::AUTH_PATH . '?requestkey=' . $response['key'];
+	    return config('tequila.host') . self::AUTH_PATH . '?requestkey=' . $response['key'];
     }
     
     // create a authentification request
     private static function createRequest() {
 
-    	$host = Config::get('tequila.host') . self::CREATE_PATH;
+    	$host = config('tequila.host') . self::CREATE_PATH;
 
         $data = [
         	'urlaccess'		=> URL::current(),
-            'service'   	=> Config::get('tequila.service'),
-			'request' 		=> Config::get('tequila.request'),
-			'require' 		=> Config::get('tequila.require'),
-			'allows' 		=> Config::get('tequila.allows')
+            'service'   	=> config('tequila.service'),
+			'request' 		=> config('tequila.request'),
+			'require' 		=> config('tequila.require'),
+			'allows' 		=> config('tequila.allows')
 		];
 
         return self::post($host, $data);

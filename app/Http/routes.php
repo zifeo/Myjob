@@ -28,25 +28,30 @@ Route::get('reset', function() {
 
 Route::group(['middleware' => 'locales'], function() {
 
-	Route::get('/', 'PublicController@index');
-	
-	Route::get('ad/create', 	'AdController@create');
-	Route::post('ad/store', 	'AdController@store');
-	
-	Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
-	
-	Route::get('help', 'HelpController@showHelp');
-	
+	Route::get('/', 				'PublicController@index');
+	Route::get('help', 				'PublicController@help');
+
+	Route::get('ad/create', 		'AdController@create');
+	Route::post('ad', 				'AdController@store');
+	Route::get('{email}/{secret}', 	'AdController@manage_ads_with_email');
+		
 	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
 	
-	Route::post('language/set', 'HomeController@changeLanguage');
-	
+	// require at least publisher access	
 	Route::group(['middleware' => 'publisher'], function() {
 		
-		Route::resource('ad', 'AdController', ['except' => ['create', 'store']]);
-			
+		Route::get('ad', 			'AdController@index');
+		Route::get('ad/{ad}', 		'AdController@show');
+		Route::get('edit/{ad}', 	'AdController@edit');
+		Route::put('ad/{ad}', 		'AdController@update');
+		Route::get('delete/{ad}', 	'AdController@destroy');
+		
+		Route::get('enable/{ad}', 	'ModerationController@enable');
+		Route::get('disable/{ad}', 	'ModerationController@disable');
+		
 	});
 	
+	// require at least tequila access
 	Route::group(['middleware' => 'tequila'], function() {
 		
 		Route::get('connect', function() {
@@ -55,10 +60,12 @@ Route::group(['middleware' => 'locales'], function() {
 		
 	});
 	
+	// require at least admin access
 	Route::group(['middleware' => ['tequila', 'admin']], function() {
 	
 		Route::get('moderation', 'ModerationController@adsToModerate');
-		Route::post('moderation', 'ModerationController@validation');
+		Route::get('accept/{ad}', 'ModerationController@accept');
+		Route::get('refuse/{ad}', 'ModerationController@refuse');
 		
 		/*
 		Route::get('crons', function() {

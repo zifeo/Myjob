@@ -20,7 +20,7 @@ Myjob
 							<div class="header">{{ $ad->title }}</div>
 							<div class="meta">
 								<span class="right floated moment">{{ $ad->updated_at }}</span>
-								<span class="category">{{ $ad->place or trans('general.unspecified') }}</span>
+								{{ $ad->place }}
 							</div>
 							<div class="description">
 								<p>{{ $ad->description }}</p>

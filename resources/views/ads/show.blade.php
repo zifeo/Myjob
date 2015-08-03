@@ -9,7 +9,11 @@ Myjob
 <div class="row">
 	<div class="eleven wide column">
 		
-		<h2 class="ui header">{{ $ad->title }}</h2>
+		<h2 class="ui header">
+			{{ $ad->title }}
+			@if (! $ad->validated)<span class="ui teal horizontal label">not yet validated</span>@endif
+			@if (expired($ad))<span class="ui orange horizontal label">disabled</span>@endif
+		</h2>
 		<div class="ui internally celled stackable grid segment">
 			<div class="row">
 				<div class="ten wide column">
@@ -62,11 +66,11 @@ Myjob
 				<div class="eight wide column">
 					<div class="ui list">
 						<div class="item">
-							<div class="header">{{ trans('ads.skills') }}</div>
+							<div class="header">{{ label('skills') }}</div>
 							<p>{{ $ad->skills }}</p>
 						</div>
 						<div class="item">
-							<div class="header">{{ trans('ads.languages') }}</div>
+							<div class="header">{{ label('languages') }}</div>
 							<p>{{ $ad->languages }}</p>
 						</div>
 					</div>
@@ -74,16 +78,16 @@ Myjob
 				<div class="eight wide column">
 					<div class="ui list">
 						<div class="item">
-							<div class="header">{{ trans('ads.date') }}</div>
+							<div class="header">{{ trans('ads.dates') }}</div>
 							<p>
 								<span class="date">{{ $ad->starts_at }}</span>
 								@if (isset($ad->ends_at))
-								- <span class="date">{{ $ad->starts_at }}</span>
+								{{ trans('ads.todate') }} <span class="date">{{ $ad->ends_at }}</span>
 								@endif
 							</p>
   						</div>
   						<div class="item">
-							<div class="header">{{ trans('ads.indicative_duration') }}</div>
+							<div class="header">{{ label('duration') }}</div>
 							<p>{{ $ad->duration }}</p>
   						</div>
 					</div>
@@ -94,40 +98,66 @@ Myjob
 		<div class="align-center mt">
 			<a href="javascript:history.back()" class="ui grey button mt">Revenir</a>
 			<a href="mailto:{{ $ad->contact_email }}?subject={{ $ad->title }}" class="ui red button mt">{{ trans('general.apply_job') }}</a>
+		</div>
+		<div class="align-center">
 			<div class="ui buttons mt">
-				@if (!isset($ad->validated_at) && $admin)
-				<a href="" class="ui green icon button">
+				@if (! isset($ad->validated) && $admin)
+				<a href="{{ action('ModerationController@accept', $ad->url) }}" class="ui green icon button">
 					<i class="checkmark icon"></i>
-					{{ trans('general.accept') }}
+					{{ trans('ads.buttons.accept') }}
 				</a>
-				<a href="{{ route('ad.edit', $ad->url) }}" class="ui orange icon button">
+				<a href="{{ action('AdController@edit', $ad->url) }}" class="ui orange icon button">
 					<i class="write icon"></i>
-					{{ trans('general.edit') }}
+					{{ trans('ads.buttons.edit') }}
 				</a>
-				<a href="" class="ui red icon button">
+				<a href="{{ action('ModerationController@refuse', $ad->url) }}" class="ui red icon button">
 					<i class="remove icon"></i>
-					{{ trans('general.refuse') }}
+					{{ trans('ads.buttons.refuse') }}
 				</a>
 				@else
-				<a href="" class="ui grey icon button">
-					<i class="hide icon"></i>
-					{{ trans('general.put_offline') }}
-				</a>
-				<a href="" class="ui green icon button">
+				@if ($ad->expires_at <= formatDate())
+				<a href="{{ action('ModerationController@enable', $ad->url) }}" class="ui green icon button">
 					<i class="unhide icon"></i>
-					{{ trans('general.put_offline') }}
+					{{ trans('ads.buttons.renew') }}
 				</a>
-				<a href="{{ route('ad.edit', $ad->url) }}" class="ui orange icon button">
+				@else
+				<a href="{{ action('ModerationController@disable', $ad->url) }}" class="ui grey icon button">
+					<i class="hide icon"></i>
+					{{ trans('ads.buttons.disable') }}
+				</a>
+				@endif
+				<a href="{{ action('AdController@edit', $ad->url) }}" class="ui orange icon button">
 					<i class="write icon"></i>
-					{{ trans('general.edit') }}
+					{{ trans('ads.buttons.edit') }}
 				</a>
-				<a href="" class="ui red icon button">
+				<div class="ui red icon button ad-delete">
 					<i class="remove icon"></i>
-					{{ trans('general.delete') }}
-				</a>
+					{{ trans('ads.buttons.delete') }}
+				</div>
 				@endif
 			</div>
 		</div>
+		
+		<div class="ui small basic modal" id="confirm-delete">
+			<i class="close icon"></i>
+			<div class="ui icon header">
+				<i class="trash icon"></i>
+				Supprimer cette annonce ?
+			</div>
+			<div class="content align-center">
+				<p>Désactiver l'annonce permet de la retrouver et de la réactiver plus tard.<br>Au contraire, la suppression est définitive.</p>
+				@if (expired($ad))<p><strong>L'annonce est déjà désactivée.</strong></p>@endif
+				<a href="{{ action('ModerationController@disable', $ad->url) }}" class="ui green inverted button mt">
+					<i class="hide icon"></i>
+					{{ trans('ads.buttons.disable') }}
+				</a>
+				<a href="{{ action('AdController@destroy', $ad->url) }}" class="ui red inverted button mt">
+					<i class="checkmark icon"></i>
+					{{ trans('ads.buttons.delete') }}
+				</a>
+			</div>
+		</div>
+		
 	</div>
 	<div class="computer tablet only five wide column">
 		<h3 class="ui header">Conseils de postulation</h3>

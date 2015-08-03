@@ -5,19 +5,17 @@
 <div class="row">
 	<div class="ten wide column">
 	
-	    <h2 class="ui header">{{ trans('ads.new_ad_title') }}</h2>
+	    <h2 class="ui header">{{ trans('ads.titles.new') }}</h2>
 
 	    {!! Form::open([
 	        'action' => 'AdController@store', 
-	        'class' => 'ui form', 
-	        'data-toggle' => 'validator']) !!}
+	        'class' => 'ui form validation'
+	    ]) !!}
 
-		@include('ads.form')
-		
-		{!! Form::submit(trans('ads.new_ad_submit'), [
-			'class' => 'ui red button mt'
-		]) !!}
-	
+			@include('ads.form')
+			
+			<div class="ui red submit button mt">{{ trans('ads.buttons.submit.new') }}</div>
+							
 	    {!! Form::close() !!}
 	</div>
 	<div class="six wide column">
@@ -30,9 +28,9 @@
 		<h3 class="ui header">Conditions d'acceptation</h3>
 		<p>L'annonce doit respecter les critères suivants pour être validée, au risque de pas être acceptée :</p>
 		<ol class="ui list">
-			<li>cible un étudiant bachelor, master ou edoc</li>
-			<li><strong>pas de lien de postulation extérieure</strong></li>
+			<li>cible un étudiant <strong>durant</strong> ses études à l'EPFL</li>
 			<li>respect du tarif minimum : <strong>CHF 24.—/h</strong></li>
+			<li><strong>pas de lien de postulation extérieure</strong></li>
 		</ol>
 		<a class="ui small red button mt" href="{{ url('help') }}">
 			<i class="help icon"></i>

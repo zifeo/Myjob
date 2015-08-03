@@ -19,21 +19,35 @@ class ModerationController extends Controller {
             ->with('category_names', Category::get_id_name_mapping());
     }
 
-    public function validation() {
 	    
-        $id = Input::get('id');
-        $accepted = Input::get('accepted');
-        $ad = Ad::find($id);
-
-        if ($ad == null || ($accepted != 0 && $accepted != 1)) {
-            Log::critical("Invalid arguments posted to moderation.");
-            abort(400);
-        }
-
-        $ad->is_validated = $accepted;
-        $ad->validated_at = date('Y-m-d H:i:s');
-		$ad->save();
-        echo "ok";
-        
+    public function accept($url) {
+	    return $this->validation($url, true);
     }
+    
+    public function refuse($url) {
+	    return $this->validation($url, false);
+    }
+    
+    public function enable($url) {
+	    return $this->expiration($url, formatDate(strtotime('now +' . config('myjob.ads.validityWeeks') * 7 . 'days')));
+    }
+    
+    public function disable($url) {
+	    return $this->expiration($url, formatDate());
+    }
+    
+	private function validation($url, $decision) {
+		$ad = Ad::findOrFail($url);
+	    $ad->validated = $decision;
+        $ad->validated_at = formatDate();
+		$ad->save();
+        return redirect()->action('AdController@show', $url);
+	}
+	
+	private function expiration($url, $date) {
+		$ad = Ad::findOrFail($url);
+	    $ad->expires_at = $date;
+		$ad->save();
+        return redirect()->action('AdController@show', $url);
+	}
 }

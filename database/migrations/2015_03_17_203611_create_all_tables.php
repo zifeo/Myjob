@@ -47,6 +47,7 @@ class CreateAllTables extends Migration {
 			$table->boolean('weekly_notice_activated')->default(true);
 			$table->boolean('admin')->default(false);
 			
+			$table->rememberToken();
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -75,8 +76,8 @@ class CreateAllTables extends Migration {
 			$table->string('contact_email', config('data.ad.contact_email.max'));
 			$table->string('contact_phone', config('data.ad.contact_phone.max'))->nullable();
 
+			$table->boolean('validated')->nullable();
 			$table->dateTime('validated_at')->nullable();
-			$table->boolean('activated')->default(true);			
 			$table->dateTime('expires_at');
 
 			$table->foreign('category_id')->references('category_id')->on('categories');

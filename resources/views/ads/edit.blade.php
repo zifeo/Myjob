@@ -2,23 +2,41 @@
 
 @section('content')
 
-<div class="col-sm-12">
+<div class="row">
+	<div class="ten wide column">
 
-    <h3>{{ trans('ads.modify_title') }}</h3>
+    <h3>{{ trans('ads.titles.edit') }}</h3>
 
-    {{ Form::model($ad, [
-        'route' => ['ad.update', $ad->url], 
-        'class' => 'form-horizontal', 
-        'data-toggle' => 'validator',
-        'method' => 'PUT']) }}
+    {!! Form::model($ad, [
+        'action' => ['AdController@update', $ad->url], 
+        'class' => 'ui form validation', 
+        'method' => 'PUT']) !!}
         
 		@include('ads.form') 
 		
-		<div class="form-group col-sm-4">
-			{{ Form::submit(trans('ads.modify_submit'), array('class' => 'btn btn-default')) }}
-		</div>
-        
-    {{ Form::close() }}
+		<div class="ui red submit button mt">{{ trans('ads.buttons.submit.edit') }}</div>
+
+    {!! Form::close() !!}
+	</div>
+	<div class="six wide column">
+		<h3 class="ui header">Gestion de l'annonce</h3>
+		<p>Il existe deux façons de gérer l'annonce. Pour les collaborateurs et les étudiants de l'EPFL, il est possible de se connecter au moyen de Tequila puis d'aller dans la rubrique "mes annonces". Pour les autres, il suffit de cliquer sur le lien envoyé à la création de l'annonce ou d'en redemander. Dans tous les cas, <strong>l'annonce est visible durant 15 jours</strong>, durée après laquelle il faut la renouveler.</p>
+		<a class="ui small red icon button mt" href="{{ url('help') }}">
+			<i class="repeat icon"></i>
+			Récupérer une annonce
+		</a>
+		<h3 class="ui header">Conditions d'acceptation</h3>
+		<p>L'annonce doit respecter les critères suivants pour être validée, au risque de pas être acceptée :</p>
+		<ol class="ui list">
+			<li>cible un étudiant <strong>durant</strong> ses études à l'EPFL</li>
+			<li>respect du tarif minimum : <strong>CHF 24.—/h</strong></li>
+			<li><strong>pas de lien de postulation extérieure</strong></li>
+		</ol>
+		<a class="ui small red button mt" href="{{ url('help') }}">
+			<i class="help icon"></i>
+			Poser une question
+		</a>
+	</div>
 </div>
 
 @stop
