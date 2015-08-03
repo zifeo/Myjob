@@ -6,6 +6,7 @@ return [
 	'titles' => [
 		'new' 					=> 'Nouvelle annonce',
 		'edit'	 				=> 'Edition d\'une annonce',
+		'confirmdeletion'		=> 'Supprimer cette annonce ?',
 	],
 	'buttons' => [
 		'submit' => [
@@ -18,6 +19,12 @@ return [
 		'delete'	 			=> 'Supprimer',	
 		'accept'	 			=> 'Accepter',	
 		'refuse'	 			=> 'Refuser',	
+	],
+	'texts' => [
+		'confirmdeletion'		=> "Désactiver l'annonce permet de la retrouver et de la réactiver plus tard.",
+		'definitivedeletion'	=> "Au contraire, la suppression est définitive.",
+		'alreadydisable'		=> "L'annonce est déjà désactivée.",
+		'nothingleft' 			=> "Pas d'annonce disponible.",
 	],
 	'sections' => [
 		'general' 				=> 'Information générale',
@@ -69,5 +76,6 @@ return [
 	'startingtoday' 			=> "dès aujourd'hui",
 	'dates' 					=> 'Date·s',
 	'todate' 					=> "jusqu'au",
-	
+	'undefined' 				=> 'Non spécifié',
+
 ];

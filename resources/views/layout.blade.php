@@ -23,9 +23,11 @@
 					<a class="active item" href="?lang=fr">Fr<span>ançais</span></a>
 					<a class="item" href="?lang=en">En<span>glish</span></a>
 				</div>
-				{!! Form::open(['route' => 'ad.search']) !!}
+				{!! Form::open(['action' => 'AdController@search']) !!}
 					<div class="ui action input">
-						<input type="text" name="q" id="search-query" placeholder="{{ trans('general.search') }}">
+						{!! Form::text('q', isset($search) ? e($search): null, [
+							'placeholder' => trans('general.search')
+						]) !!}
 						<button class="ui icon basic button"><i class="search icon"></i></button>
 					</div>
 				{!! Form::close() !!}
@@ -137,17 +139,6 @@
 				@endif
 			</div>
 		</div>
-		@if ($errors->any())
-		<div class="ui container red clearing segment grid notifications-wrapper">
-			<div class="middle aligned doubling two wide column">
-				<i class="announcement big icon"></i>
-			</div>
-			<div class="column">
-				<h4 class="header">{{ trans('error') }}</h4>
-				<p>{{ $errors->first() }}Test</p>
-			</div>
-		</div>
-		@endif
 		<div class="ui container centered stackable grid content-wrapper">
 			@yield('content')
 		</div>

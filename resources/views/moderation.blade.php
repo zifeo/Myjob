@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				@empty
-				<p class="mt">Pas d'annonce à modérer pour le moment.</p>
+				<p class="mt">{{ trans('ads.texts.nothingleft') }}</p>
 	           @endforelse
 			</div>
 		</div>   

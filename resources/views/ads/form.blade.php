@@ -1,3 +1,13 @@
+@if ($errors->any())
+<div class="ui error visible message">
+	<ul class="list">
+		@foreach ($errors->all() as $error)
+		<li>{{ $error }}</li>
+        @endforeach
+	</ul>
+</div>
+@endif
+
 <div class="ui segment">
 	<div class="ui top attached label caps">{{ trans('ads.sections.general') }}</div>
 	<div class="field">

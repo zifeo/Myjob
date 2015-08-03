@@ -5,7 +5,7 @@ namespace Myjob\Http\Controllers;
 use Myjob\Models\Category;
 use Myjob\Models\Ad;
 use Myjob\Models\Provider;
-use View, App, Input, Validator, Redirect;
+use View, App, Input, Validator, Redirect, Auth;
 
 class AdController extends Controller {
 	
@@ -22,7 +22,7 @@ class AdController extends Controller {
 				   'place',
 				   'ads.updated_at'];
 
-		$ads = Ad::acceptedAd($fields)->get();
+		$ads = Ad::acceptedAd($fields)->simplePaginate(config('myjob.ads.numberDisplay'));
 		return View::make('ads.list')->with('ads', $ads);
 	}
 
@@ -46,19 +46,17 @@ class AdController extends Controller {
 	public function store()
 	{
 		$categories = Category::get_id_name_mapping();
-		$fields = $this->validation();
-		$validator = Validator::make(Input::all(), $fields);
-		$data = array_only(Input::all(), array_keys($fields));
+		$validator = Validator::make(Input::all(), $this->validation());
+		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels'))); 
 		
-		if ($validator->fails()) {
-			return Redirect::back()->withErrors($validator)->with('type', 'danger');
-		} else {
+		if ($validator->fails())
+			return back()->withInput()->withErrors($validator);
+		else {
 			/* If this is the first ad with that email, 
 			or last secret is outdated, create new entry 
 			in contact_emails */
 
 			$email = Input::get('contact_email');
-
 			if (empty(Provider::get_valid_secrets($email))) {
 				$contact_email = new Provider;
 
@@ -66,14 +64,13 @@ class AdController extends Controller {
 				$contact_email->random_secret = str_random(32);
 
 				$contact_email->save();
-
-				// TODO send email with code
 			}
 
-			/* Create the ad in the DB */
-			$url = Ad::create($data);
+			$ad = Ad::create(Input::all());
 
-			return Redirect::route('AdController@show', $url);
+			// TODO send email with code
+			
+			return redirect()->action('AdController@show', $ad->url);
 		}
 	}
 
@@ -107,8 +104,8 @@ class AdController extends Controller {
 	public function edit($url)
 	{
 		$ad = Ad::withVisitors()->findorfail($url);
-
 		$categories = Category::get_id_name_mapping();
+		
 		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
 	}
 
@@ -124,9 +121,10 @@ class AdController extends Controller {
 		$ad = Ad::withVisitors()->findorfail($url);
 		$categories = Category::get_id_name_mapping();
 		$validator = Validator::make(Input::all(), $this->validation());
-
+		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels'))); 
+		
 		if ($validator->fails())
-			return back()->withErrors($validator)->with('type', 'danger');
+			return back()->withInput()->withErrors($validator);
 		else {
 			$ad->fill(Input::all());
 			$ad->save();
@@ -174,20 +172,23 @@ class AdController extends Controller {
 	
 	public function search() {
 		
+		if (Auth::guest())
+			return redirect()->action('PublicController@help');
+		
 		$raw = trim(Input::get('q'));
-		if (empty($raw)) {
-			return Redirect::route('AdController@index');
-		}
+		if (empty($raw))
+			return redirect()->action('AdController@index');
+		
 		$terms = explode(' ', $raw);
 		
-		$fields = ['url', 
-				   'title', 'name AS category', 
+		$fields = ['url',
+				   'title', 'name_'. App::getLocale() . ' AS category', 
 				   'description',
 				   'place',
-				   'starts_at'];	
+				   'ads.updated_at'];	
 		
-		$query = Ad::withCategories()->select($fields)->where('is_validated', '=', 1);
-		$searchFields = ['title', 'description', 'place', 'skills', 'languages', 'name'];
+		$query = Auth::user()->admin ? Ad::withCategories()->select($fields): Ad::acceptedAd()->select($fields);
+		$searchFields = ['title', 'description', 'place', 'skills', 'languages', 'name_'. App::getLocale(), 'contact_email'];
 
 	    foreach ($terms as $t) {
 	        $query->where(function($query) use (&$t, &$searchFields) {
@@ -196,9 +197,9 @@ class AdController extends Controller {
 	        	}
 	        });
 	    }
-		$ads = $query->get();
+		$ads = $query->simplePaginate(config('myjob.ads.numberDisplay'));
 		
-		return View::make('ads.list')->with('ads', $ads)->with('searchTerms', $raw);
+		return View::make('ads.list')->with('ads', $ads)->with('search', $raw);
 	}
 
 	private function validation() {
@@ -210,10 +211,7 @@ class AdController extends Controller {
 			$f = [];
 			
 			if (isset($config[$field]['required']))
-				$f[] = 'required';
-			if (isset($config[$field]['email']))
-				$filters[] = 'email';
-				
+				$f[] = 'required';		
 			if (isset($config[$field]['min']))
 				$f[] = 'min:' . $config[$field]['min'];
 			if (isset($config[$field]['max']))
@@ -222,11 +220,16 @@ class AdController extends Controller {
 			return $f;
 		}, $fields));
 		
+		$filters['contact_email'][] = 'email';
 		$filters['category_id'][] 	= 'in:' . implode(',', Category::get_id_name_mapping()->keys()->all());
-		$filters['starts_at'][] 	= 'after:-1 day';
+		$filters['starts_at'][] 	= 'after: -1 day';
 		$filters['ends_at'][] 		= 'after:' . Input::get('starts_at');
-					
-		return $fields;
+			
+		$filters = array_map(function($f) {
+			return implode('|', $f);
+		}, $filters);
+			
+		return $filters;
 	}
 	
 }

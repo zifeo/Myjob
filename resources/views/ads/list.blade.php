@@ -29,16 +29,26 @@ Myjob
 					</a>
 				</div>
 				@empty
-				<p class="mt">Pas d'annonce pour le moment.</p>
+				<p class="mt">{{ trans('ads.texts.nothingleft') }}</p>
 				@endforelse
 			</div>
 		</div>
+		@if ($ads->hasMorePages() || $ads->currentPage() > 1)
 		<div class="align-center mt">
-			<a class="ui red icon button mt">
-				<i class="arrow circle down icon"></i>
-				Plus d'annonce
+			@if ($ads->currentPage() > 1)
+			<a href="{{ $ads->url($ads->currentPage() - 1) }}" class="ui red icon button mt">
+				<i class="arrow circle left icon"></i>
+				Page précédente
 			</a>
+			@endif
+			@if ($ads->hasMorePages())
+			<a href="{{ $ads->nextPageUrl() }}"class="ui red icon button mt">
+				Page suivante
+				<i class="arrow circle right icon"></i>
+			</a>
+			@endif
 		</div>
+		@endif
 	</div>
 	<div class="computer tablet only five wide column">
 		<h3 class="ui header">MyJob nouvelles</h3>

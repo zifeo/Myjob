@@ -37,21 +37,23 @@ class Ad extends Model {
 	public static function create(array $data = [])
 	{
 
-		$ad = new Ad($data); // mass-alignement allowed on fillable 
-		assert(isset($ad->title), "Create without all datas.");
-		
-		$ad->url = self::generate_url($ad->title);
-		$ad->random_secret = str_random(32);
-		$ad->expires_at = date('Y-m-d', time() + config('myjob.ads.validityWeeks') * self::WEEK);
-
 		foreach (config('data.ad') as $field => $filters) {
 			if (! isset($filters['required']))
-				$ad->{$field} = self::nullable($ad->{$field});
+				$data[$field] = self::nullable($data[$field]);
 		}
-				
+
+		$ad = new Ad($data); // mass-alignement allowed on fillable 
+		assert(isset($ad->title), "Create without all datas.");
+		$url = self::generate_url($ad->title);
+		
+		$ad->url = $url;
+		$ad->random_secret = str_random(32);
+		$ad->expires_at = formatDate(time() + config('myjob.ads.validityWeeks') * self::WEEK);
+
 		$ad->save();
+		$ad->url = $url; // reset $ad->url as it is only the primary key in Laravel and was altered by save
 		Log::info('Ad ' . e($ad->title) . ' created.');		
-		return $ad->url;
+		return $ad;
 	}
 
 	public static function acceptedAd($fields)
@@ -72,21 +74,16 @@ class Ad extends Model {
 	{
 		$new_url = Str::slug($ad_name, "-");
 
-		if (self::url_is_unique($new_url)) {
-
+		if (self::url_is_unique($new_url))
 			return $new_url;
 
-		// If url already exists, append a number
-		} else {
-			$i = 0;
+		$i = 0;
+		do {
+			$new_url_num = $new_url . '-' . $i;
+			$i++;
+		} while(! self::url_is_unique($new_url_num));
 
-			do {
-				$new_url_num = $new_url . '-' . $i;
-				$i++;
-			} while(! self::url_is_unique($new_url_num));
-
-			return $new_url_num;
-		}
+		return $new_url_num;
 	}
 
 	private static function url_is_unique($url) {
@@ -94,6 +91,6 @@ class Ad extends Model {
 	}
 
 	private static function nullable($field) {
-		return isset($field) && !empty($field) ? $field: null;
+		return isset($field) && ! empty($field) ? $field: null;
 	}
 }

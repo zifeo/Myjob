@@ -2,6 +2,7 @@
 
 namespace Myjob\Http\Controllers;
 
+use Myjob\Models\FAQ;
 use View;
 
 class PublicController extends Controller {

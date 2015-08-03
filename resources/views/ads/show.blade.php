@@ -28,15 +28,15 @@ Myjob
 							</div>
 						</div>
 						<div class="item">
-							<i class="pin icon"></i>
-							<div class="content">
-								{{ $ad->place }}
-							</div>
-						</div>
-						<div class="item">
 							<i class="wait icon"></i>
 							<div class="content">
 								<span class="calendar">{{ $ad->updated_at }}</span>
+							</div>
+						</div>
+						<div class="item">
+							<i class="pin icon"></i>
+							<div class="content">
+								{{ $ad->place }}
 							</div>
 						</div>
 						<div class="item">
@@ -67,11 +67,11 @@ Myjob
 					<div class="ui list">
 						<div class="item">
 							<div class="header">{{ label('skills') }}</div>
-							<p>{{ $ad->skills }}</p>
+							<p>{{ $ad->skills or trans('ads.undefined') }}</p>
 						</div>
 						<div class="item">
 							<div class="header">{{ label('languages') }}</div>
-							<p>{{ $ad->languages }}</p>
+							<p>{{ $ad->languages or trans('ads.undefined') }}</p>
 						</div>
 					</div>
 				</div>
@@ -90,13 +90,17 @@ Myjob
 							<div class="header">{{ label('duration') }}</div>
 							<p>{{ $ad->duration }}</p>
   						</div>
+  						<div class="item">
+							<div class="header">{{ label('salary') }}</div>
+							<p>{{ $ad->salary }}</p>
+  						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	
 		<div class="align-center mt">
-			<a href="javascript:history.back()" class="ui grey button mt">Revenir</a>
+			<a href="javascript:history.back()" class="ui grey button mt">{{ trans('general.back') }}</a>
 			<a href="mailto:{{ $ad->contact_email }}?subject={{ $ad->title }}" class="ui red button mt">{{ trans('general.apply_job') }}</a>
 		</div>
 		<div class="align-center">
@@ -142,11 +146,11 @@ Myjob
 			<i class="close icon"></i>
 			<div class="ui icon header">
 				<i class="trash icon"></i>
-				Supprimer cette annonce ?
+				{{ trans('ads.titles.confirmdeletion') }}
 			</div>
 			<div class="content align-center">
-				<p>Désactiver l'annonce permet de la retrouver et de la réactiver plus tard.<br>Au contraire, la suppression est définitive.</p>
-				@if (expired($ad))<p><strong>L'annonce est déjà désactivée.</strong></p>@endif
+				<p>{{ trans('ads.texts.confirmdeletion') }}<br>{{ trans('ads.texts.definitivedeletion') }}</p>
+				@if (expired($ad))<p><strong>{{ trans('ads.texts.alreadydisable') }}</strong></p>@endif
 				<a href="{{ action('ModerationController@disable', $ad->url) }}" class="ui green inverted button mt">
 					<i class="hide icon"></i>
 					{{ trans('ads.buttons.disable') }}

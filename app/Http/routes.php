@@ -34,12 +34,12 @@ Route::group(['middleware' => 'locales'], function() {
 	Route::get('ad/create', 		'AdController@create');
 	Route::post('ad', 				'AdController@store');
 	Route::get('{email}/{secret}', 	'AdController@manage_ads_with_email');
-		
-	Route::post('search', ['as' => 'ad.search', 'uses' => 'AdController@search']);
+	
+	Route::post('search',			'AdController@search');		
 	
 	// require at least publisher access	
 	Route::group(['middleware' => 'publisher'], function() {
-		
+			
 		Route::get('ad', 			'AdController@index');
 		Route::get('ad/{ad}', 		'AdController@show');
 		Route::get('edit/{ad}', 	'AdController@edit');

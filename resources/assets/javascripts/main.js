@@ -121,7 +121,7 @@ $(function() {
 			attrs[name] = field;
 		});
 		
-		$(this).form({
+		/*$(this).form({
 			on: 'blur',
 			inline : true,
 			fields: attrs,
@@ -130,7 +130,7 @@ $(function() {
 		          return $('<div class="ui red pointing prompt label transition">'+error+'</div>');
 		       }
 		    }
-		});
+		});*/
 	});
 
 	// ad deletion

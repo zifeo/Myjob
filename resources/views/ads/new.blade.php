@@ -14,7 +14,11 @@
 
 			@include('ads.form')
 			
-			<div class="ui red submit button mt">{{ trans('ads.buttons.submit.new') }}</div>
+						<button type="submit" class="ui red submit button mt">{{ trans('ads.buttons.submit.edit') }}</button>
+
+			<div class="align-center">
+				<div class="ui red submit button mt">{{ trans('ads.buttons.submit.new') }}</div>
+			</div>
 							
 	    {!! Form::close() !!}
 	</div>
