@@ -19,22 +19,22 @@ class ModerationController extends Controller {
 
 	    
     public function accept($url) {
-	    return $this->validation($url, true);
+	    return $this->validity($url, true);
     }
     
     public function refuse($url) {
-	    return $this->validation($url, false);
+	    return $this->validity($url, false);
     }
     
     public function enable($url) {
-	    return $this->expiration($url, formatDate(strtotime('now +' . config('myjob.ads.validityWeeks') * 7 . 'days')));
+	    return $this->status($url, formatDate(strtotime('now +' . config('myjob.ads.validityWeeks') * 7 . 'days')));
     }
     
     public function disable($url) {
-	    return $this->expiration($url, formatDate());
+	    return $this->status($url, formatDate());
     }
     
-	private function validation($url, $decision) {
+	private function validity($url, $decision) {
 		$ad = Ad::findOrFail($url);
 	    $ad->validated = $decision;
         $ad->validated_at = formatDate();
@@ -42,7 +42,7 @@ class ModerationController extends Controller {
         return redirect()->action('AdController@show', $url);
 	}
 	
-	private function expiration($url, $date) {
+	private function status($url, $date) {
 		$ad = Ad::findOrFail($url);
 	    $ad->expires_at = $date;
 		$ad->save();

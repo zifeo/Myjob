@@ -1,36 +1,24 @@
+@if ($errors->any())
+<div class="ui error visible message">
+	<ul class="list">
+		@foreach ($errors->all() as $error)
+		<li>{{ $error }}</li>
+        @endforeach
+	</ul>
+</div>
+@endif
+
 <div class="three fields">
 	<div class="field">
-		{!! Form::text('contact_first_name', null, [
-            'placeholder' => trans('ads.first_name_placeholder'), 
-            'required',
-            'data-minlength' => '2',
-            'maxlength' => '50'
-        ]) !!}
+		{!! Form::text('first_name', isset($user) ? $user: null, contactForm('first_name')) !!}
 	</div>
 	<div class="field">
-		{!! Form::text('contact_last_name', null, [
-            'placeholder' => trans('ads.last_name_placeholder'), 
-            'required',
-            'data-minlength' => '2',
-            'maxlength' => '50'
-        ]) !!}
+		{!! Form::text('last_name', isset($user_last) ? $user_last: null, contactForm('last_name')) !!}
 	</div>
 	<div class="field">
-		{!! Form::email('contact_email', null, [
-            'placeholder' => trans('ads.email_placeholder'), 
-            'required',
-            'type' => 'email',
-            'maxlength' => '75'
-        ]) !!}
+		{!! Form::email('email', isset($user_email) ? $user_email: null, contactForm('email')) !!}
 	</div>
 </div>
 <div class="field">
-	{!! Form::textarea('description', null, [
-        'placeholder' => trans('ads.description_placeholder'), 
-        'rows' => 7, 
-        'required',
-        'data-minlength' => '10',
-        'maxlength' => '1500',
-        'data-stopshouting'
-    ]) !!}
+	{!! Form::textarea('message', null, contactForm('message')) !!}
 </div>

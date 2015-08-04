@@ -47,4 +47,25 @@ abstract class Controller extends BaseController
 		    View::share('user', Session::get('connected_visitor'));
 	    }
     }
+    
+    protected function validation($item) {
+	
+		$config = config('data.' . $item);
+		$fields = array_keys($config);
+		
+		$filters = array_combine($fields, array_map(function($field) use ($config) {
+			$f = [];
+			
+			if (isset($config[$field]['required']))
+				$f[] = 'required';		
+			if (isset($config[$field]['min']))
+				$f[] = 'min:' . $config[$field]['min'];
+			if (isset($config[$field]['max']))
+				$f[] = 'max:' . $config[$field]['max'];
+				
+			return $f;
+		}, $fields));
+	    
+	    return $filters;
+	}
 }

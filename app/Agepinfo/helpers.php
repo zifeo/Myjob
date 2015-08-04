@@ -4,15 +4,23 @@ function label($field) {
 	return trans('ads.labels.' . $field);
 }
 
-function form($field) {
+function adform($field) {
+	return form($field, 'ad');
+}
+
+function contactForm($field) {
+	return form($field, 'contact');
+}
+
+function form($field, $item) {
 	
-	$config = config('data.ad')[$field];
+	$config = config('data.' . $item)[$field];
 	$attrs = [
 		'id' => $field,	
 	];
 	
-	if (existTrans('ads.placeholders', $field))
-		$attrs['placeholder'] = trans('ads.placeholders.' . $field);
+	if (existTrans($item . 's.placeholders', $field))
+		$attrs['placeholder'] = trans($item . 's.placeholders.' . $field);
 	if (isset($config['class']))
 		$attrs['class'] = $config['class'];
 	
@@ -27,6 +35,10 @@ function form($field) {
 		$attrs['maxlength'] = $config['max'];
 		
 	return $attrs;
+}
+
+function prefill($model, $value) {
+	return isset($value) && ! isset($model) ? $value: null;
 }
 
 function existTrans($subname, $name) {

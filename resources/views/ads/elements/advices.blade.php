@@ -1,2 +1,2 @@
-<h3 class="ui header">Conseils de postulation</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut maximus, lacus ac volutpat dictum, arcu urna venenatis tellus, in tempus arcu ligula a ante. Mauris mattis, lorem sed pharetra lacinia, justo tellus ultricies purus, ac placerat augue ante et quam. Quisque id pretium turpis.</p>
+<h3 class="ui header">{{ trans('general.titles.advices') }}</h3>
+<p>{{ trans('general.texts.advices') }}</p>

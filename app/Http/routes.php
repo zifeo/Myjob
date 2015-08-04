@@ -27,7 +27,9 @@ Route::get(trans('general.routes.disconnect'),					'PublicController@disconnect'
 Route::group(['middleware' => 'locales'], function() {
 
 	Route::get(trans('general.routes.home'),					'PublicController@index');
+	
 	Route::get(trans('general.routes.help'),					'PublicController@help');
+	Route::post(trans('general.routes.help'),					'PublicController@send');
 
 	Route::get(trans('general.routes.newjob'), 					'AdController@create');
 	Route::post(trans('general.routes.newjob'), 				'AdController@store');
@@ -56,6 +58,7 @@ Route::group(['middleware' => 'locales'], function() {
 		Route::get(trans('general.routes.jobs'), 				'AdController@index');
 		
 		Route::get(trans('general.routes.connect'), 			'PublicController@connect');
+		Route::get(trans('general.routes.connectcreate'), 		'PublicController@connectCreate');
 				
 		Route::get(trans('general.routes.options'), 			'OptionsController@index');
 		Route::put(trans('general.routes.options'), 			'OptionsController@update');

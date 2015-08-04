@@ -26,7 +26,7 @@ class OptionsController extends Controller {
 		$user->fill($values);
 		$user->save();
 		
-		return view('ads.options', ['options' => $user, 'success' => trans('general.successes.options')]);
+		return redirect()->action('OptionsController@index')->with('success', trans('general.successes.options'));
     }
 
 }

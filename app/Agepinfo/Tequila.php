@@ -36,9 +36,9 @@ final class Tequila {
 
 			Auth::login($u);
 			
-			return redirect()->action('AdController@index');
+			return Session::has('intended') ? redirect(Session::get('intended')): redirect()->action('AdController@index');
 		}
-
+		
 		return redirect(self::requestUrl());
 	}
     

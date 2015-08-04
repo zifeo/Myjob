@@ -1,15 +1,15 @@
-@if (isset($success))
+@if (session('success'))
 <div class="ui green nag">
 	<i class="close icon"></i>
 	<div class="title">
-		<i class="checkmark icon"></i> {{ $success }}
+		<i class="checkmark icon"></i> {{ session('success') }}
 	</div>
 </div>
-@elseif (isset($info))
+@elseif (session('info'))
 <div class="ui teal nag">
 	<i class="close icon"></i>
 	<div class="title">
-		<i class="info icon"></i> {{ $info }}
+		<i class="info icon"></i> {{ session('info') }}
 	</div>
 </div>
 @endif

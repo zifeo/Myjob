@@ -48,6 +48,9 @@ $(function() {
 	
 	// toggle
 	$('.nag').nag('show');
+	setTimeout(function() {
+		$('.nag').nag('hide');	
+	}, 4000);
 	
 	// close message banner
 	$('.message .close').on('click', function() {

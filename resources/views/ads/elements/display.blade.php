@@ -51,22 +51,22 @@
 			<div class="ui list">
 				<div class="item">
 					<div class="header">{{ label('skills') }}</div>
-					<p>{{ $ad->skills or trans('ads.undefined') }}</p>
+					<p>{{ $ad->skills or trans('general.undefined') }}</p>
 				</div>
 				<div class="item">
 					<div class="header">{{ label('languages') }}</div>
-					<p>{{ $ad->languages or trans('ads.undefined') }}</p>
+					<p>{{ $ad->languages or trans('general.undefined') }}</p>
 				</div>
 			</div>
 		</div>
 		<div class="eight wide column">
 			<div class="ui list">
 				<div class="item">
-					<div class="header">{{ trans('ads.dates') }}</div>
+					<div class="header">{{ trans('general.dates') }}</div>
 					<p>
 						<span class="date">{{ $ad->starts_at }}</span>
 						@if (isset($ad->ends_at))
-						{{ trans('ads.todate') }} <span class="date">{{ $ad->ends_at }}</span>
+						{{ trans('general.todate') }} <span class="date">{{ $ad->ends_at }}</span>
 						@endif
 					</p>
 					</div>

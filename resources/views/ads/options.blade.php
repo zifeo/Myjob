@@ -7,7 +7,8 @@
 		{!! Form::model($options, [
 	        'action' => 'OptionsController@update', 
 	        'class' => 'ui form', 
-	        'method' => 'PUT']) !!}
+	        'method' => 'PUT'
+	    ]) !!}
 		
 			@include('ads.elements.mails')
 		

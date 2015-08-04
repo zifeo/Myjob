@@ -19,6 +19,7 @@ return [
 		'options' 			=> 'Options',
 		'help' 				=> 'Aide',
 		'connect' 			=> 'Se connecter',
+		'connectcreate' 	=> 'Se connecter',
 		'disconnect' 		=> 'Déconnexion',
 	],
 	
@@ -39,6 +40,7 @@ return [
 		'options' 			=> 'options',
 		'help' 				=> 'aide',
 		'connect' 			=> 'connexion',
+		'connectcreate' 	=> 'connexion-nouveau-job',
 		'disconnect' 		=> 'reset',
 	],
 	
@@ -46,7 +48,8 @@ return [
 		'submit' => [
 			'new' 			=> 'Enregistrer la nouvelle annonce',
 			'edit'	 		=> "Modifier l'annonce",	
-			'update'	 	=> "Modifier les options",	
+			'update'	 	=> "Modifier les options",
+			'send'		 	=> "Envoyer le message",	
 		],	
 		'edit'	 			=> 'Editer',	
 		'renew'	 			=> 'Renouveller',	
@@ -57,12 +60,14 @@ return [
 		'reget'	 			=> 'Récupérer une annonce',	
 		'ask'	 			=> 'Poser une question',	
 		'apply'		 		=> 'Postuler',	
-		'send'		 		=> 'Envoyer le message',	
+		'offer'		 		=> 'Je recherche un étudiant',	
+		'seek'		 		=> 'Je recherche un job',	
+		'feedback'	 		=> 'Feedback',	
 	],
 
 	'optional' 				=> 'si applicable',	
 	'undefined' 			=> 'Non spécifié',
-	'nothingleft' 			=> "Pas d'annonce disponible.",
+	'nothingleft' 			=> "Pas de contenu disponible.",
 	'back' 					=> 'Retour',
 
 	'disabled'	 			=> 'désactivé',
@@ -73,7 +78,8 @@ return [
 	'todate' 				=> "jusqu'au",
 	
 	'successes'	=> [
-		'options'			=> "Options misent à jour.",	
+		'options'			=> "Options mises à jour.",	
+		'sent'				=> "Message envoyé.",	
 	],
 
 	'titles' => [
@@ -83,6 +89,11 @@ return [
 		'faq'				=> "Foire aux questions",	
 		'confirmdelete'		=> "Supprimer un job ?",	
 		'notifications'		=> "Notifications",	
+		'publishers'		=> "Employeurs",	
+		'students'			=> "Etudiants",	
+		'adopt'				=> "Adopte un étudiant EPFL",	
+		'news'				=> "Un nouveau Myjob !",	
+		'advices'			=> "Conseils de postulation",	
 	],
 
 	'texts' => [
@@ -101,7 +112,15 @@ return [
 		'contact' 			=> "Pour toute·s question·s (après avoir lu attentivement la foire aux questions) et/ou suggestion·s, vous pouvez contacter rapidement l'équipe par ici.",
 		'faq' 				=> "Après de nombreuses années de services, l'équipe de Myjob a récolté soigneusement les questions les plus posées et les a répertoriées ici.",
 		'notifications' 	=> "Malgré le nombre d'annonces, certaines places se font rares et c'est pourquoi il est possible de paramétrer des alertes emails qui vous seront envoyées selon certains critères.",
-		
+		'description'		=> "L'<strong>Association Générale des Etudiants</strong> de l'<strong>Ecole Polytechnique Fédérale de Lausanne</strong> met gratuitement cette plateforme à disposition pour mettre en relation étudiants et employeurs. Le but est de permettre à tous les étudiants de trouver facilement un job/emploi <strong>durant leurs études</strong>, et en même temps d'offrir aux employeurs des profils variés et qualifiés.",
+		'noinscription'		=> "Aucune inscription, gestion par email.",
+		'tequila'			=> "Accès Gaspar requis, via Tequila.",
+		'peopleepfl'		=> "Raccourci collaborateur EPFL.",
+		'oldad'				=> "Retrouver une ancienne annonce.",
+		'newpassword'		=> "Recevoir un nouveau mot de passe.",
+		'outsideepfl'		=> "Informations étudiants hors-EPFL.",
+		'advices'			=> "Par le service académique, lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut maximus, lacus ac volutpat dictum, arcu urna venenatis tellus, in tempus arcu ligula a ante. Mauris mattis, lorem sed pharetra lacinia, justo tellus ultricies purus, ac placerat augue ante et quam. Quisque id pretium turpis.",
+		'news'				=> "Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en signalant tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et suggestions !"
 	],
 	
 ];

@@ -75,6 +75,29 @@ return [
 			'min' => 2,
 			'max' => 50,
 		],
-	]
+	],
+	
+	'contact' => [
+		'first_name' => [
+			'required' => true,
+			'min' => 2,
+			'max' => 50,
+		],
+		'last_name' => [
+			'required' => true,
+			'min' => 2,
+			'max' => 50,
+		],
+		'email' => [
+			'required' => true,
+			'min' => 2,
+			'max' => 100,
+		],
+		'message' => [
+			'required' => true,
+			'min' => 10,
+			'max' => 1500,
+		],
+	],
 
 ];

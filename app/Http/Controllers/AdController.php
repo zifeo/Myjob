@@ -59,32 +59,31 @@ class AdController extends Controller {
 	public function store()
 	{
 		$categories = Category::get_id_name_mapping();
-		$validator = Validator::make(Input::all(), $this->validation());
+		$validator = Validator::make(Input::all(), $this->adValidation());
 		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels'))); 
 		
 		if ($validator->fails())
 			return back()->withInput()->withErrors($validator);
-		else {
-			/* If this is the first ad with that email, 
-			or last secret is outdated, create new entry 
-			in contact_emails */
+		
+		/* If this is the first ad with that email, 
+		or last secret is outdated, create new entry 
+		in contact_emails */
 
-			$email = Input::get('contact_email');
-			if (empty(Publisher::get_valid_secrets($email))) {
-				$contact_email = new Publisher;
+		$email = Input::get('contact_email');
+		if (empty(Publisher::get_valid_secrets($email))) {
+			$contact_email = new Publisher;
 
-				$contact_email->contact_email = $email;
-				$contact_email->random_secret = str_random(32);
+			$contact_email->contact_email = $email;
+			$contact_email->random_secret = str_random(32);
 
-				$contact_email->save();
-			}
-
-			$ad = Ad::create(Input::all());
-
-			// TODO send email with code
-			
-			return redirect()->action('AdController@show', $ad->url);
+			$contact_email->save();
 		}
+
+		$ad = Ad::create(Input::all());
+
+		// TODO send email with code
+		
+		return redirect()->action('AdController@show', $ad->url);
 	}
 
 
@@ -133,16 +132,15 @@ class AdController extends Controller {
 	{
 		$ad = Ad::withVisitors()->findorfail($url);
 		$categories = Category::get_id_name_mapping();
-		$validator = Validator::make(Input::all(), $this->validation());
+		$validator = Validator::make(Input::all(), $this->adValidation());
 		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels'))); 
 		
 		if ($validator->fails())
 			return back()->withInput()->withErrors($validator);
-		else {
-			$ad->fill(Input::all());
-			$ad->save();
-			return redirect()->action('AdController@show', $url);
-		}
+		
+		$ad->fill(Input::all());
+		$ad->save();
+		return redirect()->action('AdController@show', $url);
 	}
 
 
@@ -165,8 +163,7 @@ class AdController extends Controller {
 	*/
 	public function manage_ads_with_email($email, $secret)
 	{
-		if (Publisher::is_outdated($secret, $email))
-		{
+		if (Publisher::is_outdated($secret, $email)) {
 			// TODO Lien dans le message
 			$message = 'Ce lien a plus de ' . config('myjob.Publishers.secretValidityWeeks') .
 			' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
@@ -215,28 +212,14 @@ class AdController extends Controller {
 		return view('ads.search', ['ads' => $ads, 'search' => $raw]);
 	}
 
-	private function validation() {
-
-		$config = config('data.ad');
-		$fields = array_keys($config);
+	protected function adValidation() {
 		
-		$filters = array_combine($fields, array_map(function($field) use ($config) {
-			$f = [];
-			
-			if (isset($config[$field]['required']))
-				$f[] = 'required';		
-			if (isset($config[$field]['min']))
-				$f[] = 'min:' . $config[$field]['min'];
-			if (isset($config[$field]['max']))
-				$f[] = 'max:' . $config[$field]['max'];
-				
-			return $f;
-		}, $fields));
+		$filters = parent::validation('ad');
 		
 		$filters['contact_email'][] = 'email';
 		$filters['category_id'][] 	= 'in:' . implode(',', Category::get_id_name_mapping()->keys()->all());
 		$filters['starts_at'][] 	= 'after: -1 day';
-		$filters['ends_at'][] 		= 'after:' . Input::get('starts_at');
+		$filters['ends_at'][] 		= 'after:' . Input::get('starts_at') . ' -1 day';
 			
 		$filters = array_map(function($f) {
 			return implode('|', $f);

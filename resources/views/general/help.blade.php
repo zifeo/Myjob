@@ -17,11 +17,18 @@
 		
 		<p>{{ trans('general.texts.contact') }}</p>
 		
-		@include('general.elements.contact')
+		{!! Form::open([
+	        'action' => 'PublicController@send', 
+	        'class' => 'ui form validation', 
+	    ]) !!}
+	        
+			@include('general.elements.contact')
 		
-		{!! Form::submit(trans('general.buttons.send'), [
-			'class' => 'ui red button'
-		]) !!}
+			<div class="align-center">
+				<div class="ui red submit button">{{ trans('general.buttons.submit.send') }}</div>
+			</div>	
+			
+		{!! Form::close() !!}
 		
 	</div>
 </div>

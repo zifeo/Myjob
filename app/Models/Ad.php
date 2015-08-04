@@ -41,7 +41,10 @@ class Ad extends Model {
 			if (! isset($filters['required']) && isset($data[$field]))
 				$data[$field] = self::nullable($data[$field]);
 		}
-
+		
+		if (isset($data['starts_at'], $data['ends_at']) && $data['starts_at'] == $data['ends_at'])
+			$data['ends_at'] = null;
+			
 		$ad = new Ad($data); // mass-alignement allowed on fillable 
 		assert(isset($ad->title), "Create without all datas.");
 		$url = self::generate_url($ad->title);
@@ -54,6 +57,19 @@ class Ad extends Model {
 		$ad->url = $url; // reset $ad->url as it is only the primary key in Laravel and was altered by save
 		Log::info('Ad ' . e($ad->title) . ' created.');		
 		return $ad;
+	}
+	
+	public function fill(array $data) {
+		
+		foreach (config('data.ad') as $field => $filters) {
+			if (! isset($filters['required']) && isset($data[$field]))
+				$data[$field] = self::nullable($data[$field]);
+		}
+		
+		if (isset($data['starts_at'], $data['ends_at']) && $data['starts_at'] == $data['ends_at'])
+			$data['ends_at'] = null;
+		
+		return parent::fill($data);
 	}
 
 	public static function acceptedAd($fields)

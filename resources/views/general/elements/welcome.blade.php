@@ -1,20 +1,20 @@
-<h2 class="ui center aligned header">Adopte un étudiant EPFL</h2>
-<p>L'<strong>Association Générale des Etudiants</strong> de l'<strong>Ecole Polytechnique Fédérale de Lausanne</strong> met gratuitement cette plateforme à disposition pour mettre en relation étudiants et employeurs. Le but est de permettre à tous les étudiants de trouver facilement un job/emploi <strong>durant leurs études</strong>, et en même temps d'offrir aux employeurs des profils variés et qualifiés.</p>
+<h2 class="ui center aligned header">{{ trans('general.titles.adopt') }}</h2>
+<p>{!! trans('general.texts.description') !!}</p>
 <div class="ui two statistics">
 	<div class="red small statistic">
 		<div class="value">
-			5550
+			{{ $students }}
 		</div>
 		<div class="label">
-			Consultations
+			{{ trans('general.titles.students') }}
 		</div>
 	</div>
 	<div class="red small statistic">
 		<div class="value">
-			234
+			{{ $publishers }}
 		</div>
 		<div class="label">
-			Annonces
+			{{ trans('general.titles.publishers') }}
 		</div>
 	</div>
 </div>

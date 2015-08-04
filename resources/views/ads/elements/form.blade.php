@@ -12,21 +12,21 @@
 	<div class="ui top attached label caps">{{ trans('ads.sections.general') }}</div>
 	<div class="field">
 		<label>{{ label('title') }}</label>
-		{!! Form::text('title', null, form('title')) !!}
+		{!! Form::text('title', null, adform('title')) !!}
 	</div>
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('category_id') }}</label>
- 			{!! Form::select('category_id', $categories, null, form('category_id')) !!}
+ 			{!! Form::select('category_id', $categories, null, adform('category_id')) !!}
 		</div>
 		<div class="field">
 			<label>{{ label('place') }}</label>
-			{!! Form::text('place', null, form('place')) !!}
+			{!! Form::text('place', null, adform('place')) !!}
 		</div>
 	</div>
 	<div class="field">
 		<label>{{ label('description') }}</label>
-		{!! Form::textarea('description', null, form('description')) !!}
+		{!! Form::textarea('description', null, adform('description')) !!}
 	</div>
 </div>
 	        
@@ -35,31 +35,31 @@
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('starts_at') }} <small>({{ trans('general.startingtoday') }})</small></label>
-			{!! Form::text('starts_at', date('c'), form('starts_at')) !!}
+			{!! Form::text('starts_at', prefill($ad, date('c')), adform('starts_at')) !!}
 		</div>
 		<div class="field">
 			<label>{{ label('ends_at') }} <small>({{ trans('general.optional') }})</small></label>
-			{!! Form::text('ends_at', null, form('ends_at')) !!}
+			{!! Form::text('ends_at', null, adform('ends_at')) !!}
 		</div>
 	</div>
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('duration') }}</label>
-			{!! Form::text('duration', null, form('duration')) !!}
+			{!! Form::text('duration', null, adform('duration')) !!}
 		</div>
 		<div class="field">
 	        <label>{{ label('salary') }}</label>
- 			{!! Form::text('salary', null, form('salary')) !!}
+ 			{!! Form::text('salary', null, adform('salary')) !!}
 		</div>
 	</div>
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('skills') }} <small>({{ trans('general.optional') }})</small></label>
-			{!! Form::text('skills', null, form('skills')) !!}
+			{!! Form::text('skills', null, adform('skills')) !!}
 		</div>
 		<div class="field">
 			<label>{{ label('languages') }} <small>({{ trans('general.optional') }})</small></label>
-			{!! Form::text('languages', null, form('languages')) !!}
+			{!! Form::text('languages', null, adform('languages')) !!}
 		</div>
 	</div>
 </div>
@@ -69,21 +69,21 @@
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('contact_first_name') }}</label>
-			{!! Form::text('contact_first_name', isset($user) ? $user: null, form('contact_first_name')) !!}
+			{!! Form::text('contact_first_name', isset($user) ? prefill($ad, $user): null, adform('contact_first_name')) !!}
 		</div>
 		<div class="field">
 			<label>{{ label('contact_last_name') }}</label>
-			{!! Form::text('contact_last_name', isset($user_last) ? $user_last: null, form('contact_last_name')) !!}
+			{!! Form::text('contact_last_name', isset($user) ? prefill($ad, $user_last): null, adform('contact_last_name')) !!}
 		</div>
 	</div>
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('contact_email') }}</label>
-			{!! Form::email('contact_email', isset($user_email) ? $user_email: null, form('contact_email')) !!}
+			{!! Form::email('contact_email', isset($user) ? prefill($ad, $user_email): null, adform('contact_email')) !!}
 		</div>
 		<div class="field">
 			<label>{{ label('contact_phone') }} <small>({{ trans('general.optional') }})</small></label>
-			{!! Form::text('contact_phone', null, form('contact_phone')) !!}
+			{!! Form::text('contact_phone', null, adform('contact_phone')) !!}
 		</div>
 	</div>
 </div>

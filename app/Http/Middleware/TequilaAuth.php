@@ -2,9 +2,8 @@
 
 namespace Myjob\Http\Middleware;
 
-use Closure;
-use Auth;
 use Myjob\Agepinfo\Tequila;
+use Closure, Auth, Session;
 
 class TequilaAuth
 {
@@ -18,6 +17,7 @@ class TequilaAuth
     public function handle($request, Closure $next)
     {
 	    if (Auth::guest()) {
+		    Session::flash('intended', $request->path());
 	    	return Tequila::auth();
 		}
 		

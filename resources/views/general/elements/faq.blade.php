@@ -10,6 +10,6 @@
 		</p>
 	</div>
 	@empty
-	<p class="mt">Pas de question-réponse pour le moment.</p>
+	<p>{{ trans('general.nothingleft') }}</p>
 	@endforelse
 </div>
