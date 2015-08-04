@@ -28,7 +28,19 @@ class CategoriesTableSeeder extends Seeder {
     {
         DB::table('categories')->delete();
 
-        $categories = [
+        $categories_en = [
+            'Domestic help',
+            'Babysitting',
+            'Scientific experiment',
+            'IT',
+            'Office work',
+            'Public relations',
+            'Restaurant / Hotel work',
+            'Tutoring',
+            'Other'
+        ];
+
+        $categories_fr = [
             'Aide à domicile',
             'Babysitting',
             'Cobaye pour expériences',
@@ -40,10 +52,14 @@ class CategoriesTableSeeder extends Seeder {
             'Autre'
         ];
 
-        foreach ($categories as $category_name) {
+        for ($i = 0; $i < sizeof($categories_en); $i++) {
             $category = new Category;
 
-            $category->name = $category_name;
+            $category->name_en = current($categories_en);
+            $category->name_fr = current($categories_fr);
+
+            next($categories_en);
+            next($categories_fr);
 
             $category->save();
         }
@@ -153,27 +169,45 @@ class FAQSeeder extends Seeder {
     {
         DB::table('faq')->delete();
 
-        /* Every seeded Ad should have corresponding email here. */
-        $questionAnswers = [
+        $question_answers_en = [
             'What is the meaning of life?' => 'God.',
             'What if I accidently eat a banana?' => 'Send an email to banana@myjob.ch and we\'ll see what we can do.',
             'How to make MyJob work, it\'s all laggy!' => 'Did you try to reboot your computer?',
             'Knock knock' => 'Who\'s there?',
-            'How can I post an ad on MyJob?' => 'Please use the <a href="ad/create">corresponding form</a>'
+            'How can I post an ad on MyJob?' => 'Please use the <a href="ad/create">corresponding form</a>.'
         ];
 
-        $position = 0;
+        $question_answers_fr = [
+            'Quel est le sens de la vie ?' => 'Dieu.',
+            'Que se passe-t-il si je mange accidentellement une banane ?' => 'Envoyez un email à banana@myjob.ch et nous regarderons ce que nous pouvons faire à ce sujet.',
+            'Comment faire marcher MyJob, rien ne fonctionne !' => 'Avez-vous essayé de redémarrer votre ordinateur ?',
+            'Toc toc...' => 'Qui est là ?',
+            'Comment puis-je poster une annonce sur MyJob ?' => 'Veuillez utiliser le <a href="ad/create">formulaire correspondant</a>.'
+        ];
 
-        foreach ($questionAnswers as $question => $answer) {
+
+        for ($position = 0; $position < sizeof($question_answers_en); $position++) { 
+
+            // Extract current question / answer in en and fr
+            $question_en = key($question_answers_en);
+            $question_fr = key($question_answers_fr);
+            $answer_en = current($question_answers_en);
+            $answer_fr = current($question_answers_fr);
+
+            // Construct an FAQ entry in the database
             $faq_entry = new FAQ;
 
             $faq_entry->position = $position;
-            $faq_entry->question = $question;
-            $faq_entry->answer = $answer;
+            $faq_entry->question_en = $question_en;
+            $faq_entry->answer_en = $answer_en;
+            $faq_entry->question_fr = $question_fr;
+            $faq_entry->answer_fr = $answer_fr;
 
             $faq_entry->save();
 
-            ++$position;
+            // Iterate over the arrays
+            next($question_answers_en);
+            next($question_answers_fr);
         }
     }
 }

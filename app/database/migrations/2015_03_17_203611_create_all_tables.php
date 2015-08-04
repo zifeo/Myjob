@@ -27,7 +27,8 @@ class CreateAllTables extends Migration {
 		Schema::create('categories', function(Blueprint $table)
 		{
 			$table->increments('category_id');
-			$table->string('name', 30);
+			$table->string('name_en', 30);
+			$table->string('name_fr', 30);
 			$table->integer('color');
 
 			$table->timestamps();
@@ -85,8 +86,10 @@ class CreateAllTables extends Migration {
 		Schema::create('faq', function(Blueprint $table) {
 			$table->integer('position');
 			$table->primary('position');
-			$table->string('question', 100);
-			$table->text('answer');
+			$table->string('question_fr', 100);
+			$table->text('answer_fr');
+			$table->string('question_en', 100);
+			$table->text('answer_en');
 
 			$table->timestamps();
 		});

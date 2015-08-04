@@ -62,6 +62,8 @@ $secret_regexp = "[a-zA-Z0-9]{32}";
 
 	Route::get('help', 'HelpController@showHelp');
 
+	Route::post('language/set', 'HomeController@changeLanguage');
+
 // RANDOM_SECRET NEEDED
 
 	Route::get('ad/{email}/{secret}', 'AdController@manage_ads_with_email')

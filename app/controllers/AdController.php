@@ -9,9 +9,8 @@ class AdController extends \BaseController {
 	 */
 	public function index()
 	{
-		
 		$fields = ['url',
-				   'title', 'name AS category', 
+				   'title', 'name_'. $this->get_safe_locale() . ' AS category', 
 				   'description',
 				   'place',
 				   'starts_at'];
@@ -28,7 +27,7 @@ class AdController extends \BaseController {
 	 */
 	public function create()
 	{
-		$categories = Category::lists('name', 'category_id');
+		$categories = Category::get_id_name_mapping();
 		return View::make('ads.new')->with('categories', $categories)->with('ad', null);
 	}
 
@@ -41,7 +40,7 @@ class AdController extends \BaseController {
 	public function store()
 	{
 		$this->beforeFilter('csrf');
-		$categories = Category::lists('name', 'category_id');
+		$categories = Category::get_id_name_mapping();
 
 		$fields = $this->validation();
 		$validator = Validator::make(Input::all(), $fields);
@@ -87,7 +86,7 @@ class AdController extends \BaseController {
 	{
 		
 		$fields = ['url', 
-				   'title', 'name AS category', 
+				   'title', 'name_' . $this->get_safe_locale() . ' AS category', 
 				   'description',
 				   'salary', 'place', 'skills', 'languages',
 				   'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone',
@@ -111,7 +110,7 @@ class AdController extends \BaseController {
 
 		$this->check_visitor_connected($ad->contact_email);
 
-		$categories = Category::lists('name', 'category_id');
+		$categories = Category::get_id_name_mapping();
 		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
 	}
 
@@ -129,7 +128,7 @@ class AdController extends \BaseController {
 		$this->check_visitor_connected($ad->contact_email);
 
 		$this->beforeFilter('csrf');
-		$categories = Category::lists('name', 'category_id');
+		$categories = Category::get_id_name_mapping();
 
 		$fields = $this->validation();
 		$validator = Validator::make(Input::all(), $fields);
@@ -187,7 +186,7 @@ class AdController extends \BaseController {
 
 	private function validation() {
 		
-		$categories = Category::lists('name', 'category_id');
+		$categories = Category::get_id_name_mapping();
 		return [
 			'title' => 				['required', 'min:5', 'max:50'],
 			'place' => 				['min:3', 'max:15'],
@@ -206,11 +205,20 @@ class AdController extends \BaseController {
 		];
 	}
 
-	private function check_visitor_connected($email)
-	{
+	private function check_visitor_connected($email) {
 		if (! Session::has('connected_visitor') || Session::get('connected_visitor') != $email) {
 			App::abort(404);
 		}
 	}
 	
+	private function get_safe_locale() {
+		$locale = App::getLocale();
+
+		if (! in_array($locale, ['en', 'fr'])) {
+			// Unsupported locale
+			App::abort(403);
+		}
+
+		return $locale;
+	}
 }
