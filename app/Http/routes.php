@@ -20,47 +20,50 @@ Route::get('rss/{rss}', function() {
 });
 */
 
-Route::get('disconnect',			'PublicController@disconnect');
+Route::get(trans('general.routes.disconnect'),					'PublicController@disconnect');
 
 Route::group(['middleware' => 'locales'], function() {
 
-	Route::get('/', 				'PublicController@index');
-	Route::get('help', 				'PublicController@help');
+	Route::get(trans('general.routes.home'),					'PublicController@index');
+	Route::get(trans('general.routes.help'),					'PublicController@help');
 
-	Route::get('ad/create', 		'AdController@create');
-	Route::post('ad', 				'AdController@store');
+	Route::get(trans('general.routes.newjob'), 					'AdController@create');
+	Route::post(trans('general.routes.newjob'), 				'AdController@store');
+	
 	Route::get('{email}/{secret}', 	'AdController@manage_ads_with_email');
 	
-	Route::post('search',			'AdController@search');		
+	Route::get(trans('general.routes.search'),					'AdController@search');		
 	
 	// require at least publisher access	
 	Route::group(['middleware' => 'publisher'], function() {
 			
-		Route::get('ad', 			'AdController@index');
-		Route::get('ad/{ad}', 		'AdController@show');
-		Route::get('edit/{ad}', 	'AdController@edit');
-		Route::put('ad/{ad}', 		'AdController@update');
-		Route::get('delete/{ad}', 	'AdController@destroy');
+		Route::get(trans('general.routes.myjobs'), 				'AdController@created');
+		Route::get(trans('general.routes.job') . '/{ad}', 		'AdController@show');
+		Route::get(trans('general.routes.editjob') .'/{ad}', 	'AdController@edit');
+		Route::put(trans('general.routes.editjob') .'/{ad}', 	'AdController@update');
+		Route::get(trans('general.routes.deletejob') .'/{ad}', 	'AdController@destroy');
 		
-		Route::get('enable/{ad}', 	'ModerationController@enable');
-		Route::get('disable/{ad}', 	'ModerationController@disable');
+		Route::get(trans('general.routes.enablejob') .'/{ad}', 	'ModerationController@enable');
+		Route::get(trans('general.routes.disablejob') .'/{ad}', 'ModerationController@disable');
 		
 	});
 	
 	// require at least tequila access
 	Route::group(['middleware' => 'tequila'], function() {
 		
-		Route::get('connect', 		'PublicController@connect');		
-		Route::get('options', 		'OptionsController@index');
+		Route::get(trans('general.routes.jobs'), 				'AdController@index');
+		
+		Route::get(trans('general.routes.connect'), 			'PublicController@connect');		
+		Route::get(trans('general.routes.options'), 			'OptionsController@index');
 
 	});
 	
 	// require at least admin access
 	Route::group(['middleware' => ['tequila', 'admin']], function() {
 	
-		Route::get('moderation', 	'ModerationController@adsToModerate');
-		Route::get('accept/{ad}', 	'ModerationController@accept');
-		Route::get('refuse/{ad}', 	'ModerationController@refuse');
+		Route::get(trans('general.routes.moderation'), 			'ModerationController@adsToModerate');
+		Route::get(trans('general.routes.acceptjob') .'/{ad}', 	'ModerationController@accept');
+		Route::get(trans('general.routes.refusejob') .'/{ad}', 	'ModerationController@refuse');
 		
 		/*
 		Route::get('crons', function() {

@@ -3,7 +3,7 @@
 	<div class="ui fluid card">
 		<div class="content">
 			<div class="right floated">{{ $category_names[$ad->category_id] }}</div>
-			<a class="header" href="{{ url('ad', $ad->url) }}">
+			<a class="header" href="{{ action('AdController@show', $ad->url) }}">
 				{{ $ad->title }}
 			</a>
 			<div class="meta">
@@ -25,12 +25,12 @@
 			</div>
 		</div>
 		<div class="ui bottom attached three compact buttons">
-			<div class="ui green button validation-accept" rel="{{ $ad->url }}">{{ trans('ads.buttons.accept') }}</div>
-			<a class="ui orange button" href="{{ action('AdController@edit', $ad->url) }}">{{ trans('ads.buttons.edit') }}</a>
-			<div class="ui red button validation-refuse" rel="{{ $ad->url }}">{{ trans('ads.buttons.refuse') }}</div>
+			<a class="ui green button moderation" href="{{ action('ModerationController@accept', $ad->url) }}">{{ trans('general.buttons.accept') }}</a>
+			<a class="ui orange button" href="{{ action('AdController@edit', $ad->url) }}">{{ trans('general.buttons.edit') }}</a>
+			<a class="ui red button moderation" href="{{ action('ModerationController@refuse', $ad->url) }}">{{ trans('general.buttons.refuse') }}</a>
 		</div>
 	</div>
 </div>
 @empty
-<p class="mt">{{ trans('ads.texts.nothingleft') }}</p>
+<p>{{ trans('general.nothingleft') }}</p>
 @endforelse

@@ -9,12 +9,15 @@ class PublicController extends Controller {
 
 	public function index() {
 		
+		if (Auth::check())
+			return redirect()->action('AdController@index');
+		
 		return view('general.home');
 	}
 	
 	public function help() {
+		
         $faq_items = FAQ::all();
-
         return view('general.help', ['faq_items' => $faq_items]);
     }
 
@@ -23,7 +26,8 @@ class PublicController extends Controller {
 	}
 	
 	public function disconnect() {
-		Auth::logout();
+		if (Auth::check())
+			Auth::logout();
 		Session::flush();
 		return redirect()->action('PublicController@index');
 	}

@@ -1,6 +1,7 @@
 @if ($auth)
 <div class="ui computer tablet only row text inverted menu">
 	{!! item('jobs', $action) !!}
+	{!! item('myjobs', $action) !!}
 	{!! item('newjob', $action) !!}
 	@if ($admin)
 	{!! item('moderation', $action) !!}
@@ -24,6 +25,7 @@
 </div>
 <div class="ui left vertical inverted sidebar labeled icon menu">
 	{!! item('jobs', $action, 'home') !!}
+	{!! item('myjobs', $action, 'browser') !!}
 	{!! item('newjob', $action, 'add circle') !!}
 	@if ($admin)
 	{!! item('moderation', $action, 'unhide') !!}
@@ -39,20 +41,49 @@
 @else
 <div class="ui computer tablet only row text inverted menu">
 	{!! item('home', $action) !!}
+	@if ($publisher)
+	{!! item('myjobs', $action) !!}
+	@endif
 	{!! item('newjob', $action) !!}
 	{!! item('help', $action) !!}
 	<div class="right menu">
+		@if ($publisher)
+		<a class="item" href="{{ action('PublicController@disconnect') }}">
+			{{ trans('general.nav.disconnect') }} · {{ $user }}
+		</a>
+		@else
 		{!! item('connect', $action) !!}
+		@endif
 	</div>
 </div>
 <div class="ui mobile only row text inverted icon menu">
-	<a class="{{ $action == 'PublicController@index' ? 'active ': '' }}item" href="{{ action('PublicController@index') }}">
-		<i class="home large icon"></i>
+	<a class="item mobile-menu-toggle">
+		<i class="sidebar large icon"></i>
+		{{ $title or 'Myjob' }}
 	</a>
-	{!! item('newjob', $action) !!}
-	{!! item('help', $action) !!}
 	<div class="right menu">
+		@if ($publisher)
+		{!! item('disconnect', $action) !!}
+		@else
 		{!! item('connect', $action) !!}
+		@endif
 	</div>
+</div>
+<div class="ui left vertical inverted sidebar labeled icon menu">
+	{!! item('home', $action, 'home') !!}
+	@if ($publisher)
+	{!! item('myjobs', $action, 'browser') !!}
+	@endif
+	{!! item('newjob', $action, 'add circle') !!}
+	{!! item('help', $action, 'comments') !!}
+	@if ($publisher)
+	{!! item('disconnect', $action, 'sign out') !!}
+	@else
+	{!! item('connect', $action, 'sign in') !!}
+	@endif
+	<a class="item mobile-menu-toggle">
+		<i class="chevron circle right icon"></i>
+		{{ trans('general.back') }}
+	</a>
 </div>
 @endif

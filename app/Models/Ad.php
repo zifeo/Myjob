@@ -5,7 +5,7 @@ namespace Myjob\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Log, Auth;
+use Log, Auth, Session;
 
 class Ad extends Model {
 

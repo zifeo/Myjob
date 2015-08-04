@@ -5,7 +5,7 @@ namespace Myjob\Http\Controllers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Auth, View, Route;
+use Auth, View, Route, Session;
 
 abstract class Controller extends BaseController
 {
@@ -16,17 +16,26 @@ abstract class Controller extends BaseController
 	    $auth = Auth::check();
 	    View::share('auth', $auth);
 	    
-	    $route = explode('\\', Route::getCurrentRoute()->getActionName());
-	    $action = end($route);
-	    $routeName = array_search($action, config('myjob.routes'));
-	    $title = trans('general.nav.' . $routeName);
-	    View::share('action', $action);
-	    View::share('title', $title);
+	    $publisher = Session::has('connected_visitor');
+	    View::share('publisher', $publisher);
+	    
+	    if ($currentRoute = Route::getCurrentRoute()) {
+		    $route = explode('\\', $currentRoute->getActionName());
+		    $action = end($route);
+		    $routeName = array_search($action, config('myjob.routes'));
+		    $title = trans('general.nav.' . $routeName);
+		    View::share('action', $action);
+		    View::share('title', $title);
+	    }
 	    
 	    if ($auth) {
 		    $user = Auth::user();
 		    View::share('admin', $user->admin == 1);
 		    View::share('user', strtok($user->first_name, ' '));
-	    }    
+		    View::share('user_last', $user->last_name);
+		    View::share('user_email', $user->email);
+	    } elseif ($publisher) {
+		    View::share('user', Session::get('connected_visitor'));
+	    }
     }
 }

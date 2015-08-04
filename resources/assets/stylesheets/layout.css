@@ -13,7 +13,7 @@ body {
 }
 
 .mt {
-	margin-top: 0.8rem !important;
+	margin-top: 0.5rem !important;
 }
 
 .caps {
@@ -24,6 +24,19 @@ body {
 	padding: 1rem 0 0 0;
 	text-align: center;
 }
+
+.form > .segment {
+	margin-top: 0 !important;
+}
+
+.stretched.compact.row {
+	padding: 1rem !important;
+}
+
+	.stretched.compact.row > p {
+		margin: 0 auto;
+		font-weight: bold;
+	}
 
 .row.compact {
 	padding: 1rem 0.2rem 0.2rem 1rem !important; 
@@ -135,7 +148,7 @@ body {
 }
 
 .footer-wrapper {
-	margin: 2rem 0 0 0;
+	margin: 1rem 0 0 0;
 	padding: 1rem 0;
 	border-top: 1px solid #ddd;
 }

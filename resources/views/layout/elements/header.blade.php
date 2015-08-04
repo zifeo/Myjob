@@ -8,7 +8,7 @@
 		<a class="{{ App::getLocale() == 'fr' ? 'active ': ''}}item" href="?lang=fr">Fr<span>ançais</span></a>
 		<a class="{{ App::getLocale() == 'en' ? 'active ': ''}}item" href="?lang=en">En<span>glish</span></a>
 	</div>
-	{!! Form::open(['action' => 'AdController@search']) !!}
+	{!! Form::open(['action' => 'AdController@search', 'method' => 'GET']) !!}
 		<div class="ui action input">
 			{!! Form::text('q', isset($search) ? e($search): null, [
 				'placeholder' => trans('general.search')

@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="field">
-		<label>{{ label('description') }} <small>({{ trans('ads.markdown') }})</small></label>
+		<label>{{ label('description') }}</label>
 		{!! Form::textarea('description', null, form('description')) !!}
 	</div>
 </div>
@@ -34,11 +34,11 @@
 	<div class="ui top attached label caps">{{ trans('ads.sections.details') }}</div>
 	<div class="two fields">
 		<div class="field">
-			<label>{{ label('starts_at') }} <small>({{ trans('ads.startingtoday') }})</small></label>
+			<label>{{ label('starts_at') }} <small>({{ trans('general.startingtoday') }})</small></label>
 			{!! Form::text('starts_at', date('c'), form('starts_at')) !!}
 		</div>
 		<div class="field">
-			<label>{{ label('ends_at') }} <small>({{ trans('ads.optional') }})</small></label>
+			<label>{{ label('ends_at') }} <small>({{ trans('general.optional') }})</small></label>
 			{!! Form::text('ends_at', null, form('ends_at')) !!}
 		</div>
 	</div>
@@ -54,11 +54,11 @@
 	</div>
 	<div class="two fields">
 		<div class="field">
-			<label>{{ label('skills') }} <small>({{ trans('ads.optional') }})</small></label>
+			<label>{{ label('skills') }} <small>({{ trans('general.optional') }})</small></label>
 			{!! Form::text('skills', null, form('skills')) !!}
 		</div>
 		<div class="field">
-			<label>{{ label('languages') }} <small>({{ trans('ads.optional') }})</small></label>
+			<label>{{ label('languages') }} <small>({{ trans('general.optional') }})</small></label>
 			{!! Form::text('languages', null, form('languages')) !!}
 		</div>
 	</div>
@@ -69,20 +69,20 @@
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('contact_first_name') }}</label>
-			{!! Form::text('contact_first_name', null, form('contact_first_name')) !!}
+			{!! Form::text('contact_first_name', isset($user) ? $user: null, form('contact_first_name')) !!}
 		</div>
 		<div class="field">
 			<label>{{ label('contact_last_name') }}</label>
-			{!! Form::text('contact_last_name', null, form('contact_last_name')) !!}
+			{!! Form::text('contact_last_name', isset($user_last) ? $user_last: null, form('contact_last_name')) !!}
 		</div>
 	</div>
 	<div class="two fields">
 		<div class="field">
 			<label>{{ label('contact_email') }}</label>
-			{!! Form::email('contact_email', null, form('contact_email')) !!}
+			{!! Form::email('contact_email', isset($user_email) ? $user_email: null, form('contact_email')) !!}
 		</div>
 		<div class="field">
-			<label>{{ label('contact_phone') }} <small>({{ trans('ads.optional') }})</small></label>
+			<label>{{ label('contact_phone') }} <small>({{ trans('general.optional') }})</small></label>
 			{!! Form::text('contact_phone', null, form('contact_phone')) !!}
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 @forelse ($ads as $ad)
 <div class="column">
-	<a class="ui fluid card" href="{{ URL::to('ad', $ad->url) }}">
+	<a class="ui fluid card" href="{{ action('AdController@show', $ad->url) }}">
 		<div class="content">
 			<div class="right floated">{{ $ad->category }}</div>
 			<div class="header">{{ $ad->title }}</div>
@@ -15,5 +15,5 @@
 	</a>
 </div>
 @empty
-<p class="mt">{{ trans('ads.texts.nothingleft') }}</p>
+<p>{{ trans('general.nothingleft') }}</p>
 @endforelse

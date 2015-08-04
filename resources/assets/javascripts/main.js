@@ -43,6 +43,9 @@ $(function() {
 	// faq accordion
 	$('div.accordion').accordion();
 	
+	// toggle
+	$('.ui.checkbox').checkbox();
+	
 	// close message banner
 	$('.message .close').on('click', function() {
     	$(this)
@@ -51,24 +54,10 @@ $(function() {
 	});
   	
 	// ad moderation	
-	$('.validation-accept').on('click', function() {
+	$('.moderation').on('click', function(e) {
+		e.preventDefault();
 		var self = this;
-		var ad = $(this).attr("rel");
-		$.get('accept/' + ad).done(function(data) {
-			var that = $(self).parents('.card');
-			that.transition({
-				animation: 'horizontal flip',
-				onComplete: function() {
-					that.parent()
-						.remove();
-				}
-			});
-		});
-	});
-	$('.validation-refuse').on('click', function() {
-		var self = this;
-		var ad = $(this).attr("rel");
-		$.get('refuse/' + ad).done(function(data) {
+		$.get($(self).attr('href')).done(function(data) {
 			var that = $(self).parents('.card');
 			that.transition({
 				animation: 'horizontal flip',
@@ -120,7 +109,7 @@ $(function() {
 			attrs[name] = field;
 		});
 		
-		/*$(this).form({
+		$(this).form({
 			on: 'blur',
 			inline : true,
 			fields: attrs,
@@ -129,7 +118,7 @@ $(function() {
 		          return $('<div class="ui red pointing prompt label transition">'+error+'</div>');
 		       }
 		    }
-		});*/
+		});
 	});
 
 	// ad deletion

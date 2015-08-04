@@ -6,7 +6,7 @@
 	</div>
 	<div class="content">
 		<p class="transition">
-			{{ $faq_item->{'answer_' . App::getLocale()} }}
+			{!! $faq_item->{'answer_' . App::getLocale()} !!}
 		</p>
 	</div>
 	@empty

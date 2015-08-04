@@ -5,7 +5,7 @@ namespace Myjob\Http\Controllers;
 use Myjob\Models\Category;
 use Myjob\Models\Ad;
 use Myjob\Models\Publisher;
-use App, Input, Validator, Redirect, Auth;
+use App, Input, Validator, Redirect, Auth, Session;
 
 class AdController extends Controller {
 	
@@ -23,6 +23,19 @@ class AdController extends Controller {
 				   'ads.updated_at'];
 
 		$ads = Ad::acceptedAd($fields)->simplePaginate(config('myjob.ads.numberDisplay'));
+		return view('ads.index', ['ads' => $ads]);
+	}
+	
+	public function created()
+	{
+		$fields = ['url',
+				   'title', 'name_'. App::getLocale() . ' AS category', 
+				   'description',
+				   'place',
+				   'ads.updated_at'];
+
+		$publisher = Auth::check() ? Auth::user()->email: Session::get('connected_visitor');
+		$ads = Ad::withCategories()->where('contact_email', '=', $publisher)->select($fields)->simplePaginate(config('myjob.ads.numberDisplay'));
 		return view('ads.index', ['ads' => $ads]);
 	}
 
@@ -199,7 +212,7 @@ class AdController extends Controller {
 	    }
 		$ads = $query->simplePaginate(config('myjob.ads.numberDisplaySearch'));
 		
-		return view('ads.index', ['ads' => $ads, 'search' => $raw]);
+		return view('ads.search', ['ads' => $ads, 'search' => $raw]);
 	}
 
 	private function validation() {
