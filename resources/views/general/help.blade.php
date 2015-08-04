@@ -19,6 +19,10 @@
 		
 		@include('general.elements.contact')
 		
+		{!! Form::submit(trans('general.buttons.send'), [
+			'class' => 'ui red button'
+		]) !!}
+		
 	</div>
 </div>
 @stop

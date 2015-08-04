@@ -40,8 +40,9 @@ class CreateAllTables extends Migration {
 			$table->string('first_name', 50);
 			$table->string('last_name', 50);
 			$table->string('email', 75)->unique();
-			$table->boolean('daily_notice_activated')->default(false);
-			$table->boolean('weekly_notice_activated')->default(true);
+			$table->boolean('notifications_instant')->default(false);
+			$table->boolean('notifications_day')->default(false);
+			$table->boolean('notifications_week')->default(true);
 			$table->boolean('admin')->default(false);
 			
 			$table->rememberToken();

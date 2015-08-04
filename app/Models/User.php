@@ -14,6 +14,9 @@ class User extends Model implements AuthenticatableContract {
 	use Authenticatable;
 
 	protected $primaryKey = 'user_id';
+	protected $fillable = [
+		'notifications_instant', 'notifications_day', 'notifications_week'
+	];
 
 	public static function sciperOrCreate($sciper) {
 		

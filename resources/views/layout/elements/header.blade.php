@@ -1,3 +1,18 @@
+@if (isset($success))
+<div class="ui green nag">
+	<i class="close icon"></i>
+	<div class="title">
+		<i class="checkmark icon"></i> {{ $success }}
+	</div>
+</div>
+@elseif (isset($info))
+<div class="ui teal nag">
+	<i class="close icon"></i>
+	<div class="title">
+		<i class="info icon"></i> {{ $info }}
+	</div>
+</div>
+@endif
 <div class="middle aligned column">
 	<a href="{{ action($auth ? 'AdController@index': 'PublicController@index') }}">
 		<h1><img width="360" height="60" src="{{ asset('contents/images/myagep.svg') }}" alt="Myjob"></h1>

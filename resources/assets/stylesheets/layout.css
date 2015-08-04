@@ -25,6 +25,22 @@ body {
 	text-align: center;
 }
 
+.nag {
+	padding-right: 2rem !important;
+}
+
+.nag.green {
+	background-color: #21ba45 !important;
+}
+
+.nag.teal {
+	background-color: #00b5ad !important;
+}
+
+.nag > .close.icon {
+	margin: -0.7rem 0 0 0 !important;
+}
+
 .form > .segment {
 	margin-top: 0 !important;
 }

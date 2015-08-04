@@ -46,6 +46,9 @@ $(function() {
 	// toggle
 	$('.ui.checkbox').checkbox();
 	
+	// toggle
+	$('.nag').nag('show');
+	
 	// close message banner
 	$('.message .close').on('click', function() {
     	$(this)

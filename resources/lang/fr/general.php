@@ -39,13 +39,14 @@ return [
 		'options' 			=> 'options',
 		'help' 				=> 'aide',
 		'connect' 			=> 'connexion',
-		'disconnect' 		=> 'deconnexion',
+		'disconnect' 		=> 'reset',
 	],
 	
 	'buttons' => [
 		'submit' => [
 			'new' 			=> 'Enregistrer la nouvelle annonce',
 			'edit'	 		=> "Modifier l'annonce",	
+			'update'	 	=> "Modifier les options",	
 		],	
 		'edit'	 			=> 'Editer',	
 		'renew'	 			=> 'Renouveller',	
@@ -56,6 +57,7 @@ return [
 		'reget'	 			=> 'Récupérer une annonce',	
 		'ask'	 			=> 'Poser une question',	
 		'apply'		 		=> 'Postuler',	
+		'send'		 		=> 'Envoyer le message',	
 	],
 
 	'optional' 				=> 'si applicable',	
@@ -65,10 +67,14 @@ return [
 
 	'disabled'	 			=> 'désactivé',
 	'notyetvalidated'		=> 'pas encore validé',
-
+	
 	'startingtoday' 		=> "dès aujourd'hui",
 	'dates' 				=> 'Date·s',
 	'todate' 				=> "jusqu'au",
+	
+	'successes'	=> [
+		'options'			=> "Options misent à jour.",	
+	],
 
 	'titles' => [
 		'managing'			=> "Gestion de l'annonce",
@@ -93,8 +99,8 @@ return [
 			'rule3'			=> "<strong>pas de lien de postulation extérieure</strong>",
 		],
 		'contact' 			=> "Pour toute·s question·s (après avoir lu attentivement la foire aux questions) et/ou suggestion·s, vous pouvez contacter rapidement l'équipe par ici.",
-		'faq' 				=> "Après de nombreuses années de services, l'équipe de Myjob a récolté soigneusement les questions les plus posées et les répertorie ici.",
-		'notifications' 	=> "Malgré le nombre d'annonce, certaines places se font rares et c'est pourquoi il est possible de paramétrer des alertes emails qui vous seront envoyées selon certains critères.",
+		'faq' 				=> "Après de nombreuses années de services, l'équipe de Myjob a récolté soigneusement les questions les plus posées et les a répertoriées ici.",
+		'notifications' 	=> "Malgré le nombre d'annonces, certaines places se font rares et c'est pourquoi il est possible de paramétrer des alertes emails qui vous seront envoyées selon certains critères.",
 		
 	],
 	

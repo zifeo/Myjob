@@ -22,7 +22,16 @@ abstract class Controller extends BaseController
 	    if ($currentRoute = Route::getCurrentRoute()) {
 		    $route = explode('\\', $currentRoute->getActionName());
 		    $action = end($route);
-		    $routeName = array_search($action, config('myjob.routes'));
+		    $config = config('myjob.routes');
+		    $routeName = array_search($action, $config);
+		    if (empty($routeName)) {
+			    $controller = strstr($action, '@', true);
+			    $closest = array_first($config, function($key, $value) use ($controller) {
+				    return strstr($value, '@', true) == $controller;
+				});
+				$routeName = array_search($closest, $config);
+		    }
+		    
 		    $title = trans('general.nav.' . $routeName);
 		    View::share('action', $action);
 		    View::share('title', $title);
