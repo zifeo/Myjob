@@ -34,8 +34,7 @@ $(function() {
 	
 	// close mobile menu
 	$('.mobile-menu-toggle').on('click', function() {
-		$('.ui.labeled.icon.sidebar')
-			.sidebar('toggle');		
+		$('.ui.labeled.icon.sidebar').sidebar('toggle');		
 	});
 	
 	// style selects

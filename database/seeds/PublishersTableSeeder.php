@@ -3,14 +3,14 @@
 namespace Myjob\Seeders;
 
 use Illuminate\Database\Seeder;
-use Myjob\Models\Provider;
+use Myjob\Models\Publisher;
 use DB;
 
-class ProvidersTableSeeder extends Seeder {
+class PublishersTableSeeder extends Seeder {
 	
     public function run() {
 	    
-        DB::table('providers')->delete();
+        DB::table('publishers')->delete();
 
         // every seeded ad should have corresponding email here
         $emails = [
@@ -21,7 +21,7 @@ class ProvidersTableSeeder extends Seeder {
         ];
 
         foreach ($emails as $email) {
-            $contact_email = new Provider;
+            $contact_email = new Publisher;
 
             $contact_email->contact_email = $email;
             $contact_email->random_secret = str_random(32);

@@ -20,11 +20,7 @@ Route::get('rss/{rss}', function() {
 });
 */
 
-Route::get('reset', function() {
-	Auth::logout();
-	Session::flush();
-	return Redirect::to('/');
-});
+Route::get('disconnect',			'PublicController@disconnect');
 
 Route::group(['middleware' => 'locales'], function() {
 
@@ -54,18 +50,17 @@ Route::group(['middleware' => 'locales'], function() {
 	// require at least tequila access
 	Route::group(['middleware' => 'tequila'], function() {
 		
-		Route::get('connect', function() {
-			return Redirect::route('AdController@index');
-		});
-		
+		Route::get('connect', 		'PublicController@connect');		
+		Route::get('options', 		'OptionsController@index');
+
 	});
 	
 	// require at least admin access
 	Route::group(['middleware' => ['tequila', 'admin']], function() {
 	
-		Route::get('moderation', 'ModerationController@adsToModerate');
-		Route::get('accept/{ad}', 'ModerationController@accept');
-		Route::get('refuse/{ad}', 'ModerationController@refuse');
+		Route::get('moderation', 	'ModerationController@adsToModerate');
+		Route::get('accept/{ad}', 	'ModerationController@accept');
+		Route::get('refuse/{ad}', 	'ModerationController@refuse');
 		
 		/*
 		Route::get('crons', function() {

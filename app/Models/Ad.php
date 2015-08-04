@@ -38,7 +38,7 @@ class Ad extends Model {
 	{
 
 		foreach (config('data.ad') as $field => $filters) {
-			if (! isset($filters['required']))
+			if (! isset($filters['required']) && isset($data[$field]))
 				$data[$field] = self::nullable($data[$field]);
 		}
 

@@ -42,9 +42,9 @@ body {
 	.ui.stackable.celled.grid > .row > .column {
 		padding: 1rem !important;
 	}
-	
-	.ui.stackable.celled.grid > .row + .row {
-		border: 0 !important;
+
+	.ui.celled.grid>.row {
+		box-shadow: none !important;
 	}
 
 }
@@ -126,29 +126,8 @@ body {
 		margin: 0 !important;
 	}
 	
-	.menu-wrapper #current-nav-state {
-		margin: 0 0 0 0.65rem;
-	}
-	
-.notifications-wrapper {
-	margin-top: 2rem !important;
-}
-
-	.ui.notifications-wrapper {
-		max-width: 800px !important;
-	}
-	
-	.notifications-wrapper > .column:first-child {
-		text-align: center;
-	}
-	
-	.notifications-wrapper .column {
-		padding-top: 0.6rem !important;
-		padding-bottom: 0.6rem !important;
-	}
-
-	.notifications-wrapper .header {
-		margin-bottom: 0.5rem;
+	.menu-wrapper .mobile-menu-toggle .icon {
+		margin-right: 0.65rem !important;
 	}
 
 .content-wrapper {

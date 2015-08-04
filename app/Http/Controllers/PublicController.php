@@ -3,7 +3,7 @@
 namespace Myjob\Http\Controllers;
 
 use Myjob\Models\FAQ;
-use View;
+use View, Session, Auth;
 
 class PublicController extends Controller {
 
@@ -17,5 +17,15 @@ class PublicController extends Controller {
 
         return View::make('help')->with('faq_items', $faq_items);
     }
+
+	public function connect() {
+		return redirect()->action('AdController@index');
+	}
+	
+	public function disconnect() {
+		Auth::logout();
+		Session::flush();
+		return redirect()->action('PublicController@index');
+	}
 
 }

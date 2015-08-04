@@ -4,7 +4,7 @@ namespace Myjob\Http\Controllers;
 
 use Myjob\Models\Category;
 use Myjob\Models\Ad;
-use Myjob\Models\Provider;
+use Myjob\Models\Publisher;
 use View, App, Input, Validator, Redirect, Auth;
 
 class AdController extends Controller {
@@ -57,8 +57,8 @@ class AdController extends Controller {
 			in contact_emails */
 
 			$email = Input::get('contact_email');
-			if (empty(Provider::get_valid_secrets($email))) {
-				$contact_email = new Provider;
+			if (empty(Publisher::get_valid_secrets($email))) {
+				$contact_email = new Publisher;
 
 				$contact_email->contact_email = $email;
 				$contact_email->random_secret = str_random(32);
@@ -152,14 +152,14 @@ class AdController extends Controller {
 	*/
 	public function manage_ads_with_email($email, $secret)
 	{
-		if (Provider::is_outdated($secret, $email))
+		if (Publisher::is_outdated($secret, $email))
 		{
 			// TODO Lien dans le message
-			$message = 'Ce lien a plus de ' . config('myjob.providers.secretValidityWeeks') .
+			$message = 'Ce lien a plus de ' . config('myjob.Publishers.secretValidityWeeks') .
 			' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
 			return Redirect::to('/')->withErrors(array('message' => $message))->with('type', 'warning');
 			
-		} elseif (! Provider::is_valid($secret, $email)) {
+		} elseif (! Publisher::is_valid($secret, $email)) {
 			
 			App::abort(404);
 			
@@ -197,7 +197,7 @@ class AdController extends Controller {
 	        	}
 	        });
 	    }
-		$ads = $query->simplePaginate(config('myjob.ads.numberDisplay'));
+		$ads = $query->simplePaginate(config('myjob.ads.numberDisplaySearch'));
 		
 		return View::make('ads.list')->with('ads', $ads)->with('search', $raw);
 	}

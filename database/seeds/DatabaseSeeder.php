@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder {
 	    
         Model::unguard(); // enable mass assignements
 
-        $this->call(Myjob\Seeders\CategoriesTableSeeder::class); // depend on ads
-        $this->call(Myjob\Seeders\ProvidersTableSeeder::class); // depend on ads
-        $this->call(Myjob\Seeders\AdsTableSeeder::class);
+        $this->call(Myjob\Seeders\CategoriesTableSeeder::class);
+        $this->call(Myjob\Seeders\PublishersTableSeeder::class);
+        $this->call(Myjob\Seeders\AdsTableSeeder::class); // depend on both previous
         
         $this->call(Myjob\Seeders\FAQSeeder::class);
 

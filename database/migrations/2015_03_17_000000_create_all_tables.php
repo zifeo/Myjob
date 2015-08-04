@@ -12,10 +12,9 @@ class CreateAllTables extends Migration {
 	 */
 	public function up()
 	{
-		/* providers */
-		Schema::create('providers', function(Blueprint $table) {
+		Schema::create('publishers', function(Blueprint $table) {
 			
-			$table->increments('provider_id');
+			$table->increments('publisher_id');
 			$table->string('contact_email', config('data.ad.contact_email.max'))->unique();
 			$table->string('random_secret', 32);
 
@@ -23,7 +22,6 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		/* categories */
 		Schema::create('categories', function(Blueprint $table) {
 			
 			$table->increments('category_id');
@@ -35,7 +33,6 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		/* users */
 		Schema::create('users', function(Blueprint $table) {
 			
 			$table->increments('user_id');
@@ -52,7 +49,6 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		/* ads */
 		Schema::create('ads', function(Blueprint $table) {
 			
 			$table->increments('ad_id');
@@ -81,12 +77,11 @@ class CreateAllTables extends Migration {
 			$table->dateTime('expires_at');
 
 			$table->foreign('category_id')->references('category_id')->on('categories');
-			$table->foreign('contact_email')->references('contact_email')->on('providers');
+			$table->foreign('contact_email')->references('contact_email')->on('publishers');
 			$table->timestamps();
 			$table->softDeletes();
 		});
 
-		/* FAQ */
 		Schema::create('faq', function(Blueprint $table) {
 			
 			$table->increments('faq_id');
@@ -100,7 +95,6 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		/* sessions */		
 		Schema::create('sessions', function(Blueprint $table) {
 			
             $table->increments('id');
@@ -121,7 +115,7 @@ class CreateAllTables extends Migration {
 		Schema::drop('ads');
 		Schema::drop('users');
 		Schema::drop('categories');
-		Schema::drop('providers');
+		Schema::drop('publishers');
 		Schema::drop('faq');
 		Schema::drop('sessions');
 	}

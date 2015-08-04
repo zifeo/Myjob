@@ -1,5 +1,5 @@
 <?php
-
+	
 function label($field) {
 	return trans('ads.labels.' . $field);
 }
@@ -40,4 +40,21 @@ function formatDate($time = null) {
 
 function expired($ad) {
 	return $ad->expires_at <= formatDate();
+}
+
+function item($nav, $action, $icon = null) {
+	$navAction = config('myjob.routes.' . $nav);
+	$activeHTML = $action == $navAction ? 'active ': '';
+	$actionHTML = e(action($navAction));
+	$iconHTML = $icon != null ? '<i class="' . $icon . ' icon"></i> ': '';
+	$transHTML = e(trans('general.nav.' . $nav));
+	return 
+'<a class="' . $activeHTML . 'item" href="' . $actionHTML . '">
+	' . $iconHTML . $transHTML . '
+</a>';
+}
+
+function menu($action) {
+	$nav = array_search($action, config('myjob.routes'));
+	return trans('general.nav.' . $nav);
 }

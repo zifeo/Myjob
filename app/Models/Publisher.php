@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Log;
 
-class Provider extends Model {
+class Publisher extends Model {
 	
 	use SoftDeletes;
 	
@@ -15,7 +15,7 @@ class Provider extends Model {
     public static function get_outdated_secrets($email)
     {
         $models = self::where('contact_email', '=', $email)
-            ->where('created_at', '<', date('Y-m-d H-i-s', strtotime('-' . config('myjob.providers.secretValidityWeeks') . ' weeks')))->get();
+            ->where('created_at', '<', formatDate(strtotime('-' . config('myjob.providers.secretValidityWeeks') . ' weeks')))->get();
 
         return self::secrets_from_models($models);
     }
@@ -23,7 +23,7 @@ class Provider extends Model {
     public static function get_valid_secrets($email)
     {
         $models = self::where('contact_email', '=', $email)
-            ->where('created_at', '>=', date('Y-m-d H-i-s', strtotime('-' . config('myjob.providers.secretValidityWeeks') . ' weeks')))->get();
+            ->where('created_at', '>=', formatDate(strtotime('-' . config('myjob.providers.secretValidityWeeks') . ' weeks')))->get();
 
         return self::secrets_from_models($models);
     }
