@@ -5,7 +5,7 @@ namespace Myjob\Http\Controllers;
 use Myjob\Models\Category;
 use Myjob\Models\Ad;
 use Myjob\Models\Publisher;
-use View, App, Input, Validator, Redirect, Auth;
+use App, Input, Validator, Redirect, Auth;
 
 class AdController extends Controller {
 	
@@ -23,7 +23,7 @@ class AdController extends Controller {
 				   'ads.updated_at'];
 
 		$ads = Ad::acceptedAd($fields)->simplePaginate(config('myjob.ads.numberDisplay'));
-		return View::make('ads.list')->with('ads', $ads);
+		return view('ads.index', ['ads' => $ads]);
 	}
 
 	/**
@@ -34,7 +34,7 @@ class AdController extends Controller {
 	public function create()
 	{
 		$categories = Category::get_id_name_mapping();
-		return View::make('ads.new')->with('categories', $categories)->with('ad', null);
+		return view('ads.new', ['categories' => $categories, 'ad' => null]);
 	}
 
 
@@ -92,7 +92,7 @@ class AdController extends Controller {
 		
 		$ad = Ad::withCategoriesVisitors()->select($fields)->findOrFail($url);
 
-		return View::make('ads.show')->with('ad', $ad);
+		return view('ads.show', ['ad' => $ad]);
 	}
 
 	/**
@@ -106,7 +106,7 @@ class AdController extends Controller {
 		$ad = Ad::withVisitors()->findorfail($url);
 		$categories = Category::get_id_name_mapping();
 		
-		return View::make('ads.edit')->with('categories', $categories)->with('ad', $ad);
+		return view('ads.edit', ['categories' => $categories, 'ad' => $ad]);
 	}
 
 
@@ -166,7 +166,7 @@ class AdController extends Controller {
 		} else {
 			/* Temporarily allow current visitor to edit all ads with email $email. */
 			Session::put('connected_visitor', $email);
-			return Redirection::action('ads.list');
+			return redirect()->action('AdController@index');
 		}
 	}
 	
@@ -199,7 +199,7 @@ class AdController extends Controller {
 	    }
 		$ads = $query->simplePaginate(config('myjob.ads.numberDisplaySearch'));
 		
-		return View::make('ads.list')->with('ads', $ads)->with('search', $raw);
+		return view('ads.index', ['ads' => $ads, 'search' => $raw]);
 	}
 
 	private function validation() {

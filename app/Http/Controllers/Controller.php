@@ -16,14 +16,17 @@ abstract class Controller extends BaseController
 	    $auth = Auth::check();
 	    View::share('auth', $auth);
 	    
-	    $action = explode('\\', Route::getCurrentRoute()->getActionName());
-	    View::share('action', end($action));
+	    $route = explode('\\', Route::getCurrentRoute()->getActionName());
+	    $action = end($route);
+	    $routeName = array_search($action, config('myjob.routes'));
+	    $title = trans('general.nav.' . $routeName);
+	    View::share('action', $action);
+	    View::share('title', $title);
 	    
 	    if ($auth) {
 		    $user = Auth::user();
 		    View::share('admin', $user->admin == 1);
 		    View::share('user', strtok($user->first_name, ' '));
-	    }
-	    	    
+	    }    
     }
 }

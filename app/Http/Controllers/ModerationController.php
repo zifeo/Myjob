@@ -2,9 +2,9 @@
 	
 namespace Myjob\Http\Controllers;
 
-use View, Log, Input;
 use Myjob\Models\Ad;
 use Myjob\Models\Category;
+use Log;
 
 class ModerationController extends Controller {
 	
@@ -14,9 +14,7 @@ class ModerationController extends Controller {
     public function adsToModerate() {
         $ads_to_moderate = Ad::whereNull('validated_at')->get();
 
-        return View::make('moderation')
-            ->with('ads_to_moderate', $ads_to_moderate)
-            ->with('category_names', Category::get_id_name_mapping());
+        return view('ads.moderation', ['ads_to_moderate' => $ads_to_moderate, 'category_names' => Category::get_id_name_mapping()]);
     }
 
 	    

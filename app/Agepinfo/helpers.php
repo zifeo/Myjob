@@ -53,8 +53,3 @@ function item($nav, $action, $icon = null) {
 	' . $iconHTML . $transHTML . '
 </a>';
 }
-
-function menu($action) {
-	$nav = array_search($action, config('myjob.routes'));
-	return trans('general.nav.' . $nav);
-}

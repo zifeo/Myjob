@@ -2,37 +2,12 @@
 
 return [
 
-	// INFO
-	'titles' => [
-		'new' 					=> 'Nouvelle annonce',
-		'edit'	 				=> 'Edition d\'une annonce',
-		'confirmdeletion'		=> 'Supprimer cette annonce ?',
-	],
-	'buttons' => [
-		'submit' => [
-			'new' 					=> 'Enregistrer la nouvelle annonce',
-			'edit'	 				=> "Modifier l'annonce",	
-		],	
-		'edit'	 				=> 'Editer',	
-		'renew'	 				=> 'Renouveller',	
-		'disable'	 			=> 'Désactiver',	
-		'delete'	 			=> 'Supprimer',	
-		'accept'	 			=> 'Accepter',	
-		'refuse'	 			=> 'Refuser',	
-	],
-	'texts' => [
-		'confirmdeletion'		=> "Désactiver l'annonce permet de la retrouver et de la réactiver plus tard.",
-		'definitivedeletion'	=> "Au contraire, la suppression est définitive.",
-		'alreadydisable'		=> "L'annonce est déjà désactivée.",
-		'nothingleft' 			=> "Pas d'annonce disponible.",
-	],
 	'sections' => [
 		'general' 				=> 'Information générale',
 		'details' 				=> 'Détails du job',
 		'publisher' 			=> 'Personne de contact',
 	],
 	
-	// AD FIELD
 	'labels' => [
 		'title'					=> 'Titre',
 		'category_id'			=> 'Catégorie',
@@ -51,6 +26,7 @@ return [
 		'contact_email'			=> 'Email',
 		'contact_phone'			=> 'Téléphone',
 	],
+	
 	'placeholders' => [
 		'title'					=> 'Livreur de pizza, Expérience neurologique',
 		'category_id'			=> '',
@@ -70,8 +46,7 @@ return [
 		'contact_phone'			=> '+41 21 69 XX XX',
 	],
 		
-	// SPECIFIC
-	'nonrequired' 				=> 'si applicable',	
+	'optional' 					=> 'si applicable',	
 	'markdown' 					=> 'supporte le balisage Markdown',
 	'startingtoday' 			=> "dès aujourd'hui",
 	'dates' 					=> 'Date·s',

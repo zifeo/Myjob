@@ -38,7 +38,7 @@
 			{!! Form::text('starts_at', date('c'), form('starts_at')) !!}
 		</div>
 		<div class="field">
-			<label>{{ label('ends_at') }} <small>(si applicable)</small></label>
+			<label>{{ label('ends_at') }} <small>({{ trans('ads.optional') }})</small></label>
 			{!! Form::text('ends_at', null, form('ends_at')) !!}
 		</div>
 	</div>
@@ -54,11 +54,11 @@
 	</div>
 	<div class="two fields">
 		<div class="field">
-			<label>{{ label('skills') }} <small>({{ trans('ads.nonrequired') }})</small></label>
+			<label>{{ label('skills') }} <small>({{ trans('ads.optional') }})</small></label>
 			{!! Form::text('skills', null, form('skills')) !!}
 		</div>
 		<div class="field">
-			<label>{{ label('languages') }} <small>({{ trans('ads.nonrequired') }})</small></label>
+			<label>{{ label('languages') }} <small>({{ trans('ads.optional') }})</small></label>
 			{!! Form::text('languages', null, form('languages')) !!}
 		</div>
 	</div>
@@ -82,7 +82,7 @@
 			{!! Form::email('contact_email', null, form('contact_email')) !!}
 		</div>
 		<div class="field">
-			<label>{{ label('contact_phone') }} <small>({{ trans('ads.nonrequired') }})</small></label>
+			<label>{{ label('contact_phone') }} <small>({{ trans('ads.optional') }})</small></label>
 			{!! Form::text('contact_phone', null, form('contact_phone')) !!}
 		</div>
 	</div>
