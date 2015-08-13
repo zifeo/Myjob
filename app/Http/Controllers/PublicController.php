@@ -16,7 +16,7 @@ class PublicController extends Controller {
 		if (Auth::check())
 			return redirect()->action('AdController@index');
 			
-		$publishers = Publisher::withTrashed()->count() + OLD_ADS_MYJOB_1;
+		$publishers = Publisher::withTrashed()->count() + self::OLD_ADS_MYJOB_1;
 		$students = User::withTrashed()->count();
 		
 		return view('general.home', ['publishers' => $publishers, 'students' => $students]);
