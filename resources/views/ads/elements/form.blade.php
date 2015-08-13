@@ -24,10 +24,6 @@
 			{!! Form::text('place', null, adform('place')) !!}
 		</div>
 	</div>
-	<div class="field">
-		<label>{{ label('description') }}</label>
-		{!! Form::textarea('description', null, adform('description')) !!}
-	</div>
 </div>
 	        
 <div class="ui segment">
@@ -61,6 +57,14 @@
 			<label>{{ label('languages') }} <small>({{ trans('general.optional') }})</small></label>
 			{!! Form::text('languages', null, adform('languages')) !!}
 		</div>
+	</div>
+</div>
+
+<div class="ui segment">
+	<div class="ui top attached label caps">{{ trans('ads.sections.main') }}</div>
+	<div class="field">
+		<label>{{ label('description') }}</label>
+		{!! Form::textarea('description', null, adform('description')) !!}
 	</div>
 </div>
 
