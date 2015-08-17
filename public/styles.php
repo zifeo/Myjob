@@ -2,11 +2,8 @@
 
 header('Content-type: text/css'); 
 
-readfile('styles/fonts.css');
-readfile('styles/bootstrap.min.css');
-readfile('styles/glyphicons.css');
-readfile('styles/chosen.min.css');
-readfile('styles/datepicker3.css');
-readfile('styles/layout.css');
-readfile('styles/form.css');
-readfile('styles/moderation.css');
+readfile('../resources/assets/stylesheets/fonts.css');
+readfile('../resources/assets/stylesheets/semantic.min.css');
+readfile('../resources/assets/stylesheets/picker.css');
+readfile('../resources/assets/stylesheets/picker.date.css');
+readfile('../resources/assets/stylesheets/layout.css');

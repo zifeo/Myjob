@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Myjob
+        psr4_prefix: Myjob
+        src_path: app
