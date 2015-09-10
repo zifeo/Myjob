@@ -69,6 +69,9 @@ class Ad extends Model {
 		if (isset($data['starts_at'], $data['ends_at']) && $data['starts_at'] == $data['ends_at'])
 			$data['ends_at'] = null;
 		
+		if (isset($data['description']))
+			$data['description'] = self::prettyText($data['description']);
+		
 		return parent::fill($data);
 	}
 
@@ -108,5 +111,10 @@ class Ad extends Model {
 
 	private static function nullable($field) {
 		return isset($field) && ! empty($field) ? $field: null;
+	}
+
+	private static function prettyText($text) {
+		if (substr($text, -1) != '.') $text .= '.';
+		return ucfirst($text);
 	}
 }
