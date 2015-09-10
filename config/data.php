@@ -20,7 +20,7 @@ return [
 		'place' => [
 			'required' => true,
 			'min' => 2,
-			'max' => 50,
+			'max' => 30,
 		],
 		'description' => [
 			'required' => true,
