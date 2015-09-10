@@ -1,27 +1,28 @@
-## Laravel PHP Framework
+## Myjob
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Myjob is a job-offering-seeking web-platform developed by the general student association of [Swiss Federal Institute of Technology in Lausanne — EPFL](http://www.epfl.ch/index.en.html). It aims to facilitate the meeting of employers and skillful EPFL students (without boring extern subscription) for experiencing working life aside of their studies. The project ([in live here](http://myjob.epfl.ch)) is maintained by the association IT-team and is open source under the [.. LICENSE](./LICENSE) (and `Forking Myjob` rules).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### Mottos
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Some of the key features:
 
-## Official Documentation
+- ads creation, modification and full-moderation
+- student access for ads viewing and applying
+- implicit admin access for moderation
+- questions/answers and contact mechanism
+- extern ad creation without subscription (managing published ad by mails)
+- fully responsive and mobile friendly
+- clear and simple interface
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### Forking Myjob
 
-## Contributing
+When forking Myjob for improvements or your own use you have to consider the following facts:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+- project is EPFL-specific but can easily be adapted to your own infrastructure or needs
+- further EPFL affiliations are prohibited and controlled by swiss federal laws (basically you have to get rid of all EPFL related media such as name or images)
+- further general student association affiliations are prohibited following the same principle
+- current users access is using a secure and controlled authentication called [Tequila: Identity Management](https://tequila.epfl.ch), you will have to set up a Tequila server on your own or change authentication mechanism
 
-## Security Vulnerabilities
+### Support
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Any bug, improvement or question is welcome using the Github issues tool.
