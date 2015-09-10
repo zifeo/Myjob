@@ -27,7 +27,7 @@ final class Tequila {
 			$data = ['key' => Session::get('tequila')];
 			$reponse = self::post($host, $data);
 
-	       	$u = User::sciperOrCreate($reponse["uniqueid"]);
+	       	$u = User::firstSciperOrCreate($reponse["uniqueid"]);
 	       	
 	       	$u->email = $reponse["email"];
 	       	$u->first_name = $reponse["firstname"];

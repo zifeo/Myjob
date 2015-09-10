@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract {
 		'notifications_instant', 'notifications_day', 'notifications_week'
 	];
 
-	public static function sciperOrCreate($sciper) {
+	public static function firstSciperOrCreate($sciper) {
 		
 		$u = self::where("sciper", "=", $sciper)->get();
 		
