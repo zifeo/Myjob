@@ -46,6 +46,7 @@ function existTrans($subname, $name) {
 	return $trans != $subname . '.' . $name && ! empty($trans);
 }
 
+/* Format date to database compatible pattern given a timestamp or using current timestamp. */
 function formatDate($time = null) {
 	return date('Y-m-d H:i:s', $time == null ? time(): $time);
 }

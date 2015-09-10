@@ -117,6 +117,10 @@ class AdController extends Controller {
 	{
 		$ad = Ad::withVisitors()->findorfail($url);
 		$categories = Category::get_id_name_mapping();
+		$now = formatDate();
+		
+		if ($ad->starts_at < $now) $ad->starts_at = $now;
+		if ($ad->ends_at < $now) $ad->ends_at = null;
 		
 		return view('ads.edit', ['categories' => $categories, 'ad' => $ad]);
 	}
