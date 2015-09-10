@@ -68,11 +68,11 @@ return [
 		],
 		'contact_email' => [
 			'required' => true,
-			'min' => 2,
+			'min' => 5,
 			'max' => 100,
 		],
 		'contact_phone' => [
-			'min' => 2,
+			'min' => 5,
 			'max' => 50,
 		],
 	],

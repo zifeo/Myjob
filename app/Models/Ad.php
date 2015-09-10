@@ -71,6 +71,9 @@ class Ad extends Model {
 		
 		if (isset($data['description']))
 			$data['description'] = self::prettyText($data['description']);
+			
+		if (isset($data['contact_phone']))
+			$data['contact_phone'] = self::prettyPhone($data['contact_phone']);
 		
 		return parent::fill($data);
 	}
@@ -116,5 +119,37 @@ class Ad extends Model {
 	private static function prettyText($text) {
 		if (substr($text, -1) != '.') $text .= '.';
 		return ucfirst($text);
+	}
+	
+	private static function prettyPhone($phone) {
+		
+		$phone = str_replace(' ', '', $phone);
+		$formated = '';
+		$length = strlen($phone);
+		$index = 0;
+		
+		if (substr($phone, 0, 1) == '+') { // +4121.. -> +41 22 ..
+			$formated .= '+' . substr($phone, 1, 2) . ' ' . substr($phone, 3, 2) . ' ';
+			$index = 5;
+		} else if (substr($phone, 0, 2) == '00') { // 004121.. -> +41 22 ..
+			$formated .= '+' . substr($phone, 2, 2) . ' ' . substr($phone, 4, 2) . ' ';
+			$index = 4;
+		} else { // 021.. -> 021 ..
+			$formated .= substr($phone, 0, 3) . ' ';
+			$index = 3;
+		}
+		
+		// 3-chunk
+		$formated .= substr($phone, $index, 3) . ' ';
+		$index += 3;
+		
+		// chunk by 2
+		while ($length >= $index) {
+			$formated .= substr($phone, $index, 2) . ' ';
+			$index += 2;
+		}
+		
+		assert(strlen($phone) == strlen(str_replace(' ', '', $formated)));
+		return trim($formated);
 	}
 }
