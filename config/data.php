@@ -5,99 +5,99 @@
  * Fields must be set mass assignable in the corresponding model.
  */
 return [
-	
-	'ad' => [
-		'title' => [
+
+	'ad'      => [
+		'title'              => [
 			'required' => true,
-			'min' => 5,
-			'max' => 50,
+			'min'      => 5,
+			'max'      => 50,
 		],
-		'category_id' => [
+		'category_id'        => [
 			'categories' => true,
-			'required' => true,
-			'class' => 'ui selection dropdown', 
+			'required'   => true,
+			'class'      => 'ui selection dropdown',
 		],
-		'place' => [
+		'place'              => [
 			'required' => true,
-			'min' => 2,
-			'max' => 30,
+			'min'      => 2,
+			'max'      => 30,
 		],
-		'description' => [
+		'description'        => [
 			'required' => true,
-			'min' => 10,
-			'max' => 1500,
+			'min'      => 10,
+			'max'      => 1500,
 		],
-	
-		'starts_at' => [
+
+		'starts_at'          => [
 			'required' => true,
 			'readOnly' => true,
-            'class' => 'datepicker date',
+			'class'    => 'datepicker date',
 		],
-		'ends_at' => [
+		'ends_at'            => [
 			'readOnly' => true,
-            'class' => 'datepicker date',
+			'class'    => 'datepicker date',
 		],
-		'duration' => [
+		'duration'           => [
 			'required' => true,
-			'min' => 2,
-			'max' => 50,
+			'min'      => 2,
+			'max'      => 50,
 		],
-		'salary' => [
+		'salary'             => [
 			'required' => true,
+			'min'      => 2,
+			'max'      => 50,
+		],
+		'skills'             => [
 			'min' => 2,
 			'max' => 50,
 		],
-		'skills' => [
+		'languages'          => [
 			'min' => 2,
 			'max' => 50,
 		],
-		'languages' => [
-			'min' => 2,
-			'max' => 50,
-		],
-		
+
 		'contact_first_name' => [
 			'required' => true,
-			'min' => 2,
-			'max' => 50,
+			'min'      => 2,
+			'max'      => 50,
 		],
-		'contact_last_name' => [
+		'contact_last_name'  => [
 			'required' => true,
-			'min' => 2,
-			'max' => 50,
+			'min'      => 2,
+			'max'      => 50,
 		],
-		'contact_email' => [
+		'contact_email'      => [
 			'required' => true,
-			'email' => true,
-			'min' => 5,
-			'max' => 100,
+			'email'    => true,
+			'min'      => 5,
+			'max'      => 100,
 		],
-		'contact_phone' => [
+		'contact_phone'      => [
 			'min' => 5,
 			'max' => 50,
 		],
 	],
-	
+
 	'contact' => [
 		'first_name' => [
 			'required' => true,
-			'min' => 2,
-			'max' => 50,
+			'min'      => 2,
+			'max'      => 50,
 		],
-		'last_name' => [
+		'last_name'  => [
 			'required' => true,
-			'min' => 2,
-			'max' => 50,
+			'min'      => 2,
+			'max'      => 50,
 		],
-		'email' => [
+		'email'      => [
 			'required' => true,
-			'min' => 2,
-			'max' => 100,
+			'min'      => 2,
+			'max'      => 100,
 		],
-		'message' => [
+		'message'    => [
 			'required' => true,
-			'min' => 10,
-			'max' => 1500,
+			'min'      => 10,
+			'max'      => 1500,
 		],
 	],
 
