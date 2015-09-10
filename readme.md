@@ -1,4 +1,4 @@
-## Myjob
+## Myjob [![Build Status](https://magnum.travis-ci.com/zifeo/Myjob.svg?token=syrFYEvQ7fayrUQ7Q6nh&branch=deploy)](https://magnum.travis-ci.com/zifeo/Myjob)
 
 Myjob is a job-offering-seeking web-platform developed by the general student association of [Swiss Federal Institute of Technology in Lausanne — EPFL](http://www.epfl.ch/index.en.html). It aims to facilitate the meeting of employers and skillful EPFL students (without boring extern subscription) for experiencing working life aside of their studies. The project ([in live here](http://myjob.epfl.ch)) is maintained by the association IT-team and is open source under the [.. LICENSE](./LICENSE) (and `Forking Myjob` rules).
 
