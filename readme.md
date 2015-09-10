@@ -25,4 +25,4 @@ When forking Myjob for improvements or your own use you have to consider the fol
 
 ### Support
 
-Any bug, improvement or question is welcome using the Github issues tool.
+Any bug, improvement or question is welcomed using the Github issues tool.

@@ -49,14 +49,12 @@ git clone git@github.com:zifeo/Myjob.git /home/myjob/laravel
 random_key=`date +%s | sha256sum | base64 | head -c 32`
 
 echo "<?php
-return array(
-	'encryption_key' => '$random_key'
-);
-?>
+return [
+	'encryption_key' => '$random_key',
+];
 " > /home/myjob/laravel/.env.php
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/home/myjob/laravel
-
 
 # Install laravel via composer
 olddir=`pwd` # pushd doesn't exist in sh, have to "emulate" it...
