@@ -4,3 +4,5 @@ Homestead.yaml
 .env
 .DS_Store
 Thumbs.db
+*.iml
+.idea/
