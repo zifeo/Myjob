@@ -68,6 +68,7 @@ return [
 		],
 		'contact_email' => [
 			'required' => true,
+			'email' => true,
 			'min' => 5,
 			'max' => 100,
 		],

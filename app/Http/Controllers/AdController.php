@@ -71,18 +71,14 @@ class AdController extends Controller {
 
 		$email = Input::get('contact_email');
 		if (empty(Publisher::get_valid_secrets($email))) {
-			$contact_email = new Publisher;
-
-			$contact_email->contact_email = $email;
-			$contact_email->random_secret = str_random(32);
-
-			$contact_email->save();
+			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
+			$publisher->random_secret = str_random(32);
+			$publisher->save();
 		}
 
 		$ad = Ad::create(Input::all());
 
 		// TODO send email with code
-		
 		return redirect()->action('AdController@show', $ad->url);
 	}
 
@@ -115,7 +111,7 @@ class AdController extends Controller {
 	 */
 	public function edit($url)
 	{
-		$ad = Ad::withVisitors()->findorfail($url);
+		$ad = Ad::withVisitors()->findOrFail($url);
 		$categories = Category::get_id_name_mapping();
 		$now = formatDate();
 		
@@ -134,13 +130,23 @@ class AdController extends Controller {
 	 */
 	public function update($url)
 	{
-		$ad = Ad::withVisitors()->findorfail($url);
+		$ad = Ad::withVisitors()->findOrFail($url);
 		$categories = Category::get_id_name_mapping();
 		$validator = Validator::make(Input::all(), $this->adValidation());
 		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels'))); 
 		
 		if ($validator->fails())
 			return back()->withInput()->withErrors($validator);
+		
+		if (Input::has('contact_email')) {
+			$newContactEmail = Input::get('contact_email');
+			
+			if ($newContactEmail != $ad->contact_email && empty(Publisher::get_valid_secrets($newContactEmail))) {
+				$publisher = Publisher::firstOrNew(['contact_email' => $newContactEmail]);
+				$publisher->random_secret = str_random(32);
+				$publisher->save();
+			}			
+		}
 		
 		$ad->fill(Input::all());
 		$ad->save();
@@ -156,7 +162,7 @@ class AdController extends Controller {
 	 */
 	public function destroy($url)
 	{
-		$ad = Ad::withVisitors()->findorfail($url);
+		$ad = Ad::withVisitors()->findOrFail($url);
 		$ad->delete();
 		return redirect()->action('AdController@index');
 	}

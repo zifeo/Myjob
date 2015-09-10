@@ -11,6 +11,9 @@ class Publisher extends Model {
 	use SoftDeletes;
 	
     protected $primaryKey = 'contact_email';
+    protected $fillable = [
+		'contact_email'
+	];
 
     public static function get_outdated_secrets($email)
     {

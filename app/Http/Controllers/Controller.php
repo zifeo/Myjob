@@ -57,7 +57,9 @@ abstract class Controller extends BaseController
 			$f = [];
 			
 			if (isset($config[$field]['required']))
-				$f[] = 'required';		
+				$f[] = 'required';	
+			if (isset($config[$field]['email']))
+				$f[] = 'email';		
 			if (isset($config[$field]['min']))
 				$f[] = 'min:' . $config[$field]['min'];
 			if (isset($config[$field]['max']))

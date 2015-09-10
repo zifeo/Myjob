@@ -25,13 +25,13 @@ final class Tequila {
 			$host = config('tequila.host') . self::FETCH_PATCH;			
 
 			$data = ['key' => Session::get('tequila')];
-			$reponse = self::post($host, $data);
+			$response = self::post($host, $data);
 
-	       	$u = User::firstSciperOrCreate($reponse["uniqueid"]);
+	       	$u = User::firstSciperOrCreate($response["uniqueid"]);
 	       	
-	       	$u->email = $reponse["email"];
-	       	$u->first_name = $reponse["firstname"];
-	       	$u->last_name = $reponse["name"];
+	       	$u->email = $response["email"];
+	       	$u->first_name = $response["firstname"];
+	       	$u->last_name = $response["name"];
 	       	$u->save();
 
 			Auth::login($u);
