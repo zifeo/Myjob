@@ -3,8 +3,14 @@ php:
   - 5.6
   - hhvm
 before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database myjob_test;'
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
+  - php artisan key:generate
 script: phpunit
 matrix:
   fast_finish: true
+notifications:
+    on_success: never
+    on_failure: never
