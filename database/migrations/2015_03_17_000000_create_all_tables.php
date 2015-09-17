@@ -95,14 +95,6 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		Schema::create('sessions', function (Blueprint $table) {
-
-			$table->increments('id');
-			$table->text('payload');
-			$table->integer('last_activity');
-
-			$table->timestamps();
-		});
 	}
 
 	/**
@@ -111,12 +103,13 @@ class CreateAllTables extends Migration {
 	 * @return void
 	 */
 	public function down() {
+		
 		Schema::drop('ads');
 		Schema::drop('users');
 		Schema::drop('categories');
 		Schema::drop('publishers');
 		Schema::drop('faq');
-		Schema::drop('sessions');
+		
 	}
 
 }
