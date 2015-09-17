@@ -1,17 +1,19 @@
 language: php
 php:
-  - 5.6
-  - hhvm
+- 5.6
+- hhvm
 before_script:
-  - cp .env.travis .env
-  - mysql -e 'create database myjob_test;'
-  - composer self-update
-  - composer install --prefer-source --no-interaction --dev
-  - php artisan key:generate
-  - php artisan migrate:refresh --seed
+- cp .env.travis .env
+- mysql -e 'create database myjob_test;'
+- composer self-update
+- composer install --prefer-source --no-interaction --dev
+- php artisan key:generate
+- php artisan migrate:refresh --seed
 script: phpunit
 matrix:
   fast_finish: true
 notifications:
-    on_success: never
-    on_failure: never
+  on_success: never
+  on_failure: never
+  slack:
+    secure: EWtSX76FyvI6+EQLyXqJ1NECnNgYW9ALJ6GXUDAwB+1gzJZDRyXNwOBprXZjSUsuWZj1Gbrq/Zn0Uw0KcBTK0sd3PiGfGu1UEQqkqJcqRR2h3VJtN9kHTV8dw9TtBcAldcJLjm7PpCErBX3yi+rWThBkIJWjAdTfLIv4bBwNqY7bWculg1wGnO0Ea+EGMtjK3AtzWxU7Ep7r521ScMUACWXtrLc0doBb8vo5TpxV4b0STcZZ16FC606PwsHeeyjgRG/9d0MwGLTuj7y0q2C6vpnVo/QDuR/BjQ4zzMG6wIPtwSjRI7pkqUQi69sP0jcKIicUE1OH/hoLHXlsH8tyvNnIutpbHsP+Wdp7+uRBAgV105Nuj7ILpbhLvKX20VOjV2PfRIRBqes214/5TCE7YGT4gCQb79QXMuQHGfppVE3Dm2NX2ezMM9HTVr8fQZBss1O3sNFUqJ9WZ55AnN7XJJXYpHka1vhwLgPLv94zlI1bGNQSAeE6GrQFzwWUI3gZ2E8H5qfi4Ni1nFfrUIxF1+LngJ3EdVLFqMd/XkJGZ2n7sYttNW5L/XJ4aOqbYSfW3KrEQTyOdbbsXbVKhO7wSCg2sK5idzRRPrNGu5bAFMDOQW2lvlzJtCb7z82mua/7p4cq/7AGNJM6fyEVZaDTtAOoqiraG5nO3k4wujDoHV8=
