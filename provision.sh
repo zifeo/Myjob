@@ -6,8 +6,11 @@
 # MUST BE EXECUTED BY USER myjob in order that agent forwarding works
 # The default user should be "myjob"
 
-# install php5, apache, php5 mcrypt mod
-sudo apt-get -y install php5 php5-json php5-mcrypt php5-mysql mysql-server
+# latest version of php5
+sudo apt-get -y update
+sudo add-apt-repository ppa:ondrej/php5-5.6
+sudo apt-get -y update
+sudo apt-get -y install php5 php5-json php5-mhash php5-mcrypt php5-curl php5-cli php5-mysql mysql-server php5-gd php5-intl php5-xsl
 
 # Enable mcrypt mod & restart apache
 sudo php5enmod mcrypt
@@ -43,16 +46,7 @@ if ! test -d /home/myjob/laravel; then
 mkdir /home/myjob/laravel
 
 # Clone myjob into ~/laravel - Must be executed by myjob user so that agent forwarding works.
-git clone git@github.com:zifeo/Myjob.git /home/myjob/laravel 
-
-# Generate new random encryption_key
-random_key=`date +%s | sha256sum | base64 | head -c 32`
-
-echo "<?php
-return [
-	'encryption_key' => '$random_key',
-];
-" > /home/myjob/laravel/.env.php
+git clone git@github.com:zifeo/Myjob.git /home/myjob/laravel
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/home/myjob/laravel
 
@@ -75,3 +69,10 @@ fi
 # Give rights to laravel on storage folder
 sudo chown -R www-data /home/myjob/laravel/app/storage
 sudo chgrp -R www-data /home/myjob/laravel/app/storage
+
+# Generate random app key
+php artisan key:generate
+
+# Warning
+echo 'Please edit the ".env" file. If this is a production server, don\'t forget to put debug to false.'
+
