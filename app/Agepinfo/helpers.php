@@ -1,5 +1,5 @@
 <?php
-	
+
 function label($field) {
 	return trans('ads.labels.' . $field);
 }
@@ -13,39 +13,40 @@ function contactForm($field) {
 }
 
 function form($field, $item) {
-	
+
 	$config = config('data.' . $item)[$field];
 	$attrs = [
-		'id' => $field,	
+		'id' => $field,
 	];
-	
+
 	if (existTrans($item . 's.placeholders', $field))
 		$attrs['placeholder'] = trans($item . 's.placeholders.' . $field);
 	if (isset($config['class']))
 		$attrs['class'] = $config['class'];
-	
+
 	if (isset($config['required']))
-		$attrs[] = 'required';	
+		$attrs[] = 'required';
 	if (isset($config['readOnly']))
 		$attrs[] = 'readOnly';
-		
+
 	if (isset($config['min']))
 		$attrs['minlength'] = $config['min'];
 	if (isset($config['max']))
 		$attrs['maxlength'] = $config['max'];
-		
+
 	return $attrs;
 }
 
 function prefill($model, $value) {
-	return isset($value) && ! isset($model) ? $value: null;
+	return isset($value) && !isset($model) ? $value: null;
 }
 
 function existTrans($subname, $name) {
 	$trans = trans($subname . '.' . $name);
-	return $trans != $subname . '.' . $name && ! empty($trans);
+	return $trans != $subname . '.' . $name && !empty($trans);
 }
 
+/* Format date to database compatible pattern given a timestamp or using current timestamp. */
 function formatDate($time = null) {
 	return date('Y-m-d H:i:s', $time == null ? time(): $time);
 }
@@ -60,8 +61,8 @@ function item($nav, $action, $icon = null) {
 	$actionHTML = e(action($navAction));
 	$iconHTML = $icon != null ? '<i class="' . $icon . ' icon"></i> ': '';
 	$transHTML = e(trans('general.nav.' . $nav));
-	return 
-'<a class="' . $activeHTML . 'item" href="' . $actionHTML . '">
+	return
+		'<a class="' . $activeHTML . 'item" href="' . $actionHTML . '">
 	' . $iconHTML . $transHTML . '
 </a>';
 }

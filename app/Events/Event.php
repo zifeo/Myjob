@@ -2,7 +2,6 @@
 
 namespace Myjob\Events;
 
-abstract class Event
-{
-    //
+abstract class Event {
+	//
 }

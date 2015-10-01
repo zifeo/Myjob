@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAllTables extends Migration {
 
@@ -10,10 +10,9 @@ class CreateAllTables extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
-		Schema::create('publishers', function(Blueprint $table) {
-			
+	public function up() {
+		Schema::create('publishers', function (Blueprint $table) {
+
 			$table->increments('publisher_id');
 			$table->string('contact_email', config('data.ad.contact_email.max'))->unique();
 			$table->string('random_secret', 32);
@@ -22,8 +21,8 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		Schema::create('categories', function(Blueprint $table) {
-			
+		Schema::create('categories', function (Blueprint $table) {
+
 			$table->increments('category_id');
 			$table->string('name_en', 30);
 			$table->string('name_fr', 30);
@@ -33,8 +32,8 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		Schema::create('users', function(Blueprint $table) {
-			
+		Schema::create('users', function (Blueprint $table) {
+
 			$table->increments('user_id');
 			$table->integer('sciper')->unsigned()->unique();
 			$table->string('first_name', 50);
@@ -44,18 +43,18 @@ class CreateAllTables extends Migration {
 			$table->boolean('notifications_day')->default(false);
 			$table->boolean('notifications_week')->default(true);
 			$table->boolean('admin')->default(false);
-			
+
 			$table->rememberToken();
 			$table->timestamps();
 			$table->softDeletes();
 		});
 
-		Schema::create('ads', function(Blueprint $table) {
-			
+		Schema::create('ads', function (Blueprint $table) {
+
 			$table->increments('ad_id');
 			$table->string('url', config('data.ad.title.max') + 10)->unique();
 			$table->string('random_secret', 32);
-			
+
 			$table->string('title', config('data.ad.title.max'));
 			$table->integer('category_id')->unsigned();
 			$table->string('place', config('data.ad.place.max'));
@@ -67,7 +66,7 @@ class CreateAllTables extends Migration {
 			$table->string('salary', config('data.ad.salary.max'));
 			$table->string('skills', config('data.ad.skills.max'))->nullable();
 			$table->string('languages', config('data.ad.languages.max'))->nullable();
-			
+
 			$table->string('contact_first_name', config('data.ad.contact_first_name.max'));
 			$table->string('contact_last_name', config('data.ad.contact_last_name.max'));
 			$table->string('contact_email', config('data.ad.contact_email.max'));
@@ -83,8 +82,8 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		Schema::create('faq', function(Blueprint $table) {
-			
+		Schema::create('faq', function (Blueprint $table) {
+
 			$table->increments('faq_id');
 			$table->integer('position');
 			$table->string('question_fr', 100);
@@ -96,14 +95,6 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-		Schema::create('sessions', function(Blueprint $table) {
-			
-            $table->increments('id');
-            $table->text('payload');
-            $table->integer('last_activity');
-            
-            $table->timestamps();
-        });
 	}
 
 	/**
@@ -111,14 +102,14 @@ class CreateAllTables extends Migration {
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
+	public function down() {
+		
 		Schema::drop('ads');
 		Schema::drop('users');
 		Schema::drop('categories');
 		Schema::drop('publishers');
 		Schema::drop('faq');
-		Schema::drop('sessions');
+		
 	}
 
 }
