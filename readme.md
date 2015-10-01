@@ -1,10 +1,12 @@
-## Myjob
+## Myjob [![Build Status](https://magnum.travis-ci.com/zifeo/Myjob.svg?token=syrFYEvQ7fayrUQ7Q6nh&branch=deploy)](https://magnum.travis-ci.com/zifeo/Myjob)
 
-Myjob is a job-offering-seeking web-platform developed by the general student association of [Swiss Federal Institute of Technology in Lausanne — EPFL](http://www.epfl.ch/index.en.html). It aims to facilitate the meeting of employers and skillful EPFL students (without boring extern subscription) for experiencing working life aside of their studies. The project ([in live here](http://myjob.epfl.ch)) is maintained by the association IT-team and is open source under the [.. LICENSE](./LICENSE) (and `Forking Myjob` rules).
+Myjob is a job-offering-seeking web-platform developed by the [general student association](https://agepoly.ch) of [Swiss Federal Institute of Technology in Lausanne (EPFL)](http://www.epfl.ch/index.en.html). It aims to facilitate the meeting of employers and skillful EPFL students for experiencing working life aside of their studies (without boring extern website subscriptions). The [project](http://myjob.epfl.ch) is maintained by the association IT-team and is open source under the [Apache 2.0](./LICENSE) license (be sure to also understand the `Forking Myjob` rules).
+
+### Installations
+
+Development/Production installation guide and more are available on the [wiki](./wiki).
 
 ### Mottos
-
-Some of the key features:
 
 - ads creation, modification and full-moderation
 - student access for ads viewing and applying
@@ -19,9 +21,9 @@ Some of the key features:
 When forking Myjob for improvements or your own use you have to consider the following facts:
 
 - project is EPFL-specific but can easily be adapted to your own infrastructure or needs
-- further EPFL affiliations are prohibited and controlled by swiss federal laws (basically you have to get rid of all EPFL related media such as name or images)
+- current users access is done using a secure and controlled authentication method called [Tequila: Identity Management](https://tequila.epfl.ch), you will have to set up your own Tequila server or use Laravel built-in method
+- further EPFL affiliations are prohibited and controlled by swiss federal laws (e.g. you have to get rid of all EPFL related medias)
 - further general student association affiliations are prohibited following the same principle
-- current users access is using a secure and controlled authentication called [Tequila: Identity Management](https://tequila.epfl.ch), you will have to set up a Tequila server on your own or change authentication mechanism
 
 ### Support
 
