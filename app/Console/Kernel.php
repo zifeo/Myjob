@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		\Myjob\Console\Commands\Inspire::class,
+		\Myjob\Console\Commands\SendNotificationMails::class
 	];
 
 	/**
