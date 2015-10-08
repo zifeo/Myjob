@@ -6,3 +6,5 @@ Homestead.yaml
 Thumbs.db
 *.iml
 .idea/
+
+app/storage
