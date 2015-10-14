@@ -22,24 +22,28 @@ class NavigationTest extends TestCase {
         $contains = self::navTrans(["home", "newjob", "help", "connect"]);
         $notContains = self::navTrans(["myjobs", "moderation", "options", "disconnect"]);
         $this->checkIn(".computer.tablet.only.menu", $contains, $notContains);
+        return $this;
     }
 
     private function hasPublisherMenu() {
         $contains = self::navTrans(["home", "newjob", "myjobs", "help", "connect"]);
         $notContains = self::navTrans(["moderation", "options", "disconnect"]);
         $this->checkIn(".computer.tablet.only.menu", $contains, $notContains);
+        return $this;
     }
 
     private function hasUserMenu() {
         $contains = self::navTrans(["home", "newjob", "myjobs", "options", "help", "disconnect"]);
         $notContains = self::navTrans(["moderation", "connect"]);
         $this->checkIn(".computer.tablet.only.menu", $contains, $notContains);
+        return $this;
     }
 
     private function hasAdminMenu() {
         $contains = self::navTrans(["home", "newjob", "myjobs", "moderation", "options", "help", "disconnect"]);
         $notContains = self::navTrans(["connect"]);
         $this->checkIn(".computer.tablet.only.menu", $contains, $notContains);
+        return $this;
     }
 
     private static function navTrans(array $navs) {

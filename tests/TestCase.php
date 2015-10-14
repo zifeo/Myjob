@@ -32,32 +32,37 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	 * @param $selector
 	 * @param array $contains
 	 * @param array $notContains
+	 * @return $this
 	 */
 	protected function checkIn($selector, array $contains, array $notContains) {
 		$html = $this->crawler->filter($selector)->html();
-		$this->containsIn($html, $contains);
-		$this->notContainsIn($html, $notContains);
+		$this->containsIn($html, $contains)->notContainsIn($html, $notContains);
+		return $this;
 	}
 
 	/**
 	 * Test whether the raw text contains given list of elements.
 	 * @param $html
 	 * @param array $contents
+	 * @return $this
 	 */
 	protected function containsIn ($html, array $contents) {
 		foreach ($contents as $content) {
 			$this->assertContains($content, $html);
 		}
+		return $this;
 	}
 
 	/**
 	 * Test whether the raw text does not contain given list of elements.
 	 * @param $html
 	 * @param array $notContents
+	 * @return $this
 	 */
 	protected function notContainsIn ($html, array $notContents) {
 		foreach ($notContents as $notContent) {
 			$this->assertNotContains($notContent, $html);
 		}
+		return $this;
 	}
 }
