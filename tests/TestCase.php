@@ -94,7 +94,7 @@ class TestCase extends LaravelTestCase {
             return $node->attr("href");
         });
         $localLinks = array_filter($links, function($e) {
-            return strpos($e, "http://localhost") !== false;
+            return strpos($e, config('app.url')) !== false;
         });
         return array_unique($localLinks);
     }

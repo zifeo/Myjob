@@ -31,7 +31,9 @@ class NavigationTest extends TestCase {
     }
 
     private function visitorStaysVisitor() {
-        foreach ($this->extractAllLinks() as $link) {
+        $links = $this->extractAllLinks();
+        $this->assertNotCount(0, $links);
+        foreach ($links as $link) {
             try {
                 $this->visit($link);
                 $this->hasVisitorMenu();
