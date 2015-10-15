@@ -31,8 +31,5 @@ class Kernel extends ConsoleKernel {
 
 		$schedule->command('sendnotificationmails --subscribed=weekly')
 			->weeklyOn(6, '4:00');
-
-			
-
 	}
 }

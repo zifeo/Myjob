@@ -79,17 +79,18 @@ class SendNotificationMails extends Command
                 break;
         }
 
-        /* Fetch new ads */
+        /* Fetch new ads if any */
         $ads = $ads->get();
 
-        /* Process users by chunks to send notification mails with new ads*/
-        $users->chunk(200, function($users) use (&$ads) {
-            foreach ($users as $user) {
-                Mail::send('emails.notif', ['user' => $user, 'ads' => $ads], function ($m) use (&$user) {
-                    $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
-                });
-            }
-        });
-
+        if ($ads) {
+            /* Process users by chunks to send notification mails with new ads*/
+            $users->chunk(200, function($users) use (&$ads) {
+                foreach ($users as $user) {
+                    Mail::send('emails.notif', ['user' => $user, 'ads' => $ads], function ($m) use (&$user) {
+                        $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
+                    });
+                }
+            });
+        }
     }
 }
