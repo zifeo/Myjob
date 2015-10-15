@@ -48,6 +48,7 @@ class SendNotificationMails extends Command
      */
     public function handle()
     {
+
         $subscribed = $this->option('subscribed');
 
         if (!in_array($subscribed, $this->subscribedOptions)) {
@@ -56,13 +57,7 @@ class SendNotificationMails extends Command
 
         switch ($subscribed) {
             case 'instantly':
-                $users = User::where('notifications_instant', 1)->get();
-
-                foreach ($users as $user) {
-                    Mail::send('emails.notif', ['user' => $user], function ($m) use ($user) {
-                        $m->to($user->email, $user->first_name)->subject('Nouveau job'); // TODO use trans()
-                    });
-                }
+                $users = User::where('notifications_instant', 1);
 
                 break;
 
@@ -75,11 +70,19 @@ class SendNotificationMails extends Command
                 break;
             
             default:
-                # Impossible state
+                /* Impossible state */
                 Log::error("Impossible state during command sendnotificationmails");
                 break;
         }
 
+        /* Process users by chunks to send notification mails */
+        $users->chunk(200, function($users) {
+            foreach ($users as $user) {
+                Mail::send('emails.notif', ['user' => $user], function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
+                });
+            }
+        });
 
     }
 }
