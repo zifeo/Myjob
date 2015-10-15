@@ -3,7 +3,9 @@
 namespace Myjob\Console\Commands;
 
 use Illuminate\Console\Command;
+
 use Myjob\Models\User;
+use Myjob\Models\Ad;
 
 use Mail;
 use Log;
@@ -58,15 +60,17 @@ class SendNotificationMails extends Command
         switch ($subscribed) {
             case 'instantly':
                 $users = User::where('notifications_instant', 1);
-
+                $ads = Ad::where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-30 minutes")));
                 break;
 
             case 'daily':
                 $users = User::where('notifications_day', 1);
+                $ads = Ad::where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-1 day")));
                 break;
 
             case 'weekly':
                 $users = User::where('notifications_week', 1);
+                $ads = Ad::where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-1 week")));
                 break;
             
             default:
@@ -75,10 +79,13 @@ class SendNotificationMails extends Command
                 break;
         }
 
-        /* Process users by chunks to send notification mails */
-        $users->chunk(200, function($users) {
+        /* Fetch new ads */
+        $ads = $ads->get();
+
+        /* Process users by chunks to send notification mails with new ads*/
+        $users->chunk(200, function($users) use (&$ads) {
             foreach ($users as $user) {
-                Mail::send('emails.notif', ['user' => $user], function ($m) use ($user) {
+                Mail::send('emails.notif', ['user' => $user, 'ads' => $ads], function ($m) use (&$user) {
                     $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
                 });
             }
