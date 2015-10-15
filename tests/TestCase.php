@@ -1,6 +1,11 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase {
+use Illuminate\Contracts\Console\Kernel;
+use Symfony\Component\DomCrawler\Crawler;
+use Illuminate\Foundation\Testing\TestCase as LaravelTestCase;
+
+class TestCase extends LaravelTestCase {
+
 	/**
 	 * The base URL to use while testing the application.
 	 * @var string
@@ -13,7 +18,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	 */
 	public function createApplication() {
 		$app = require __DIR__ . '/../bootstrap/app.php';
-		$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+		$app->make(Kernel::class)->bootstrap();
 		return $app;
 	}
 
@@ -65,4 +70,32 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		}
 		return $this;
 	}
+
+    /**
+     * Extract all elements from given crawler using specified closure selector.
+     * @param $from
+     * @param Closure $selector
+     * @return array selection
+     */
+	protected function extractAllElements(Crawler $from, Closure $selector) {
+		$selection = [];
+		$from->each(function ($node) use (&$selector, &$selection) {
+			$selection[] = $selector($node);
+		});
+		return $selection;
+	}
+
+    /**
+     * Extract all string url from current page.
+     */
+    protected function extractAllLinks() {
+        $linksCrawler = $this->crawler->filter('a');
+        $links = self::extractAllElements($linksCrawler, function(Crawler $node) {
+            return $node->attr("href");
+        });
+        $localLinks = array_filter($links, function($e) {
+            return strpos($e, "http://localhost") !== false;
+        });
+        return array_unique($localLinks);
+    }
 }

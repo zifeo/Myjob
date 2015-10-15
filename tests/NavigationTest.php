@@ -18,6 +18,15 @@ class NavigationTest extends TestCase {
 
     }
 
+    private function visitorStaysVisitor() {
+        foreach ($this->extractAllLinks() as $link) {
+            try {
+                $this->visit($link);
+                $this->hasVisitorMenu();
+            } catch (Exception $ignored) {} // does want to connect through Tequila (give 404)
+        }
+    }
+
     private function hasVisitorMenu() {
         $contains = self::navTrans(["home", "newjob", "help", "connect"]);
         $notContains = self::navTrans(["myjobs", "moderation", "options", "disconnect"]);
