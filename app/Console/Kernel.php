@@ -23,7 +23,16 @@ class Kernel extends ConsoleKernel {
 	 * @return void
 	 */
 	protected function schedule(Schedule $schedule) {
-		$schedule->command('inspire')
-			->hourly();
+		$schedule->command('sendnotificationmails --subscribed=instantly')
+			->everyThirtyMinutes();
+
+		$schedule->command('sendnotificationmails --subscribed=daily')
+			->dailyAt('4:00');
+
+		$schedule->command('sendnotificationmails --subscribed=weekly')
+			->weeklyOn(6, '4:00');
+
+			
+
 	}
 }
