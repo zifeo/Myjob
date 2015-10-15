@@ -18,6 +18,18 @@ class NavigationTest extends TestCase {
 
     }
 
+    public function testHomeVisitorStayVisitor() {
+        $this->visit(action(config("myjob.routes.home")))->visitorStaysVisitor();
+    }
+
+    public function testNewJobVisitorStayVisitor() {
+        $this->visit(action(config("myjob.routes.newjob")))->visitorStaysVisitor();
+    }
+
+    public function testHelpVisitorStayVisitor() {
+        $this->visit(action(config("myjob.routes.help")))->visitorStaysVisitor();
+    }
+
     private function visitorStaysVisitor() {
         foreach ($this->extractAllLinks() as $link) {
             try {
