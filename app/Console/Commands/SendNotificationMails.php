@@ -55,6 +55,7 @@ class SendNotificationMails extends Command
 
         if (!in_array($subscribed, $this->subscribedOptions)) {
             echo "Please specify option --subscribed with one of the following: " . implode(", ", $this->subscribedOptions) . "\n";
+            return;
         }
 
         switch ($subscribed) {
