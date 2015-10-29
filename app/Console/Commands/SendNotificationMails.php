@@ -82,7 +82,8 @@ class SendNotificationMails extends Command
         /* Fetch new ads if any */
         $ads = $ads->get();
 
-        if ($ads) {
+        if (count($ads) > 0) {
+
             /* Process users by chunks to send notification mails with new ads*/
             $users->chunk(200, function($users) use (&$ads) {
                 foreach ($users as $user) {
