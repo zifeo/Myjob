@@ -73,7 +73,7 @@ class SendNotificationMails extends Command
                 $users = User::where('notifications_week', 1);
                 $ads = Ad::where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-1 week")));
                 break;
-            
+
             default:
                 /* Impossible state */
                 Log::error("Impossible state during command sendnotificationmails");
