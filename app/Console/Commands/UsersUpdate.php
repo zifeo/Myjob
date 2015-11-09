@@ -3,6 +3,7 @@
 namespace Myjob\Console\Commands;
 
 use Illuminate\Console\Command;
+use Myjob\Agepinfo\LDAP;
 
 class UsersUpdate extends Command
 {
@@ -37,30 +38,12 @@ class UsersUpdate extends Command
      */
     public function handle()
     {
-        $uid = 223744;
+        $u = LDAP::getStudentBySciper(223744);
 
-        $host = 'ldaps://ldap.epfl.ch';
-        $port = 636;
-        $base = 'o=epfl,c=ch';
-
-        $connection = ldap_connect($host, $port);
-
-        // Authentification
-        $bind = ldap_bind($connection);
-
-        $searchResults = ldap_search($connection, $base, "uid=" . $uid,
-            [
-                'sn', // Surname
-                'givenName', // First name
-                'uid', // Sciper ??
-                'ou', // LDAP path
-                'uniqueidentifier', // Sciper
-                'edupersonaffiliation', // eg: student
-                'mail'
-            ]);
-
-        $entries = ldap_get_entries($connection, $searchResults);
-
-        print_r($entries);
+        if ($u) {
+            echo $u;
+        } else {
+            echo "Student not found / Not a student.";
+        }
     }
 }
