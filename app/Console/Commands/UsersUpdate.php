@@ -38,12 +38,20 @@ class UsersUpdate extends Command
      */
     public function handle()
     {
-        $u = LDAP::getStudentBySciper(223744);
+        // Prof example
+        $oechslin = 107463;
+
+        // Student example
+        $lottaz = 223744;
+
+        /*$u = LDAP::getStudentBySciper($lottaz);
 
         if ($u) {
             echo $u;
         } else {
-            echo "Student not found / Not a student.";
-        }
+            echo "Student not found / Not a student.\n";
+        */
+
+        LDAP::getAllStudents();
     }
 }
