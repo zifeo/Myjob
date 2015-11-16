@@ -52,6 +52,6 @@ class UsersUpdate extends Command
             echo "Student not found / Not a student.\n";
         */
 
-        LDAP::getAllStudents();
+        echo count(LDAP::getAllStudents()) . "\n";
     }
 }
