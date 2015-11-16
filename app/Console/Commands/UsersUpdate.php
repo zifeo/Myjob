@@ -4,6 +4,7 @@ namespace Myjob\Console\Commands;
 
 use Illuminate\Console\Command;
 use Myjob\Agepinfo\LDAP;
+use Myjob\Models\User;
 
 class UsersUpdate extends Command
 {
@@ -38,20 +39,41 @@ class UsersUpdate extends Command
      */
     public function handle()
     {
-        // Prof example
-        $oechslin = 107463;
+        $LDAPStudents = LDAP::getAllStudents();
 
-        // Student example
-        $lottaz = 223744;
+        //TODO Test the code
 
-        /*$u = LDAP::getStudentBySciper($lottaz);
+        $users = User::all();
 
-        if ($u) {
-            echo $u;
-        } else {
-            echo "Student not found / Not a student.\n";
-        */
+        // Process users by chunk, to sync the DB with the LDAP
+        $users->chunk(200, function($users) {
+            foreach ($users as $user) {
+                // If user is a student in LDAP
+                if(isset($LDAPStudents[$user->sciper])) {
+                    // Update student infos
+                    $LDAPUser = $LDAPStudents[$user->sciper];
 
-        echo count(LDAP::getAllStudents()) . "\n";
+                    // TODO Better to check if different before assigning? Same cost?
+                    $user->first_name = $LDAPUser->first_name;
+                    $user->last_name = $LDAPUser->last_name;
+                    $user->email = $LDAPUser->email;
+
+                    // If user is not a student in DB
+                    if (!$user->isStudent) {
+                        $user->isStudent = TRUE;
+                    }
+                }
+                // If user is not a student in LDAP
+                else {
+                    // If user is a student in DB
+                    if($user->isStudent) {
+                        $user->isStudent = FALSE;
+                    }
+                }
+
+                // TODO Should check if value changed first? More efficient?
+                $user->save();
+            }
+        }
     }
 }

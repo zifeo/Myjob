@@ -16,7 +16,10 @@ final class LDAP {
 	const PORT = 636;
 	const BASE = 'ou=etu,o=epfl,c=ch';
 
-	// Retrieve all the students from the LDAP. Warning: 
+	/*
+	 * Retrieve all the students from the LDAP.
+	 * Warning: expensive operation, can block for a few seconds, even minutes.
+	 */
 	public static function getAllStudents() {
 		$connection = ldap_connect(self::URL, self::PORT);
 
@@ -60,7 +63,9 @@ final class LDAP {
 		return $studentList;
 	}
 
-	// Get a student from the LDAP, given its sciper
+	/*
+	 * Get a student from the LDAP, given its sciper
+	 */
 	public static function getStudentBySciper($sciper) {
 		$connection = ldap_connect(self::URL, self::PORT);
 
