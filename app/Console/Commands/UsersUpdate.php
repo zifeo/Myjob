@@ -52,6 +52,7 @@ class UsersUpdate extends Command
 
         // Process existing users by chunk, to sync the DB with the LDAP
         User::chunk(200, function($users) use (
+            &$LDAPStudents,
             &$UserBecomeStudentCount,
             &$UserUnbecomeStudentCount) {
 
@@ -99,10 +100,10 @@ class UsersUpdate extends Command
         }
 
         // Print debug informations
-        echo 'Total number of students found in LDAP: ' . $totalStudentsCount . '\n';
-        echo 'Number of new users (students): ' . $newUsersCount . '\n';
-        echo 'Number of students unbecoming students: ' . $UserUnbecomeStudentCount . '\n';
-        echo 'Number of non-students becoming students ' . $UserBecomeStudentCount . '\n';
+        echo 'Total number of students found in LDAP: ' . $totalStudentsCount . "\n";
+        echo 'Number of new users (students): ' . $newUsersCount . "\n";
+        echo 'Number of students unbecoming students: ' . $UserUnbecomeStudentCount . "\n";
+        echo 'Number of non-students becoming students ' . $UserBecomeStudentCount . "\n";
 
     }
 }
