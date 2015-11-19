@@ -43,8 +43,6 @@ class UsersUpdate extends Command
 
         //TODO Test the code
 
-        $users = User::all();
-
         $totalStudentsCount = count($LDAPStudents);
 
         $newUsersCount = 0;
@@ -53,7 +51,7 @@ class UsersUpdate extends Command
 
 
         // Process existing users by chunk, to sync the DB with the LDAP
-        $users->chunk(200, function($users) use (
+        User::chunk(200, function($users) use (
             &$UserBecomeStudentCount,
             &$UserUnbecomeStudentCount) {
 
