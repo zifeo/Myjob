@@ -45,8 +45,18 @@ class UsersUpdate extends Command
 
         $users = User::all();
 
+        $totalStudentsCount = count($LDAPStudents);
+
+        $newUsersCount = 0;
+        $UserBecomeStudentCount = 0;
+        $UserUnbecomeStudentCount = 0;
+
+
         // Process existing users by chunk, to sync the DB with the LDAP
-        $users->chunk(200, function($users) {
+        $users->chunk(200, function($users) use(
+            $UserBecomeStudentCount,
+            $UserUnbecomeStudentCount) {
+
             foreach ($users as $user) {
                 // If user is a student in LDAP
                 if(isset($LDAPStudents[$user->sciper])) {
@@ -61,6 +71,7 @@ class UsersUpdate extends Command
                     // If user is not a student in DB
                     if (!$user->isStudent) {
                         $user->isStudent = TRUE;
+                        $UserBecomeStudentCount += 1;
                     }
 
                     /* Remove student from the LDAPStudents list
@@ -72,6 +83,7 @@ class UsersUpdate extends Command
                     // If user is a student in DB
                     if($user->isStudent) {
                         $user->isStudent = FALSE;
+                        $UserUnbecomeStudentCount += 1;
                     }
                 }
 
@@ -85,7 +97,14 @@ class UsersUpdate extends Command
         foreach ($LDAPStudents as $sciper => $newUser) {
             // Create a new entry in the DB
             $newUser->save();
+            $newUsersCount += 1;
         }
+
+        // Print debug informations
+        echo 'Total number of students found in LDAP: ' . $totalStudentsCount . '\n';
+        echo 'Number of new users(students): ' . $newUsersCount . '\n';
+        echo 'Number of students unbecoming students: ' . $UserUnbecomeStudentCount . '\n';
+        echo 'Number of non-students becoming students ' . $UserBecomeStudentCount . '\n
 
     }
 }
