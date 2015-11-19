@@ -53,13 +53,13 @@ class UsersUpdate extends Command
 
 
         // Process existing users by chunk, to sync the DB with the LDAP
-        $users->chunk(200, function($users) use(
-            $UserBecomeStudentCount,
-            $UserUnbecomeStudentCount) {
+        $users->chunk(200, function($users) use (
+            &$UserBecomeStudentCount,
+            &$UserUnbecomeStudentCount) {
 
             foreach ($users as $user) {
                 // If user is a student in LDAP
-                if(isset($LDAPStudents[$user->sciper])) {
+                if (isset($LDAPStudents[$user->sciper])) {
                     // Update student infos
                     $LDAPUser = $LDAPStudents[$user->sciper];
 
@@ -69,8 +69,8 @@ class UsersUpdate extends Command
                     $user->email = $LDAPUser->email;
 
                     // If user is not a student in DB
-                    if (!$user->isStudent) {
-                        $user->isStudent = TRUE;
+                    if (!$user->is_student) {
+                        $user->is_student = TRUE;
                         $UserBecomeStudentCount += 1;
                     }
 
@@ -81,8 +81,8 @@ class UsersUpdate extends Command
                 // If user is not a student in LDAP
                 else {
                     // If user is a student in DB
-                    if($user->isStudent) {
-                        $user->isStudent = FALSE;
+                    if ($user->is_student) {
+                        $user->is_student = FALSE;
                         $UserUnbecomeStudentCount += 1;
                     }
                 }
@@ -90,7 +90,7 @@ class UsersUpdate extends Command
                 // TODO Should check if value changed first? More efficient?
                 $user->save();
             }
-        }
+        });
 
         /* Now LDAPStudents only contains the new students.
         Add them to the database */
@@ -102,9 +102,9 @@ class UsersUpdate extends Command
 
         // Print debug informations
         echo 'Total number of students found in LDAP: ' . $totalStudentsCount . '\n';
-        echo 'Number of new users(students): ' . $newUsersCount . '\n';
+        echo 'Number of new users (students): ' . $newUsersCount . '\n';
         echo 'Number of students unbecoming students: ' . $UserUnbecomeStudentCount . '\n';
-        echo 'Number of non-students becoming students ' . $UserBecomeStudentCount . '\n
+        echo 'Number of non-students becoming students ' . $UserBecomeStudentCount . '\n';
 
     }
 }
