@@ -49,7 +49,7 @@ final class LDAP {
 				$user->last_name = $entry['sn'][0];
 				$user->email = $entry['mail'][0];
 
-				$user->isStudent = TRUE;
+				$user->is_student = TRUE;
 
 				/*
 				   Add student if not already in the array
@@ -94,7 +94,7 @@ final class LDAP {
 				$user->last_name = $entry['sn'][0];
 				$user->email = $entry['mail'][0];
 
-				$user->isStudent = TRUE;
+				$user->is_student = TRUE;
 
 				return $user;
 		}
