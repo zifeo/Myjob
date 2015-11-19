@@ -45,7 +45,7 @@ class UsersUpdate extends Command
 
         $users = User::all();
 
-        // Process users by chunk, to sync the DB with the LDAP
+        // Process existing users by chunk, to sync the DB with the LDAP
         $users->chunk(200, function($users) {
             foreach ($users as $user) {
                 // If user is a student in LDAP
@@ -62,6 +62,10 @@ class UsersUpdate extends Command
                     if (!$user->isStudent) {
                         $user->isStudent = TRUE;
                     }
+
+                    /* Remove student from the LDAPStudents list
+                    to only keep the new students */
+                    unset($LDAPStudents[$user->sciper]);
                 }
                 // If user is not a student in LDAP
                 else {
@@ -75,5 +79,13 @@ class UsersUpdate extends Command
                 $user->save();
             }
         }
+
+        /* Now LDAPStudents only contains the new students.
+        Add them to the database */
+        foreach ($LDAPStudents as $sciper => $newUser) {
+            // Create a new entry in the DB
+            $newUser->save();
+        }
+
     }
 }
