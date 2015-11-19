@@ -49,6 +49,8 @@ final class LDAP {
 				$user->last_name = $entry['sn'][0];
 				$user->email = $entry['mail'][0];
 
+				$user->isStudent = TRUE;
+
 				/*
 				   Add student if not already in the array
 				   Some people might be subscribed twice as
@@ -91,6 +93,8 @@ final class LDAP {
 				$user->first_name = $entry['givenname'][0];
 				$user->last_name = $entry['sn'][0];
 				$user->email = $entry['mail'][0];
+
+				$user->isStudent = TRUE;
 
 				return $user;
 		}
