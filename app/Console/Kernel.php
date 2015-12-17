@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel {
 	protected function schedule(Schedule $schedule) {
 		// Synchronise student list with the LDAP
 		$schedule->command('syncstudents')
-			->weeklyOn(5, '4:00');
+			->weeklyOn(6, '4:00'); // 6 = Saturday
 
 		// Send notification mails
 		$schedule->command('sendnotificationmails --subscribed=instantly')
@@ -34,6 +34,6 @@ class Kernel extends ConsoleKernel {
 		$schedule->command('sendnotificationmails --subscribed=daily')
 			->dailyAt('4:00');
 		$schedule->command('sendnotificationmails --subscribed=weekly')
-			->weeklyOn(6, '4:00');
+			->weeklyOn(0, '4:00'); // 0 = Sunday
 	}
 }
