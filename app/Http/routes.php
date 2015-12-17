@@ -24,7 +24,8 @@ Route::get('rss/{rss}', function() {
 
 Route::get(trans('general.routes.disconnect'), 'PublicController@disconnect');
 
-Route::post('bridge', 'AdController@bridge');
+// Bridge between Myjob 2.0 and 1.0
+Route::any('bridge', 'AdController@bridge');
 
 Route::group(['middleware' => 'locales'], function () {
 
