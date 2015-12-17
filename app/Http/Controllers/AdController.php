@@ -48,11 +48,8 @@ class AdController extends Controller {
 	/** Each Myjob 1.0 job creation request redirects its data here. */
 	public function bridge() {
 
-		$data = print_r(Input::all(), true);
-		$data = array_map(function($e) { return trim($e); }, $data);
+		$data = array_map(function($e) { return trim($e); }, Input::all());
 		$email = $data['email'];
-
-
 
 		$bridgedAd = [
 			'title' => ucfirst(strtolower($data['titre'])),
