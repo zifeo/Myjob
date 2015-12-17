@@ -48,7 +48,7 @@ class AdController extends Controller {
 	/** Each Myjob 1.0 job creation request redirects its data here. */
 	public function bridge() {
 		$data = array_map(function($e) { return trim($e); }, Input::all());
-		$getOrElse = function($e) use (&$data) { array_key_exists($e, $data) ? $data[$e] : 'N/A'; };
+		$getOrElse = function($e) use (&$data) { return array_key_exists($e, $data) ? $data[$e] : 'N/A'; };
 
 		$email = $getOrElse('email');
 		$bridgedAd = [
@@ -69,7 +69,7 @@ class AdController extends Controller {
 		];
 
 
-		Mail::raw(print_r($data, true) . '\n' . print_r($bridgedAd, true), function ($m) {
+		Mail::raw(print_r($data, true) . print_r($bridgedAd, true), function ($m) {
 			$m->from('teo.stocco@epfl.ch');
 			$m->to('teo.stocco@epfl.ch')->subject('Myjob bridge');
 		});
