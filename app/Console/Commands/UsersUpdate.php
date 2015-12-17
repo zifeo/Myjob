@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use Myjob\Agepinfo\LDAP;
 use Myjob\Models\User;
 
+use Log;
+
 class UsersUpdate extends Command
 {
     /**
@@ -39,11 +41,19 @@ class UsersUpdate extends Command
      */
     public function handle()
     {
-        $LDAPStudents = LDAP::getAllStudents();
-
-        //TODO Test the code
+        // Get students from LDAP
+        try {
+            $LDAPStudents = LDAP::getAllStudents();
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return;
+        }
 
         $totalStudentsCount = count($LDAPStudents);
+
+        if ($totalStudentsCount == 0) {
+            Log::error("LDAP student query returned zero students");
+        }
 
         $newUsersCount = 0;
         $UserBecomeStudentCount = 0;
@@ -99,11 +109,11 @@ class UsersUpdate extends Command
             $newUsersCount += 1;
         }
 
-        // Print debug informations
-        echo 'Total number of students found in LDAP: ' . $totalStudentsCount . "\n";
-        echo 'Number of new users (students): ' . $newUsersCount . "\n";
-        echo 'Number of students unbecoming students: ' . $UserUnbecomeStudentCount . "\n";
-        echo 'Number of non-students becoming students ' . $UserBecomeStudentCount . "\n";
+        // Log debug informations
+        Log::debug('Total number of students found in LDAP: ' . $totalStudentsCount);
+        Log::debug('Number of new users (students): ' . $newUsersCount);
+        Log::debug('Number of students unbecoming students: ' . $UserUnbecomeStudentCount);
+        Log::debug('Number of non-students becoming students ' . $UserBecomeStudentCount);
 
     }
 }

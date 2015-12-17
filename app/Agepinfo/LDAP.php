@@ -19,8 +19,10 @@ final class LDAP {
 	/*
 	 * Retrieve all the students from the LDAP.
 	 * Warning: expensive operation, can block for a few seconds, even minutes.
+	 * Throws exceptions if LDAP can't be reached.
 	 */
 	public static function getAllStudents() {
+		// Connection
 		$connection = ldap_connect(self::URL, self::PORT);
 
 		// Authentification
