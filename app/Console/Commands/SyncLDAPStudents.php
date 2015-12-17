@@ -110,10 +110,10 @@ class SyncLDAPStudents extends Command
         }
 
         // Log debug informations
-        Log::debug('Total number of students found in LDAP: ' . $totalStudentsCount);
-        Log::debug('Number of new users (students): ' . $newUsersCount);
-        Log::debug('Number of students unbecoming students: ' . $UserUnbecomeStudentCount);
-        Log::debug('Number of non-students becoming students ' . $UserBecomeStudentCount);
+        Log::info('Total number of students found in LDAP: ' . $totalStudentsCount);
+        Log::info('Number of new users (students): ' . $newUsersCount);
+        Log::info('Number of students unbecoming students: ' . $UserUnbecomeStudentCount);
+        Log::info('Number of non-students becoming students ' . $UserBecomeStudentCount);
 
     }
 }
