@@ -11,6 +11,8 @@ use Myjob\Models\Publisher;
 use Redirect;
 use Session;
 use Validator;
+use Request;
+use Mail;
 
 class AdController extends Controller {
 
