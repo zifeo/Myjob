@@ -52,7 +52,6 @@ class AdController extends Controller {
 		$getOrElse = function($e) use (&$data) { array_key_exists($e, $data) ? $data[$e] : 'N/A'; };
 
 		$email = $getOrElse('email');
-
 		$bridgedAd = [
 			'title' => ucfirst(strtolower($getOrElse('titre'))),
 			'category_id' => 9,
@@ -70,6 +69,7 @@ class AdController extends Controller {
 			'contact_phone' => null
 		];
 
+		Log::info(print_r($data, true) . print_r($bridgedAd, true));
 
 		if (empty(Publisher::get_valid_secrets($email))) {
 			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
