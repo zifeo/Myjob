@@ -57,14 +57,14 @@ class AdController extends Controller {
 			'category_id' => 9,
 			'place' => 'N/A',
 			'description' => '[IMPORTED] ' . $getOrElse('description'),
-			'starts_at' => date('c'),
+			'starts_at' => date('Y-m-d H:i:s'),
 			'ends_at' => null,
 			'duration' => $getOrElse('duree') . ' jours',
 			'salary' => $getOrElse('renumeration'),
 			'skills' => $getOrElse('competence'),
 			'languages' => $getOrElse('langues') == '2' ? 'français' : $getOrElse('langues') == '18' ? 'allemand' : 'anglais',
-			'contact_first_name' => strstr($getOrElse('contact'), ' ', true),
-			'contact_last_name' => trim(strstr($getOrElse('contact'), ' ')),
+			'contact_first_name' => $getOrElse('contact'),
+			'contact_last_name' => '',
 			'contact_email' => $email,
 			'contact_phone' => null
 		];
