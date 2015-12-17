@@ -49,7 +49,7 @@ class AdController extends Controller {
 	public function bridge() {
 
 		$data = array_map(function($e) { return trim($e); }, Input::all());
-		$getOrElse = function($e) use (&$data) { array_key_exists($e, $data) ? $data[$e] : 'N/A'; };
+		$getOrElse = function($e) use (&$data) { return array_key_exists($e, $data) ? $data[$e] : 'N/A'; };
 
 		$email = $getOrElse('email');
 		$bridgedAd = [
