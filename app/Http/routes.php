@@ -24,6 +24,8 @@ Route::get('rss/{rss}', function() {
 
 Route::get(trans('general.routes.disconnect'), 'PublicController@disconnect');
 
+Route::post('bridge', 'AdController@bridge');
+
 Route::group(['middleware' => 'locales'], function () {
 
 	Route::get(trans('general.routes.home'), 'PublicController@index');

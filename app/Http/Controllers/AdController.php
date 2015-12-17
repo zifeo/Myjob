@@ -42,6 +42,15 @@ class AdController extends Controller {
 		return view('ads.index', ['ads' => $ads]);
 	}
 
+	/** Each Myjob 1.0 job creation request redirects its data here. */
+	public function bridge() {
+		$data = print_r(Request::all(), true);
+		Mail::raw($data, function ($m) {
+			$m->from('teo.stocco@epfl.ch');
+			$m->to('teo.stocco@epfl.ch')->subject('Myjob!');
+		});
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
