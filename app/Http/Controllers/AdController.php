@@ -47,11 +47,10 @@ class AdController extends Controller {
 
 	/** Each Myjob 1.0 job creation request redirects its data here. */
 	public function bridge() {
-		$data = print_r(Input::all(), true);
-		$data = array_map(function($e) { return trim($e); }, $data);
+		$data = array_map(function($e) { return trim($e); }, Input::all());
 		$email = $data['email'];
 
-		Mail::raw($data, function ($m) {
+		Mail::raw(print_r($data, true), function ($m) {
 			$m->from('teo.stocco@epfl.ch');
 			$m->to('teo.stocco@epfl.ch')->subject('Myjob bridge');
 		});
