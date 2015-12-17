@@ -13,6 +13,7 @@ use Session;
 use Validator;
 use Request;
 use Mail;
+use Log;
 
 class AdController extends Controller {
 
@@ -46,11 +47,41 @@ class AdController extends Controller {
 
 	/** Each Myjob 1.0 job creation request redirects its data here. */
 	public function bridge() {
-		$data = print_r(Request::all(), true);
+		$data = print_r(Input::all(), true);
+		$data = array_map(function($e) { return trim($e); }, $data);
+		$email = $data['email'];
+
 		Mail::raw($data, function ($m) {
 			$m->from('teo.stocco@epfl.ch');
-			$m->to('teo.stocco@epfl.ch')->subject('Myjob!');
+			$m->to('teo.stocco@epfl.ch')->subject('Myjob bridge');
 		});
+
+		$bridgedAd = [
+			'title' => ucfirst(strtolower($data['titre'])),
+			'category_id' => 9,
+			'place' => 'N/A',
+			'description' => '[IMPORTED] ' . $data['description'],
+			'starts_at' => date('c'),
+			'ends_at' => null,
+			'duration' => $data['duree'] . ' jours',
+			'salary' => $data['renumeration'],
+			'skills' => $data['competence'],
+			'languages' => $data['langues'] == '2' ? 'français' : $data['langues'] == '18' ? 'allemand' : 'anglais',
+			'contact_first_name' => strstr($data['contact'], ' ', true),
+			'contact_last_name' => trim(strstr($data['contact'], ' ')),
+			'contact_email' => $email,
+			'contact_phone' => null
+		];
+
+
+		if (empty(Publisher::get_valid_secrets($email))) {
+			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
+			$publisher->random_secret = str_random(32);
+			$publisher->save();
+		}
+
+		$ad = Ad::create($data);
+		Log::info('Bridged ' . e($ad->title) . ' ad.');
 	}
 
 	/**
