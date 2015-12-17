@@ -24,7 +24,7 @@ class SendNotificationMails extends Command
      *
      * @var string
      */
-    protected $description = 'Send notification emails. --subscribed=instantly, 
+    protected $description = 'Send notification emails. --subscribed=instantly,
         daily or weekly should be specified. Emails are sent to
         users that subscribed to corresponding notification list.';
 
@@ -87,10 +87,17 @@ class SendNotificationMails extends Command
 
             /* Process users by chunks to send notification mails with new ads*/
             $users->chunk(200, function($users) use (&$ads) {
+
                 foreach ($users as $user) {
-                    Mail::send('emails.notif', ['user' => $user, 'ads' => $ads], function ($m) use (&$user) {
-                        $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
-                    });
+                    /* Only send to user with id == 1, for testing purposes.
+                    We're starting to populate the DB with real users and
+                    don't want to bother them. TODO when it's ready, remove the
+                    "if" */
+                    if ($user->user_id == 1) {
+                        Mail::send('emails.notif', ['user' => $user, 'ads' => $ads], function ($m) use (&$user) {
+                            $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
+                        });
+                    }
                 }
             });
         }

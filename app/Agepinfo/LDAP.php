@@ -29,11 +29,12 @@ final class LDAP {
 		// Search for all users that are students
 		$searchResults = ldap_search($connection, self::BASE, '(employeeType=Etudiant)');
 
+		// Expensive operation!
 		$entries = ldap_get_entries($connection, $searchResults);
 
 		ldap_close($connection);
 
-		// Associative array [$sciper -> $user] containing found students
+		// Construct associative array [$sciper -> $user] containing found students
 		$studentList = [];
 
 		foreach ($entries as $entry) {
