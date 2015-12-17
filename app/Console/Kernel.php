@@ -24,12 +24,15 @@ class Kernel extends ConsoleKernel {
 	 * @return void
 	 */
 	protected function schedule(Schedule $schedule) {
+		// Synchronise student list with the LDAP
+		$schedule->command('syncstudents')
+			->weeklyOn(5, '4:00');
+
+		// Send notification mails
 		$schedule->command('sendnotificationmails --subscribed=instantly')
 			->everyThirtyMinutes();
-
 		$schedule->command('sendnotificationmails --subscribed=daily')
 			->dailyAt('4:00');
-
 		$schedule->command('sendnotificationmails --subscribed=weekly')
 			->weeklyOn(6, '4:00');
 	}
