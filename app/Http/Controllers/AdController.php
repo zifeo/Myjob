@@ -48,7 +48,9 @@ class AdController extends Controller {
 	/** Each Myjob 1.0 job creation request redirects its data here. */
 	public function bridge() {
 		$data = array_map(function($e) { return trim($e); }, Input::all());
-		$email = $data['email'];
+		$getOrElse = function($e) use (&$data) { array_key_exists($e, $data) ? $data[$e] : 'N/A'; };
+
+		$email = $getOrElse('email');
 
 		Mail::raw(print_r($data, true), function ($m) {
 			$m->from('teo.stocco@epfl.ch');
@@ -56,18 +58,18 @@ class AdController extends Controller {
 		});
 
 		$bridgedAd = [
-			'title' => ucfirst(strtolower($data['titre'])),
+			'title' => ucfirst(strtolower($getOrElse('titre'))),
 			'category_id' => 9,
 			'place' => 'N/A',
-			'description' => '[IMPORTED] ' . $data['description'],
+			'description' => '[IMPORTED] ' . $getOrElse('description'),
 			'starts_at' => date('c'),
 			'ends_at' => null,
-			'duration' => $data['duree'] . ' jours',
-			'salary' => $data['renumeration'],
-			'skills' => $data['competence'],
-			'languages' => $data['langues'] == '2' ? 'français' : $data['langues'] == '18' ? 'allemand' : 'anglais',
-			'contact_first_name' => strstr($data['contact'], ' ', true),
-			'contact_last_name' => trim(strstr($data['contact'], ' ')),
+			'duration' => $getOrElse('duree') . ' jours',
+			'salary' => $getOrElse('renumeration'),
+			'skills' => $getOrElse('competence'),
+			'languages' => $getOrElse('langues') == '2' ? 'français' : $getOrElse('langues') == '18' ? 'allemand' : 'anglais',
+			'contact_first_name' => strstr($getOrElse('contact'), ' ', true),
+			'contact_last_name' => trim(strstr($getOrElse('contact'), ' ')),
 			'contact_email' => $email,
 			'contact_phone' => null
 		];
@@ -79,7 +81,7 @@ class AdController extends Controller {
 			$publisher->save();
 		}
 
-		$ad = Ad::create($data);
+		$ad = Ad::create($bridgedAd);
 		Log::info('Bridged ' . e($ad->title) . ' ad.');
 	}
 
