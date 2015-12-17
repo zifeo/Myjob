@@ -22,7 +22,8 @@ class SyncLDAPStudents extends Command
      *
      * @var string
      */
-    protected $description = 'Command description.';
+    protected $description = 'Synchronise the student list stored in the '.
+        'database with the students found in the LDAP.';
 
     /**
      * Create a new command instance.
@@ -72,7 +73,6 @@ class SyncLDAPStudents extends Command
                     // Update student infos
                     $LDAPUser = $LDAPStudents[$user->sciper];
 
-                    // TODO Better to check if different before assigning? Same cost?
                     $user->first_name = $LDAPUser->first_name;
                     $user->last_name = $LDAPUser->last_name;
                     $user->email = $LDAPUser->email;
@@ -96,7 +96,6 @@ class SyncLDAPStudents extends Command
                     }
                 }
 
-                // TODO Should check if value changed first? More efficient?
                 $user->save();
             }
         });
