@@ -67,42 +67,4 @@ final class LDAP {
 
 		return $studentList;
 	}
-
-	/*
-	 * Get a student from the LDAP, given its sciper
-	 */
-	public static function getStudentBySciper($sciper) {
-		$connection = ldap_connect(self::URL, self::PORT);
-
-		// Authentification
-		$bind = ldap_bind($connection);
-
-		// Search for user with sciper $sciper and that is a student
-		$searchResults = ldap_search($connection, self::BASE, '(&(uniqueIdentifier=' . $sciper . ')(employeeType=Etudiant))');
-
-		$entries = ldap_get_entries($connection, $searchResults);
-
-		ldap_close($connection);
-
-		// For each entry, return user if the first name, last name, and email are defined
-		foreach ($entries as $entry)
-			if (isset($entry['givenname']) &&
-					isset($entry['sn']) &&
-					isset($entry['mail'])) {
-
-				$user = new User();
-
-				$user->sciper = $sciper;
-				$user->first_name = $entry['givenname'][0];
-				$user->last_name = $entry['sn'][0];
-				$user->email = $entry['mail'][0];
-
-				$user->is_student = TRUE;
-
-				return $user;
-		}
-
-		// Not a student
-		return NULL;
-	}
 }
