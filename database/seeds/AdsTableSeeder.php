@@ -47,7 +47,7 @@ class AdsTableSeeder extends Seeder {
 			],
 			[
 				'title'              => 'Aide en informatique',
-				'category_id'        => 7,
+				'category_id'        => 4,
 				'place'              => 'EPFL',
 				'salary'             => '53.—',
 				'description'        => 'Je cherche un étudiant en informatique pour m\'aider à installer une machine virtuelle sur mon Mac. J\'ai OSX Lion et ai besoin d\'installer AutoCAD sur une machine virtuelle Windows 7.',
@@ -55,7 +55,7 @@ class AdsTableSeeder extends Seeder {
 				'duration'           => '2h',
 				'languages'          => 'Français',
 				'contact_first_name' => 'Robert',
-				'contact_last_name'  => 'De la cour',
+				'contact_last_name'  => 'De la Cour',
 				'contact_email'      => 'robert.delacour@epfl.ch',
 				'contact_phone'      => '+41766118899',
 				'starts_at'          => '2015-10-10',
@@ -63,7 +63,7 @@ class AdsTableSeeder extends Seeder {
 			],
 			[
 				'title'              => 'DJ pour mariage',
-				'category_id'        => 4,
+				'category_id'        => 9,
 				'place'              => 'Morges',
 				'salary'             => '24.—/h',
 				'description'        => 'Nous cherchons un DJ pour notre mariage. Style de musique: jazz pour le repas, musique commerciale en fin de soirée.',
