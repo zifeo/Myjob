@@ -73,6 +73,11 @@ sudo chgrp -R www-data /home/myjob/laravel/app/storage
 # Generate random app key
 php artisan key:generate
 
+
+# Configure cron to execute laravel task scheduler
+echo "* * * * * php /home/myjob/laravel/artisan schedule:run 1> /dev/null 2>&1" | crontab
+
+
 # Warning
 echo 'Please edit the ".env" file. If this is a production server, don\'t forget to put debug to false.'
 
