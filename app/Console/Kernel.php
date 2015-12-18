@@ -13,6 +13,8 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		\Myjob\Console\Commands\Inspire::class,
+		\Myjob\Console\Commands\SendNotificationMails::class,
+		\Myjob\Console\Commands\SyncLDAPStudents::class,
 	];
 
 	/**
@@ -22,7 +24,16 @@ class Kernel extends ConsoleKernel {
 	 * @return void
 	 */
 	protected function schedule(Schedule $schedule) {
-		$schedule->command('inspire')
-			->hourly();
+		// Synchronise student list with the LDAP
+		$schedule->command('syncstudents')
+			->weeklyOn(6, '4:00'); // 6 = Saturday
+
+		// Send notification mails
+		$schedule->command('sendnotificationmails --subscribed=instantly')
+			->everyThirtyMinutes();
+		$schedule->command('sendnotificationmails --subscribed=daily')
+			->dailyAt('4:00');
+		$schedule->command('sendnotificationmails --subscribed=weekly')
+			->weeklyOn(0, '4:00'); // 0 = Sunday
 	}
 }
