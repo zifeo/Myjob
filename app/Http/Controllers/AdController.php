@@ -78,7 +78,7 @@ class AdController extends Controller {
 		}
 
 		$ad = Ad::create($bridgedAd);
-		Log::info('Bridged ' . e($ad->title) . ' ad.');
+		Log::debug('Bridged ' . e($ad->title) . ' ad.');
 	}
 
 	/**
