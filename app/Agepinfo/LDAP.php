@@ -12,9 +12,6 @@ use Myjob\Models\User;
 //==========================================================================
 
 final class LDAP {
-	const URL = 'ldaps://ldap.epfl.ch';
-	const PORT = 636;
-	const BASE = 'ou=etu,o=epfl,c=ch';
 
 	/*
 	 * Retrieve all the students from the LDAP.
@@ -23,13 +20,13 @@ final class LDAP {
 	 */
 	public static function getAllStudents() {
 		// Connection
-		$connection = ldap_connect(self::URL, self::PORT);
+		$connection = ldap_connect(config('ldap.host'), config('ldap.port'));
 
 		// Authentification
 		$bind = ldap_bind($connection);
 
 		// Search for all users that are students
-		$searchResults = ldap_search($connection, self::BASE, '(employeeType=Etudiant)');
+		$searchResults = ldap_search($connection, config('ldap.studentbase'), '(employeeType=Etudiant)');
 
 		// Expensive operation!
 		$entries = ldap_get_entries($connection, $searchResults);
