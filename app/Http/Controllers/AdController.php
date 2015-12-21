@@ -68,11 +68,7 @@ class AdController extends Controller {
 			'contact_phone' => null
 		];
 
-
-		Mail::raw(print_r($data, true) . print_r($bridgedAd, true), function ($m) {
-			$m->from('teo.stocco@epfl.ch');
-			$m->to('teo.stocco@epfl.ch')->subject('Myjob bridge');
-		});
+		Log::debug(print_r($data, true) . print_r($bridgedAd, true));
 
 		if (empty(Publisher::get_valid_secrets($email))) {
 			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
@@ -108,8 +104,8 @@ class AdController extends Controller {
 		if ($validator->fails())
 			return back()->withInput()->withErrors($validator);
 
-		/* If this is the first ad with that email, 
-		or last secret is outdated, create new entry 
+		/* If this is the first ad with that email,
+		or last secret is outdated, create new entry
 		in contact_emails */
 
 		$email = Input::get('contact_email');
