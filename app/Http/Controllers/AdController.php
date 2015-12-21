@@ -69,7 +69,7 @@ class AdController extends Controller {
 			'contact_phone' => null
 		];
 
-		Log::info(print_r($data, true) . print_r($bridgedAd, true));
+		Log::debug(print_r($data, true) . print_r($bridgedAd, true));
 
 		if (empty(Publisher::get_valid_secrets($email))) {
 			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
@@ -78,7 +78,7 @@ class AdController extends Controller {
 		}
 
 		$ad = Ad::create($bridgedAd);
-		Log::debug('Bridged ' . e($ad->title) . ' ad.');
+		Log::info('Bridged ' . e($ad->title) . ' ad.');
 	}
 
 	/**
@@ -105,8 +105,8 @@ class AdController extends Controller {
 		if ($validator->fails())
 			return back()->withInput()->withErrors($validator);
 
-		/* If this is the first ad with that email, 
-		or last secret is outdated, create new entry 
+		/* If this is the first ad with that email,
+		or last secret is outdated, create new entry
 		in contact_emails */
 
 		$email = Input::get('contact_email');
