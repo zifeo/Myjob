@@ -39,15 +39,18 @@ abstract class Controller extends BaseController {
 			View::share('title', $title);
 		}
 
+		$admin = false;
 		if ($auth) {
 			$user = Auth::user();
-			View::share('admin', $user->admin == 1);
+			$admin = $user->admin == 1;
 			View::share('user', strtok($user->first_name, ' '));
 			View::share('user_last', $user->last_name);
 			View::share('user_email', $user->email);
 		} elseif ($publisher) {
 			View::share('user', Session::get('connected_visitor'));
 		}
+		View::share('admin', $admin);
+
 	}
 
 	protected function validation($item) {
