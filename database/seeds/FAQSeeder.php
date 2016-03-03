@@ -13,19 +13,75 @@ class FAQSeeder extends Seeder {
 		DB::table('faq')->delete();
 
 		$question_answers_en = [
-			'What is the meaning of life?'             => 'God.',
-			'What if I accidently eat a banana?'       => 'Send an email to banana@myjob.ch and we\'ll see what we can do.',
-			'How to make MyJob work, it\'s all laggy!' => 'Did you try to reboot your computer?',
-			'Knock knock'                              => 'Who\'s there?',
-			'How can I post an ad on MyJob?'           => 'Please use the <a href="ad/create">corresponding form</a>.',
+			'I want to offer a job to a student, how to proceed?'	=>
+				'You simply have to create an ad following [this link].
+				No registration is needed, a link to manage the ads you
+				created will be sent to you by email.',
+
+			'I created an ad, how to modify / delete it?' =>
+				'You should have recieved a link to manage the ads you
+				created. [Click here] to ask for a new link.',
+
+			'Why is the salary field mandatory?' =>
+				'"To discuss" can be written in this field. But you have to know
+				that a student-assistant job at EPFL must respect a minimum salary
+				of 24 CHF per hour.',
+
+			'I am a student and am looking for a job, is it possible to create
+			an ad to offer my services?' =>
+				'No, ads are reserved for people who offer jobs to students.
+				We encourage you to look for newly available ads regularly, and
+				to [subscribe to daily mails] to increase your chances of finding
+				a job.',
+
+			'I posted an ad and it does not appear, what is happening?' =>
+				'Ads must be validated by the moderation team before being
+				visible. We try to validate ads as fast as possible. If after 24h
+				your ad is still not visible, a problem might have occured.
+				Please contact us though the form on your right.',
+
+			'I posted an ad and it has been refused, what happened?' =>
+				'In addition to respecting the Acceptation Conditions, your ad
+				must be written in a courteous way, can not contain too many uppercase
+				letters and avoid systematically using the word "URGENT".',
 		];
 
 		$question_answers_fr = [
-			'Quel est le sens de la vie ?'                                => 'Dieu.',
-			'Que se passe-t-il si je mange accidentellement une banane ?' => 'Envoyez un email à banana@myjob.ch et nous regarderons ce que nous pouvons faire à ce sujet.',
-			'Comment faire marcher MyJob, rien ne fonctionne !'           => 'Avez-vous essayé de redémarrer votre ordinateur ?',
-			'Toc toc...'                                                  => 'Qui est là ?',
-			'Comment puis-je poster une annonce sur MyJob ?'              => 'Veuillez utiliser le <a href="ad/create">formulaire correspondant</a>.',
+			'Je veux proposer un job à un étudiant, comment procéder ?'	=>
+				'Il suffit de créer une annonce en suivant [ce lien]. Pas besoin
+				d\'inscription, un lien pour administrer les annonces que vous
+				avez créées vous sera envoyé par email.',
+
+			'J\'ai créé une annonce, comment la modifier / supprimer ?' =>
+				'Vous devez avoir reçu un email avec un lien pour administrer
+				les annonces que vous avez créées. [Cliquez ici] pour demander
+				un nouveau lien.',
+
+			'Pourquoi est-ce que le champ "Rémunération" est obligatoire ?' =>
+				'Il est possible d\'inscrire "à discuter" dans le champ
+				"Rémunération". Sachez pourtant qu\'un travail
+				d\'assistant-étudiant à l\'EPFL est soumis au tarif minimum de
+				24 CHF par heure.',
+
+			'Je suis étudiant et cherche un job, est-ce possible de créer une
+			annonce pour proposer mes services ?' =>
+				'Non, les annonces sont réservées aux personnes proposant un
+				job aux étudiants. Nous vous invitons à consulter les annonces
+				disponibles régulièrement, et à [activer les mails journaliers]
+				afin d\'augmenter vos chances de trouver un job.',
+
+			'J\'ai posté une annonce et elle n\'apparaît pas, que se passe-t-il ?' =>
+				'Les annonces sont soumise à une équipe de modération. Nous nous
+				efforçons de valider vos annonces le plus vite possible. Si votre
+				annonce n\'est toujours pas validée après 24h, il est possible
+				qu\'un problème ait survenu. Veuillez nous contacter via le
+				Formulaire de Contact sur votre droite.',
+
+			'J\'ai posté une annonce et elle a été refusée, que s\'est-il passé ?' =>
+				'En plus de respecter les Conditions d\'acceptation, votre
+				annonce doit être écrite de manière courtoise, ne pas contenir
+				trop de majuscules et éviter l\'usage systèmatique du mot clé
+				"URGENT".',
 		];
 
 
