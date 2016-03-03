@@ -108,6 +108,7 @@ return [
 			'rule1'      => "cible un étudiant <strong>durant</strong> ses études à l'EPFL",
 			'rule2'      => "respect du tarif minimum : <strong>CHF 24.—/h</strong>",
 			'rule3'      => "<strong>pas de lien de postulation extérieure</strong>",
+			'rule4'      => "les annonces doivent être rédigées en <strong>français</strong> ou <strong>anglais</strong>",
 		],
 		'contact'       => "Pour toute·s question·s (après avoir lu attentivement la foire aux questions) et/ou suggestion·s, vous pouvez contacter rapidement l'équipe par ici.",
 		'faq'           => "Après de nombreuses années de services, l'équipe de Myjob a récolté soigneusement les questions les plus posées et les a répertoriées ici.",

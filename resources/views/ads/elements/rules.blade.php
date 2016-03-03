@@ -10,6 +10,7 @@
     <li>{!! trans('general.texts.rules.rule1') !!}</li>
     <li>{!! trans('general.texts.rules.rule2') !!}</li>
     <li>{!! trans('general.texts.rules.rule3') !!}</li>
+    <li>{!! trans('general.texts.rules.rule4') !!}</li>
 </ol>
 <a class="ui small red button mt" href="{{ action('PublicController@help') }}">
     <i class="help icon"></i>

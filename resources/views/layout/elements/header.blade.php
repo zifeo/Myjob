@@ -28,7 +28,7 @@
     {!! Form::open(['action' => 'AdController@search', 'method' => 'GET']) !!}
     <div class="ui action input">
         {!! Form::text('q', isset($search) ? e($search): null, [
-            'placeholder' => trans('general.search')
+            'placeholder' => trans('general.nav.search')
         ]) !!}
         <button class="ui icon basic button"><i class="search icon"></i></button>
     </div>
