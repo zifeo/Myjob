@@ -11,6 +11,9 @@ use Myjob\Models\Publisher;
 use Redirect;
 use Session;
 use Validator;
+use Request;
+use Mail;
+use Log;
 
 class AdController extends Controller {
 
@@ -42,6 +45,41 @@ class AdController extends Controller {
 		return view('ads.index', ['ads' => $ads]);
 	}
 
+	/** Each Myjob 1.0 job creation request redirects its data here. */
+	public function bridge() {
+		$data = array_map(function($e) { return trim($e); }, Input::all());
+		$getOrElse = function($e) use (&$data) { return array_key_exists($e, $data) ? $data[$e] : 'N/A'; };
+
+		$email = $getOrElse('email');
+		$bridgedAd = [
+			'title' => ucfirst(strtolower($getOrElse('titre'))),
+			'category_id' => 9,
+			'place' => 'N/A',
+			'description' => '[IMPORTED] ' . $getOrElse('description'),
+			'starts_at' => date('Y-m-d H:i:s'),
+			'ends_at' => null,
+			'duration' => $getOrElse('duree') . ' jours',
+			'salary' => $getOrElse('renumeration'),
+			'skills' => $getOrElse('competence'),
+			'languages' => $getOrElse('langues') == '2' ? 'français' : $getOrElse('langues') == '18' ? 'allemand' : 'anglais',
+			'contact_first_name' => $getOrElse('contact'),
+			'contact_last_name' => '',
+			'contact_email' => $email,
+			'contact_phone' => null
+		];
+
+		Log::debug(print_r($data, true) . print_r($bridgedAd, true));
+
+		if (empty(Publisher::get_valid_secrets($email))) {
+			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
+			$publisher->random_secret = str_random(32);
+			$publisher->save();
+		}
+
+		$ad = Ad::create($bridgedAd);
+		Log::info('Bridged ' . e($ad->title) . ' ad.');
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -66,8 +104,8 @@ class AdController extends Controller {
 		if ($validator->fails())
 			return back()->withInput()->withErrors($validator);
 
-		/* If this is the first ad with that email, 
-		or last secret is outdated, create new entry 
+		/* If this is the first ad with that email,
+		or last secret is outdated, create new entry
 		in contact_emails */
 
 		$email = Input::get('contact_email');

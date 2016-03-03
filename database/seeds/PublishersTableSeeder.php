@@ -14,10 +14,10 @@ class PublishersTableSeeder extends Seeder {
 
 		// every seeded ad should have corresponding email here
 		$emails = [
-			'j.p@gmail.com',
-			'c.c@pollypocket.com',
-			'j.ahahhsh@epfl.ch',
-			'j.p@epfl.ch',
+			'jean.claude@fakemail.com',
+			'a.boulette@chuv.ch',
+			'robert.delacour@epfl.ch',
+			'huguette.michel@bluewin.ch',
 		];
 
 		foreach ($emails as $email) {

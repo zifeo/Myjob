@@ -27,6 +27,8 @@ class User extends Model implements AuthenticatableContract {
 			$u->sciper = $sciper;
 
 			$u->save();
+
+			// TODO remove when cleaning code for production
 			$u->admin = $u->user_id == 1;
 
 			return $u;

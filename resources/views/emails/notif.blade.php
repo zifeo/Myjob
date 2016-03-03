@@ -108,10 +108,10 @@ a {
 			<table id="elements" width="100%" cellpadding="0" cellspacing="0">
 				<tr>
 					<td class="title">
-						Nouvel annonce
+						{{ trans('mails.notifications.newads') }}
 					</td>
 					<td class="right">
-						<a class="inverted button" href="">Aller sur Myjob</a>
+						<a class="inverted button" href="">{{ trans('mails.notifications.gotomyjob') }}</a>
 					</td>
 				</tr>
 			</table>	
@@ -122,38 +122,41 @@ a {
 			<table id="corps" width="100%" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						<p>Salut, Teo !</p>
-						<p>Un nouveau job vient de paraître à l'instant sur <a href="afdgfd">Myjob</a> et il est fort probable qu'elle t'intéresse ou un de tes amis. Tu peux le consulter et postuler en cliquant sur le lien ci-dessous.</p>
+						<p>{{ trans('mails.notifications.Hi') }}, {{ $user->first_name }}</p>
+						<p>{{ trans('mails.notifications.newjobjustappeared') }}</p>
 					</td>
 				</tr>
+
+				@foreach ($ads as $ad)				
 				<tr>
 					<td>
 						<table id="ad">
 							<tr>
 								<td>
-									<a href="" class="title">Je recherche une personne musclée pour des travaux d'entretien</a>
-									<div class="fright">catégorie</div>
+									<a href="" class="title">{{ $ad->title }}</a>
+									<div class="fright">{{ $ad->category_id }}</div>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									location
-									<div class="fright">date et heure</div>
+									{{ $ad->place }}
+									<div class="fright">{{ $ad->starts_at }}</div>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<p>Je recherche une personne musclée pour des travaux d'entretien</p>
+									<p>{{ $ad->description }}</p>
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
+				@endforeach
+
 				<tr>
 					<td>
-						<a href="mailto:j.p@gmail.com?subject=Recherche Jardinier" class="ui red button mt">Consulter</a>
-						<p>Ne rate surtout pas les autres derniers jobs récemment publiés : <a>Job 1</a>, <a>Job 1</a> et <a>Job 1</a>.</p>
-						<p>Bonne chance et à tout,<br><em>L'équipe Myjob</em></p>
+						<a href="{{ action(config('myjob.routes.jobs')) }}" class="ui red button mt">{{ trans('mails.notifications.seeads') }}</a>
+						<p>{{ trans('mails.notifications.goodluckseeyou') }},<br><em>{{ trans('mails.notifications.teammyjob') }}</em></p>
 					</td>
 				</tr>
 			</table>	
@@ -162,7 +165,7 @@ a {
 	<tr id="footer">
 		<td class="center">
 			<p>
-				<a href="https://agepoly.ch">AGEPINFO</a> 2015 · <a href="https://agepoly.ch">Options</a><br>
+				<a href="https://agepoly.ch">AGEPINFO</a> 2015 · <a href="https://agepoly.ch">{{ trans('mails.notifications.Options') }}</a><br>
 			</p>
 		</td>
 	</tr>
