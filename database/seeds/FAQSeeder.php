@@ -14,13 +14,13 @@ class FAQSeeder extends Seeder {
 
 		$question_answers_en = [
 			'I want to offer a job to a student, how to proceed?'	=>
-				'You simply have to create an ad following [this link].
-				No registration is needed, a link to manage the ads you
-				created will be sent to you by email.',
+				'You simply have to create an ad following <a href="nouveau-job">
+				this link</a>. No registration is needed, a link to manage the
+				ads you will be sent to you by email.',
 
 			'I created an ad, how to modify / delete it?' =>
 				'You should have recieved a link to manage the ads you
-				created. [Click here] to ask for a new link.',
+				created. <a href="#">Click here</a> to ask for a new link.',
 
 			'Why is the salary field mandatory?' =>
 				'"To discuss" can be written in this field. But you have to know
@@ -31,8 +31,8 @@ class FAQSeeder extends Seeder {
 			an ad to offer my services?' =>
 				'No, ads are reserved for people who offer jobs to students.
 				We encourage you to look for newly available ads regularly, and
-				to [subscribe to daily mails] to increase your chances of finding
-				a job.',
+				to <a href="options">subscribe to daily mails</a> to increase
+				your chances of finding	a job.',
 
 			'I posted an ad and it does not appear, what is happening?' =>
 				'Ads must be validated by the moderation team before being
@@ -48,14 +48,15 @@ class FAQSeeder extends Seeder {
 
 		$question_answers_fr = [
 			'Je veux proposer un job à un étudiant, comment procéder ?'	=>
-				'Il suffit de créer une annonce en suivant [ce lien]. Pas besoin
-				d\'inscription, un lien pour administrer les annonces que vous
-				avez créées vous sera envoyé par email.',
+				'Il suffit de créer une annonce en suivant
+				<a href="nouveau-job">ce lien</a>. Pas besoin d\'inscription, un
+				lien pour administrer les annonces que vous	avez créées vous
+				sera envoyé par email.',
 
 			'J\'ai créé une annonce, comment la modifier / supprimer ?' =>
 				'Vous devez avoir reçu un email avec un lien pour administrer
-				les annonces que vous avez créées. [Cliquez ici] pour demander
-				un nouveau lien.',
+				les annonces que vous avez créées. <a href="#">Cliquez ici</a>
+				pour demander un nouveau lien.', // TODO link
 
 			'Pourquoi est-ce que le champ "Rémunération" est obligatoire ?' =>
 				'Il est possible d\'inscrire "à discuter" dans le champ
@@ -67,8 +68,9 @@ class FAQSeeder extends Seeder {
 			annonce pour proposer mes services ?' =>
 				'Non, les annonces sont réservées aux personnes proposant un
 				job aux étudiants. Nous vous invitons à consulter les annonces
-				disponibles régulièrement, et à [activer les mails journaliers]
-				afin d\'augmenter vos chances de trouver un job.',
+				disponibles régulièrement, et à <a href="options">activer
+				les mails journaliers</a> afin d\'augmenter vos chances de trouver
+				un job.',
 
 			'J\'ai posté une annonce et elle n\'apparaît pas, que se passe-t-il ?' =>
 				'Les annonces sont soumise à une équipe de modération. Nous nous
