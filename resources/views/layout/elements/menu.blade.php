@@ -7,7 +7,7 @@
     @if ($admin)
         {!! item('moderation', $action) !!}
     @endif
-    @if ($auth)git
+    @if ($auth)
         {!! item('options', $action) !!}
     @endif
     {!! item('help', $action) !!}
