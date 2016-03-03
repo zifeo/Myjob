@@ -86,9 +86,9 @@ class CreateAllTables extends Migration {
 
 			$table->increments('faq_id');
 			$table->integer('position');
-			$table->string('question_fr', 100);
+			$table->text('question_fr');
 			$table->text('answer_fr');
-			$table->string('question_en', 100);
+			$table->text('question_en');
 			$table->text('answer_en');
 
 			$table->timestamps();
@@ -103,13 +103,13 @@ class CreateAllTables extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		
+
 		Schema::drop('ads');
 		Schema::drop('users');
 		Schema::drop('categories');
 		Schema::drop('publishers');
 		Schema::drop('faq');
-		
+
 	}
 
 }
