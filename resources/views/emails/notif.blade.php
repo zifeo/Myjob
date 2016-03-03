@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		
+<head>		
 <style>
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
@@ -18,11 +17,11 @@ h1 {
 	font-size: 16px;
 }
 .title {
-	font-size: 24px;
+	font-size: 1.2em;
 	padding: 0;
 	margin: 0;
 	font-family: 'Montserrat', inherit;
-	font-weight: 700;
+	font-weight: 400;
 }
 #mail td {
 	padding: 15px;
@@ -77,9 +76,8 @@ color: #ffffff;
 text-decoration: none;
 display: inline-block;
 font-family: 'Montserrat', inherit;
-font-weight: 700;
 border: 2px solid #c61618;
-
+font-size: 0.95em;
 }
 a.inverted {
 border-color: #ffffff;
@@ -91,10 +89,8 @@ a {
 	color: rgba(0, 0, 0, .8);
 }
 </style>
-
-	</head>
-	<body>
-	
+</head>
+<body>
 <table id="mail" width="100%" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="center">
@@ -122,7 +118,7 @@ a {
 			<table id="corps" width="100%" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						<p>{{ trans('mails.notifications.Hi') }}, {{ $user->first_name }}</p>
+						<p>{{ trans('mails.notifications.Hi') }} {{ $user->first_name }},</p>
 						<p>{{ trans('mails.notifications.newjobjustappeared') }}</p>
 					</td>
 				</tr>
@@ -134,13 +130,12 @@ a {
 							<tr>
 								<td>
 									<a href="" class="title">{{ $ad->title }}</a>
-									<div class="fright">{{ $ad->category_id }}</div>
+									<div class="fright">{{ date_format($ad->created_at, 'H:i') }}</div>
 								</td>
 							</tr>
 							<tr>
-								<td>
-									{{ $ad->place }}
-									<div class="fright">{{ $ad->starts_at }}</div>
+								<td>					{{ $category_names[$ad->category_id] }}
+									<div class="fright">{{ $ad->place }}</div>
 								</td>
 							</tr>
 							<tr>
@@ -156,7 +151,7 @@ a {
 				<tr>
 					<td>
 						<a href="{{ action(config('myjob.routes.jobs')) }}" class="ui red button mt">{{ trans('mails.notifications.seeads') }}</a>
-						<p>{{ trans('mails.notifications.goodluckseeyou') }},<br><em>{{ trans('mails.notifications.teammyjob') }}</em></p>
+						<p><em>{{ trans('mails.notifications.teammyjob') }}</em></p>
 					</td>
 				</tr>
 			</table>	
@@ -165,7 +160,7 @@ a {
 	<tr id="footer">
 		<td class="center">
 			<p>
-				<a href="https://agepoly.ch">AGEPINFO</a> 2015 · <a href="https://agepoly.ch">{{ trans('mails.notifications.Options') }}</a><br>
+				<a href="https://agepoly.ch">AGEPINFO</a> 2015 · <a href="https://myjob.epfl.ch/options">{{ trans('mails.notifications.options') }}</a><br>
 			</p>
 		</td>
 	</tr>

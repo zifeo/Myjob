@@ -7,12 +7,10 @@ return [
 		'newads'	=> 'Nouvelles annonces',
 		'gotomyjob'	=> 'Aller sur Myjob',
 		'Hi'		=> 'Salut',
-		'newjobjustappeared' =>	'Un nouveau job vient de paraître à l\'instant' .
-								' sur Myjob et il est fort probable qu\'il t\'intéresse toi ou un de tes amis:',
+		'newjobjustappeared' =>	'Des nouvelles annonces sont disponibles sur Myjob.',
 		'seeads'	=> 'Consulter les annonces',
-		'goodluckseeyou'	=> 'Bonne chance et à bientôt',
-		'teammyjob'	=>	'L\'équipe de Myjob',
-		'Options'	=>	'Options',
+		'teammyjob'	=>	'A bientôt, l\'équipe de Myjob.',
+		'options'	=>	'Options',
 	],
 
 ];

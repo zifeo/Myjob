@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use Myjob\Models\User;
 use Myjob\Models\Ad;
+use Myjob\Models\Category;
 
 use Mail;
 use Log;
@@ -61,17 +62,17 @@ class SendNotificationMails extends Command
         switch ($subscribed) {
             case 'instantly':
                 $users = User::where('notifications_instant', 1);
-                $ads = Ad::where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-30 minutes")));
+                $ads = Ad::withCategories()->where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-30 minutes")));
                 break;
 
             case 'daily':
                 $users = User::where('notifications_day', 1);
-                $ads = Ad::where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-1 day")));
+                $ads = Ad::withCategories()->where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-1 day")));
                 break;
 
             case 'weekly':
                 $users = User::where('notifications_week', 1);
-                $ads = Ad::where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-1 week")));
+                $ads = Ad::withCategories()->where('validated', 1)->where('validated_at', '>=', formatDate(strtotime("-1 week")));
                 break;
 
             default:
@@ -82,11 +83,12 @@ class SendNotificationMails extends Command
 
         /* Fetch new ads if any */
         $ads = $ads->get();
+        $categoryMappings = Category::get_id_name_mapping();
 
         if (count($ads) > 0) {
 
             /* Process users by chunks to send notification mails with new ads*/
-            $users->chunk(200, function($users) use (&$ads) {
+            $users->chunk(200, function($users) use (&$ads, &$categoryMappings) {
 
                 foreach ($users as $user) {
                     /* Only send to user with id == 1, for testing purposes.
@@ -94,7 +96,7 @@ class SendNotificationMails extends Command
                     don't want to bother them. TODO when it's ready, remove the
                     "if" */
                     if ($user->user_id == 1) {
-                        Mail::send('emails.notif', ['user' => $user, 'ads' => $ads], function ($m) use (&$user) {
+                        Mail::send('emails.notif', ['user' => $user, 'ads' => $ads, 'category_names' => $categoryMappings], function ($m) use (&$user) {
                             $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
                         });
                     }
