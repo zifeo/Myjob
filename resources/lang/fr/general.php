@@ -47,8 +47,8 @@ return [
 	'buttons'         => [
 		'submit'   => [
 			'new'    => 'Enregistrer la nouvelle annonce',
-			'edit'   => "Modifier l'annonce",
-			'update' => "Modifier les options",
+			'edit'   => "Appliquer les modifications",
+			'update' => "Appliquer changements",
 			'send'   => "Envoyer le message",
 		],
 		'edit'     => 'Editer',
@@ -67,7 +67,7 @@ return [
 
 	'optional'        => 'si applicable',
 	'undefined'       => 'Non spécifié',
-	'nothingleft'     => "Pas de contenu disponible.",
+	'nothingleft'     => 'Pas de contenu disponible.',
 	'back'            => 'Retour',
 
 	'disabled'        => 'désactivé',
@@ -93,29 +93,29 @@ return [
 		'students'      => "Etudiants",
 		'adopt'         => "Adopte un étudiant EPFL",
 		'news'          => "Un nouveau Myjob !",
-		'advices'       => "Conseils de postulation",
+		'advices'       => "Conseils pour postuler",
 	],
 
 	'texts'           => [
 		'delete'        => [
-			'confirm'    => "Désactiver l'annonce permet de la retrouver et de la réactiver plus tard.",
+			'confirm'    => "Désactiver l'annonce permet de la rendre invisible et de la réactiver plus tard.",
 			'definitive' => "Au contraire, la suppression est définitive.",
 			'disabled'   => "L'annonce est déjà désactivée.",
 		],
 		'rules'         => [
-			'respect'    => "L'annonce doit respecter les critères suivants pour être validée, au risque de pas être acceptée :",
-			'visibility' => "Il existe deux façons de gérer l'annonce. Pour les collaborateurs et les étudiants de l'EPFL, il est possible de se connecter au moyen de Tequila puis d'aller dans la rubrique \"mes annonces\". Pour les autres, il suffit de cliquer sur le lien envoyé à la création de l'annonce ou d'en redemander un. Dans tous les cas, <strong>l'annonce est visible durant 15 jours</strong>, durée après laquelle il faut la renouveler.",
+			'respect'    => "L'annonce doit respecter les critères suivants pour être validée:",
+			'visibility' => "Il existe deux façons de gérer l'annonce. Pour les collaborateurs et les étudiants de l'EPFL, il est possible de se connecter au moyen de Tequila, puis d'aller dans la rubrique \"mes annonces\". Pour les autres, il suffit de cliquer sur le lien envoyé par email à la création de l'annonce ou d'en redemander un. Dans tous les cas, <strong>l'annonce est visible durant 15 jours</strong>, durée après laquelle il faut la renouveler.",
 			'rule1'      => "cible un étudiant <strong>durant</strong> ses études à l'EPFL",
 			'rule2'      => "respect du tarif minimum : <strong>CHF 24.—/h</strong>",
 			'rule3'      => "<strong>pas de lien de postulation extérieure</strong>",
 			'rule4'      => "les annonces doivent être rédigées en <strong>français</strong> ou <strong>anglais</strong>",
 		],
 		'contact'       => "Pour toute·s question·s (après avoir lu attentivement la foire aux questions) et/ou suggestion·s, vous pouvez contacter rapidement l'équipe par ici.",
-		'faq'           => "Après de nombreuses années de services, l'équipe de Myjob a récolté soigneusement les questions les plus posées et les a répertoriées ici.",
-		'notifications' => "Malgré le nombre d'annonces, certaines places se font rares et c'est pourquoi il est possible de paramétrer des alertes emails qui vous seront envoyées selon certains critères.",
-		'description'   => "L'<strong>Association Générale des Etudiants</strong> de l'<strong>Ecole Polytechnique Fédérale de Lausanne</strong> met gratuitement cette plateforme à disposition pour mettre en relation étudiants et employeurs. Le but est de permettre à tous les étudiants de trouver facilement un job/emploi <strong>durant leurs études</strong>, et en même temps d'offrir aux employeurs des profils variés et qualifiés.",
-		'noinscription' => "Aucune inscription, gestion par email.",
-		'tequila'       => "Accès Gaspar requis, via Tequila.",
+		'faq'           => "Après de nombreuses années de services, l'équipe de Myjob a soigneusement répertorié ici les questions les plus posées.",
+		'notifications' => "Malgré le nombre d'annonces, les places se font rares. Il est donc possible de paramétrer des alertes emails fréquentes pour ne pas rater les nouvelles annonces.",
+		'description'   => "L'<strong>Association Générale des Etudiants</strong> de l'<strong>Ecole Polytechnique Fédérale de Lausanne</strong> met gratuitement cette plateforme à disposition pour mettre en relation étudiants et employeurs. Le but est de permettre aux étudiants de trouver facilement un job/emploi <strong>durant leurs études</strong>, et en même temps d'offrir aux employeurs des profils variés et qualifiés.",
+		'noinscription' => "Aucune inscription, gestion par <strong>email</strong>.",
+		'tequila'       => "Accès <strong><em>Tequila</em></strong> requis",
 		'peopleepfl'    => "Raccourci collaborateur EPFL.",
 		'oldad'         => "Retrouver une ancienne annonce.",
 		'newpassword'   => "Recevoir un nouveau mot de passe.",

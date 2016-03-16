@@ -3,7 +3,7 @@
 return [
 
 	'sections'     => [
-		'general'   => 'Information générale',
+		'general'   => 'Informations générales',
 		'details'   => 'Détails du job',
 		'main'      => "Corps de l'annonce",
 		'publisher' => 'Personne de contact',

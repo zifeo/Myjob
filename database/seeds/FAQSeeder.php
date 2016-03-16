@@ -34,6 +34,9 @@ class FAQSeeder extends Seeder {
 				to <a href="options">subscribe to daily mails</a> to increase
 				your chances of finding	a job.',
 
+			'Im am not an EPFL student, is it still possible to access Myjob\'s ads?' =>
+				'No, ads are reserved for EPFL students.',
+
 			'I posted an ad and it does not appear, what is happening?' =>
 				'Ads must be validated by the moderation team before being
 				visible. We try to validate ads as fast as possible. If after 24h
@@ -71,6 +74,10 @@ class FAQSeeder extends Seeder {
 				disponibles régulièrement, et à <a href="options">activer
 				les mails journaliers</a> afin d\'augmenter vos chances de trouver
 				un job.',
+
+			'Je ne suis pas étudiant à l\'EPFL, est-ce tout de même possible d\'accéder
+			 aux annonces de Myjob ?' =>
+				'Non, les annonces sont réservées aux étudiants de l\'EPFL.',
 
 			'J\'ai posté une annonce et elle n\'apparaît pas, que se passe-t-il ?' =>
 				'Les annonces sont soumise à une équipe de modération. Nous nous
