@@ -14,7 +14,7 @@ class FAQSeeder extends Seeder {
 
 		$question_answers_en = [
 			'I want to offer a job to a student, how to proceed?'	=>
-				'You simply have to create an ad following <a href="nouveau-job">
+				'You simply have to create an ad following <a href="new-job">
 				this link</a>. No registration is needed, a link to manage the
 				ads you will be sent to you by email.',
 
@@ -49,7 +49,7 @@ class FAQSeeder extends Seeder {
 		$question_answers_fr = [
 			'Je veux proposer un job à un étudiant, comment procéder ?'	=>
 				'Il suffit de créer une annonce en suivant
-				<a href="nouveau-job">ce lien</a>. Pas besoin d\'inscription, un
+				<a href="new-job">ce lien</a>. Pas besoin d\'inscription, un
 				lien pour administrer les annonces que vous	avez créées vous
 				sera envoyé par email.',
 
