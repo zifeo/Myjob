@@ -14,9 +14,10 @@ class FAQSeeder extends Seeder {
 
 		$question_answers_en = [
 			'I want to offer a job to a student, how to proceed?'	=>
-				'You simply have to create an ad following <a href="new-job">
-				this link</a>. No registration is needed, a link to manage the
-				ads you will be sent to you by email.',
+				'You simply have to create an ad following <a href="' . 
+				action('AdController@create') . '">this link</a>. No 
+				registration is needed, a link to manage the ads you will 
+				be sent to you by email.',
 
 			'I created an ad, how to modify / delete it?' =>
 				'You should have recieved a link to manage the ads you
@@ -31,8 +32,8 @@ class FAQSeeder extends Seeder {
 			an ad to offer my services?' =>
 				'No, ads are reserved for people who offer jobs to students.
 				We encourage you to look for newly available ads regularly, and
-				to <a href="options">subscribe to daily mails</a> to increase
-				your chances of finding	a job.',
+				to <a href="'. action('OptionsController@index') . '">subscribe 
+				to daily mails</a> to increase your chances of finding	a job.',
 
 			'I posted an ad and it does not appear, what is happening?' =>
 				'Ads must be validated by the moderation team before being
@@ -49,9 +50,9 @@ class FAQSeeder extends Seeder {
 		$question_answers_fr = [
 			'Je veux proposer un job à un étudiant, comment procéder ?'	=>
 				'Il suffit de créer une annonce en suivant
-				<a href="new-job">ce lien</a>. Pas besoin d\'inscription, un
-				lien pour administrer les annonces que vous	avez créées vous
-				sera envoyé par email.',
+				<a href="' . action('AdController@create') . '">ce lien</a>. 
+				Pas besoin d\'inscription, un lien pour administrer les annonces 
+				que vous avez créées vous sera envoyé par email.',
 
 			'J\'ai créé une annonce, comment la modifier / supprimer ?' =>
 				'Vous devez avoir reçu un email avec un lien pour administrer
@@ -68,9 +69,9 @@ class FAQSeeder extends Seeder {
 			annonce pour proposer mes services ?' =>
 				'Non, les annonces sont réservées aux personnes proposant un
 				job aux étudiants. Nous vous invitons à consulter les annonces
-				disponibles régulièrement, et à <a href="options">activer
-				les mails journaliers</a> afin d\'augmenter vos chances de trouver
-				un job.',
+				disponibles régulièrement, et à <a href="'. 
+				action('OptionsController@index') . '">activer les mails 
+				journaliers</a> afin d\'augmenter vos chances de trouver un job.',
 
 			'J\'ai posté une annonce et elle n\'apparaît pas, que se passe-t-il ?' =>
 				'Les annonces sont soumise à une équipe de modération. Nous nous
