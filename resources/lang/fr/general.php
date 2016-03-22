@@ -23,27 +23,6 @@ return [
 		'disconnect'    => 'Déconnexion',
 	],
 
-	'routes'          => [
-		'home'          => '/', // always a route with '/' needed
-		'jobs'          => 'jobs',
-		'myjobs'        => 'mes-jobs',
-		'job'           => 'job',
-		'search'        => 'recherche',
-		'newjob'        => 'nouveau-job',
-		'editjob'       => 'edition',
-		'deletejob'     => 'supression',
-		'enablejob'     => 'activation',
-		'disablejob'    => 'desactivation',
-		'acceptjob'     => 'validation',
-		'refusejob'     => 'refus',
-		'moderation'    => 'moderation',
-		'options'       => 'options',
-		'help'          => 'aide',
-		'connect'       => 'connexion',
-		'connectcreate' => 'connexion-nouveau-job',
-		'disconnect'    => 'reset',
-	],
-
 	'buttons'         => [
 		'submit'   => [
 			'new'    => 'Enregistrer la nouvelle annonce',
