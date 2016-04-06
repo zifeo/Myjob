@@ -40,7 +40,6 @@ class PublicController extends Controller {
 			return back()->withInput()->withErrors($validator);
 
 		return redirect()->action('PublicController@help')->with('success', trans('general.successes.sent'));
-
 	}
 
 	public function connect() {
@@ -58,6 +57,14 @@ class PublicController extends Controller {
 		return redirect()->action('PublicController@index');
 	}
 
+	public function getForgottenLink() {
+		return view("general.forgotten-link");
+	}
+
+	public function postForgottenLink() {
+		
+	}
+
 	private function contactValidation() {
 
 		$filters = parent::validation('contact');
@@ -69,7 +76,5 @@ class PublicController extends Controller {
 		}, $filters);
 
 		return $filters;
-
 	}
-
 }
