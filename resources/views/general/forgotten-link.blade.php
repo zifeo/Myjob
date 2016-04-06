@@ -4,6 +4,8 @@
     <div class="row">
         <div class="eleven wide column">
             <!-- TODO use trans()-->
+            We will send you a mail containing your secret connection link.
+
             <form class="ui form">
                 <div class="field">
                     <label>Your email adress</label>
