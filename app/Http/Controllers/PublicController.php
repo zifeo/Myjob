@@ -63,6 +63,14 @@ class PublicController extends Controller {
 
 	public function postForgottenLink() {
 		// TODO send email to email adress given in Input(), with secret link
+		$email = Input::get('email');
+
+		if (!Publisher::exists($email)) {
+			return "Doesn't exist"; // TODO nice error
+		} else {
+			//Send mail with secret
+			//return nice message
+		}
 	}
 
 	private function contactValidation() {

@@ -22,6 +22,10 @@ class Publisher extends Model {
 		// Return new one
 	}
 
+	public static function exists($email) {
+		return self::where('contact_email', '=', $email)->exists();
+	}
+
 	public static function get_valid_secret($email) {
 		$model = self::where('contact_email', '=', $email)->first();
 
