@@ -62,7 +62,7 @@ class PublicController extends Controller {
 	}
 
 	public function postForgottenLink() {
-		
+		// TODO send email to email adress given in Input(), with secret link
 	}
 
 	private function contactValidation() {

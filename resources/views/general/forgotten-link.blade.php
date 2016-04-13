@@ -2,24 +2,22 @@
 
 @section('content')
     <div class="row">
-        <div class="eleven wide column">
+        <div class="seven wide column centered">
             <!-- TODO use trans()-->
-            We will send you a mail containing your secret connection link.
+            <h2>{{ trans('general.titles.forgotten-link') }}</h2>
+            <p>
+                {{ trans('general.texts.forgotten-link') }}
+
+            </p>
 
             <form class="ui form">
                 <div class="field">
-                    <label>Your email adress</label>
-                    <input type="text" name="email" placeholder="The email adress you used to create the ad">
+                    <input type="text" name="email" placeholder="{{ trans('general.placeholders.forgotten-link-mail') }}">
                 </div>
                 <div class="align-center">
-                    <button class="ui red submit button" type="submit">Submit</button>
+                    <button class="ui red submit button" type="submit">{{ trans('general.buttons.submit.send-short') }}</button>
                 </div>
             </form>
-
-        </div>
-        <div class="five wide column">
-
-            @include('ads.elements.notifications')
 
         </div>
     </div>
