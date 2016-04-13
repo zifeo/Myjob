@@ -207,20 +207,12 @@ class AdController extends Controller {
 	 * the @param $email email
 	 */
 	public function manage_ads_with_email($email, $secret) {
-		if (Publisher::is_outdated($secret, $email)) {
-			// TODO Lien dans le message
-			$message = 'Ce lien a plus de ' . config('myjob.Publishers.secretValidityWeeks') .
-				' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
-			return Redirect::to('/')->withErrors(['message' => $message])->with('type', 'warning');
-
-		} elseif (!Publisher::is_valid($secret, $email)) {
-
-			App::abort(404);
-
-		} else {
+		if (Publisher::is_valid($secret, $email)) {
 			/* Temporarily allow current visitor to edit all ads with email $email. */
 			Session::put('connected_visitor', $email);
-			return redirect()->action('AdController@index');
+			return redirect()->action('AdController@created');
+		} else {
+			App::abort(404);
 		}
 	}
 
