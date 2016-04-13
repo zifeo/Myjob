@@ -1,6 +1,6 @@
 <h3 class="ui header">{{ trans('general.titles.managing') }}</h3>
 <p>{!! trans('general.texts.rules.visibility') !!}</p>
-<a class="ui small red icon button mt" href="{{ url('help') }}">
+<a class="ui small red icon button mt" href="{{ url('forgotten-link') }}">
     <i class="repeat icon"></i>
     {{ trans('general.buttons.reget') }}
 </a>
