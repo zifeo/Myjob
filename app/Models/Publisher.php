@@ -15,13 +15,35 @@ class Publisher extends Model {
 		'contact_email',
 	];
 
+	/**
+	 * Create a new publisher for email $email
+	 */
+	 public static function new_publisher($email) {
+		$publisher = new Publisher;
+		$publisher->contact_email = $email;
+		$publisher->random_secret = str_random(32);
+		$publisher->save();
+
+		return $publisher;
+	 }
+
+	/**
+	 * Generate a new secret for publisher with email $email
+	 */
 	public static function generate_new_secret($email) {
-		//TODO
-		// Soft delete old secret
-		// Generate new one
-		// Return new one
+		// Delete old publiser
+		$publisher = Publisher::where('contact_email', $email)->first();
+		$publisher->delete();
+
+		// Create new publisher with new secret
+		$new_publisher = self::new_publisher($email);
+
+		return $new_publisher->random_secret;
 	}
 
+	/**
+	 * Check if publisher exists
+	 */
 	public static function exists($email) {
 		return self::where('contact_email', '=', $email)->exists();
 	}

@@ -14,7 +14,7 @@ class CreateAllTables extends Migration {
 		Schema::create('publishers', function (Blueprint $table) {
 
 			$table->increments('publisher_id');
-			$table->string('contact_email', config('data.ad.contact_email.max'))->unique();
+			$table->string('contact_email', config('data.ad.contact_email.max'));
 			$table->string('random_secret', 32);
 
 			$table->timestamps();
@@ -77,7 +77,6 @@ class CreateAllTables extends Migration {
 			$table->dateTime('expires_at');
 
 			$table->foreign('category_id')->references('category_id')->on('categories');
-			$table->foreign('contact_email')->references('contact_email')->on('publishers');
 			$table->timestamps();
 			$table->softDeletes();
 		});

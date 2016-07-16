@@ -51,9 +51,7 @@ class PublicController extends Controller {
 	}
 
 	public function disconnect() {
-		if (Auth::check())
-			Auth::logout();
-		Session::flush();
+		Controller::disconnect();
 		return redirect()->action('PublicController@index');
 	}
 
@@ -62,14 +60,15 @@ class PublicController extends Controller {
 	}
 
 	public function postForgottenLink() {
-		// TODO send email to email adress given in Input(), with secret link
 		$email = Input::get('email');
 
 		if (!Publisher::exists($email)) {
-			return "Doesn't exist"; // TODO nice error
+			return back()->withErrors(trans('general.texts.forgotten-link-error', ['email' => $email]));
 		} else {
-			//Send mail with secret
-			//return nice message
+			Publisher::generate_new_secret($email);
+			//TODO send mail with secret
+			Session::flash('success', trans('general.texts.forgotten-link-success'));
+			return redirect()->Action('PublicController@index');
 		}
 	}
 
