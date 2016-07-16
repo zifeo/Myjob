@@ -17,7 +17,6 @@ class ModerationController extends Controller {
 		return view('moderation.list', ['ads_to_moderate' => $ads_to_moderate, 'category_names' => Category::get_id_name_mapping()]);
 	}
 
-
 	public function accept($url) {
 		return $this->validity($url, true);
 	}

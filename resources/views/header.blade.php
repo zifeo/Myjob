@@ -16,7 +16,7 @@
     </div>
 @endif
 <div class="middle aligned column">
-    <a href="{{ action($auth ? 'AdController@index': 'PublicController@index') }}">
+    <a href="{{ action($auth ? 'AdController@index': 'HomeController@index') }}">
         <h1><img width="360" height="60" src="{{ asset('contents/images/myagep.svg') }}" alt="Myjob"></h1>
     </a>
 </div>

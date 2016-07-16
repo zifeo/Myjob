@@ -92,7 +92,6 @@ class AdController extends Controller {
 		return view('ads.new', ['categories' => $categories, 'ad' => null]);
 	}
 
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -103,8 +102,9 @@ class AdController extends Controller {
 		$validator = Validator::make(Input::all(), $this->adValidation());
 		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels')));
 
-		if ($validator->fails())
-			return back()->withInput()->withErrors($validator);
+		if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
 
 		/* If this is the first ad with that email,
 		create new publisher */
@@ -219,7 +219,7 @@ class AdController extends Controller {
 	public function search() {
 
 		if (Auth::guest())
-			return redirect()->action('PublicController@help');
+			return redirect()->action('HelpController@index');
 
 		$raw = trim(Input::get('q'));
 		if (empty($raw))

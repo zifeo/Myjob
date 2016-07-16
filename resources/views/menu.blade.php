@@ -13,7 +13,7 @@
     {!! item('help', $action) !!}
     <div class="right menu">
         @if ($auth || $publisher)
-            <a class="item" href="{{ action('PublicController@disconnect') }}">
+            <a class="item" href="{{ action('HomeController@disconnect') }}">
                 {{ trans('general.nav.disconnect') }} · {{ $user }}
             </a>
         @else

@@ -11,7 +11,7 @@
             <h2 class="ui header">{{ trans('general.titles.contact') }}</h2>
             <p>{{ trans('general.texts.contact') }}</p>
             {!! Form::open([
-                'action' => 'PublicController@send',
+                'action' => 'HelpController@send',
                 'class' => 'ui form validation',
             ]) !!}
             @include('help.elements.contact')
