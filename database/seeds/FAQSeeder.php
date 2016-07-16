@@ -21,7 +21,7 @@ class FAQSeeder extends Seeder {
 
 			'I created an ad, how to modify / delete it?' =>
 				'You should have recieved a link to manage the ads you
-				created. <a href="#">Click here</a> to ask for a new link.',
+				created. <a href="#">Click here</a> to ask for a new link.', // TODO link
 
 			'Why is the salary field mandatory?' =>
 				'"To discuss" can be written in this field. But you have to know

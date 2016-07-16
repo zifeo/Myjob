@@ -1,5 +1,6 @@
 <?php
 
+/*
 namespace Myjob\Jobs;
 
 use Illuminate\Bus\Queueable;
@@ -14,7 +15,8 @@ abstract class Job {
 	| is shared across all of your jobs. The trait included with the class
 	| provides access to the "queueOn" and "delay" queue helper methods.
 	|
-	*/
+	*//*
 
 	use Queueable;
 }
+*/

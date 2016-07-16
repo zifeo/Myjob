@@ -11,21 +11,15 @@
 |
 */
 
-/* TODO
-Route::get('erreur', function() {
-	return 'erreur';
-});
-Route::get('rss/{rss}', function() {
-    return 'rss';
-});
-*/
-
-// real pages (i.e. no-redirect) should have the reverse bind in config/myjob.php
-
-Route::get('disconnect', 'PublicController@disconnect');
+// TODO : error page
 
 // Bridge between Myjob 2.0 and 1.0
+
 Route::post('bridge', 'AdController@bridge');
+
+// Important: real pages (i.e. no-redirect) should have the reverse bind in config/myjob.php
+
+Route::get('disconnect', 'PublicController@disconnect');
 
 Route::group(['middleware' => 'locales'], function () {
 
@@ -74,12 +68,6 @@ Route::group(['middleware' => 'locales'], function () {
 		Route::get('moderation', 'ModerationController@adsToModerate');
 		Route::get('accept-job/{ad}', 'ModerationController@accept');
 		Route::get('refuse-job/{ad}', 'ModerationController@refuse');
-
-		/*
-		Route::get('crons', function() {
-			return 'crons';
-		});
-		*/
 
 	});
 

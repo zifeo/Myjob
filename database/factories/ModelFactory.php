@@ -11,6 +11,7 @@
 |
 */
 
+/*
 $factory->define(Myjob\User::class, function (Faker\Generator $faker) {
 	return [
 		'name'           => $faker->name,
@@ -19,3 +20,4 @@ $factory->define(Myjob\User::class, function (Faker\Generator $faker) {
 		'remember_token' => str_random(10),
 	];
 });
+*/
