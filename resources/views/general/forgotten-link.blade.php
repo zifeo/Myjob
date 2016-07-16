@@ -9,12 +9,23 @@
                 'action' => 'PublicController@postForgottenLink',
                 'class' => 'ui form',
             ]) !!}
-                <div class="field">
-                    <input type="text" name="email" placeholder="{{ trans('general.placeholders.forgotten-link-mail') }}">
+
+            @if ($errors->any())
+                <div class="ui error visible message">
+                    <ul class="list">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <div class="align-center">
-                    <button class="ui red submit button" type="submit">{{ trans('general.buttons.submit.send-short') }}</button>
-                </div>
+            @endif
+
+            <div class="field">
+                <input type="text" name="email" placeholder="{{ trans('general.placeholders.forgotten-link-mail') }}">
+            </div>
+            <div class="align-center">
+                <button class="ui red submit button" type="submit">{{ trans('general.buttons.submit.send-short') }}</button>
+            </div>
             {!! Form::close() !!}
 
         </div>
