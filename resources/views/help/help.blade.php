@@ -8,7 +8,7 @@
 
             <p>{{ trans('general.texts.faq') }}</p>
 
-            @include('general.elements.faq')
+            @include('help.elements.faq')
 
         </div>
         <div class="eight wide column">
@@ -22,7 +22,7 @@
                 'class' => 'ui form validation',
             ]) !!}
 
-            @include('general.elements.contact')
+            @include('help.elements.contact')
 
             <div class="align-center">
                 <div class="ui red submit button">{{ trans('general.buttons.submit.send') }}</div>
