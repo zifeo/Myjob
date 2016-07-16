@@ -22,13 +22,13 @@ class PublicController extends Controller {
 		$publishers = Publisher::withTrashed()->count() + self::OLD_ADS_MYJOB_1;
 		$students = User::withTrashed()->count();
 
-		return view('general.home', ['publishers' => $publishers, 'students' => $students]);
+		return view('home.index', ['publishers' => $publishers, 'students' => $students]);
 	}
 
 	public function help() {
 
 		$faq_items = FAQ::all();
-		return view('general.help', ['faq_items' => $faq_items]);
+		return view('help.index', ['faq_items' => $faq_items]);
 	}
 
 	public function send() {

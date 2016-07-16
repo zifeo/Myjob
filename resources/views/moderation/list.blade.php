@@ -5,7 +5,7 @@
         <div class="sixteen wide column">
             <div class="ui three column stackable grid">
                 <div class="stretched compact row">
-                    @include('moderations.elements.moderate')
+                    @include('moderation.elements.moderate')
                 </div>
             </div>
         </div>

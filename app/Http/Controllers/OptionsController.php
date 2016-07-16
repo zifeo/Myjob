@@ -11,7 +11,7 @@ class OptionsController extends Controller {
 
 		$user = Auth::user();
 
-		return view('ads.options', ['options' => $user]);
+		return view('options.index', ['options' => $user]);
 	}
 
 	public function update() {
