@@ -13,11 +13,11 @@
 </head>
 <body>
 <header class="header-wrapper ui container two column stackable grid">
-    @include('layout.elements.header')
+    @include('header')
 </header>
 <div class="menu-wrapper">
     <div class="ui container grid">
-        @include('layout.elements.menu')
+        @include('menu')
     </div>
 </div>
 <div class="ui container centered stackable grid content-wrapper">
@@ -25,7 +25,7 @@
 </div>
 <div class="footer-wrapper">
     <footer class="ui container three column stackable grid">
-        @include('layout.elements.footer')
+        @include('footer')
     </footer>
 </div>
 </body>

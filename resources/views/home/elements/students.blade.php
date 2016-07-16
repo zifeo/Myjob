@@ -7,5 +7,4 @@
     <div class="item">{!! trans('general.texts.tequila') !!}</div>
     <a class="item"
        href="https://gaspar.epfl.ch/cgi-bin/gaspar-web/lostpwd">{{ trans('general.texts.newpassword') }}</a>
-    <a class="item" href="{{ action('PublicController@help') }}">{{ trans('general.texts.outsideepfl') }}</a>
 </div>

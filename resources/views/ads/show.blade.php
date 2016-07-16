@@ -1,20 +1,17 @@
-@extends('layout.layout')
+@extends('layout')
 
 @section('title', $ad->title)
 
 @section('content')
     <div class="row">
         <div class="eleven wide column">
-
             <h2 class="ui header">
                 {{ $ad->title }}
                 @if (! $ad->validated)<span
                         class="ui teal horizontal label">{{ trans('general.notyetvalidated') }}</span>@endif
                 @if (expired($ad))<span class="ui orange horizontal label">{{ trans('general.disabled') }}</span>@endif
             </h2>
-
             @include('ads.elements.display')
-
             <div class="align-center mt">
                 <a href="javascript:history.back()" class="ui grey button mt">{{ trans('general.back') }}</a>
                 <a href="mailto:{{ $ad->contact_email }}?subject={{ $ad->title }}"
@@ -60,10 +57,8 @@
                     @endif
                 </div>
             </div>
-
             <div class="ui small basic modal" id="confirm-delete">
                 <i class="close icon"></i>
-
                 <div class="ui icon header">
                     <i class="trash icon"></i>
                     {{ trans('general.titles.confirmdelete') }}
@@ -82,12 +77,9 @@
                     </a>
                 </div>
             </div>
-
         </div>
         <div class="computer tablet only five wide column">
-
             @include('ads.elements.advices')
-
         </div>
     </div>
 @stop

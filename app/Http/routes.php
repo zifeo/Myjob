@@ -11,38 +11,32 @@
 |
 */
 
-/* TODO
-Route::get('erreur', function() {
-	return 'erreur';
-});
-Route::get('rss/{rss}', function() {
-    return 'rss';
-});
-*/
-
-// real pages (i.e. no-redirect) should have the reverse bind in config/myjob.php
-
-Route::get('disconnect', 'PublicController@disconnect');
+// TODO : error page
 
 // Bridge between Myjob 2.0 and 1.0
+
 Route::post('bridge', 'AdController@bridge');
+
+// Important: real pages (i.e. no-redirect) should have the reverse bind in config/myjob.php
+
+Route::get('disconnect', 'HomeController@disconnect');
 
 Route::group(['middleware' => 'locales'], function () {
 
-	Route::get('/', 'PublicController@index');
+	Route::get('/', 'HomeController@index');
 
-	Route::get('help', 'PublicController@help');
-	Route::post('help', 'PublicController@send');
+	Route::get('help', 'HelpController@index');
+	Route::post('help', 'HelpController@send');
 
 	Route::get('new-job', 'AdController@create');
 	Route::post('new-job', 'AdController@store');
 
-	Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
-
 	Route::get('search', 'AdController@search');
 
-	Route::get('forgotten-link', 'PublicController@getForgottenLink');
-	Route::post('forgotten-link', 'PublicController@postForgottenLink');
+	Route::get('forgotten-link', 'PublishersController@getForgottenLink');
+	Route::post('forgotten-link', 'PublishersController@postForgottenLink');
+
+	Route::get('{email}/{secret}', 'AdController@manage_ads_with_email');
 
 	// require at least publisher access
 	Route::group(['middleware' => 'publisher'], function () {
@@ -63,8 +57,7 @@ Route::group(['middleware' => 'locales'], function () {
 
 		Route::get('jobs', 'AdController@index');
 
-		Route::get('connect', 'PublicController@connect');
-		Route::get('connect-create', 'PublicController@connectCreate');
+		Route::get('connect', 'HomeController@connect');
 
 		Route::get('options', 'OptionsController@index');
 		Route::put('options', 'OptionsController@update');
@@ -77,12 +70,6 @@ Route::group(['middleware' => 'locales'], function () {
 		Route::get('moderation', 'ModerationController@adsToModerate');
 		Route::get('accept-job/{ad}', 'ModerationController@accept');
 		Route::get('refuse-job/{ad}', 'ModerationController@refuse');
-
-		/*
-		Route::get('crons', function() {
-			return 'crons';
-		});
-		*/
 
 	});
 

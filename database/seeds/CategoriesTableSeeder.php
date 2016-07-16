@@ -27,11 +27,11 @@ class CategoriesTableSeeder extends Seeder {
 		$categories_fr = [
 			'Aide à domicile',
 			'Babysitting',
-			'Cobaye pour expériences',
+			'Expériences',
 			'Informatique',
 			'Job de bureau',
 			'Promotion',
-			'Restauration - Hôtellerie',
+			'Restauration / Hôtellerie',
 			'Soutien scolaire',
 			'Autre',
 		];
