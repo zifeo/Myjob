@@ -16,7 +16,7 @@ class PublisherAuth {
 	 * @return mixed
 	 */
 	public function handle($request, Closure $next) {
-		if (Auth::guest() && (!Session::has('connected_visitor'))) {
+		if (Auth::guest() && !Session::has('connected_visitor')) {
 
 			App::abort(404);
 		}

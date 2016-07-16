@@ -54,8 +54,9 @@ abstract class Controller extends BaseController {
 	}
 
 	protected function disconnect() {
-		if (Auth::check())
+		if (Auth::check()) {
 			Auth::logout();
+		}
 		Session::flush();
 	}
 
