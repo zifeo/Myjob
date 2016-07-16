@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('emails.layout')
 
 @section('content')
     <tr id="red" style="background: #c61618;">
