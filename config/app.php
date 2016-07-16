@@ -145,7 +145,6 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		//Myjob\Providers\AppServiceProvider::class,
 		//Myjob\Providers\EventServiceProvider::class,
 		Myjob\Providers\RouteServiceProvider::class,
 
