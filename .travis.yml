@@ -4,7 +4,7 @@ php:
 - '7.0'
 - hhvm
 before_script:
-- phpenv config-rm xdebug.ini
+- type phpenv && phpenv config-rm xdebug.ini
 - cp .env.travis .env
 - mysql -e 'create database myjob_test;'
 - composer self-update
