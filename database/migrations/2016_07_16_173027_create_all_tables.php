@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateAllTables extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up() {
-		Schema::create('publishers', function (Blueprint $table) {
+class CreateAllTables extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('publishers', function (Blueprint $table) {
 
 			$table->increments('publisher_id');
 			$table->string('contact_email', config('data.ad.contact_email.max'));
@@ -43,6 +44,7 @@ class CreateAllTables extends Migration {
 			$table->boolean('notifications_day')->default(false);
 			$table->boolean('notifications_week')->default(true);
 			$table->boolean('admin')->default(false);
+			$table->boolean('is_student');
 
 			$table->rememberToken();
 			$table->timestamps();
@@ -94,21 +96,26 @@ class CreateAllTables extends Migration {
 			$table->softDeletes();
 		});
 
-	}
+		Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->unique();
+            $table->text('payload');
+            $table->integer('last_activity');
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down() {
-
-		Schema::drop('ads');
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('ads');
 		Schema::drop('users');
 		Schema::drop('categories');
 		Schema::drop('publishers');
 		Schema::drop('faq');
+		Schema::drop('sessions');
 
-	}
-
+    }
 }
