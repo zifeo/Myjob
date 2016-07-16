@@ -33,6 +33,10 @@ class AdController extends Controller {
 		return view('ads.index', ['ads' => $ads]);
 	}
 
+	/**
+	 * Show ads created by connected publisher
+	 *
+	 */
 	public function created() {
 		$fields = ['url',
 			'title', 'name_' . App::getLocale() . ' AS category',
@@ -70,10 +74,8 @@ class AdController extends Controller {
 
 		Log::debug(print_r($data, true) . print_r($bridgedAd, true));
 
-		if (empty(Publisher::get_valid_secrets($email))) {
-			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
-			$publisher->random_secret = str_random(32);
-			$publisher->save();
+		if (!Publisher::exists($email)) {
+			Publisher::new_publisher($email);
 		}
 
 		$ad = Ad::create($bridgedAd);
@@ -105,19 +107,16 @@ class AdController extends Controller {
 			return back()->withInput()->withErrors($validator);
 
 		/* If this is the first ad with that email,
-		or last secret is outdated, create new entry
-		in contact_emails */
+		create new publisher */
 
 		$email = Input::get('contact_email');
-		if (empty(Publisher::get_valid_secrets($email))) {
-			$publisher = Publisher::firstOrNew(['contact_email' => $email]);
-			$publisher->random_secret = str_random(32);
-			$publisher->save();
+		if (!Publisher::exists($email)) {
+			Publisher::new_publisher($email);
+			// TODO send email with secret
 		}
 
 		$ad = Ad::create(Input::all());
 
-		// TODO send email with code
 		return redirect()->action('AdController@show', $ad->url);
 	}
 
@@ -177,10 +176,8 @@ class AdController extends Controller {
 		if (Input::has('contact_email')) {
 			$newContactEmail = Input::get('contact_email');
 
-			if ($newContactEmail != $ad->contact_email && empty(Publisher::get_valid_secrets($newContactEmail))) {
-				$publisher = Publisher::firstOrNew(['contact_email' => $newContactEmail]);
-				$publisher->random_secret = str_random(32);
-				$publisher->save();
+			if ($newContactEmail != $ad->contact_email && !Publisher::exists($email)) {
+				Publisher::new_publisher($email);
 			}
 		}
 
@@ -207,20 +204,15 @@ class AdController extends Controller {
 	 * the @param $email email
 	 */
 	public function manage_ads_with_email($email, $secret) {
-		if (Publisher::is_outdated($secret, $email)) {
-			// TODO Lien dans le message
-			$message = 'Ce lien a plus de ' . config('myjob.Publishers.secretValidityWeeks') .
-				' semaines et n\'est plus valide. Vous pouvez en générer un nouveau ici: [Lien]';
-			return Redirect::to('/')->withErrors(['message' => $message])->with('type', 'warning');
+		if (Publisher::is_valid($secret, $email)) {
+			/* Disconnect previous sessions */
+			Controller::disconnect();
 
-		} elseif (!Publisher::is_valid($secret, $email)) {
-
-			App::abort(404);
-
-		} else {
 			/* Temporarily allow current visitor to edit all ads with email $email. */
 			Session::put('connected_visitor', $email);
-			return redirect()->action('AdController@index');
+			return redirect()->action('AdController@created');
+		} else {
+			App::abort(404);
 		}
 	}
 

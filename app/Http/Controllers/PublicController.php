@@ -40,7 +40,6 @@ class PublicController extends Controller {
 			return back()->withInput()->withErrors($validator);
 
 		return redirect()->action('PublicController@help')->with('success', trans('general.successes.sent'));
-
 	}
 
 	public function connect() {
@@ -52,10 +51,25 @@ class PublicController extends Controller {
 	}
 
 	public function disconnect() {
-		if (Auth::check())
-			Auth::logout();
-		Session::flush();
+		Controller::disconnect();
 		return redirect()->action('PublicController@index');
+	}
+
+	public function getForgottenLink() {
+		return view("general.forgotten-link");
+	}
+
+	public function postForgottenLink() {
+		$email = Input::get('email');
+
+		if (!Publisher::exists($email)) {
+			return back()->withErrors(trans('general.texts.forgotten-link-error', ['email' => $email]));
+		} else {
+			Publisher::generate_new_secret($email);
+			//TODO send mail with secret
+			Session::flash('success', trans('general.texts.forgotten-link-success'));
+			return redirect()->Action('PublicController@index');
+		}
 	}
 
 	private function contactValidation() {
@@ -69,7 +83,5 @@ class PublicController extends Controller {
 		}, $filters);
 
 		return $filters;
-
 	}
-
 }

@@ -39,6 +39,9 @@ final class Tequila {
 			$u->last_name = $response["name"];
 			$u->save();
 
+			// Disconnect previous publisher if needed
+			Session::flush();
+
 			Auth::login($u);
 
 			return Session::has('intended') ? redirect(Session::get('intended')): redirect()->action('AdController@index');

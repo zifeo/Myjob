@@ -29,6 +29,7 @@ return [
 			'edit'   => "Appliquer les modifications",
 			'update' => "Appliquer changements",
 			'send'   => "Envoyer le message",
+			'send-short'	=> "Envoyer",
 		],
 		'edit'     => 'Editer',
 		'renew'    => 'Renouveller',
@@ -73,6 +74,11 @@ return [
 		'adopt'         => "Adopte un étudiant EPFL",
 		'news'          => "Un nouveau Myjob !",
 		'advices'       => "Conseils pour postuler",
+		'forgotten-link'=> "Lien perdu",
+	],
+
+	'placeholders' => [
+		'forgotten-link-mail' => "L'adresse email utilisée lors de la création des annonces",
 	],
 
 	'texts'           => [
@@ -101,6 +107,9 @@ return [
 		'outsideepfl'   => "Informations étudiants hors-EPFL.",
 		'advices'       => "Par le service académique, lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut maximus, lacus ac volutpat dictum, arcu urna venenatis tellus, in tempus arcu ligula a ante. Mauris mattis, lorem sed pharetra lacinia, justo tellus ultricies purus, ac placerat augue ante et quam. Quisque id pretium turpis.",
 		'news'          => "Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en signalant tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et suggestions !",
+		'forgotten-link'=> "Nous vous enverrons un email contenant un nouveau lien secret de connexion. Votre lien précédent sera invalidé.",
+		'forgotten-link-success' => "Un email contenant le nouveau lien secret de connexion vous a été envoyé.",
+		'forgotten-link-error' => "Personne n'a publié d'annonce avec l'email :email."
 	],
 
 ];

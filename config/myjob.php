@@ -8,9 +8,6 @@ return [
 		'numberDisplay'       => 10,
 		'numberDisplaySearch' => 24,
 	],
-	'providers' => [
-		'secretValidityWeeks' => 2,
-	],
 	'routes'    => [ // should contains the same real pages as routes.php (i.e. no-redirect)
 		'home'       => 'PublicController@index',
 		'jobs'       => 'AdController@index',

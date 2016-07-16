@@ -15,35 +15,46 @@ class Publisher extends Model {
 		'contact_email',
 	];
 
-	public static function get_outdated_secrets($email) {
-		$models = self::where('contact_email', '=', $email)
-			->where('created_at', '<', formatDate(strtotime('-' . config('myjob.providers.secretValidityWeeks') . ' weeks')))->get();
+	/**
+	 * Create a new publisher for email $email
+	 */
+	 public static function new_publisher($email) {
+		$publisher = new Publisher;
+		$publisher->contact_email = $email;
+		$publisher->random_secret = str_random(32);
+		$publisher->save();
 
-		return self::secrets_from_models($models);
+		return $publisher;
+	 }
+
+	/**
+	 * Generate a new secret for publisher with email $email
+	 */
+	public static function generate_new_secret($email) {
+		// Delete old publiser
+		$publisher = Publisher::where('contact_email', $email)->first();
+		$publisher->delete();
+
+		// Create new publisher with new secret
+		$new_publisher = self::new_publisher($email);
+
+		return $new_publisher->random_secret;
 	}
 
-	public static function get_valid_secrets($email) {
-		$models = self::where('contact_email', '=', $email)
-			->where('created_at', '>=', formatDate(strtotime('-' . config('myjob.providers.secretValidityWeeks') . ' weeks')))->get();
+	/**
+	 * Check if publisher exists
+	 */
+	public static function exists($email) {
+		return self::where('contact_email', '=', $email)->exists();
+	}
 
-		return self::secrets_from_models($models);
+	public static function get_valid_secret($email) {
+		$model = self::where('contact_email', '=', $email)->first();
+
+		return $model->random_secret;
 	}
 
 	public static function is_valid($secret, $email) {
-		return in_array($secret, self::get_valid_secrets($email));
-	}
-
-	public static function is_outdated($secret, $email) {
-		return in_array($secret, self::get_outdated_secrets($email));
-	}
-
-	private static function secrets_from_models($models) {
-		$secrets = [];
-
-		foreach ($models as $model) {
-			array_push($secrets, $model->random_secret);
-		}
-
-		return $secrets;
+		return $secret == self::get_valid_secret($email);
 	}
 }
