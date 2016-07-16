@@ -35,7 +35,10 @@ Route::group(['middleware' => 'locales'], function () {
 
 	Route::get('search', 'AdController@search');
 
-	// require at least publisher access	
+	Route::get('forgotten-link', 'PublicController@getForgottenLink');
+	Route::post('forgotten-link', 'PublicController@postForgottenLink');
+
+	// require at least publisher access
 	Route::group(['middleware' => 'publisher'], function () {
 
 		Route::get('my-jobs', 'AdController@created');

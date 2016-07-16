@@ -53,6 +53,13 @@ abstract class Controller extends BaseController {
 
 	}
 
+	protected function disconnect() {
+		if (Auth::check()) {
+			Auth::logout();
+		}
+		Session::flush();
+	}
+
 	protected function validation($item) {
 
 		$config = config('data.' . $item);

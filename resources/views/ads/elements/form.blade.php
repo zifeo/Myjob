@@ -85,13 +85,13 @@
         </div>
         <div class="field">
             <label>{{ label('contact_last_name') }}</label>
-            {!! Form::text('contact_last_name', isset($user) ? prefill($ad, $user_last): null, adform('contact_last_name')) !!}
+            {!! Form::text('contact_last_name', isset($user_last) ? prefill($ad, $user_last): null, adform('contact_last_name')) !!}
         </div>
     </div>
     <div class="two fields">
         <div class="field">
             <label>{{ label('contact_email') }}</label>
-            {!! Form::email('contact_email', isset($user) ? prefill($ad, $user_email): null, adform('contact_email')) !!}
+            {!! Form::email('contact_email', isset($user_email) ? prefill($ad, $user_email): null, adform('contact_email')) !!}
         </div>
         <div class="field">
             <label>{{ label('contact_phone') }}
