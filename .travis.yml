@@ -2,9 +2,10 @@ language: php
 php:
 - '5.6'
 - '7.0'
+- nightly
 - hhvm
 before_script:
-- type phpenv && phpenv config-rm xdebug.ini
+- if [[ $TRAVIS_PHP_VERSION != hhvm ]]; then phpenv config-rm xdebug.ini; fi;
 - cp .env.travis .env
 - mysql -e 'create database myjob_test;'
 - composer self-update
