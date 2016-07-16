@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout')
 
 @section('content')
     <div class="row">
@@ -10,7 +10,7 @@
                 'method' => 'PUT'
             ]) !!}
 
-            @include('ads.elements.mails')
+            @include('options.elements.mails')
 
             <div class="align-center">
                 <button type="submit" class="ui red submit button">{{ trans('general.buttons.submit.update') }}</button>
@@ -21,7 +21,7 @@
         </div>
         <div class="five wide column">
 
-            @include('ads.elements.notifications')
+            @include('options.elements.notifications')
 
         </div>
     </div>

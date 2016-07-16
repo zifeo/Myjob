@@ -49,7 +49,7 @@ class PublicController extends Controller {
 
 	public function connectCreate() {
 		return redirect()->action('AdController@create');
-	}
+	} // FIXME
 
 	public function disconnect() {
 		if (Auth::check())

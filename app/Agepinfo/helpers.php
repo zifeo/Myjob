@@ -1,13 +1,16 @@
 <?php
 
+/** Shortcut for label text. */
 function label($field) {
 	return trans('ads.labels.' . $field);
 }
 
+/** Shortcut for ad form. */
 function adform($field) {
 	return form($field, 'ad');
 }
 
+/** Shortcut for contact form. */
 function contactForm($field) {
 	return form($field, 'contact');
 }
@@ -46,7 +49,7 @@ function existTrans($subname, $name) {
 	return $trans != $subname . '.' . $name && !empty($trans);
 }
 
-/* Format date to database compatible pattern given a timestamp or using current timestamp. */
+/** Format date to database compatible pattern given a timestamp or using current timestamp. */
 function formatDate($time = null) {
 	return date('Y-m-d H:i:s', $time == null ? time(): $time);
 }
@@ -55,6 +58,7 @@ function expired($ad) {
 	return $ad->expires_at <= formatDate();
 }
 
+/** Generate menu item. */
 function item($nav, $action, $icon = null) {
 	$navAction = config('myjob.routes.' . $nav);
 	$activeHTML = $action == $navAction ? 'active ': '';

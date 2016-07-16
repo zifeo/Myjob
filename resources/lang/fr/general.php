@@ -19,7 +19,6 @@ return [
 		'options'       => 'Options',
 		'help'          => 'Aide',
 		'connect'       => 'Se connecter',
-		'connectcreate' => 'Se connecter',
 		'disconnect'    => 'Déconnexion',
 	],
 
