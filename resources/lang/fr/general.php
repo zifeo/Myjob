@@ -76,6 +76,7 @@ return [
 		'advices'       => "Conseils pour postuler",
 		'forgotten-link'=> "Lien perdu",
         'forgotten-links-process' => 'Processus',
+        'error'         => "Une erreur s'est produite",
 	],
 
 	'placeholders' => [
@@ -101,7 +102,7 @@ return [
 		'notifications' => "Malgré le nombre d'annonces, les places se font rares. Il est donc possible de paramétrer des alertes emails fréquentes pour ne pas rater les nouvelles annonces.",
 		'description'   => "L'<strong>Association Générale des Etudiants</strong> de l'<strong>Ecole Polytechnique Fédérale de Lausanne</strong> met gratuitement cette plateforme à disposition pour mettre en relation étudiants et employeurs. Le but est de permettre aux étudiants de trouver facilement un job/emploi <strong>durant leurs études</strong>, et en même temps d'offrir aux employeurs des profils variés et qualifiés.",
 		'noinscription' => "Aucune inscription, gestion par <strong>email</strong>.",
-		'tequila'       => "Accès <strong><em>Tequila</em></strong> requis",
+		'tequila'       => "Accès <strong><em>Tequila</em></strong> requis.",
 		'oldad'         => "Retrouver une ancienne annonce.",
 		'newpassword'   => "Recevoir un nouveau mot de passe.",
 		'advices'       => "Par le service académique, lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut maximus, lacus ac volutpat dictum, arcu urna venenatis tellus, in tempus arcu ligula a ante. Mauris mattis, lorem sed pharetra lacinia, justo tellus ultricies purus, ac placerat augue ante et quam. Quisque id pretium turpis.",
@@ -110,6 +111,7 @@ return [
 		'forgotten-link-success' => "Un email contenant le nouveau lien secret de connexion vous a été envoyé.",
 		'forgotten-link-error' => "Personne n'a publié d'annonce avec l'email :email.",
 		'forgotten-link-advices' => "Si vous avez déjà créé une annonce sur Myjob, vous devriez avoir reçu un email contenant votre lien de connexion. Si ce lien a été perdu ou ne fonctionne pas, veuillez en redemander un nouveau en indiquant votre adresse email. Merci de vérifier qu'il s'agisse bien de l'adresse email utilisée lors de la création d'une annonce.",
+        'error'         => "Merci de recharger la page et de réessayer. Si l'erreur persiste et que vous pensez qu'il s'agit d'un comportement anormal, <a href=\"" . action('HelpController@index') . "\">contactez-nous</a>."
 	],
 
 ];
