@@ -75,6 +75,7 @@ return [
 		'news'          => "Un nouveau Myjob !",
 		'advices'       => "Conseils pour postuler",
 		'forgotten-link'=> "Lien perdu",
+        'forgotten-links-process' => 'Processus',
 	],
 
 	'placeholders' => [
