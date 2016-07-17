@@ -107,7 +107,8 @@ return [
 		'news'          => "Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en signalant tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et suggestions !",
 		'forgotten-link'=> "Nous vous enverrons un email contenant un nouveau lien secret de connexion. Votre lien précédent sera invalidé.",
 		'forgotten-link-success' => "Un email contenant le nouveau lien secret de connexion vous a été envoyé.",
-		'forgotten-link-error' => "Personne n'a publié d'annonce avec l'email :email."
+		'forgotten-link-error' => "Personne n'a publié d'annonce avec l'email :email.",
+		'forgotten-link-advices' => "Si vous avez déjà créé une annonce sur Myjob, vous devriez avoir reçu un email contenant votre lien de connexion. Si ce lien a été perdu ou ne fonctionne pas, veuillez en redemander un nouveau en indiquant votre adresse email. Merci de vérifier qu'il s'agisse bien de l'adresse email utilisée lors de la création d'une annonce.",
 	],
 
 ];
