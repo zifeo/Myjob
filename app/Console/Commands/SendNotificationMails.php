@@ -96,7 +96,7 @@ class SendNotificationMails extends Command
                     don't want to bother them. TODO when it's ready, remove the
                     "if" */
                     if ($user->user_id == 1) {
-                        Mail::send('emails.ads', ['user' => $user, 'ads' => $ads, 'category_names' => $categoryMappings], function ($m) use (&$user) {
+                        Mail::send('emails.publishers', ['user' => $user, 'ads' => $ads, 'category_names' => $categoryMappings], function ($m) use (&$user) {
                             $m->to($user->email, $user->first_name)->subject(trans('mails.notifications.newjobs'));
                         });
                     }
