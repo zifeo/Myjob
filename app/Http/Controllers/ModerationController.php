@@ -18,19 +18,23 @@ class ModerationController extends Controller {
 	}
 
 	public function accept($url) {
+        Log::info('accept ad: ' . $url);
 		return $this->validity($url, true);
 	}
 
 	public function refuse($url) {
+        Log::info('refuse ad: ' . $url);
 		return $this->validity($url, false);
 	}
 
 	public function enable($url) {
+        Log::info('enable ad: ' . $url);
 		return $this->status($url, formatDate(strtotime('now +' . config('myjob.ads.validityWeeks') * 7 . 'days')));
 	}
 
 	public function disable($url) {
-		return $this->status($url, formatDate());
+        Log::info('disable ad: ' . $url);
+        return $this->status($url, formatDate());
 	}
 
 	private function validity($url, $decision) {
