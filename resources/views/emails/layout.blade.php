@@ -117,7 +117,7 @@
     <tr id="footer">
         <td class="center">
             <p>
-                <a href="https://agepoly.ch">AGEPINFO</a> 2015 · <a href="https://myjob.epfl.ch/options">{{ trans('mails.notifications.options') }}</a><br>
+                <a href="https://agepoly.ch">AGEPINFO</a> 2015 · <a href="{{ action('OptionsController@index') }}">{{ trans('mails.notifications.options') }}</a><br>
             </p>
         </td>
     </tr>
