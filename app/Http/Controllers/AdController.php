@@ -117,7 +117,17 @@ class AdController extends Controller {
 
 		$ad = Ad::create(Input::all());
 
-		return redirect()->action('AdController@show', $ad->url);
+		// Success message
+		Session::flash('success', trans('general.successes.adcreated'));
+
+		// Redirection to ad if allowed
+		if ($ad->canBeSeen()) {
+			return redirect()->action('AdController@show', $ad->url);
+		} else {
+			return redirect()->action('HomeController@index');
+		}
+
+
 	}
 
 

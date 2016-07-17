@@ -90,6 +90,11 @@ class Ad extends Model {
 		return array_merge(parent::getDates(), ['starts_at', 'ends_at', 'validated_at']);
 	}
 
+	// Return TRUE if visitor has rights to see the ad
+	public function canBeSeen() {
+		return Auth::check() || (Session::has('connected_visitor') && Session::get('connected_visitor') == $this->contact_email);
+	}
+
 	/** Generates a new unique and readable url **/
 	private static function generate_url($ad_name) {
 		$new_url = Str::slug($ad_name, "-");

@@ -59,6 +59,7 @@ return [
 	'successes'       => [
 		'options' => "Options mises à jour.",
 		'sent'    => "Message envoyé.",
+		'adcreated' => "L'annonce a été créée avec succès !",
 	],
 
 	'titles'          => [
