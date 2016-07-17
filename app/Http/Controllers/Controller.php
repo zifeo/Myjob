@@ -47,7 +47,7 @@ abstract class Controller extends BaseController {
 			View::share('user_last', $user->last_name);
 			View::share('user_email', $user->email);
 		} elseif ($publisher) {
-			View::share('user', Session::get('connected_visitor'));
+			View::share('user_email', Session::get('connected_visitor'));
 		}
 		View::share('admin', $admin);
 
