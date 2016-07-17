@@ -8,7 +8,7 @@
             <table id="corps" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
-                        <p>{{ trans('mails.notifications.Hi') }} {{ $user->first_name }},</p>
+                        <p>{{ trans('mails.notifications.hi') }} {{ $user->first_name }},</p>
                         <p class="spacer">{{ trans('mails.notifications.newjobjustappeared') }}</p>
                     </td>
                 </tr>
