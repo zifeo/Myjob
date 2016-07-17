@@ -11,8 +11,6 @@
 |
 */
 
-// TODO : error page
-
 // Bridge between Myjob 2.0 and 1.0
 
 Route::post('bridge', 'AdController@bridge');
