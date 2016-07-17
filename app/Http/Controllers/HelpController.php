@@ -20,8 +20,11 @@ class HelpController extends Controller {
         $validator = Validator::make(Input::all(), $this->contactValidation());
         $validator->setAttributeNames(array_map('strtolower', trans('contacts.placeholders')));
 
-        if ($validator->fails())
+        if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
+        }
+
+        Log::debug('help mail sent');
 
         return redirect()->action('HelpController@index')->with('success', trans('general.successes.sent'));
     }

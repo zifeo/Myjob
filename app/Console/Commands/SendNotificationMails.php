@@ -87,6 +87,7 @@ class SendNotificationMails extends Command
 
         if (count($ads) > 0) {
 
+            Log::info('email notifications (' . $subscribed . '): start sending ' . count($ads) . ' new ads');
             /* Process users by chunks to send notification mails with new ads*/
             $users->chunk(200, function($users) use (&$ads, &$categoryMappings) {
 
@@ -102,6 +103,10 @@ class SendNotificationMails extends Command
                     }
                 }
             });
+            Log::info('email notifications (' . $subscribed . '): terminate sending ' . count($ads) . ' new ads');
+
+        } else {
+            Log::info('email notifications (' . $subscribed . '): no new ad');
         }
     }
 }

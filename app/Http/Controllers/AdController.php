@@ -35,7 +35,6 @@ class AdController extends Controller {
 
 	/**
 	 * Show ads created by connected publisher
-	 *
 	 */
 	public function created() {
 		$fields = ['url',
@@ -117,6 +116,7 @@ class AdController extends Controller {
 
 		$ad = Ad::create(Input::all());
 
+        Log::info('create new ad: ' . $ad->url);
 		// Success message
 		Session::flash('success', trans('general.successes.adcreated'));
 
@@ -176,7 +176,6 @@ class AdController extends Controller {
 	 */
 	public function update($url) {
 		$ad = Ad::withVisitors()->findOrFail($url);
-		$categories = Category::get_id_name_mapping();
 		$validator = Validator::make(Input::all(), $this->adValidation());
 		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels')));
 
@@ -193,7 +192,10 @@ class AdController extends Controller {
 
 		$ad->fill(Input::all());
 		$ad->save();
-		return redirect()->action('AdController@show', $url);
+
+        Log::info('update ad: ' . $ad->url);
+
+        return redirect()->action('AdController@show', $url);
 	}
 
 
@@ -206,7 +208,10 @@ class AdController extends Controller {
 	public function destroy($url) {
 		$ad = Ad::withVisitors()->findOrFail($url);
 		$ad->delete();
-		return redirect()->action('AdController@index');
+
+        Log::info('delete ad: ' . $ad->url);
+
+        return redirect()->action('AdController@index');
 	}
 
 	/**
@@ -254,6 +259,8 @@ class AdController extends Controller {
 			});
 		}
 		$ads = $query->simplePaginate(config('myjob.ads.numberDisplaySearch'));
+
+        Log::debug('search for ' . e($raw));
 
 		return view('ads.search', ['ads' => $ads, 'search' => $raw]);
 	}
