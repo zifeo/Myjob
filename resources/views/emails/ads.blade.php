@@ -40,7 +40,7 @@
                 @endforeach
                 <tr>
                     <td>
-                        <a href="{{ action(config('myjob.routes.jobs')) }}" class="ui red button mt">{{ trans('mails.notifications.seeads') }}</a>
+                        <a href="{{ action('AdController@index') }}" class="ui red button mt">{{ trans('mails.notifications.seeads') }}</a>
                         <p>{{ trans('mails.notifications.teammyjob') }}</p>
                     </td>
                 </tr>
