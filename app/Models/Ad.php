@@ -46,7 +46,7 @@ class Ad extends Model {
 		if (isset($data['starts_at'], $data['ends_at']) && $data['starts_at'] == $data['ends_at'])
 			$data['ends_at'] = null;
 
-		$ad = new Ad($data); // mass-alignement allowed on fillable 
+		$ad = new Ad($data); // mass-alignement allowed on fillable
 		assert(isset($ad->title), "Create without all datas.");
 		$url = self::generate_url($ad->title);
 
@@ -82,7 +82,7 @@ class Ad extends Model {
 	public static function acceptedAd($fields) {
 		return Ad::withCategoriesVisitors()->select($fields)
 			->whereNotNull('validated_at')
-			->where('expires_at', '>', date('Y-m-d'))
+			->where('expires_at', '>', date('Y-m-d H:i:s'))
 			->where('validated', '=', true);
 	}
 
