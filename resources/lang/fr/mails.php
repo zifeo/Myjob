@@ -16,9 +16,9 @@ return [
     'publishers' => [
         'link'      => 'Lien d\'administration',
         'hi'        => 'Bonjour',
-        'thanks'    => 'Merci d\'utiliser Myjob, voici le lien permettant d\'administrer vos annonces.',
+        'thanks'    => 'Merci d\'utiliser Myjob ! Voici le lien permettant d\'administrer vos annonces.',
         'teammyjob'	=>	'A bientôt, l\'équipe de Myjob.',
-        'list'      => 'Voir mes annonces',
+        'manage'      => 'Administrer mes annonces',
     ],
 
 ];

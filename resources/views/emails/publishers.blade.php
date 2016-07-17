@@ -10,7 +10,7 @@
                     <td>
                         <p>{{ trans('mails.publishers.hi') }},</p>
                         <p class="spacer">{{ trans('mails.publishers.thanks') }}</p>
-                        <a href="{{ action('AdController@manage_ads_with_email', $email, $secret) }}" class="ui red button mt">{{ trans('mails.publishers.list') }}</a>
+                        <a href="{{ action('AdController@manage_ads_with_email', $email, $secret) }}" class="ui red button mt">{{ trans('mails.publishers.manage') }}</a>
                         <p>{{ trans('mails.publishers.teammyjob') }}</p>
                     </td>
                 </tr>

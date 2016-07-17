@@ -7,6 +7,7 @@ use Input;
 use Myjob\Models\Publisher;
 use Session;
 use Validator;
+use Mail;
 
 class PublishersController extends Controller {
 
@@ -20,8 +21,12 @@ class PublishersController extends Controller {
         if (!Publisher::exists($email)) {
             return back()->withErrors(trans('general.texts.forgotten-link-error', ['email' => $email]));
         } else {
-            Publisher::generate_new_secret($email);
-            //TODO send mail with secret
+            $secret = Publisher::generate_new_secret($email);
+
+            Mail::send('emails.publishers', ['email' => $email, 'secret' => $secret], function ($m) use (&$email) {
+                $m->to($email)->subject(trans('mails.publishers.link'));
+            });
+
             Session::flash('success', trans('general.texts.forgotten-link-success'));
             return redirect()->Action('HomeController@index');
         }
