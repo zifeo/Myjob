@@ -23,9 +23,10 @@ class PublishersController extends Controller {
         } else {
             $secret = Publisher::generate_new_secret($email);
 
-            Mail::send('emails.publishers', ['email' => $email, 'secret' => $secret], function ($m) use (&$email) {
+            // TODO test when sending mail work again
+            /*Mail::send('emails.publishers', ['email' => $email, 'secret' => $secret], function ($m) use (&$email) {
                 $m->to($email)->subject(trans('mails.publishers.link'));
-            });
+            });*/
 
             Session::flash('success', trans('general.texts.forgotten-link-success'));
             return redirect()->Action('HomeController@index');
