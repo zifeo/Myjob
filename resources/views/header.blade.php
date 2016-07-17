@@ -1,7 +1,6 @@
 @if (session('success'))
     <div class="ui green nag">
         <i class="close icon"></i>
-
         <div class="title">
             <i class="checkmark icon"></i> {{ session('success') }}
         </div>
@@ -9,7 +8,6 @@
 @elseif (session('info'))
     <div class="ui teal nag">
         <i class="close icon"></i>
-
         <div class="title">
             <i class="info icon"></i> {{ session('info') }}
         </div>

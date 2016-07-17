@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="row">
-        <div class="eight wide column">
+        <div class="ten wide column">
             @include('publishers.elements.form')
         </div>
-        <div class="five wide column">
+        <div class="six wide column">
             @include('publishers.elements.advices')
         </div>
     </div>
