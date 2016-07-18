@@ -1,10 +1,13 @@
 ## Myjob [![Build Status](https://travis-ci.org/zifeo/Myjob.svg)](https://travis-ci.org/zifeo/Myjob)
 
-Myjob is a job-offering-seeking web-platform developed by the [general student association](https://agepoly.ch) of [Swiss Federal Institute of Technology in Lausanne (EPFL)](http://www.epfl.ch/index.en.html). It aims to facilitate the meeting of employers and skillful EPFL students for experiencing working life aside of their studies (without boring extern website subscriptions). The [project](http://myjob.epfl.ch) is maintained by the association IT-team and is open source under the [Apache 2.0](./LICENSE) license (be sure to also understand the `Forking Myjob` rules).
+Myjob is a job-offering-seeking web-platform developed by the [general student association](https://agepoly.ch) of [Swiss Federal Institute of Technology in Lausanne (EPFL)](http://www.epfl.ch/index.en.html). 
+It aims to facilitate the meeting of employers and skillful EPFL students for experiencing working life aside of their studies (without boring extern website subscriptions). 
+The [project](http://myjob.epfl.ch) is maintained by the association IT-team and open source under the [Apache 2.0](./LICENSE) license.
 
-### Installations
+### Installation
 
 Development/Production installation guide and more are available on the [wiki](./wiki).
+You can also have a look on `provision.sh` for more information.
 
 ### Mottos
 

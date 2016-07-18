@@ -104,6 +104,7 @@ class SyncLDAPStudents extends Command
         Add them to the database */
         foreach ($LDAPStudents as $sciper => $newUser) {
             // Create a new entry in the DB
+            Log::info('New student ' . $sciper);
             $newUser->save();
             $newUsersCount += 1;
         }

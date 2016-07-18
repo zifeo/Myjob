@@ -26,6 +26,8 @@ class OptionsController extends Controller {
 		$user->fill($values);
 		$user->save();
 
+        Log::info('update notifications');
+
 		return redirect()->action('OptionsController@index')->with('success', trans('general.successes.options'));
 	}
 

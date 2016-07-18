@@ -2,6 +2,9 @@
 
 namespace Myjob\Exceptions;
 
+use Log;
+use Request;
+use Auth;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -25,6 +28,11 @@ class Handler extends ExceptionHandler {
 	 * @return void
 	 */
 	public function report(Exception $e) {
+
+	    $sciper = Auth::check() ? Auth::user()->sciper : 'unknown';
+        Log::error('Exception from '. $sciper .' during request: '. Request::fullUrl());
+        Log::error($e);
+
 		return parent::report($e);
 	}
 
