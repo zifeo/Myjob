@@ -8,7 +8,8 @@
 
 # latest version of php5
 sudo apt-get -y update
-sudo add-apt-repository ppa:ondrej/php5-5.6
+sudo add-apt-repository ppa:ondrej/php5-5.6 #for ubuntu it works. for debian, follow: http://nwdthemes.com/2016/01/31/how-to-upgrade-to-php-5-6-on-debian-7-wheezy/
+
 sudo apt-get -y update
 sudo apt-get -y install php5 php5-json php5-mhash php5-mcrypt php5-curl php5-cli php5-mysql mysql-server php5-gd php5-intl php5-xsl
 
