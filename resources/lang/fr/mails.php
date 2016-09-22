@@ -21,4 +21,8 @@ return [
         'manage'      => 'Administrer mes annonces',
     ],
 
+    'moderation' => [
+      'newjob' => 'Nouveau job à modérer'
+    ],
+
 ];

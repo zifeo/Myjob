@@ -37,4 +37,8 @@ class User extends Model implements AuthenticatableContract {
 		}
 	}
 
+	public static function admins() {
+	    return self::where("admin", "=", 1)->get();
+    }
+
 }

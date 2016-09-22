@@ -97,7 +97,6 @@ class AdController extends Controller {
 	 * @return Response
 	 */
 	public function store() {
-		$categories = Category::get_id_name_mapping();
 		$validator = Validator::make(Input::all(), $this->adValidation());
 		$validator->setAttributeNames(array_map('strtolower', trans('ads.labels')));
 
@@ -119,6 +118,17 @@ class AdController extends Controller {
         Log::info('create new ad: ' . $ad->url);
 		// Success message
 		Session::flash('success', trans('general.successes.adcreated'));
+
+
+        $admins = User::admins();
+        $weekAdmin = $admins[intval(date('Y')) % count($admins)];
+        Log::info('attributed admin: ' . $weekAdmin);
+        // TODO : remove
+        foreach ($admins as $weekAdmin) {
+            Mail::send('emails.moderation', ['ad' => $ad], function ($m) use (&$weekAdmin) {
+                $m->to($weekAdmin->email, $weekAdmin->first_name)->subject(trans('mails.moderation.newjob'));
+            });
+        }
 
 		// Redirection to ad if allowed
 		if ($ad->canBeSeen()) {
