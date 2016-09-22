@@ -4,6 +4,7 @@ namespace Myjob\Http\Controllers;
 
 use Auth;
 use Input;
+use Log;
 
 class OptionsController extends Controller {
 
