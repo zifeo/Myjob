@@ -95,7 +95,7 @@ return [
 		'students'      => "Etudiants",
 		'adopt'         => "Adopte un étudiant EPFL",
 		'news'          => "Un nouveau Myjob !",
-		'advices'       => "Conseils de postulation",
+		'apply'       => "Conseils de postulation",
 	],
 
 	'texts'           => [
@@ -121,7 +121,7 @@ return [
 		'oldad'         => "Retrouver une ancienne annonce.",
 		'newpassword'   => "Recevoir un nouveau mot de passe.",
 		'outsideepfl'   => "Informations étudiants hors-EPFL.",
-		'advices'       => "Par le service académique, lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut maximus, lacus ac volutpat dictum, arcu urna venenatis tellus, in tempus arcu ligula a ante. Mauris mattis, lorem sed pharetra lacinia, justo tellus ultricies purus, ac placerat augue ante et quam. Quisque id pretium turpis.",
+		'apply'       => "Pour postuler, veuillez contacter directement l'auteur de l'annonce.",
 		'news'          => "Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en signalant tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et suggestions !",
 	],
 
