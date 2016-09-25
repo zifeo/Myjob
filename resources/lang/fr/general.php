@@ -24,41 +24,41 @@ return [
 
 	'buttons'         => [
 		'submit'   => [
-			'new'    => "Enregistrer la nouvelle annonce"
-			'edit'   => "Appliquer les modifications"
-			'update' => "Appliquer changements"
-			'send'   => "Envoyer le message"
-			'send-short'	=> "Envoyer"
+			'new'    => "Enregistrer la nouvelle annonce",
+			'edit'   => "Appliquer les modifications",
+			'update' => "Appliquer changements",
+			'send'   => "Envoyer le message",
+			'send-short'	=> "Envoyer",
 		],
-		'edit'     => "Editer"
-		'renew'    => "Renouveller"
-		'disable'  => "Désactiver"
-		'delete'   => "Supprimer"
-		'accept'   => "Accepter"
-		'refuse'   => "Refuser"
-		'reget'    => "Récupérer une annonce"
-		'ask'      => "Poser une question"
-		'apply'    => "Postuler"
-		'offer'    => "Je recherche un étudiant"
-		'seek'     => "Je recherche un job"
-		'feedback' => "Feedback"
+		'edit'     => "Editer",
+		'renew'    => "Renouveller",
+		'disable'  => "Désactiver",
+		'delete'   => "Supprimer",
+		'accept'   => "Accepter",
+		'refuse'   => "Refuser",
+		'recover'    => "Récupérer une annonce",
+		'ask'      => "Poser une question",
+		'apply'    => "Postuler",
+		'offer'    => "Je recherche un étudiant",
+		'seek'     => "Je recherche un job",
+		'feedback' => "Feedback",
 	],
 
-	'optional'        => "si applicable"
-	'undefined'       => "Non spécifié"
-	'nothingleft'     => "Pas de contenu disponible."
-	'back'            => "Retour"
+	'optional'        => "si applicable",
+	'undefined'       => "Non spécifié",
+	'nothingleft'     => "Pas de contenu disponible.",
+	'back'            => "Retour",
 
-	'disabled'        => "désactivé"
-	'notyetvalidated' => "pas encore validé"
+	'disabled'        => "désactivé",
+	'notyetvalidated' => "pas encore validé",
 
 	'startingtoday'   => "dès aujourd'hui",
-	'dates'           => "Date·s"
+	'dates'           => "Date·s",
 	'todate'          => "jusqu'au",
 
 	'successes'       => [
-		'options' => "Options mises à jour."
-		'sent'    => "Message envoyé."
+		'options' => "Options mises à jour.",
+		'sent'    => "Message envoyé.",
 		'adcreated' => "L'annonce a été créée avec succès !",
 	],
 
@@ -104,14 +104,14 @@ return [
 		'noinscription' => "Aucune inscription, gestion par <strong>email</strong>.",
 		'tequila'       => "Accès <strong><em>Tequila</em></strong> requis.",
 		'oldad'         => "Retrouver une ancienne annonce.",
-		'newpassword'   => "Recevoir un nouveau mot de passe.",
-		'apply'       	=> "Pour postuler, veuillez contacter directement l'auteur de l'annonce.",
-		'news'          => "Bienvenue sur la nouvelle version ! Aide-nous à améliorer cette grande mise à jour en signalant tout ce qui te parait anormal ou peu pratique. On attend avec impatience tes remarques et suggestions !",
-		'forgotten-link'=> "Nous vous enverrons un email contenant un nouveau lien secret de connexion. Votre lien précédent sera invalidé.",
-		'forgotten-link-success'	=> "Un email contenant le nouveau lien secret de connexion vous a été envoyé.",
-		'forgotten-link-error'		=> "Personne n'a publié d'annonce avec l'email :email.",
-		'forgotten-link-advices'	=> "Si vous avez déjà créé une annonce sur Myjob, vous devriez avoir reçu un email contenant votre lien de connexion. Si ce lien a été perdu ou ne fonctionne pas, veuillez en redemander un nouveau en indiquant votre adresse email. Merci de vérifier qu'il s'agisse bien de l'adresse email utilisée lors de la création d'une annonce.",
-        'error' 		=> "Merci de recharger la page et de réessayer. Si l'erreur persiste et que vous pensez qu'il s'agit d'un comportement anormal, <a href=\"" . action('HelpController@index') . "\">contactez-nous</a>."
+		'newpassword'   => "Mot de passe \"Gaspar\" perdu.",
+		'apply'       	=> "To apply, please contact the ad owner directly.",
+		'news'          => "Welcome on the new version of Myjob! Help us impoving this big update by reporting everything that looks abnormal or unpractical. Feedback is very appreciated!",
+		'forgotten-link'=> "We'll send you an email containing a new management link. Your former link will be disabled.",
+		'forgotten-link-success'	=> "An email containing the new management link has been sent.",
+		'forgotten-link-error'		=> "No-one published an ad with email :email.",
+		'forgotten-link-advices'	=> "If you already created an ad on Myjob, you should have recieved an email containing your management link. If this link was lost or does not work, please ask a new one by providing your email address. Please verify that it is the email address that was used to create the ads.",
+        'error' 		=> "Please reload the page and try again. If the error persists and if you think it is abnormal, <a href=\"" . action('HelpController@index') . "\">contact us</a>.",
 	],
 
 ];

@@ -7,8 +7,8 @@ return [
 	'labels'       => [],
 
 	'placeholders' => [
-		'first_name' => 'Prénom',
-		'last_name'  => 'Nom',
+		'first_name' => 'First name',
+		'last_name'  => 'Name',
 		'email'      => 'Email',
 		'message'    => 'Message',
 	],
