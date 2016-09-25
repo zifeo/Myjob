@@ -3,22 +3,22 @@
 return [
 
 	'notifications' => [
-		'newjobs'	=>	"Nouveaux jobs sur Myjob",
-		'newads'	=>	"Nouvelles annonces",
-		'gotomyjob'	=>	"Aller sur Myjob",
-		'hi'		=>	"Salut",
-		'newjobjustappeared' =>	"Des nouvelles annonces sont disponibles sur Myjob.",
-		'seeads'	=>	"Consulter les annonces",
-		'teammyjob'	=>	"A bientôt, l\'équipe de Myjob.",
+		'newjobs'	=>	"New jobs on Myjob",
+		'newads'	=>	"New ads",
+		'gotomyjob'	=>	"Go to Myjob",
+		'hi'		=>	"Hi",
+		'newjobjustappeared' =>	"New ads are available on Myjob.",
+		'seeads'	=>	"See the ads",
+		'teammyjob'	=>	"See you soon, the Myjob team.",
 		'options'	=>	"Options",
 	],
 
     'publishers' => [
-        'link'      =>	"Lien d\'administration",
-        'hi'        =>	"Bonjour",
-        'thanks'    =>	"Merci d\'utiliser Myjob ! Voici votre lien privé permettant d\'administrer vos annonces. Ne partagez ce lien avec personne.",
-        'teammyjob'	=>	"A bientôt, l\'équipe de Myjob.",
-        'manage'    =>	"Administrer mes annonces",
+        'link'      =>	"Management link",
+        'hello'        =>	"Hello",
+        'thanks'    =>	"Thank you for using Myjob! Here is your private link allowing you to manage your ads. Do not share this link with anyone.",
+        'teammyjob'	=>	"See you soon, the Myjob team.",
+        'manage'    =>	"Manage my ads",
     ],
 
 ];

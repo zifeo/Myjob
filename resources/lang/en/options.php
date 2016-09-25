@@ -5,9 +5,9 @@ return [
 	'sections'     => [],
 
 	'labels'       => [
-		'notifications_instant' => "Notification instantanée (dès la modération de l'annonce)",
-		'notifications_day'     => "Notification journalière (nouvelles annonces du jour)",
-		'notifications_week'    => "Notification hebdomadaire (nouvelles annonces de la semaine)",
+		'notifications_instant' => "Instant notifications (as soon as the ad is validated)",
+		'notifications_day'     => "Daily notifications (new ads of the day)",
+		'notifications_week'    => "Weekly notifications (new ads of the week)",
 	],
 
 	'placeholders' => [],
