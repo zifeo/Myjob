@@ -32,7 +32,7 @@ return [
 		'title'              => "Pizza delivery, Neuroscience experiment",
 		'category_id'        => "",
 		'place'              => "St-Sulpice, remotely",
-		'description'        => "What kind of work is it? Are there any particular dispositions (schedule, team, prerequisite) ?",
+		'description'        => "What kind of work is it? Are there any particular dispositions (schedule, team, prerequisite)?",
 
 		'starts_at'          => "",
 		'ends_at'            => "",
