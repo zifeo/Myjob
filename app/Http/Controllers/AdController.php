@@ -110,13 +110,17 @@ class AdController extends Controller {
 
 		$email = Input::get('contact_email');
 		if (!Publisher::exists($email)) {
-			Publisher::new_publisher($email);
-			// TODO send email with secret
+			$publisher = Publisher::new_publisher($email);
+
+			Mail::send('emails.publishers', ['email' => $email, 'secret' => $publisher->random_secret], function ($m) use (&$email) {
+					$m->to($email)->subject(trans('mails.publishers.link'));
+			});
+
+			Log::info("New user ". $email . ", mail sent with admin link");
 		}
 
 		$ad = Ad::create(Input::all());
 
-        Log::info('create new ad: ' . $ad->url);
 		// Success message
 		Session::flash('success', trans('general.successes.adcreated'));
 

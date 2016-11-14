@@ -8,6 +8,7 @@ use Myjob\Models\Publisher;
 use Session;
 use Validator;
 use Mail;
+use Log;
 
 class PublishersController extends Controller {
 
@@ -23,10 +24,12 @@ class PublishersController extends Controller {
         } else {
             $secret = Publisher::generate_new_secret($email);
 
-            // TODO test when sending mail work again
-            /*Mail::send('emails.publishers', ['email' => $email, 'secret' => $secret], function ($m) use (&$email) {
+            // TODO fix mails to non-epfl adresses
+            Mail::send('emails.publishers', ['email' => $email, 'secret' => $secret], function ($m) use (&$email) {
                 $m->to($email)->subject(trans('mails.publishers.link'));
-            });*/
+            });
+
+            Log::info("Forgotten link for ". $email . ", mail sent with admin link");
 
             Session::flash('success', trans('general.texts.forgotten-link-success'));
             return redirect()->Action('HomeController@index');
