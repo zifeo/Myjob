@@ -110,12 +110,12 @@ class CreateAllTables extends Migration
      */
     public function down()
     {
-        Schema::drop('ads');
-		Schema::drop('users');
-		Schema::drop('categories');
-		Schema::drop('publishers');
-		Schema::drop('faq');
-		Schema::drop('sessions');
+        Schema::dropIfExists('ads');
+		Schema::dropIfExists('users');
+		Schema::dropIfExists('categories');
+		Schema::dropIfExists('publishers');
+		Schema::dropIfExists('faq');
+		Schema::dropIfExists('sessions');
 
     }
 }
