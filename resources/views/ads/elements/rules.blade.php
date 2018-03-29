@@ -2,7 +2,7 @@
 <p>{!! trans('general.texts.rules.visibility') !!}</p>
 <a class="ui small red icon button mt" href="{{ url('forgotten-link') }}">
     <i class="repeat icon"></i>
-    {{ trans('general.buttons.reget') }}
+    {{ trans('general.buttons.recover') }}
 </a>
 <h3 class="ui header">{{ trans('general.titles.conditions') }}</h3>
 <p>{{ trans('general.texts.rules.respect') }}</p>
